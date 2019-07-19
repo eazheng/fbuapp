@@ -10,6 +10,12 @@
 
 @interface ViewController : UIViewController
 
+//register thirdparty authentication
+//+ (void)registerAuthenticationDelegate:(id<PFUserAuthenticationDelegate>)delegate forAuthType:(NSString *)authType;
+
+//login user with third party authentication
+//+ (BFTask<__kindof PFUser *> *)logInWithAuthTypeInBackground:(NSString *)authType
+
 
 @end
 

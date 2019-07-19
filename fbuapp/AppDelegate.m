@@ -8,22 +8,25 @@
 
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Parse/Parse.h>
+
 
 @interface AppDelegate ()
-
+@property (strong, nonatomic) UIView *view;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
-    // Add any custom logic here.
+    
     return YES;
 }
+
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url

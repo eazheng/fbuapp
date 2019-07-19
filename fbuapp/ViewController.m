@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "AppDelegate.h"
 
 
 
@@ -20,24 +21,45 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    //create login button
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-    // Optional: Place the button in the center of your view.
+    // center button
     loginButton.center = self.view.center;
     [self.view addSubview:loginButton];
+    
     if ([FBSDKAccessToken currentAccessToken]) {
+        
         // TODO: User is logged in, do work such as go to next view controller.
         //
         //
         
-    }   
-//        // Optional: Add Facebook Login to Your Code
-//        // Add to your viewDidLoad method:
-//        loginButton.readPermissions = @[@"public_profile", @"email"];
-
+    }
+    
+    [FBSDKProfile loadCurrentProfileWithCompletion:^(FBSDKProfile *profile, NSError *error) {
+        if (profile){
+            NSLog(@"Hello, %@!", profile.firstName);
+        }
+    }];
+    
+    [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+    [[NSNotificationCenter defaultCenter] addObserverForName:FBSDKProfileDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock: ^(NSNotification *notification) {
+        if ([FBSDKProfile currentProfile]) {
+            // Update for new user profile
+        }
+    }];
+    
+    //display users's facebook profile picture
+    FBSDKProfilePictureView *profilePictureView = [[FBSDKProfilePictureView alloc] init];
+    profilePictureView.frame = CGRectMake(0,0, 100, 100);
+    //show profile of current user logged in
+    profilePictureView.profileID = [[FBSDKAccessToken currentAccessToken] userID];
+    [self.view addSubview:profilePictureView];
+    
 }
 
 //Testing
+
 
 @end
 
