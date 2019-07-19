@@ -1,39 +1,37 @@
 //
-//  ViewController.m
+//  LoginViewController.m
 //  fbuapp
 //
 //  Created by eazheng on 7/16/19.
 //  Copyright © 2019 eazheng. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "LoginViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "AppDelegate.h"
 
 
 
-@interface ViewController ()
+@interface LoginViewController ()
 
 @end
 
-@implementation ViewController
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //create login button
+    //create facebook login button
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     // center button
     loginButton.center = self.view.center;
     [self.view addSubview:loginButton];
     
     if ([FBSDKAccessToken currentAccessToken]) {
-        
         // TODO: User is logged in, do work such as go to next view controller.
         //
         //
-        
     }
     
     [FBSDKProfile loadCurrentProfileWithCompletion:^(FBSDKProfile *profile, NSError *error) {
