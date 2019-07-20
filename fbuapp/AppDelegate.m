@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
+#import "LogViewController.h"
 
 
 @interface AppDelegate ()
@@ -46,6 +47,9 @@
 //        }
 //    }];
     
+    LogViewController *logViewController = [[LogViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: logViewController];
+    self.window.rootViewController = navigationController;
     return YES;
 }
 
