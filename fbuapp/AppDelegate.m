@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
+#import "HomeViewController.h"
 
 
 @interface AppDelegate ()
@@ -32,6 +33,11 @@
     }];
     
     [Parse initializeWithConfiguration:config];
+    
+    HomeViewController *vc = [[HomeViewController alloc] init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = navigationController;
     
 //    //TEST
 //    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];

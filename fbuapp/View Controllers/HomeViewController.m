@@ -7,8 +7,11 @@
 //
 
 #import "HomeViewController.h"
+#import "PostCell.h"
 
-@interface HomeViewController ()
+static NSString *kTableViewPostCell = @"PostCell";
+
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -16,8 +19,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     // Do any additional setup after loading the view from its nib.
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
+    cell.name.text = @"New Row";
+    return cell;
+}
+
 
 /*
 #pragma mark - Navigation

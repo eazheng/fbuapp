@@ -18,6 +18,10 @@
 		3827E2E922DE98F9008B8FA0 /* fbuappUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3827E2E822DE98F9008B8FA0 /* fbuappUITests.m */; };
 		75952087513A89F63BDB73FF /* Pods_fbuappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C7AE6EEA297BB83EB63A00 /* Pods_fbuappTests.framework */; };
 		83E6B27322E137AF0045B437 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27222E137AF0045B437 /* Post.m */; };
+		A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A59322E24C9B00F9E81A /* HomeViewController.m */; };
+		A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A59422E24C9B00F9E81A /* HomeViewController.xib */; };
+		A496A5A322E25CF800F9E81A /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A5A122E25CF800F9E81A /* PostCell.m */; };
+		A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A5A222E25CF800F9E81A /* PostCell.xib */; };
 		DB489E5DE6651191239211CD /* Pods_fbuappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +65,12 @@
 		46F19CAC609CE62F3533B72A /* Pods-fbuappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappTests.release.xcconfig"; path = "Target Support Files/Pods-fbuappTests/Pods-fbuappTests.release.xcconfig"; sourceTree = "<group>"; };
 		83E6B27122E137AF0045B437 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		83E6B27222E137AF0045B437 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		A496A59222E24C9B00F9E81A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		A496A59322E24C9B00F9E81A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		A496A59422E24C9B00F9E81A /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		A496A5A022E25CF800F9E81A /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		A496A5A122E25CF800F9E81A /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		A496A5A222E25CF800F9E81A /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		B51A71B6D6B82112B20F0798 /* Pods-fbuappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappTests.debug.xcconfig"; path = "Target Support Files/Pods-fbuappTests/Pods-fbuappTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fbuappUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E5224419A9BFE788FE134A /* Pods_fbuapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fbuapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +141,7 @@
 		3827E2C322DE98F8008B8FA0 /* fbuapp */ = {
 			isa = PBXGroup;
 			children = (
+				A496A59722E24F9E00F9E81A /* Views */,
 				83E6B27422E148E40045B437 /* View Controllers */,
 				83E6B27022E136FD0045B437 /* Models */,
 				3827E2C422DE98F8008B8FA0 /* AppDelegate.h */,
@@ -176,6 +187,9 @@
 			children = (
 				3827E2C722DE98F8008B8FA0 /* LoginViewController.h */,
 				3827E2C822DE98F8008B8FA0 /* LoginViewController.m */,
+				A496A59222E24C9B00F9E81A /* HomeViewController.h */,
+				A496A59322E24C9B00F9E81A /* HomeViewController.m */,
+				A496A59422E24C9B00F9E81A /* HomeViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -191,6 +205,16 @@
 				3B4C51A1A5894227EFC92EF2 /* Pods-fbuappUITests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A496A59722E24F9E00F9E81A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A496A5A022E25CF800F9E81A /* PostCell.h */,
+				A496A5A122E25CF800F9E81A /* PostCell.m */,
+				A496A5A222E25CF800F9E81A /* PostCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,7 +326,9 @@
 			files = (
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
+				A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
+				A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,7 +442,9 @@
 				3827E2C922DE98F8008B8FA0 /* LoginViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
+				A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */,
 				83E6B27322E137AF0045B437 /* Post.m in Sources */,
+				A496A5A322E25CF800F9E81A /* PostCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

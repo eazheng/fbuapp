@@ -12,12 +12,15 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+//    self.profilePhoto.layer.cornerRadius = 25;
+//    self.profilePhoto.clipsToBounds = YES;
+    
     // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
