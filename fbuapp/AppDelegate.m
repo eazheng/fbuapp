@@ -9,8 +9,9 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
+#import "CreatePostViewController.h"
 
-
+// Google API key AIzaSyC_YzXLHww0ImN1OUu4t7whakhZT_PFRn8
 @interface AppDelegate ()
 @property (strong, nonatomic) UIView *view;
 @end
@@ -32,6 +33,14 @@
     }];
     
     [Parse initializeWithConfiguration:config];
+    
+    
+    // set root view controller as CreatePostViewController
+    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
+    
+    self.window.rootViewController = navigationController;
     
 //    //TEST
 //    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];

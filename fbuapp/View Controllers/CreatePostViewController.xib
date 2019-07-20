@@ -19,10 +19,8 @@
                 <outlet property="eventStreetField" destination="8q8-8H-Elr" id="nw8-rE-qOl"/>
                 <outlet property="eventTitleField" destination="Fgf-JZ-xaX" id="rKj-lZ-Jfg"/>
                 <outlet property="eventZipField" destination="r6R-0m-fdF" id="IQy-fl-kMC"/>
-                <outlet property="userDayAvailabilityControl" destination="Wtl-bM-FpX" id="eG5-je-bJD"/>
                 <outlet property="userLevelControl" destination="lYa-mN-7b0" id="1wu-no-DUj"/>
                 <outlet property="userRoleControl" destination="LRZ-y7-HBt" id="MeI-7Q-xee"/>
-                <outlet property="userTimeAvailabilityControl" destination="feI-fo-Xbg" id="Gio-Jh-9Ch"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,7 +34,11 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
                         <navigationItem title="Create an Event" id="hsX-DE-9dK">
-                            <barButtonItem key="rightBarButtonItem" title="Post Event!" id="JYk-AP-rm1"/>
+                            <barButtonItem key="rightBarButtonItem" title="Post Event!" id="JYk-AP-rm1">
+                                <connections>
+                                    <action selector="postEventAction:" destination="-1" id="Mem-a7-AnH"/>
+                                </connections>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>
