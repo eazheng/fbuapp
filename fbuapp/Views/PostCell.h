@@ -16,9 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventDistance;
 @property (weak, nonatomic) IBOutlet UILabel *eventPrice;
 @property (weak, nonatomic) IBOutlet UILabel *eventDaysAgo;
-@property (weak, nonatomic) IBOutlet UILabel *postUserSkillLevel;
-@property (weak, nonatomic) IBOutlet UIButton *isFavorited;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfilePhoto;
+@property (weak, nonatomic) IBOutlet UILabel *eventCategory;
+@property (weak, nonatomic) IBOutlet UILabel *eventDescription;
+@property (weak, nonatomic) IBOutlet UILabel *eventAuthor;
+@property (weak, nonatomic) IBOutlet UIImageView *eventImage;
+@property (weak, nonatomic) IBOutlet UIButton *isFavorited;
 
 
 

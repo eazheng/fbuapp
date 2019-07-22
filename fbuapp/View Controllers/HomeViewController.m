@@ -50,28 +50,50 @@ static NSString *kTableViewPostCell = @"PostCell";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
-    
+
 //    Post *post = self.posts[indexPath.row];
-//    PFUser *user = post[@"eventAuthor"];
 //    
+//
 //    cell.eventTitle.text = post[@"eventTitle"];
 //    CLLocation *eventLocation = post[@"eventLocation"];
-//    //change location to a eventDistance here
+//    //change location to an eventDistance here
 //    cell.eventDistance.text =
+//
+//    cell.eventPrice = post[@"eventPrice"];
 //    
 //    NSDate postCreatedAt = post[@"createdAt"];
 //    //change createdAt to a eventDaysAgo here
 //    cell.eventDaysAgo.text =
+//
+//    [post[@"userProfilePhoto"] getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+//        if (!error) {
+//            cell.userProfilePhoto.image = [UIImage imageWithData:data];
+//        }
+//    }];//look at again, might need afnetwokring
 //    
-//    cell.postUserSkillLevel.text = post[@"postUserSkillLevel"]; //dka make this to stars
+//    cell.eventCategory.text = post[@"eventCategory"];
+//    
+//    cell.eventDescription.text = post[@"eventDescription"];
+//    
+//    cell.eventAuthor.text = post[@"eventAuthor"];
+//    
+//    [post[@"eventImage"] getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+//        if (!error) {
+//            cell.eventImage.image = [UIImage imageWithData:data];
+//        }
+//    }];//look at again, might need afnetwokring
+//    
 //    cell.isFavorited = post[@"isFavorited"]; //set up this boolean selector
-//    cell.eventDistance.text = post[@"eventDistance"];
-//    cell.eventDistance.text = post[@"eventDistance"];
-    
+//
+//
+//
+//
+//    //may need to clip to bounds here self.userProfilePhoto.clipsToBounds = YES;
+
     return cell;
 }
 
-//
+
 //-(void)fetchPosts {
 //    PFQuery *postQuery = [Post query];
 //    [postQuery orderByDescending:@"createdAt"];
@@ -87,6 +109,8 @@ static NSString *kTableViewPostCell = @"PostCell";
 //        [self.refreshControl endRefreshing];
 //    }];
 //}
+
+
 
 
 
