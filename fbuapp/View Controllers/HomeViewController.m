@@ -8,10 +8,13 @@
 
 #import "HomeViewController.h"
 #import "PostCell.h"
+#import "Parse/Parse.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) NSArray * posts;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -23,7 +26,13 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self.tableView registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    // Do any additional setup after loading the view from its nib.
+    
+//    [self fetchPosts]; dka
+//    self.refreshControl = [[UIRefreshControl alloc] init];
+//    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+//    [self.tableView addSubview:self.refreshControl];
+    
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -33,16 +42,53 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+//    return self.posts.count; dka
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
-    cell.name.text = @"New Row";
+    
+//    Post *post = self.posts[indexPath.row];
+//    PFUser *user = post[@"eventAuthor"];
+//    
+//    cell.eventTitle.text = post[@"eventTitle"];
+//    CLLocation *eventLocation = post[@"eventLocation"];
+//    //change location to a eventDistance here
+//    cell.eventDistance.text =
+//    
+//    NSDate postCreatedAt = post[@"createdAt"];
+//    //change createdAt to a eventDaysAgo here
+//    cell.eventDaysAgo.text =
+//    
+//    cell.postUserSkillLevel.text = post[@"postUserSkillLevel"]; //dka make this to stars
+//    cell.isFavorited = post[@"isFavorited"]; //set up this boolean selector
+//    cell.eventDistance.text = post[@"eventDistance"];
+//    cell.eventDistance.text = post[@"eventDistance"];
+    
     return cell;
 }
+
+//
+//-(void)fetchPosts {
+//    PFQuery *postQuery = [Post query];
+//    [postQuery orderByDescending:@"createdAt"];
+//    postQuery.limit = 20;
+//    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+//        if (posts) {
+//            self.posts = [NSArray arrayWithArray:posts] ;// step 6
+//            [self.tableView reloadData];// step 4 5 7
+//        }
+//        else {
+//            // handle error
+//        }
+//        [self.refreshControl endRefreshing];
+//    }];
+//}
+
+
 
 
 /*
