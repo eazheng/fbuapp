@@ -11,7 +11,6 @@
 #import <Parse/Parse.h>
 #import "CreatePostViewController.h"
 
-// Google API key AIzaSyC_YzXLHww0ImN1OUu4t7whakhZT_PFRn8
 @interface AppDelegate ()
 @property (strong, nonatomic) UIView *view;
 @end
@@ -40,6 +39,7 @@
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
     
+    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navigationController;
     
 //    //TEST

@@ -10,17 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Post : PFObject
+@interface Post : PFObject <PFSubclassing>
 
 @property (nonatomic, strong) NSString *eventTitle;
 @property (nonatomic, strong) PFUser *eventAuthor;
 @property (nonatomic, strong) NSString *eventDescription;
-@property (nonatomic, strong) NSString *authorSkillLevel;
+@property (nonatomic, assign) NSInteger eventCategory;
+@property (nonatomic, assign) NSInteger authorSkillLevel;
+@property (nonatomic, assign) NSInteger authorRole;
 @property (nonatomic, strong) NSDate *createdAt;
-@property (nonatomic, strong) CLLocation *eventLocation;
+@property (nonatomic, strong) PFGeoPoint *eventLocation;
 @property (nonatomic, strong) NSNumber *eventPrice;
 
-+ (void) postEvent: (NSString *)title withDescription: (NSString *)description withPrice: (NSNumber *) price withSkill: (NSString *) authorSkill withLocation: (CLLocation *)location withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postEvent: (NSString *)title withDescription: (NSString *)description withPrice: (NSNumber *) price withSkill: (NSInteger) authorSkill withLocation: (CLLocation *)location withRole: (NSInteger)authorRole withCategory: (NSInteger)cat withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 
 @end
