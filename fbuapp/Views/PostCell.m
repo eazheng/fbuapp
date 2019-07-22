@@ -12,8 +12,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.userProfilePhoto.layer.cornerRadius = 50;
+    self.userProfilePhoto.layer.cornerRadius = 25;
     self.userProfilePhoto.clipsToBounds = YES;
+    self.eventImage.layer.cornerRadius = 20;
+    self.eventImage.clipsToBounds = YES;
     
     // Initialization code
 }
