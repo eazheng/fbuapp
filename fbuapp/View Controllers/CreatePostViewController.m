@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
 @property (weak, nonatomic) IBOutlet UITextField *eventDescriptionField;
 @property (weak, nonatomic) IBOutlet UIPickerView *eventCategoryPicker;
-@property (weak, nonatomic) IBOutlet UILabel *pickedCategoryLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userLevelControl;
 @property (weak, nonatomic) IBOutlet UITextField *eventStreetField;
@@ -46,7 +45,6 @@
     self.eventCategoryPicker.delegate = self;
     self.eventCategoryPicker.dataSource = self;
     self.categoryList = [NSArray arrayWithObjects: @"Outdoor Active", @"Indoor Active", @"Lifestyle", @"Arts", nil];
-    self.pickedCategoryLabel.text = @"Select Category";
     //self.eventCategoryPicker.hidden = YES;
     //self.pickerToolbar.hidden = YES;
     self.pickerView.hidden = YES;
@@ -140,8 +138,6 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.eventCategory = row;
     //self.eventCategoryPicker.hidden = YES;
-    //self.pickedCategoryLabel.hidden = NO;
-    self.pickedCategoryLabel.text = self.categoryList[row];
 }
 
 - (IBAction)onTapPicker:(id)sender {
@@ -170,6 +166,7 @@
     self.pickerView.transform = transform;
     self.pickerView.alpha = self.pickerView.alpha * (-1) + 1;
     [UIView commitAnimations];
+    [self.pickerField endEditing:YES];
 }
 
 
