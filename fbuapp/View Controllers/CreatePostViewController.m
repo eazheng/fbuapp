@@ -45,6 +45,7 @@
     self.categoryList = [NSArray arrayWithObjects: @"Outdoor Active", @"Indoor Active", @"Lifestyle", @"Arts", nil];
     self.pickerView.hidden = YES;
     self.pickerView.alpha = 0;
+    self.eventCategory = -1;
 
     self.navigationItem.title=@"Create an Event";
     
@@ -59,14 +60,32 @@
 }
 - (IBAction)postEventAction:(id)sender {
     
-    //check for errors
-    //TODO: check if all fields are filled in
-    
+    //check for errors (like error posting event)
+    // check if all necessary fields are filled in
     if ([self.eventTitleField.text isEqualToString:@""]) {
         NSLog(@"Need an event title");
+        [self showComposeError:@"Please enter an event title"];
+        return;
     }
-    else if ([self.eventStreetField.text isEqualToString:@""] || [self.eventStateField.text isEqualToString:@""] || [self.eventCityField.text isEqualToString:@""]) {
-        NSLog(@"Incomplete address");
+    if ([self.eventDescriptionField.text isEqualToString:@""]) {
+        [self showComposeError:@"Please add a brief event description"];
+        return;
+    }
+    if ([self.eventStreetField.text isEqualToString:@""]) {
+        [self showComposeError:@"Invalid address: Missing street field"];
+        return;
+    }
+    if ([self.eventCityField.text isEqualToString:@""]) {
+        [self showComposeError:@"Invalid address: Missing city field"];
+        return;
+    }
+    if ([self.eventStateField.text isEqualToString:@""]) {
+        [self showComposeError:@"Invalid address: Missing state field"];
+        return;
+    }
+    if (self.eventCategory == -1) {
+        [self showComposeError:@"Please choose an event category"];
+        return;
     }
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
@@ -78,7 +97,6 @@
     
     // create address string and convert into CLLocation
     NSString *addressString = [NSString stringWithFormat:@"%@, %@, %@", self.eventStreetField.text, self.eventCityField.text, self.eventStateField.text];
-    NSLog(@"HERE IS STRING: %@", addressString);
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:addressString completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
@@ -133,6 +151,7 @@
     self.eventCategory = row;
 }
 
+// picker to choose a category
 - (IBAction)onTapPicker:(id)sender {
     self.pickerView.hidden = NO;
     NSLog(@"TAPPED PICKER");
@@ -153,7 +172,7 @@
     [UIView setAnimationDuration:0.3];
     CGAffineTransform transform = CGAffineTransformMakeTranslation(0, 80);
     self.pickerView.transform = transform;
-    self.pickerView.alpha = self.pickerView.alpha * (-1) + 1;
+    self.pickerView.alpha = 0;
     [UIView commitAnimations];
     [self.pickerField endEditing:YES];
 }
@@ -162,9 +181,7 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-
     imagePickerVC.sourceType =UIImagePickerControllerSourceTypePhotoLibrary;
-    
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
@@ -193,5 +210,28 @@
     self.eventImage.image = editedImage;
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//show error if missing fields for create post
+- (void)showComposeError:(NSString *)errorMessage {
+    //setup UIAlertController
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error Posting Event"
+                                                                   message:errorMessage
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Okay"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                         // handle response here.
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+//    [self.activityIndicator stopAnimating];
+    
 }
 @end
