@@ -10,13 +10,15 @@
 #import "PostCell.h"
 #import "Parse/Parse.h"
 #import "Post.h"
+#import <CoreLocation/CoreLocation.h>
 
 static NSString *kTableViewPostCell = @"PostCell";
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 @property (strong, nonatomic) NSArray * posts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) PFGeoPoint * currentLocation;
+@property (nonatomic,strong) CLLocationManager *locationManager;
 
 @end
 
@@ -24,33 +26,42 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest; //make less later on
+        [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager startUpdatingLocation];
+//    } else {
+//        NSLog(@"Location services are not enabled");
+//    }
     
     [self.tableView registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-
-    
     [self fetchPosts];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
-    
-    
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.posts.count;
 }
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 1;
-//}
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-////    return self.posts.count;
-//    return 20;
-//}
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = [locations lastObject];
+    NSString *latitudeValue = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
+//    self.longtitudeValue.text = [NSString stringWithFormat:@"%f", location.coordinate.longitude];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"There was an error retrieving your location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [errorAlert show];
+    NSLog(@"Error: %@",error.description);
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -22,6 +22,7 @@
 		A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A59422E24C9B00F9E81A /* HomeViewController.xib */; };
 		A496A5A322E25CF800F9E81A /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A5A122E25CF800F9E81A /* PostCell.m */; };
 		A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A5A222E25CF800F9E81A /* PostCell.xib */; };
+		A4B6283B22E7C43C00248F45 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B6283A22E7C43C00248F45 /* CoreLocation.framework */; };
 		DB489E5DE6651191239211CD /* Pods_fbuappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		A496A5A022E25CF800F9E81A /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		A496A5A122E25CF800F9E81A /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		A496A5A222E25CF800F9E81A /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
+		A4B6283A22E7C43C00248F45 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B51A71B6D6B82112B20F0798 /* Pods-fbuappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappTests.debug.xcconfig"; path = "Target Support Files/Pods-fbuappTests/Pods-fbuappTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fbuappUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E5224419A9BFE788FE134A /* Pods_fbuapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fbuapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4B6283B22E7C43C00248F45 /* CoreLocation.framework in Frameworks */,
 				2FDD79737868E795742BA65F /* Pods_fbuapp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +112,7 @@
 		272BC2E3337D227D2928A536 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4B6283A22E7C43C00248F45 /* CoreLocation.framework */,
 				D2E5224419A9BFE788FE134A /* Pods_fbuapp.framework */,
 				E2C7AE6EEA297BB83EB63A00 /* Pods_fbuappTests.framework */,
 				CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */,
