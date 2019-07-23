@@ -15,6 +15,7 @@
                 <outlet property="eventCategoryPicker" destination="27Q-l2-e7h" id="ojD-2j-nf8"/>
                 <outlet property="eventCityField" destination="Tba-tK-kti" id="dMq-Mp-HV6"/>
                 <outlet property="eventDescriptionField" destination="euL-Ay-KeH" id="Es3-PM-1Dm"/>
+                <outlet property="eventImage" destination="DeV-Gp-E9C" id="mq3-2a-s3C"/>
                 <outlet property="eventPriceField" destination="7oL-go-kvj" id="dkS-4Q-SoE"/>
                 <outlet property="eventStateField" destination="45T-7z-qSx" id="DWi-Vx-Tr9"/>
                 <outlet property="eventStreetField" destination="8q8-8H-Elr" id="nw8-rE-qOl"/>
@@ -63,9 +64,9 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPL-tH-dKi">
-                    <rect key="frame" x="20" y="88" width="113" height="30"/>
+                    <rect key="frame" x="20" y="88" width="91" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -167,7 +168,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7oL-go-kvj">
+                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$0" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7oL-go-kvj">
                     <rect key="frame" x="214" y="688" width="180" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -182,15 +183,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cB-Id-zvy">
-                    <rect key="frame" x="0.0" y="753" width="414" height="143"/>
+                    <rect key="frame" x="0.0" y="750" width="414" height="146"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="27Q-l2-e7h">
-                            <rect key="frame" x="0.0" y="8" width="414" height="202"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        </pickerView>
                         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tzi-65-6fj">
-                            <rect key="frame" x="0.0" y="-75" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="-26" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <items>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="3mY-UW-S9N"/>
@@ -201,9 +198,26 @@
                                 </barButtonItem>
                             </items>
                         </toolbar>
+                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="27Q-l2-e7h">
+                            <rect key="frame" x="0.0" y="27" width="414" height="128"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        </pickerView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="imageplaceholder-270x184" translatesAutoresizingMaskIntoConstraints="NO" id="DeV-Gp-E9C">
+                    <rect key="frame" x="214" y="263" width="180" height="116"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <gestureRecognizers/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-lY-LDV">
+                    <rect key="frame" x="144" y="253" width="49" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Upload"/>
+                    <connections>
+                        <action selector="uploadImageButton:" destination="-1" eventType="touchUpInside" id="w7X-TN-Xds"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
@@ -211,4 +225,7 @@
             <point key="canvasLocation" x="66.666666666666671" y="120.53571428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="imageplaceholder-270x184" width="270" height="184"/>
+    </resources>
 </document>

@@ -11,10 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import "AppDelegate.h"
 
-@interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
 @property (weak, nonatomic) IBOutlet UITextField *eventDescriptionField;
+@property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UIPickerView *eventCategoryPicker;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userLevelControl;
@@ -27,11 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
 
 @property (weak, nonatomic) IBOutlet UITextField *eventPriceField;
-//@property (weak, nonatomic) IBOutlet UISegmentedControl *userTimeAvailabilityControl;
-//@property (weak, nonatomic) IBOutlet UISegmentedControl *userDayAvailabilityControl;
 @property NSArray *categoryList;
 @property NSInteger eventCategory;
-
 
 @end
 
@@ -45,11 +43,8 @@
     self.eventCategoryPicker.delegate = self;
     self.eventCategoryPicker.dataSource = self;
     self.categoryList = [NSArray arrayWithObjects: @"Outdoor Active", @"Indoor Active", @"Lifestyle", @"Arts", nil];
-    //self.eventCategoryPicker.hidden = YES;
-    //self.pickerToolbar.hidden = YES;
     self.pickerView.hidden = YES;
     self.pickerView.alpha = 0;
-
 
     self.navigationItem.title=@"Create an Event";
     
@@ -73,7 +68,6 @@
     else if ([self.eventStreetField.text isEqualToString:@""] || [self.eventStateField.text isEqualToString:@""] || [self.eventCityField.text isEqualToString:@""]) {
         NSLog(@"Incomplete address");
     }
-        
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
@@ -81,7 +75,6 @@
     
     NSInteger authorSkill = [self.userLevelControl selectedSegmentIndex];
     NSInteger authorRole = [self.userRoleControl selectedSegmentIndex];
-    //NSInteger eventCategory = [self.eventCategoryPicker selectedRowInComponent:0];
     
     // create address string and convert into CLLocation
     NSString *addressString = [NSString stringWithFormat:@"%@, %@, %@", self.eventStreetField.text, self.eventCityField.text, self.eventStateField.text];
@@ -95,9 +88,10 @@
             CLPlacemark *placemark = [placemarks lastObject];
             CLLocation *loc = [[CLLocation alloc] initWithLatitude:placemark.location.coordinate.latitude longitude:placemark.location.coordinate.longitude];
 
-            
+            CGSize size = CGSizeMake(400, 400);
+            UIImage *resizedImage = [self resizeImage:self.eventImage.image withSize:size];
             //post the event
-            [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withRole:authorRole withCategory: self.eventCategory withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(!succeeded){
                     NSLog(@"Error posting Event: %@", error.localizedDescription);
                 }
@@ -137,13 +131,9 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.eventCategory = row;
-    //self.eventCategoryPicker.hidden = YES;
 }
 
 - (IBAction)onTapPicker:(id)sender {
-    //self.eventCategoryPicker.hidden = NO;
-    //self.pickedCategoryLabel.hidden = YES;
-    //self.pickerToolbar.hidden = NO;
     self.pickerView.hidden = NO;
     NSLog(@"TAPPED PICKER");
     
@@ -156,7 +146,6 @@
 }
 
 - (IBAction)onTapDone:(id)sender {
-    //self.eventCategoryPicker.hidden = YES;
     NSLog(@"TAPPED DONE");
     self.pickerField.text = self.categoryList[self.eventCategory];
     
@@ -169,5 +158,40 @@
     [self.pickerField endEditing:YES];
 }
 
+- (IBAction)uploadImageButton:(id)sender {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
 
+    imagePickerVC.sourceType =UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+//resize image to be within 10MB
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    // Get the image captured by the UIImagePickerController
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    
+    // Do something with the images (based on your use case)
+    self.eventImage.image = editedImage;
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

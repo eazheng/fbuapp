@@ -21,8 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) PFGeoPoint *eventLocation;
 @property (nonatomic, strong) NSNumber *eventPrice;
+@property (nonatomic, strong) PFFileObject *image;
 
-+ (void) postEvent: (NSString *)title withDescription: (NSString *)description withPrice: (NSNumber *) price withSkill: (NSInteger) authorSkill withLocation: (CLLocation *)location withRole: (NSInteger)authorRole withCategory: (NSInteger)cat withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postEvent: (NSString *)title withDescription: (NSString *)description withPrice: (NSNumber *) price withSkill: (NSInteger) authorSkill withLocation: (CLLocation *)location withRole: (NSInteger)authorRole withCategory: (NSInteger)cat withImage: (UIImage *)image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 
 @end
