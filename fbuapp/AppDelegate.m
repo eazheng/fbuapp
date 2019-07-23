@@ -7,9 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <Parse/Parse.h>
+#import "ProfileViewController.h"
 #import "LogViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <Parse/Parse.h>
 
 
 @interface AppDelegate ()
@@ -21,18 +22,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
-    //initialize parse
-    ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        
-        configuration.applicationId = @"skillAppId";
-        configuration.server = @"https://skill--app.herokuapp.com/parse";
-    }];
+    //present view controllers
+    if ([FBSDKAccessToken currentAccessToken]) {
+        //take user to profileV
+        ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
+        self.window.rootViewController = navigationController;
+    }
+    else {
+        //take user to logViewController
+        LogViewController *logViewController = [[LogViewController alloc] initWithNibName:@"LogViewController" bundle:nil];
+        self.window.rootViewController = logViewController;
+    }
     
-    [Parse initializeWithConfiguration:config];
+//    //initialize parse
+//    ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+//
+//        configuration.applicationId = @"skillAppId";
+//        configuration.server = @"https://skill--app.herokuapp.com/parse";
+//    }];
+//
+//    [Parse initializeWithConfiguration:config];
     
 //    //TEST
 //    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
@@ -47,9 +60,7 @@
 //        }
 //    }];
     
-    LogViewController *logViewController = [[LogViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: logViewController];
-    self.window.rootViewController = navigationController;
+
     return YES;
 }
 

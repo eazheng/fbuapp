@@ -46,10 +46,7 @@
 }
 
 
-- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    NSLog(@"User has logged out");
-    //sent to delegate once user logs out
-}
+
 
 
 /*
