@@ -17,7 +17,7 @@ static NSString *kTableViewPostCell = @"PostCell";
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 @property (strong, nonatomic) NSArray * posts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) PFGeoPoint * currentLocation;
+@property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 
 @end
@@ -26,21 +26,19 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    if ([CLLocationManager locationServicesEnabled]) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest; //make less later on
-        [self.locationManager requestWhenInUseAuthorization];
-        [self.locationManager startUpdatingLocation];
-//    } else {
-//        NSLog(@"Location services are not enabled");
-//    }
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest; //make less accurate later
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startUpdatingLocation];
     
     [self.tableView registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     [self fetchPosts];
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
@@ -52,14 +50,21 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    CLLocation *location = [locations lastObject];
-    NSString *latitudeValue = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
+    self.currentLocation = [locations lastObject];
+//    NSString *latitudeValue = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
 //    self.longtitudeValue.text = [NSString stringWithFormat:@"%f", location.coordinate.longitude];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"There was an error retrieving your location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [errorAlert show];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Location Services Error"
+                                                                   message:[NSString stringWithFormat:@"%@", error.localizedDescription]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:^{}];
     NSLog(@"Error: %@",error.description);
 }
 
@@ -67,12 +72,12 @@ static NSString *kTableViewPostCell = @"PostCell";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
-
     Post *post = self.posts[indexPath.row];
 
-//
     cell.eventTitle.text = post[@"eventTitle"];
     PFGeoPoint *eventLocation = post[@"eventLocation"];
+    double dist = [eventLocation distanceInMilesTo :[PFGeoPoint geoPointWithLocation :self.currentLocation]];
+    cell.eventDistance.text = [NSString stringWithFormat:@"%.2f", dist];
 //    PFUser * cur =[PFUser currentUser];
 //    double x = [eventLocation distanceInMilesTo :cur[@"userLocation"]];// may need nullable
 ////    NSLog([NSString stringWithFormat:@"%.20lf", x]);
@@ -94,7 +99,7 @@ static NSString *kTableViewPostCell = @"PostCell";
 //
 //    cell.eventCategory.text = post[@"eventCategory"];//enum?
 ////
-//    cell.eventDescription.text = post[@"eventDescription"];
+    cell.eventDescription.text = post[@"eventDescription"];
 //
 ////    cell.eventAuthor.text = eventAuthor.name; need to add to user still
 //
