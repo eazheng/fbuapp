@@ -35,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PbO-gi-2SP">
-                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fgf-JZ-xaX">
                             <rect key="frame" x="20" y="49" width="374" height="33"/>
@@ -156,42 +156,11 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cB-Id-zvy">
-                            <rect key="frame" x="0.0" y="674" width="414" height="154"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="27Q-l2-e7h">
-                                    <rect key="frame" x="0.0" y="32" width="414" height="122"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                </pickerView>
-                                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tzi-65-6fj">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    <items>
-                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="3mY-UW-S9N"/>
-                                        <barButtonItem title="Done" id="LWp-hs-v5b">
-                                            <connections>
-                                                <action selector="onTapDone:" destination="-1" id="Ld1-4P-HEB"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </items>
-                                </toolbar>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="imageplaceholder-270x184" translatesAutoresizingMaskIntoConstraints="NO" id="DeV-Gp-E9C">
-                            <rect key="frame" x="213" y="293" width="180" height="116"/>
+                            <rect key="frame" x="164" y="293" width="229" height="116"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <gestureRecognizers/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-lY-LDV">
-                            <rect key="frame" x="141" y="287" width="49" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Upload"/>
-                            <connections>
-                                <action selector="uploadImageButton:" destination="-1" eventType="touchUpInside" id="w7X-TN-Xds"/>
-                            </connections>
-                        </button>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eSj-iF-WqK">
                             <rect key="frame" x="20" y="119" width="374" height="97"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -199,7 +168,16 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-lY-LDV">
+                            <rect key="frame" x="131" y="289" width="49" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Upload"/>
+                            <connections>
+                                <action selector="uploadImageButton:" destination="-1" eventType="touchUpInside" id="w7X-TN-Xds"/>
+                            </connections>
+                        </button>
                     </subviews>
+                    <viewLayoutGuide key="safeArea" id="Lpu-uq-Ncm"/>
                 </scrollView>
                 <tabBar clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJi-6N-Jy7">
                     <rect key="frame" x="0.0" y="813" width="414" height="83"/>
@@ -210,17 +188,40 @@
                         <tabBarItem title="Profile" id="oaP-ri-wN6"/>
                     </items>
                 </tabBar>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cB-Id-zvy">
+                    <rect key="frame" x="0.0" y="742" width="414" height="154"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="27Q-l2-e7h">
+                            <rect key="frame" x="0.0" y="32" width="414" height="122"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        </pickerView>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tzi-65-6fj">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <items>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="3mY-UW-S9N"/>
+                                <barButtonItem title="Done" id="LWp-hs-v5b">
+                                    <connections>
+                                        <action selector="onTapDone:" destination="-1" id="Ld1-4P-HEB"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                        </toolbar>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="eJi-6N-Jy7" secondAttribute="trailing" id="4Eg-Gl-hs2"/>
-                <constraint firstAttribute="bottom" secondItem="PbO-gi-2SP" secondAttribute="bottom" id="Iug-Lc-GPH"/>
-                <constraint firstAttribute="trailingMargin" secondItem="PbO-gi-2SP" secondAttribute="trailingMargin" id="OgK-Fy-CrW"/>
                 <constraint firstItem="eJi-6N-Jy7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Rqv-VU-Ur4"/>
-                <constraint firstItem="PbO-gi-2SP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZRW-NB-uvZ"/>
+                <constraint firstItem="PbO-gi-2SP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="W3Z-7V-kZR"/>
+                <constraint firstItem="PbO-gi-2SP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YpJ-JE-pnf"/>
+                <constraint firstAttribute="bottom" secondItem="PbO-gi-2SP" secondAttribute="bottom" id="a8U-eS-yHB"/>
+                <constraint firstAttribute="trailing" secondItem="PbO-gi-2SP" secondAttribute="trailing" id="cko-C3-8TB"/>
                 <constraint firstAttribute="bottom" secondItem="eJi-6N-Jy7" secondAttribute="bottom" id="gvc-VW-til"/>
-                <constraint firstItem="PbO-gi-2SP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="nSc-V9-bfE"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="66.666666666666671" y="120.53571428571428"/>

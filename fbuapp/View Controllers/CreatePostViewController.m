@@ -43,7 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height+100);
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
     
 
     // Connect data:
