@@ -18,18 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 //activate a camera for user to select profile image
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
@@ -42,7 +32,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//user can change profile image
+
+//access camera for user to change profile image
 - (IBAction)didEdit:(id)sender {
     NSLog(@"Button was clicked");
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
@@ -59,13 +50,13 @@
     }
 }
 
+
 //user can go back to original profile
 - (IBAction)didCancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
-//user completed editiing thier profile image
+//user completed editiing thier profile 
 - (IBAction)doneEditing:(id)sender {
 }
 

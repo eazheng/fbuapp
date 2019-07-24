@@ -13,11 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol PFUserAuthenticationDelegate;
 
 @interface RegisterViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextField *firstNameField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 - (IBAction)signupButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
+@property (strong, nonatomic) IBOutlet UITextField *emailField;
+- (IBAction)addPhotoButton:(id)sender;
 
 
 @end

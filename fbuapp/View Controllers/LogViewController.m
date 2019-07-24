@@ -10,6 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "ProfileViewController.h"
+#import "Parse/Parse.h"
 
 @interface LogViewController ()
 
@@ -23,10 +24,11 @@
     //create facebook login button
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     loginButton.delegate = self;
-    // center button
+    //contected to a visibe view
     loginButton.center = self.loginButtonView.center;
     //ask user for access to information
-    loginButton.permissions = @[@"public_profile", @"email"];
+    loginButton.permissions = @[@"public_profile"];
+    loginButton.permissions = @[@"email"];
     //displays the created button
     [self.view addSubview:loginButton];
 }
@@ -46,9 +48,6 @@
 }
 
 
-
-
-
 /*
 #pragma mark - Navigation
 
@@ -58,27 +57,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-
-
-
-
-//if ([FBSDKAccessToken currentAccessToken]) {
-//    // TODO: User is logged in, do work such as go to next view controller.
-//    //
-//    //
-//}
-//
-
-//
-//[FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
-//[[NSNotificationCenter defaultCenter] addObserverForName:FBSDKProfileDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock: ^(NSNotification *notification) {
-//    if ([FBSDKProfile currentProfile]) {
-//        // Update for new user profile
-//    }
-//}];
-
-
-
 
 @end

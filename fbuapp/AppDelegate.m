@@ -9,7 +9,9 @@
 #import "AppDelegate.h"
 #import "ProfileViewController.h"
 #import "LogViewController.h"
+#import "RegisterViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Parse/Parse.h"
 //#import <Parse/Parse.h>
 
 
@@ -27,10 +29,14 @@
     
     //present view controllers
     if ([FBSDKAccessToken currentAccessToken]) {
-        //take user to profileV
-        ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
+        //take user to RegisterViewController
+        RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: registerViewController];
         self.window.rootViewController = navigationController;
+//        //take user to ProfileViewController
+//        ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
+//        self.window.rootViewController = navigationController;
     }
     else {
         //take user to logViewController
@@ -38,14 +44,13 @@
         self.window.rootViewController = logViewController;
     }
     
-//    //initialize parse
-//    ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-//
-//        configuration.applicationId = @"skillAppId";
-//        configuration.server = @"https://skill--app.herokuapp.com/parse";
-//    }];
-//
-//    [Parse initializeWithConfiguration:config];
+    //initialize parse
+    ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+
+        configuration.applicationId = @"skillAppId";
+        configuration.server = @"https://skill--app.herokuapp.com/parse";
+    }];
+    [Parse initializeWithConfiguration:config];
     
 //    //TEST
 //    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
@@ -59,7 +64,6 @@
 //            NSLog(@"Error: %@", error.description);
 //        }
 //    }];
-    
 
     return YES;
 }

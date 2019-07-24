@@ -22,7 +22,7 @@
 		83657DEF22E67606002EB6A8 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DED22E67606002EB6A8 /* RegisterViewController.xib */; };
 		83657DF322E67798002EB6A8 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DF122E67798002EB6A8 /* EditViewController.m */; };
 		83657DF422E67798002EB6A8 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DF222E67798002EB6A8 /* EditViewController.xib */; };
-		83E6B27322E137AF0045B437 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27222E137AF0045B437 /* Post.m */; };
+		83657E8A22E8D00D002EB6A8 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657E8922E8D00D002EB6A8 /* Profile.m */; };
 		83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27622E234C10045B437 /* ProfileViewController.m */; };
 		83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E6B27722E234C10045B437 /* ProfileViewController.xib */; };
 		DB489E5DE6651191239211CD /* Pods_fbuappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */; };
@@ -73,8 +73,8 @@
 		83657DF022E67798002EB6A8 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		83657DF122E67798002EB6A8 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		83657DF222E67798002EB6A8 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
-		83E6B27122E137AF0045B437 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
-		83E6B27222E137AF0045B437 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		83657E8822E8D00D002EB6A8 /* Profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		83657E8922E8D00D002EB6A8 /* Profile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		83E6B27522E234C10045B437 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		83E6B27622E234C10045B437 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		83E6B27722E234C10045B437 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -183,6 +183,8 @@
 		83657DE522E6451B002EB6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				83657E8822E8D00D002EB6A8 /* Profile.h */,
+				83657E8922E8D00D002EB6A8 /* Profile.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,8 +192,6 @@
 		83E6B27022E136FD0045B437 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				83E6B27122E137AF0045B437 /* Post.h */,
-				83E6B27222E137AF0045B437 /* Post.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -454,10 +454,10 @@
 			files = (
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
-				83E6B27322E137AF0045B437 /* Post.m in Sources */,
 				83657DF322E67798002EB6A8 /* EditViewController.m in Sources */,
 				83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */,
 				83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */,
+				83657E8A22E8D00D002EB6A8 /* Profile.m in Sources */,
 				83657DE022E24824002EB6A8 /* LogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

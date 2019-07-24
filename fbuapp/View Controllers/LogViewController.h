@@ -16,13 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *loginButtonView;
 @property (copy, nonatomic) NSArray<NSString *> *permissions;
 
-//register thirdparty authentication
-//+ (void)registerAuthenticationDelegate:(id<PFUserAuthenticationDelegate>)delegate forAuthType:(NSString *)authType;
-
-//login user with third party authentication
-//+ (BFTask<__kindof PFUser *> *)logInWithAuthTypeInBackground:(NSString *)authType
-
-
 
 @end
 
