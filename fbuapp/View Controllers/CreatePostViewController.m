@@ -11,8 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import "AppDelegate.h"
 #import "UITextView+Placeholder.h"
+#import <GooglePlaces/GooglePlaces.h>
 
-@interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
@@ -23,10 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *eventCategoryPicker;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userLevelControl;
-@property (weak, nonatomic) IBOutlet UITextField *eventStreetField;
-@property (weak, nonatomic) IBOutlet UITextField *eventCityField;
-@property (weak, nonatomic) IBOutlet UITextField *eventStateField;
-//@property (weak, nonatomic) IBOutlet UITextField *eventZipField;
 @property (weak, nonatomic) IBOutlet UITextField *pickerField;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
@@ -34,10 +33,33 @@
 @property (weak, nonatomic) IBOutlet UITextField *eventPriceField;
 @property NSArray *categoryList;
 @property NSInteger eventCategory;
+@property (weak, nonatomic) IBOutlet UITextField *eventLocationTextField;
+@property  GMSAutocompleteFilter *filter;
+@property  NSString *addressString;
 
 @end
 
 @implementation CreatePostViewController
+
+// Present the autocomplete view controller when the button is pressed.
+- (void)searchClicked {
+    NSLog(@"Clicked on search");
+    GMSAutocompleteViewController *locationController = [[GMSAutocompleteViewController alloc] init];
+    locationController.delegate = self;
+    
+    // Specify the place data types to return.
+    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldFormattedAddress);
+    locationController.placeFields = fields;
+    
+    // Specify a filter.
+    self.filter = [[GMSAutocompleteFilter alloc] init];
+    self.filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
+    locationController.autocompleteFilter = self.filter;
+    
+    // Display the autocomplete view controller.
+    [self presentViewController:locationController animated:YES completion:nil];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,7 +71,10 @@
     // Connect data:
     self.eventCategoryPicker.delegate = self;
     self.eventCategoryPicker.dataSource = self;
+    
     self.categoryList = [NSArray arrayWithObjects: @"Outdoor Active", @"Indoor Active", @"Lifestyle", @"Arts", @"Business", @"Finance", @"Music", @"Photography", nil];
+    
+    
     self.pickerView.hidden = YES;
     self.pickerView.alpha = 0;
     self.eventCategory = -1;
@@ -70,7 +95,24 @@
     
     // then we add the button to the navigation bar
     self.navigationItem.rightBarButtonItem = myButton;
+    
+    //button on search location field
+    UIButton* overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [overlayButton setImage:[UIImage imageNamed:@"search_icon"] forState:UIControlStateNormal];
+    [overlayButton addTarget:self action:NSSelectorFromString(@"searchClicked") forControlEvents:UIControlEventTouchUpInside];
+    [self.eventLocationTextField addTarget:self action:NSSelectorFromString(@"searchClicked") forControlEvents:UIControlEventEditingDidBegin];
+
+    
+    [overlayButton setTitle:@"Launch location search" forState:UIControlStateNormal];
+    
+    overlayButton.frame = CGRectMake(0, 0, 26, 26);
+    
+    // Assign the overlay button to a stored text field
+    self.eventLocationTextField.leftView = overlayButton;
+    self.eventLocationTextField.leftViewMode = UITextFieldViewModeAlways;
 }
+
+
 - (IBAction)postEventAction:(id)sender {
     
     //check for errors (like error posting event)
@@ -82,18 +124,6 @@
     }
     if ([self.eventDescriptionField.text isEqualToString:@""]) {
         [self showComposeError:@"Please add a brief event description"];
-        return;
-    }
-    if ([self.eventStreetField.text isEqualToString:@""]) {
-        [self showComposeError:@"Invalid address: Missing street field"];
-        return;
-    }
-    if ([self.eventCityField.text isEqualToString:@""]) {
-        [self showComposeError:@"Invalid address: Missing city field"];
-        return;
-    }
-    if ([self.eventStateField.text isEqualToString:@""]) {
-        [self showComposeError:@"Invalid address: Missing state field"];
         return;
     }
     if (self.eventCategory == -1) {
@@ -109,9 +139,9 @@
     NSInteger authorRole = [self.userRoleControl selectedSegmentIndex];
     
     // create address string and convert into CLLocation
-    NSString *addressString = [NSString stringWithFormat:@"%@, %@, %@", self.eventStreetField.text, self.eventCityField.text, self.eventStateField.text];
+    //NSString *addressString = [NSString stringWithFormat:@"%@, %@, %@", self.eventStreetField.text, self.eventCityField.text, self.eventStateField.text];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:addressString completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    [geocoder geocodeAddressString:self.addressString completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error geocoding address string: %@", error.localizedDescription);
         }
@@ -250,4 +280,41 @@
 //    [self.activityIndicator stopAnimating];
     
 }
+
+
+// for GMSAutocompleteViewControllerDelegate
+// Handle the user's selection.
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didAutocompleteWithPlace:(GMSPlace *)place {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // Do something with the selected place.
+    NSLog(@"Place name %@", place.name);
+    NSLog(@"Place ID %@", place.placeID);
+    NSLog(@"Formatted Address %@", place.formattedAddress);
+    NSLog(@"Place attributions %@", place.attributions.string);
+    self.addressString = place.formattedAddress;
+    self.eventLocationTextField.text = place.name;
+}
+
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didFailAutocompleteWithError:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // TODO: handle the error.
+    NSLog(@"Error: %@", [error description]);
+}
+
+// User canceled the operation.
+- (void)wasCancelled:(GMSAutocompleteViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// Turn the network activity indicator on and off again.
+- (void)didRequestAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)didUpdateAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
 @end

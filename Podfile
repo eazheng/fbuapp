@@ -9,6 +9,9 @@ target 'fbuapp' do
   pod 'FBSDKLoginKit'
   pod 'Parse'
   pod 'UITextView+Placeholder'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  #pod 'GoogleAPIClientForREST'
   target 'fbuappTests' do
     inherit! :search_paths
     # Pods for testing

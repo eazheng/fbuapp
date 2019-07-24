@@ -10,6 +10,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
 #import "CreatePostViewController.h"
+#import <GooglePlaces/GooglePlaces.h>
+#import "Key.h"
 
 @interface AppDelegate ()
 @property (strong, nonatomic) UIView *view;
@@ -17,9 +19,10 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //[GMSServices provideAPIKey:API_KEY];
+    [GMSPlacesClient provideAPIKey:API_KEY];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
@@ -36,11 +39,15 @@
     
     // set root view controller as CreatePostViewController
     CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
-    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
     
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[navigationController];
+    
     //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = navigationController;
+    self.window.rootViewController = tabBarController;
+    
+    
     
     return YES;
 }

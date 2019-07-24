@@ -13,12 +13,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreatePostViewController">
             <connections>
                 <outlet property="eventCategoryPicker" destination="27Q-l2-e7h" id="ojD-2j-nf8"/>
-                <outlet property="eventCityField" destination="Tba-tK-kti" id="dMq-Mp-HV6"/>
                 <outlet property="eventDescriptionField" destination="eSj-iF-WqK" id="AJS-pY-0NZ"/>
                 <outlet property="eventImage" destination="DeV-Gp-E9C" id="mq3-2a-s3C"/>
+                <outlet property="eventLocationTextField" destination="3tO-2T-wN3" id="x32-Ec-xLM"/>
                 <outlet property="eventPriceField" destination="7oL-go-kvj" id="dkS-4Q-SoE"/>
-                <outlet property="eventStateField" destination="45T-7z-qSx" id="DWi-Vx-Tr9"/>
-                <outlet property="eventStreetField" destination="8q8-8H-Elr" id="nw8-rE-qOl"/>
                 <outlet property="eventTitleField" destination="Fgf-JZ-xaX" id="rKj-lZ-Jfg"/>
                 <outlet property="pickerField" destination="mUi-qi-WV2" id="1es-JS-y9B"/>
                 <outlet property="pickerToolbar" destination="Tzi-65-6fj" id="J4A-78-ikB"/>
@@ -93,41 +91,6 @@
                                 <segment title="Expert"/>
                             </segments>
                         </segmentedControl>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXU-7K-kRl">
-                            <rect key="frame" x="20" y="531" width="113" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8q8-8H-Elr">
-                            <rect key="frame" x="20" y="560" width="374" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" textContentType="street-address"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tba-tK-kti">
-                            <rect key="frame" x="20" y="598" width="374" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" textContentType="address-level2"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="45T-7z-qSx">
-                            <rect key="frame" x="20" y="636" width="180" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" textContentType="address-level1"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r6R-0m-fdF">
-                            <rect key="frame" x="213" y="636" width="180" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" textContentType="postal-code"/>
-                        </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About Myself" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-IW-Y4B">
                             <rect key="frame" x="20" y="412" width="102" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -135,20 +98,6 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mmc-7o-pqX">
-                            <rect key="frame" x="20" y="688" width="39" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$0" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7oL-go-kvj">
-                            <rect key="frame" x="213" y="683" width="180" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sT-dZ-DoW">
                             <rect key="frame" x="20" y="293" width="95" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -176,18 +125,37 @@
                                 <action selector="uploadImageButton:" destination="-1" eventType="touchUpInside" id="w7X-TN-Xds"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXU-7K-kRl">
+                            <rect key="frame" x="20" y="542" width="113" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3tO-2T-wN3">
+                            <rect key="frame" x="20" y="571" width="373" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mmc-7o-pqX">
+                            <rect key="frame" x="20" y="631" width="39" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$0" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7oL-go-kvj">
+                            <rect key="frame" x="213" y="626" width="180" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="Lpu-uq-Ncm"/>
                 </scrollView>
-                <tabBar clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJi-6N-Jy7">
-                    <rect key="frame" x="0.0" y="813" width="414" height="83"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <items>
-                        <tabBarItem title="Home" id="VrY-pK-Ds9"/>
-                        <tabBarItem title="Post" id="YPb-Ae-AaL"/>
-                        <tabBarItem title="Profile" id="oaP-ri-wN6"/>
-                    </items>
-                </tabBar>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cB-Id-zvy">
                     <rect key="frame" x="0.0" y="742" width="414" height="154"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -215,16 +183,13 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="eJi-6N-Jy7" secondAttribute="trailing" id="4Eg-Gl-hs2"/>
-                <constraint firstItem="eJi-6N-Jy7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Rqv-VU-Ur4"/>
                 <constraint firstItem="PbO-gi-2SP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="W3Z-7V-kZR"/>
                 <constraint firstItem="PbO-gi-2SP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YpJ-JE-pnf"/>
                 <constraint firstAttribute="bottom" secondItem="PbO-gi-2SP" secondAttribute="bottom" id="a8U-eS-yHB"/>
                 <constraint firstAttribute="trailing" secondItem="PbO-gi-2SP" secondAttribute="trailing" id="cko-C3-8TB"/>
-                <constraint firstAttribute="bottom" secondItem="eJi-6N-Jy7" secondAttribute="bottom" id="gvc-VW-til"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="66.666666666666671" y="120.53571428571428"/>
+            <point key="canvasLocation" x="-33.333333333333336" y="86.383928571428569"/>
         </view>
     </objects>
     <resources>

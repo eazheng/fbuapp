@@ -19,6 +19,9 @@
 		3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3827E30122E236BC008B8FA0 /* CreatePostViewController.m */; };
 		3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */; };
 		3827E30622E29935008B8FA0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3827E30522E29935008B8FA0 /* CoreLocation.framework */; };
+		38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */; };
+		38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */; };
+		38FBA5AD22E8EEA7002C1114 /* Key.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5AC22E8EEA7002C1114 /* Key.m */; };
 		75952087513A89F63BDB73FF /* Pods_fbuappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C7AE6EEA297BB83EB63A00 /* Pods_fbuappTests.framework */; };
 		83E6B27322E137AF0045B437 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27222E137AF0045B437 /* Post.m */; };
 		DB489E5DE6651191239211CD /* Pods_fbuappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */; };
@@ -64,6 +67,11 @@
 		3827E30122E236BC008B8FA0 /* CreatePostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatePostViewController.m; sourceTree = "<group>"; };
 		3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostViewController.xib; sourceTree = "<group>"; };
 		3827E30522E29935008B8FA0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		38FBA5A322E8E026002C1114 /* EnterLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterLocationViewController.h; sourceTree = "<group>"; };
+		38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterLocationViewController.m; sourceTree = "<group>"; };
+		38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterLocationViewController.xib; sourceTree = "<group>"; };
+		38FBA5AB22E8EEA7002C1114 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
+		38FBA5AC22E8EEA7002C1114 /* Key.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Key.m; sourceTree = "<group>"; };
 		3B4C51A1A5894227EFC92EF2 /* Pods-fbuappUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappUITests.release.xcconfig"; path = "Target Support Files/Pods-fbuappUITests/Pods-fbuappUITests.release.xcconfig"; sourceTree = "<group>"; };
 		46F19CAC609CE62F3533B72A /* Pods-fbuappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappTests.release.xcconfig"; path = "Target Support Files/Pods-fbuappTests/Pods-fbuappTests.release.xcconfig"; sourceTree = "<group>"; };
 		83E6B27122E137AF0045B437 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
@@ -140,6 +148,7 @@
 		3827E2C322DE98F8008B8FA0 /* fbuapp */ = {
 			isa = PBXGroup;
 			children = (
+				38FBA59E22E8DADD002C1114 /* Views */,
 				3827E30722E7C09F008B8FA0 /* Helpers */,
 				83E6B27422E148E40045B437 /* View Controllers */,
 				83E6B27022E136FD0045B437 /* Models */,
@@ -150,6 +159,8 @@
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
+				38FBA5AB22E8EEA7002C1114 /* Key.h */,
+				38FBA5AC22E8EEA7002C1114 /* Key.m */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";
@@ -179,6 +190,13 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		38FBA59E22E8DADD002C1114 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		83E6B27022E136FD0045B437 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +214,9 @@
 				3827E30022E236BC008B8FA0 /* CreatePostViewController.h */,
 				3827E30122E236BC008B8FA0 /* CreatePostViewController.m */,
 				3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */,
+				38FBA5A322E8E026002C1114 /* EnterLocationViewController.h */,
+				38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */,
+				38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -225,6 +246,7 @@
 				3827E2BE22DE98F8008B8FA0 /* Frameworks */,
 				3827E2BF22DE98F8008B8FA0 /* Resources */,
 				C57C54ECA2F16CAD83AB6657 /* [CP] Embed Pods Frameworks */,
+				7CCED80A70EC56A0AE0D93A4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -323,6 +345,7 @@
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
 				3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */,
+				38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +367,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7CCED80A70EC56A0AE0D93A4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-fbuapp/Pods-fbuapp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-fbuapp/Pods-fbuapp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-fbuapp/Pods-fbuapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9D622D172BBB84A2DA01CAFF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,7 +475,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3827E2C922DE98F8008B8FA0 /* LoginViewController.m in Sources */,
+				38FBA5AD22E8EEA7002C1114 /* Key.m in Sources */,
 				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
+				38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
 				83E6B27322E137AF0045B437 /* Post.m in Sources */,
