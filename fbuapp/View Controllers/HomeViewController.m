@@ -11,6 +11,7 @@
 #import "Parse/Parse.h"
 #import "Post.h"
 #import <CoreLocation/CoreLocation.h>
+#import "UIImageView+AFNetworking.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
@@ -84,7 +85,7 @@ static NSString *kTableViewPostCell = @"PostCell";
 ////    //change location to an eventDistance here
 ////    cell.eventDistance.text =
 //
-//    cell.eventPrice = post[@"eventPrice"];
+    cell.eventPrice = [post[@"eventPrice"] stringValue];
 //
 //    NSDate *postCreatedAt = post[@"createdAt"];
 ////    change createdAt to a eventDaysAgo here
@@ -108,7 +109,12 @@ static NSString *kTableViewPostCell = @"PostCell";
 //            cell.eventImage.image = [UIImage imageWithData:data];
 //        }
 //    }];//look at again, might need afnetwokring
-//
+    
+    PFFileObject *pfobj = post[@"image"];
+    NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];
+    cell.eventImage.image = nil;
+    [cell.eventImage setImageWithURL:eventImageURL];
+    
 ////    cell.isFavorited = post[@"isFavorited"]; //set up this boolean selector
 //
 ////  only deques

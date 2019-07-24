@@ -8,6 +8,7 @@ target 'fbuapp' do
   # Pods for fbuapp
   pod 'FBSDKLoginKit'
   pod 'Parse'
+pod 'AFNetworking'
 
   target 'fbuappTests' do
     inherit! :search_paths

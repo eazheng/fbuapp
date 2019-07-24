@@ -14,8 +14,9 @@
     [super awakeFromNib];
     self.userProfilePhoto.layer.cornerRadius = 25;
     self.userProfilePhoto.clipsToBounds = YES;
-    self.eventImage.layer.cornerRadius = 20;
+    self.eventImage.layer.cornerRadius = 17;
     self.eventImage.clipsToBounds = YES;
+    self.eventImage.contentMode = UIViewContentModeScaleToFill;
     
     // Initialization code
 }

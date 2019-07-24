@@ -1,12 +1,27 @@
 PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
   - Bolts/Tasks (1.9.0)
-  - FBSDKCoreKit (5.2.1):
-    - FBSDKCoreKit/Basics (= 5.2.1)
-    - FBSDKCoreKit/Core (= 5.2.1)
-  - FBSDKCoreKit/Basics (5.2.1)
-  - FBSDKCoreKit/Core (5.2.1):
+  - FBSDKCoreKit (5.1.1):
+    - FBSDKCoreKit/Basics (= 5.1.1)
+    - FBSDKCoreKit/Core (= 5.1.1)
+  - FBSDKCoreKit/Basics (5.1.1)
+  - FBSDKCoreKit/Core (5.1.1):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.2.1):
+  - FBSDKLoginKit (5.1.1):
     - FBSDKCoreKit (~> 5.0)
   - Parse (1.17.2):
     - Parse/Core (= 1.17.2)
@@ -14,22 +29,25 @@ PODS:
     - Bolts/Tasks (~> 1.9)
 
 DEPENDENCIES:
+  - AFNetworking
   - FBSDKLoginKit
   - Parse
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AFNetworking
     - Bolts
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Parse
 
 SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  FBSDKCoreKit: e1ab8d86f5eea2d7aa6ab12acca3e1d2dcb11983
-  FBSDKLoginKit: 6e20e44775ddf4b159a8ca676834325e13d12221
+  FBSDKCoreKit: c29b6b65f6a171ca0a317960a622cff62c9ee269
+  FBSDKLoginKit: fdaf402766755e1175ed5c0382f25e2e7dab3c2a
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
 
-PODFILE CHECKSUM: 1bed3e2c8cb0e31f8867cb6482876a698b6ade3b
+PODFILE CHECKSUM: 7847e58ad04d757f5d5ea68691e3eb36a9936422
 
 COCOAPODS: 1.7.2
