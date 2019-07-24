@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void) postEvent: (NSString *)title withDescription: (NSString *)description withPrice: (NSNumber *) price withSkill: (NSInteger) authorSkill withLocation: (CLLocation *)location withRole: (NSInteger)authorRole withCategory: (NSInteger)cat withImage: (UIImage *)image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

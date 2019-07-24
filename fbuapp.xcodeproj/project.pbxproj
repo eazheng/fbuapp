@@ -140,6 +140,7 @@
 		3827E2C322DE98F8008B8FA0 /* fbuapp */ = {
 			isa = PBXGroup;
 			children = (
+				3827E30722E7C09F008B8FA0 /* Helpers */,
 				83E6B27422E148E40045B437 /* View Controllers */,
 				83E6B27022E136FD0045B437 /* Models */,
 				3827E2C422DE98F8008B8FA0 /* AppDelegate.h */,
@@ -169,6 +170,13 @@
 				3827E2EA22DE98F9008B8FA0 /* Info.plist */,
 			);
 			path = fbuappUITests;
+			sourceTree = "<group>";
+		};
+		3827E30722E7C09F008B8FA0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		83E6B27022E136FD0045B437 /* Models */ = {

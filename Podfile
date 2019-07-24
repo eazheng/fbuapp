@@ -8,7 +8,7 @@ target 'fbuapp' do
   # Pods for fbuapp
   pod 'FBSDKLoginKit'
   pod 'Parse'
-
+  pod 'UITextView+Placeholder'
   target 'fbuappTests' do
     inherit! :search_paths
     # Pods for testing

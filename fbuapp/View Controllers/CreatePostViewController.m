@@ -10,11 +10,15 @@
 #import "Post.h"
 #import <CoreLocation/CoreLocation.h>
 #import "AppDelegate.h"
+#import "UITextView+Placeholder.h"
 
 @interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
-@property (weak, nonatomic) IBOutlet UITextField *eventDescriptionField;
+//@property (weak, nonatomic) IBOutlet UITextField *eventDescriptionField;
+@property (weak, nonatomic) IBOutlet UITextView *eventDescriptionField;
+
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UIPickerView *eventCategoryPicker;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
@@ -38,15 +42,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height+100);
+    
 
     // Connect data:
     self.eventCategoryPicker.delegate = self;
     self.eventCategoryPicker.dataSource = self;
-    self.categoryList = [NSArray arrayWithObjects: @"Outdoor Active", @"Indoor Active", @"Lifestyle", @"Arts", nil];
+    self.categoryList = [NSArray arrayWithObjects: @"Outdoor Active", @"Indoor Active", @"Lifestyle", @"Arts", @"Business", @"Finance", @"Music", @"Photography", nil];
     self.pickerView.hidden = YES;
     self.pickerView.alpha = 0;
     self.eventCategory = -1;
-
+    
+    self.eventDescriptionField.layer.borderWidth = 0.3f;
+    self.eventDescriptionField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.eventDescriptionField.layer.cornerRadius = 8;
+    self.eventDescriptionField.placeholder = @"Write a brief description for your event!";
+    self.eventDescriptionField.placeholderColor = [UIColor lightGrayColor];
+ 
     self.navigationItem.title=@"Create an Event";
     
     // first we create a button and set it's properties
@@ -166,6 +179,9 @@
 
 - (IBAction)onTapDone:(id)sender {
     NSLog(@"TAPPED DONE");
+    if (self.eventCategory == -1) {
+        self.eventCategory = 0;
+    }
     self.pickerField.text = self.categoryList[self.eventCategory];
     
     [UIView beginAnimations:nil context:nil];
