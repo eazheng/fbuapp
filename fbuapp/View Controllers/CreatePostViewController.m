@@ -20,7 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescriptionField;
-
+@property (weak, nonatomic) IBOutlet UITextField *eventLocationTextField;
+@property  NSString *addressString;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UIPickerView *eventCategoryPicker;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
@@ -29,12 +30,11 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
 
+
 @property (weak, nonatomic) IBOutlet UITextField *eventPriceField;
 @property NSArray *categoryList;
 @property NSInteger eventCategory;
-@property (weak, nonatomic) IBOutlet UITextField *eventLocationTextField;
-@property  GMSAutocompleteFilter *filter;
-@property  NSString *addressString;
+
 
 @end
 
@@ -51,9 +51,9 @@
     locationController.placeFields = fields;
     
     // Specify a filter.
-    self.filter = [[GMSAutocompleteFilter alloc] init];
-    self.filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
-    locationController.autocompleteFilter = self.filter;
+    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
+    filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
+    locationController.autocompleteFilter = filter;
     
     // Display the autocomplete view controller.
     [self presentViewController:locationController animated:YES completion:nil];
@@ -119,7 +119,8 @@
 
 - (IBAction)postEventAction:(id)sender {
     
-    //check for errors (like error posting event)
+    //TODO - check for errors (like error posting event)
+    
     // check if all necessary fields are filled in
     if ([self.eventTitleField.text isEqualToString:@""]) {
         NSLog(@"Need an event title");
@@ -280,7 +281,6 @@
     [self presentViewController:alert animated:YES completion:^{
         // optional code for what happens after the alert controller has finished presenting
     }];
-//    [self.activityIndicator stopAnimating];
     
 }
 
@@ -304,6 +304,7 @@ didFailAutocompleteWithError:(NSError *)error {
     [self dismissViewControllerAnimated:YES completion:nil];
     // TODO: handle the error.
     NSLog(@"Error: %@", [error description]);
+    [self showComposeError:[error description]];
 }
 
 // User canceled the operation.
