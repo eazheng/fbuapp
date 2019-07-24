@@ -12,6 +12,7 @@
 #import "Post.h"
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
+#import "DateTools.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
@@ -85,10 +86,28 @@ static NSString *kTableViewPostCell = @"PostCell";
 ////    //change location to an eventDistance here
 ////    cell.eventDistance.text =
 //
-    cell.eventPrice = [post[@"eventPrice"] stringValue];
-//
-//    NSDate *postCreatedAt = post[@"createdAt"];
-////    change createdAt to a eventDaysAgo here
+    cell.eventPrice.text = [post[@"eventPrice"] stringValue];
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss z";
+    NSDate *date = post.createdAt;
+    NSDate *now = [[NSDate date] dateByAddingDays:-1];
+    BOOL postWasRecentBool = [date isLaterThan:now];
+    
+    //if post was less than 1 day ago
+    if (postWasRecentBool) {
+        cell.eventDaysAgo.text = [NSString stringWithFormat:@"%@%@", date.shortTimeAgoSinceNow, @" ago"];
+    }
+    else {
+        // Configure output format
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterNoStyle;
+        // Convert Date to String
+        cell.eventDaysAgo.text = [formatter stringFromDate:date];
+    }
+    
+    
+//    change createdAt to a eventDaysAgo here
 ////    cell.eventDaysAgo.text =
 //    PFUser *eventAuthor = post[@"author"];
 //
@@ -104,12 +123,7 @@ static NSString *kTableViewPostCell = @"PostCell";
 //
 ////    cell.eventAuthor.text = eventAuthor.name; need to add to user still
 //
-//    [post[@"eventImage"] getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-//        if (!error) {
-//            cell.eventImage.image = [UIImage imageWithData:data];
-//        }
-//    }];//look at again, might need afnetwokring
-    
+
     PFFileObject *pfobj = post[@"image"];
     NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];
     cell.eventImage.image = nil;
