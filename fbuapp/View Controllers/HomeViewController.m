@@ -13,14 +13,17 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
+#import "CategoryHeaderView.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
+static NSString *kCollectionViewPillCell = @"PillCell";
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) NSArray * posts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic,strong) CLLocationManager *locationManager;
+//@property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
 
@@ -36,10 +39,14 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self.locationManager startUpdatingLocation];
     
     [self.tableView registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     [self fetchPosts];
+    CategoryHeaderView *work = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
+    self.tableView.tableHeaderView = work;
+//    [self.view addSubview:header];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
@@ -69,6 +76,25 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self presentViewController:alert animated:YES completion:^{}];
     NSLog(@"Error: %@",error.description);
 }
+
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [self fetchPosts];
+//}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    if(!self.isMoreDataLoading){
+//        // Calculate the position of one screen length before the bottom of the results
+//        int scrollViewContentHeight = self.tableView.contentSize.height;
+//        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+//
+//        // When the user has scrolled past the threshold, start requesting
+//        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+//            self.isMoreDataLoading = true;
+//            //[self loadMoreData];
+//            [self fetchPosts];
+//        }
+//    }
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,8 +133,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     }
     
     
-//    change createdAt to a eventDaysAgo here
-////    cell.eventDaysAgo.text =
 //    PFUser *eventAuthor = post[@"author"];
 //
 ////    [eventAuthor.userProfilePhoto getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
@@ -159,6 +183,8 @@ static NSString *kTableViewPostCell = @"PostCell";
         [self.refreshControl endRefreshing];
     }];
 }
+
+
 
 
 

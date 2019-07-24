@@ -23,6 +23,10 @@
 		A496A5A322E25CF800F9E81A /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A5A122E25CF800F9E81A /* PostCell.m */; };
 		A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A5A222E25CF800F9E81A /* PostCell.xib */; };
 		A4B6283B22E7C43C00248F45 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B6283A22E7C43C00248F45 /* CoreLocation.framework */; };
+		A4F5D9FC22E8DAEF00ED06F5 /* PillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5D9FA22E8DAEF00ED06F5 /* PillCell.m */; };
+		A4F5D9FD22E8DAEF00ED06F5 /* PillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4F5D9FB22E8DAEF00ED06F5 /* PillCell.xib */; };
+		A4F5DA0E22E90F7900ED06F5 /* CategoryHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4F5DA0D22E90F7900ED06F5 /* CategoryHeaderView.xib */; };
+		A4F5DA1122E90FDD00ED06F5 /* CategoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5DA1022E90FDD00ED06F5 /* CategoryHeaderView.m */; };
 		DB489E5DE6651191239211CD /* Pods_fbuappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +77,12 @@
 		A496A5A122E25CF800F9E81A /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		A496A5A222E25CF800F9E81A /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		A4B6283A22E7C43C00248F45 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A4F5D9F922E8DAEF00ED06F5 /* PillCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PillCell.h; sourceTree = "<group>"; };
+		A4F5D9FA22E8DAEF00ED06F5 /* PillCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PillCell.m; sourceTree = "<group>"; };
+		A4F5D9FB22E8DAEF00ED06F5 /* PillCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PillCell.xib; sourceTree = "<group>"; };
+		A4F5DA0D22E90F7900ED06F5 /* CategoryHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryHeaderView.xib; sourceTree = "<group>"; };
+		A4F5DA0F22E90FDD00ED06F5 /* CategoryHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryHeaderView.h; sourceTree = "<group>"; };
+		A4F5DA1022E90FDD00ED06F5 /* CategoryHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryHeaderView.m; sourceTree = "<group>"; };
 		B51A71B6D6B82112B20F0798 /* Pods-fbuappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappTests.debug.xcconfig"; path = "Target Support Files/Pods-fbuappTests/Pods-fbuappTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fbuappUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E5224419A9BFE788FE134A /* Pods_fbuapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fbuapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +227,12 @@
 				A496A5A022E25CF800F9E81A /* PostCell.h */,
 				A496A5A122E25CF800F9E81A /* PostCell.m */,
 				A496A5A222E25CF800F9E81A /* PostCell.xib */,
+				A4F5D9F922E8DAEF00ED06F5 /* PillCell.h */,
+				A4F5D9FA22E8DAEF00ED06F5 /* PillCell.m */,
+				A4F5D9FB22E8DAEF00ED06F5 /* PillCell.xib */,
+				A4F5DA0F22E90FDD00ED06F5 /* CategoryHeaderView.h */,
+				A4F5DA1022E90FDD00ED06F5 /* CategoryHeaderView.m */,
+				A4F5DA0D22E90F7900ED06F5 /* CategoryHeaderView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -328,8 +344,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4F5D9FD22E8DAEF00ED06F5 /* PillCell.xib in Resources */,
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
+				A4F5DA0E22E90F7900ED06F5 /* CategoryHeaderView.xib in Resources */,
 				A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
 				A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */,
@@ -444,9 +462,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3827E2C922DE98F8008B8FA0 /* LoginViewController.m in Sources */,
+				A4F5DA1122E90FDD00ED06F5 /* CategoryHeaderView.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
 				A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */,
+				A4F5D9FC22E8DAEF00ED06F5 /* PillCell.m in Sources */,
 				83E6B27322E137AF0045B437 /* Post.m in Sources */,
 				A496A5A322E25CF800F9E81A /* PostCell.m in Sources */,
 			);
