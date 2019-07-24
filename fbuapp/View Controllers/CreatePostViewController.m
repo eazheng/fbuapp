@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
-//@property (weak, nonatomic) IBOutlet UITextField *eventDescriptionField;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescriptionField;
 
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
@@ -66,7 +65,6 @@
     // Do any additional setup after loading the view from its nib.
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-    
 
     // Connect data:
     self.eventCategoryPicker.delegate = self;
@@ -104,12 +102,18 @@
 
     
     [overlayButton setTitle:@"Launch location search" forState:UIControlStateNormal];
-    
-    overlayButton.frame = CGRectMake(0, 0, 26, 26);
+    overlayButton.frame = CGRectMake(0, 0, self.eventLocationTextField.frame.size.height, self.eventLocationTextField.frame.size.height);
     
     // Assign the overlay button to a stored text field
     self.eventLocationTextField.leftView = overlayButton;
     self.eventLocationTextField.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIImageView *priceImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.eventPriceField.font.pointSize, self.eventPriceField.font.pointSize)];
+    priceImage.image = [UIImage imageNamed:@"dollar_sign"];
+    priceImage.contentMode = UIViewContentModeScaleAspectFit;
+    self.eventPriceField.leftViewMode = UITextFieldViewModeAlways;
+    self.eventPriceField.leftView = priceImage;
+
 }
 
 
@@ -138,8 +142,7 @@
     NSInteger authorSkill = [self.userLevelControl selectedSegmentIndex];
     NSInteger authorRole = [self.userRoleControl selectedSegmentIndex];
     
-    // create address string and convert into CLLocation
-    //NSString *addressString = [NSString stringWithFormat:@"%@, %@, %@", self.eventStreetField.text, self.eventCityField.text, self.eventStateField.text];
+
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:self.addressString completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
