@@ -22,6 +22,9 @@
 		38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */; };
 		38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */; };
 		38FBA5AD22E8EEA7002C1114 /* Key.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5AC22E8EEA7002C1114 /* Key.m */; };
+		38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5B122EA1DEA002C1114 /* Utils.m */; };
+		38FBA5B622EA1F43002C1114 /* ShowAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */; };
+		38FBA5B722EA1F43002C1114 /* ShowAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */; };
 		75952087513A89F63BDB73FF /* Pods_fbuappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C7AE6EEA297BB83EB63A00 /* Pods_fbuappTests.framework */; };
 		83E6B27322E137AF0045B437 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27222E137AF0045B437 /* Post.m */; };
 		DB489E5DE6651191239211CD /* Pods_fbuappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */; };
@@ -72,6 +75,11 @@
 		38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterLocationViewController.xib; sourceTree = "<group>"; };
 		38FBA5AB22E8EEA7002C1114 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		38FBA5AC22E8EEA7002C1114 /* Key.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Key.m; sourceTree = "<group>"; };
+		38FBA5B022EA1DEA002C1114 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		38FBA5B122EA1DEA002C1114 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		38FBA5B322EA1F43002C1114 /* ShowAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowAlertViewController.h; sourceTree = "<group>"; };
+		38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowAlertViewController.m; sourceTree = "<group>"; };
+		38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowAlertViewController.xib; sourceTree = "<group>"; };
 		3B4C51A1A5894227EFC92EF2 /* Pods-fbuappUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappUITests.release.xcconfig"; path = "Target Support Files/Pods-fbuappUITests/Pods-fbuappUITests.release.xcconfig"; sourceTree = "<group>"; };
 		46F19CAC609CE62F3533B72A /* Pods-fbuappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappTests.release.xcconfig"; path = "Target Support Files/Pods-fbuappTests/Pods-fbuappTests.release.xcconfig"; sourceTree = "<group>"; };
 		83E6B27122E137AF0045B437 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
@@ -186,6 +194,11 @@
 		3827E30722E7C09F008B8FA0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				38FBA5B022EA1DEA002C1114 /* Utils.h */,
+				38FBA5B122EA1DEA002C1114 /* Utils.m */,
+				38FBA5B322EA1F43002C1114 /* ShowAlertViewController.h */,
+				38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */,
+				38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -342,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FBA5B722EA1F43002C1114 /* ShowAlertViewController.xib in Resources */,
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
 				3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */,
@@ -477,7 +491,9 @@
 				3827E2C922DE98F8008B8FA0 /* LoginViewController.m in Sources */,
 				38FBA5AD22E8EEA7002C1114 /* Key.m in Sources */,
 				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
+				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
 				38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */,
+				38FBA5B622EA1F43002C1114 /* ShowAlertViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
 				83E6B27322E137AF0045B437 /* Post.m in Sources */,
