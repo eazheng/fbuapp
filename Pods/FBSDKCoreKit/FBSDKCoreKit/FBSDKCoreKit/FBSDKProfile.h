@@ -96,6 +96,7 @@ NS_SWIFT_NAME(Profile)
  @param middleName the user's middle name
  @param lastName the user's last name
  @param name the user's complete name
+ @param email the user's email
  @param linkURL the link for this profile
  @param refreshDate the optional date this profile was fetched. Defaults to [NSDate date].
  */
@@ -105,6 +106,7 @@ NS_SWIFT_NAME(Profile)
                       lastName:(nullable NSString *)lastName
                           name:(nullable NSString *)name
                        linkURL:(nullable NSURL *)linkURL
+                         email:(nullable NSString *)email
                    refreshDate:(nullable NSDate *)refreshDate NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -138,6 +140,10 @@ NS_SWIFT_NAME(current);
   The user's complete name
  */
 @property (nonatomic, copy, readonly, nullable) NSString *name;
+/**
+ The user's email adress
+ */
+@property (nonatomic, copy, readonly, nullable) NSString *email;
 /**
   A URL to the user's profile.
 
