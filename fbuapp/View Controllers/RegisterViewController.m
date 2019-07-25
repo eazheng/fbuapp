@@ -49,7 +49,7 @@
                 self.lastNameField.text = profile.lastName;
                 
                 //test
-                NSLog(@"Hello" " " "%@!", profile.firstName);
+                NSLog(@"Hello %@!", profile.firstName);
                 
                 //welcome user to app in navigation bar
                 self.navigationItem.title = [NSString stringWithFormat:@"Welcome" " " "%@", profile.firstName];
