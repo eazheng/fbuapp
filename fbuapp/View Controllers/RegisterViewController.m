@@ -35,13 +35,10 @@
                  startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                      if (!error) {
                          NSLog(@"user:%@", result);
+                         //setting property to result dictionary value
+                         self.emailField.text = result[@"email"];
                      }
                  }];
-                //creating dictionary to pull out and utilized the user's email
-                NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-                [parameters setValue:@"email" forKey:@"fields"];
-                //set dictionary value to emailField
-                self.emailField.text = parameters[@"fields"];
     
                 //get user's first and last name
                 //setting my created properties to currentProfile properties
