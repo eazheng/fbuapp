@@ -52,7 +52,7 @@
                 NSLog(@"Hello %@!", profile.firstName);
                 
                 //welcome user to app in navigation bar
-                self.navigationItem.title = [NSString stringWithFormat:@"Welcome" " " "%@", profile.firstName];
+                self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", profile.firstName];
                 
                 //display users's facebook profile picture
                 FBSDKProfilePictureView *profilePictureView = [[FBSDKProfilePictureView alloc] init];
