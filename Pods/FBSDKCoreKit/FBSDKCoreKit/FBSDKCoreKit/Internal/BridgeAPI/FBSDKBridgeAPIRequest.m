@@ -19,6 +19,7 @@
 #import "FBSDKBridgeAPIRequest.h"
 #import "FBSDKBridgeAPIRequest+Private.h"
 
+#import "FBSDKBridgeAPICrypto.h"
 #import "FBSDKBridgeAPIProtocolNativeV1.h"
 #import "FBSDKBridgeAPIProtocolWebV1.h"
 #import "FBSDKBridgeAPIProtocolWebV2.h"
@@ -114,6 +115,7 @@ NSString *const FBSDKBridgeAPIVersionKey = @"version";
 
   NSDictionary<NSString *, NSString *> *requestQueryParameters = [FBSDKBasicUtility dictionaryWithQueryString:requestURL.query];
   NSMutableDictionary *queryParameters = [[NSMutableDictionary alloc] initWithDictionary:requestQueryParameters];
+  [FBSDKBridgeAPICrypto addCipherKeyToQueryParameters:queryParameters];
   [FBSDKBasicUtility dictionary:queryParameters setObject:[FBSDKSettings appID] forKey:FBSDKBridgeAPIAppIDKey];
   [FBSDKBasicUtility dictionary:queryParameters
                       setObject:[FBSDKSettings appURLSchemeSuffix]

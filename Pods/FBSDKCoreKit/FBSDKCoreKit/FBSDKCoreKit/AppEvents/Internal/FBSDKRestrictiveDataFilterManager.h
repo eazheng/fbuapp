@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
     restrictiveParams:(nullable NSDictionary<NSString *, id> *)restrictiveParams;
 + (nullable NSString *)getMatchedDataTypeWithEventName:(NSString *)eventName
                                               paramKey:(NSString *)paramKey
-                                            paramValue:(id)paramValue;
+                                            paramValue:(NSString *)paramValue;
 + (BOOL)isDeprecatedEvent:(NSString *)eventName;
 
 @end
