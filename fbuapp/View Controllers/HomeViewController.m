@@ -13,7 +13,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
-//#import "CategoryHeaderView.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
@@ -23,7 +22,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic,strong) CLLocationManager *locationManager;
-//@property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
 
@@ -34,7 +32,7 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest; //make less accurate later
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
@@ -44,8 +42,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     self.tableView.delegate = self;
     
     [self fetchPosts];
-//    CategoryHeaderView *work = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
-//    self.tableView.tableHeaderView = work;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
@@ -59,8 +55,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     self.currentLocation = [locations lastObject];
-//    NSString *latitudeValue = [NSString stringWithFormat:@"%f", location.coordinate.latitude];
-//    self.longtitudeValue.text = [NSString stringWithFormat:@"%f", location.coordinate.longitude];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
@@ -76,25 +70,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     NSLog(@"Error: %@",error.description);
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    [self fetchPosts];
-//}
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    if(!self.isMoreDataLoading){
-//        // Calculate the position of one screen length before the bottom of the results
-//        int scrollViewContentHeight = self.tableView.contentSize.height;
-//        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
-//
-//        // When the user has scrolled past the threshold, start requesting
-//        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
-//            self.isMoreDataLoading = true;
-//            //[self loadMoreData];
-//            [self fetchPosts];
-//        }
-//    }
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -105,7 +80,8 @@ static NSString *kTableViewPostCell = @"PostCell";
     PFGeoPoint *eventLocation = post[@"eventLocation"];
     double dist = [eventLocation distanceInMilesTo :[PFGeoPoint geoPointWithLocation :self.currentLocation]];
     cell.eventDistance.text = [NSString stringWithFormat:@"%.2f", dist];
-//    PFUser * cur =[PFUser currentUser];
+    
+//    PFUser * cur =[PFUser currentUser]; waiting for user class
 //    double x = [eventLocation distanceInMilesTo :cur[@"userLocation"]];// may need nullable
 ////    NSLog([NSString stringWithFormat:@"%.20lf", x]);
 ////    //change location to an eventDistance here
@@ -131,36 +107,26 @@ static NSString *kTableViewPostCell = @"PostCell";
         cell.eventDaysAgo.text = [formatter stringFromDate:date];
     }
     
-    
-//    PFUser *eventAuthor = post[@"author"];
+//    PFUser *eventAuthor = post[@"author"]; waiting for user class
 //
 ////    [eventAuthor.userProfilePhoto getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
 ////        if (!error) {
 ////            cell.userProfilePhoto.image = [UIImage imageWithData:data];
 ////        }
-////    }];//look at again, might need afnetwokring
-//
-//    cell.eventCategory.text = post[@"eventCategory"];//enum?
-////
+////    }];
+////    cell.eventAuthor.text = eventAuthor.name;
     cell.eventDescription.text = post[@"eventDescription"];
-//
-////    cell.eventAuthor.text = eventAuthor.name; need to add to user still
-//
 
     PFFileObject *pfobj = post[@"image"];
     NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];
     cell.eventImage.image = nil;
     [cell.eventImage setImageWithURL:eventImageURL];
     
-////    cell.isFavorited = post[@"isFavorited"]; //set up this boolean selector
-//
-////  only deques
-    cell.layer.shadowOpacity = 0.8;
+    cell.layer.shadowOpacity = 0.5;
     cell.layer.shadowRadius = 5.0;
     cell.layer.shadowColor = [UIColor blackColor].CGColor;
     cell.layer.shadowOffset = CGSizeMake(0, 0);
 
-//    //may need to clip to bounds here self.userProfilePhoto.clipsToBounds = YES;
 
     return cell;
 }
@@ -173,8 +139,8 @@ static NSString *kTableViewPostCell = @"PostCell";
     postQuery.limit = 20;//infinite change
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
-            self.posts = [NSArray arrayWithArray:posts] ;// step 6
-            [self.tableView reloadData];// step 4 5 7
+            self.posts = [NSArray arrayWithArray:posts] ;
+            [self.tableView reloadData];
         }
         else {
             // handle error
@@ -182,12 +148,6 @@ static NSString *kTableViewPostCell = @"PostCell";
         [self.refreshControl endRefreshing];
     }];
 }
-
-
-
-
-
-
 
 
 /*

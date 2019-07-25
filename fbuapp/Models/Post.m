@@ -36,8 +36,6 @@
     newPost.eventCategory = cat;
     
     newPost.createdAt = [NSDate date];
-    //newPost.eventLocation = location;
-    //create a geopoint for parse
     PFGeoPoint *parsePoint = [PFGeoPoint geoPointWithLocation:location];
     newPost.eventLocation = parsePoint;
     newPost.eventPrice = price;

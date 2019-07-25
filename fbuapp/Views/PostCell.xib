@@ -37,14 +37,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jl8-nO-2SG">
-                        <rect key="frame" x="329" y="27" width="62" height="53"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button" image="favorite"/>
-                        <connections>
-                            <action selector="onFavoriteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oNV-qo-Dvw"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vO5-kF-mhi">
                         <rect key="frame" x="87" y="333" width="132" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
@@ -175,7 +167,6 @@
                 <outlet property="eventImage" destination="ijj-Vb-8rK" id="1Q9-Jw-ANk"/>
                 <outlet property="eventPrice" destination="vtr-v8-NQe" id="kH4-ZF-38r"/>
                 <outlet property="eventTitle" destination="jXy-3h-wqF" id="nQl-BD-44f"/>
-                <outlet property="isFavorited" destination="jl8-nO-2SG" id="YJR-Lx-ba0"/>
                 <outlet property="userProfilePhoto" destination="gU8-5j-fRy" id="2Ri-jy-Nt1"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="120.53571428571428"/>
@@ -183,7 +174,6 @@
     </objects>
     <resources>
         <image name="Fly-Fishing" width="1800" height="1200"/>
-        <image name="favorite" width="225" height="225"/>
         <image name="profile_tab" width="25" height="25"/>
     </resources>
 </document>
