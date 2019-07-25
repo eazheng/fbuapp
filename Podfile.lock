@@ -24,16 +24,27 @@ PODS:
     - FBSDKCoreKit/Basics
   - FBSDKLoginKit (5.1.1):
     - FBSDKCoreKit (~> 5.0)
+  - GoogleMaps (3.1.0):
+    - GoogleMaps/Maps (= 3.1.0)
+  - GoogleMaps/Base (3.1.0)
+  - GoogleMaps/Maps (3.1.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.1.0):
+    - GoogleMaps/Base (= 3.1.0)
   - Parse (1.17.2):
     - Parse/Core (= 1.17.2)
   - Parse/Core (1.17.2):
     - Bolts/Tasks (~> 1.9)
+  - "UITextView+Placeholder (1.2.1)"
 
 DEPENDENCIES:
   - AFNetworking
   - DateTools
   - FBSDKLoginKit
+  - GoogleMaps
+  - GooglePlaces
   - Parse
+  - "UITextView+Placeholder"
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,16 +53,23 @@ SPEC REPOS:
     - DateTools
     - FBSDKCoreKit
     - FBSDKLoginKit
+    - GoogleMaps
+    - GooglePlaces
     - Parse
+    - "UITextView+Placeholder"
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
-  FBSDKCoreKit: c29b6b65f6a171ca0a317960a622cff62c9ee269
-  FBSDKLoginKit: fdaf402766755e1175ed5c0382f25e2e7dab3c2a
-  Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
 
-PODFILE CHECKSUM: 231093d8ec55b74ba12813f2a05e427bc8bfa3c7
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126ca
+  FBSDKCoreKit: e1ab8d86f5eea2d7aa6ab12acca3e1d2dcb11983
+  FBSDKLoginKit: 6e20e44775ddf4b159a8ca676834325e13d12221
+  GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
+  GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
+  Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
+  "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
+
+PODFILE CHECKSUM: 9af4733284c30eda7f6c769d0da4fec45de16685
 
 COCOAPODS: 1.7.2
