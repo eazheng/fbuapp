@@ -11,9 +11,10 @@
 #import "LogViewController.h"
 #import "RegisterViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import "Parse/Parse.h"
-//#import <Parse/Parse.h>
-
+#import <Parse/Parse.h>
+#import "CreatePostViewController.h"
+#import <GooglePlaces/GooglePlaces.h>
+#import "Key.h"
 
 @interface AppDelegate ()
 @property (strong, nonatomic) UIView *view;
@@ -21,9 +22,11 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //[GMSServices provideAPIKey:API_KEY];
+    [GMSPlacesClient provideAPIKey:API_KEY];
+
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
@@ -51,20 +54,17 @@
         configuration.server = @"https://skill--app.herokuapp.com/parse";
     }];
     [Parse initializeWithConfiguration:config];
-    
-//    //TEST
-//    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
-//    gameScore[@"score"] = @1337;
-//    gameScore[@"playerName"] = @"Test Plott";
-//    gameScore[@"cheatMode"] = @NO;
-//    [gameScore saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            NSLog(@"Object saved!");
-//        } else {
-//            NSLog(@"Error: %@", error.description);
-//        }
-//    }];
 
+    // set root view controller as CreatePostViewController
+    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[navigationController];
+    
+    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = tabBarController;
+    
     return YES;
 }
 
