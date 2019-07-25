@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2FDD79737868E795742BA65F /* Pods_fbuapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E5224419A9BFE788FE134A /* Pods_fbuapp.framework */; };
 		3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3827E2C522DE98F8008B8FA0 /* AppDelegate.m */; };
-		3827E2C922DE98F8008B8FA0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3827E2C822DE98F8008B8FA0 /* LoginViewController.m */; };
 		3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3827E2CA22DE98F8008B8FA0 /* Main.storyboard */; };
 		3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3827E2CD22DE98F9008B8FA0 /* Assets.xcassets */; };
 		3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */; };
@@ -26,7 +25,15 @@
 		38FBA5B622EA1F43002C1114 /* ShowAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */; };
 		38FBA5B722EA1F43002C1114 /* ShowAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */; };
 		75952087513A89F63BDB73FF /* Pods_fbuappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C7AE6EEA297BB83EB63A00 /* Pods_fbuappTests.framework */; };
-		83E6B27322E137AF0045B437 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27222E137AF0045B437 /* Post.m */; };
+		83657DE022E24824002EB6A8 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DDE22E24824002EB6A8 /* LogViewController.m */; };
+		83657DE122E24824002EB6A8 /* LogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DDF22E24824002EB6A8 /* LogViewController.xib */; };
+		83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DEC22E67606002EB6A8 /* RegisterViewController.m */; };
+		83657DEF22E67606002EB6A8 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DED22E67606002EB6A8 /* RegisterViewController.xib */; };
+		83657DF322E67798002EB6A8 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DF122E67798002EB6A8 /* EditViewController.m */; };
+		83657DF422E67798002EB6A8 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DF222E67798002EB6A8 /* EditViewController.xib */; };
+		83657E8A22E8D00D002EB6A8 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657E8922E8D00D002EB6A8 /* Profile.m */; };
+		83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27622E234C10045B437 /* ProfileViewController.m */; };
+		83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E6B27722E234C10045B437 /* ProfileViewController.xib */; };
 		DB489E5DE6651191239211CD /* Pods_fbuappUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,8 +60,6 @@
 		3827E2C122DE98F8008B8FA0 /* fbuapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fbuapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3827E2C422DE98F8008B8FA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3827E2C522DE98F8008B8FA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3827E2C722DE98F8008B8FA0 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		3827E2C822DE98F8008B8FA0 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3827E2CB22DE98F8008B8FA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3827E2CD22DE98F9008B8FA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3827E2D022DE98F9008B8FA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -82,8 +87,20 @@
 		38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowAlertViewController.xib; sourceTree = "<group>"; };
 		3B4C51A1A5894227EFC92EF2 /* Pods-fbuappUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappUITests.release.xcconfig"; path = "Target Support Files/Pods-fbuappUITests/Pods-fbuappUITests.release.xcconfig"; sourceTree = "<group>"; };
 		46F19CAC609CE62F3533B72A /* Pods-fbuappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappTests.release.xcconfig"; path = "Target Support Files/Pods-fbuappTests/Pods-fbuappTests.release.xcconfig"; sourceTree = "<group>"; };
-		83E6B27122E137AF0045B437 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
-		83E6B27222E137AF0045B437 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		83657DDD22E24824002EB6A8 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
+		83657DDE22E24824002EB6A8 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		83657DDF22E24824002EB6A8 /* LogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogViewController.xib; sourceTree = "<group>"; };
+		83657DEB22E67606002EB6A8 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		83657DEC22E67606002EB6A8 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		83657DED22E67606002EB6A8 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		83657DF022E67798002EB6A8 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		83657DF122E67798002EB6A8 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		83657DF222E67798002EB6A8 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
+		83657E8822E8D00D002EB6A8 /* Profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		83657E8922E8D00D002EB6A8 /* Profile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		83E6B27522E234C10045B437 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		83E6B27622E234C10045B437 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		83E6B27722E234C10045B437 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		B51A71B6D6B82112B20F0798 /* Pods-fbuappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuappTests.debug.xcconfig"; path = "Target Support Files/Pods-fbuappTests/Pods-fbuappTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF0065FC46B5F21DD664DED4 /* Pods_fbuappUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fbuappUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E5224419A9BFE788FE134A /* Pods_fbuapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fbuapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +175,7 @@
 			children = (
 				38FBA59E22E8DADD002C1114 /* Views */,
 				3827E30722E7C09F008B8FA0 /* Helpers */,
+				83657DE522E6451B002EB6A8 /* Views */,
 				83E6B27422E148E40045B437 /* View Controllers */,
 				83E6B27022E136FD0045B437 /* Models */,
 				3827E2C422DE98F8008B8FA0 /* AppDelegate.h */,
@@ -206,6 +224,11 @@
 		38FBA59E22E8DADD002C1114 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+		83657DE522E6451B002EB6A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				83657E8822E8D00D002EB6A8 /* Profile.h */,
+				83657E8922E8D00D002EB6A8 /* Profile.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,8 +236,6 @@
 		83E6B27022E136FD0045B437 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				83E6B27122E137AF0045B437 /* Post.h */,
-				83E6B27222E137AF0045B437 /* Post.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +251,18 @@
 				38FBA5A322E8E026002C1114 /* EnterLocationViewController.h */,
 				38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */,
 				38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */,
+				83657DDD22E24824002EB6A8 /* LogViewController.h */,
+				83657DDE22E24824002EB6A8 /* LogViewController.m */,
+				83657DDF22E24824002EB6A8 /* LogViewController.xib */,
+				83657DEB22E67606002EB6A8 /* RegisterViewController.h */,
+				83657DEC22E67606002EB6A8 /* RegisterViewController.m */,
+				83657DED22E67606002EB6A8 /* RegisterViewController.xib */,
+				83E6B27522E234C10045B437 /* ProfileViewController.h */,
+				83E6B27622E234C10045B437 /* ProfileViewController.m */,
+				83E6B27722E234C10045B437 /* ProfileViewController.xib */,
+				83657DF022E67798002EB6A8 /* EditViewController.h */,
+				83657DF122E67798002EB6A8 /* EditViewController.m */,
+				83657DF222E67798002EB6A8 /* EditViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -360,7 +393,11 @@
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
 				3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */,
 				38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */,
+				83657DE122E24824002EB6A8 /* LogViewController.xib in Resources */,
+				83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
+				83657DEF22E67606002EB6A8 /* RegisterViewController.xib in Resources */,
+				83657DF422E67798002EB6A8 /* EditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +533,11 @@
 				38FBA5B622EA1F43002C1114 /* ShowAlertViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
-				83E6B27322E137AF0045B437 /* Post.m in Sources */,
+				83657DF322E67798002EB6A8 /* EditViewController.m in Sources */,
+				83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */,
+				83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */,
+				83657E8A22E8D00D002EB6A8 /* Profile.m in Sources */,
+				83657DE022E24824002EB6A8 /* LogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

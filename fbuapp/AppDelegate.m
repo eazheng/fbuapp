@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "ProfileViewController.h"
+#import "LogViewController.h"
+#import "RegisterViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
 #import "CreatePostViewController.h"
@@ -23,20 +26,35 @@
     
     //[GMSServices provideAPIKey:API_KEY];
     [GMSPlacesClient provideAPIKey:API_KEY];
-    
+
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
+    //present view controllers
+    if ([FBSDKAccessToken currentAccessToken]) {
+        //take user to RegisterViewController
+        RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: registerViewController];
+        self.window.rootViewController = navigationController;
+//        //take user to ProfileViewController
+//        ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
+//        self.window.rootViewController = navigationController;
+    }
+    else {
+        //take user to logViewController
+        LogViewController *logViewController = [[LogViewController alloc] initWithNibName:@"LogViewController" bundle:nil];
+        self.window.rootViewController = logViewController;
+    }
+    
     //initialize parse
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        
+
         configuration.applicationId = @"skillAppId";
         configuration.server = @"https://skill--app.herokuapp.com/parse";
     }];
-    
     [Parse initializeWithConfiguration:config];
-    
-    
+
     // set root view controller as CreatePostViewController
     CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
@@ -46,8 +64,6 @@
     
     //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabBarController;
-    
-    
     
     return YES;
 }
