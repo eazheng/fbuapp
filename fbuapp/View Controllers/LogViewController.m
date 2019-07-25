@@ -24,7 +24,7 @@
     //create facebook login button
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     loginButton.delegate = self;
-    //contected to a visibe view
+    //connected to a visible view
     loginButton.center = self.loginButtonView.center;
     //ask user for access to information
     loginButton.permissions = @[@"public_profile"];
