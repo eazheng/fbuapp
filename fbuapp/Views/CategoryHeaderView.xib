@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoryHeaderView" customModule="fbuapp" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="MV6-4n-UMB" id="Pgp-Hg-gGc"/>
                 <outlet property="headerView" destination="iN0-l3-epB" id="ZFi-4F-4vJ"/>
             </connections>
         </placeholder>

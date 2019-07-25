@@ -13,10 +13,10 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
-#import "CategoryHeaderView.h"
+//#import "CategoryHeaderView.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
-static NSString *kCollectionViewPillCell = @"PillCell";
+
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) NSArray * posts;
@@ -44,9 +44,8 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     self.tableView.delegate = self;
     
     [self fetchPosts];
-    CategoryHeaderView *work = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
-    self.tableView.tableHeaderView = work;
-//    [self.view addSubview:header];
+//    CategoryHeaderView *work = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
+//    self.tableView.tableHeaderView = work;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];

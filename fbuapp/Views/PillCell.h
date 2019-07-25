@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PillCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *eventCategory;
+@property (weak, nonatomic) IBOutlet UIView *pillBackground;
 
 @end
 
