@@ -14,7 +14,7 @@
 #import <GooglePlaces/GooglePlaces.h>
 
 
-@interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate>
+@interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -113,6 +113,8 @@
     priceImage.contentMode = UIViewContentModeScaleAspectFit;
     self.eventPriceField.leftViewMode = UITextFieldViewModeAlways;
     self.eventPriceField.leftView = priceImage;
+    
+    self.eventPriceField.delegate= self;
 
 }
 
@@ -319,6 +321,17 @@ didFailAutocompleteWithError:(NSError *)error {
 
 - (void)didUpdateAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    // allow empty field or digit 0 to 9 for price field
+    if (!string.length || [string intValue])
+    {
+        return YES;
+    }
+    return NO;
 }
 
 @end
