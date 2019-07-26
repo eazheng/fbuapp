@@ -56,7 +56,6 @@
     }];
     [Parse initializeWithConfiguration:config];
 
-    // set root view controller as CreatePostViewController
     CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
     UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
 
@@ -64,7 +63,11 @@
     UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[createPostNavigationController, homeViewControllerNavigationController];
+    tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
+    
+    tabBarController.tabBar.items[0].title = @"Home";
+    tabBarController.tabBar.items[1].title = @"Create Post";
+    
     self.window.rootViewController = tabBarController;
     
     return YES;
