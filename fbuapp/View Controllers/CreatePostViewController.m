@@ -12,7 +12,6 @@
 #import "AppDelegate.h"
 #import "UITextView+Placeholder.h"
 #import <GooglePlaces/GooglePlaces.h>
-//#import "ShowAlertViewController.h"
 #import "UIViewController+Alerts.h"
 
 
@@ -79,11 +78,57 @@
     self.pickerView.alpha = 0;
     self.eventCategory = -1;
     
-    self.eventDescriptionField.layer.borderWidth = 0.3f;
-    self.eventDescriptionField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.eventDescriptionField.layer.cornerRadius = 8;
-    self.eventDescriptionField.placeholder = @"Write a brief description for your event!";
+    //var myMutableStringTitle = NSMutableAttributedString()
+    //let Name  = "Enter Title" // PlaceHolderText
+    
+    //myMutableStringTitle = NSMutableAttributedString(string:Name, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 20.0)!]) // Font
+    
+    //NSAttributedString *titlePlaceholderString = [[NSAttributedString alloc] initWithString:@"Event Title" attributes:@{NSFontAttributeName: [UIFont name]}];
+    //self.eventTitleField.attributedPlaceholder = titlePlaceholderString;
+    //[self.eventTitleField setValue:[UIColor colorWithRed:97.0/255.0 green:1.0/255.0 blue:17.0/255.0 alpha:1.0] forKeyPath:@"_placeholderLabel.textColor"];
+    //self.myLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+    self.eventTitleField.font = [UIFont boldSystemFontOfSize:50.0f];
+//    self.eventTitleField.placeholder = @"Event Title";
+    self.eventTitleField.borderStyle = UITextBorderStyleNone;
+    self.eventTitleField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    
+    if ([self.eventTitleField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+        UIColor *color = [UIColor blackColor];
+        self.eventTitleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Event Title" attributes:@{NSForegroundColorAttributeName: color}];
+    } else {
+        NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
+        // TODO: Add fall-back code to set placeholder color.
+    }
+    
+    CGRect frameRect = self.eventTitleField.frame;
+    frameRect.size.height = 60;
+    self.eventTitleField.frame = frameRect;
+    
+    //self.eventDescriptionField.layer.borderWidth = 0.3f;
+    //self.eventDescriptionField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    //self.eventDescriptionField.layer.cornerRadius = 8;
+    self.eventDescriptionField.placeholder = @"Write a brief description of your event here!";
     self.eventDescriptionField.placeholderColor = [UIColor lightGrayColor];
+    self.eventDescriptionField.font = [UIFont systemFontOfSize:16.0f];
+    
+    [self.eventDescriptionField.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
+    [self.eventDescriptionField.layer setBorderColor: [[UIColor grayColor] CGColor]];
+    [self.eventDescriptionField.layer setBorderWidth: 0.0];
+    //[txt.layer setCornerRadius:12.0f];
+//    [self.eventDescriptionField.layer setMasksToBounds:NO];
+//    [self.eventDescriptionField.layer setShadowRadius:2.0f];
+//    self.eventDescriptionField.layer.shadowColor = [[UIColor blackColor] CGColor];
+//    self.eventDescriptionField.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+//    self.eventDescriptionField.layer.shadowOpacity = 1.0f;
+//    self.eventDescriptionField.layer.shadowRadius = 1.0f;
+    
+//    CALayer *bottomLine = [[CALayer alloc] init];
+//    bottomLine.frame = CGRectMake(0.0, self.eventLocationTextField.frame.size.height - 1, self.eventLocationTextField.frame.size.width, 0.3);
+//    bottomLine.backgroundColor =[[UIColor lightGrayColor] CGColor];
+////    self.eventDescriptionField.frame border
+//    //self.eventDescriptionField.border
+//    //self.eventDescriptionField.borderStyle = UITextBorderStyleNone;
+//    [self.eventLocationTextField.layer addSublayer:bottomLine];
  
     self.navigationItem.title=@"Create an Event";
     
@@ -117,8 +162,7 @@
     self.eventPriceField.leftView = priceImage;
     
     self.eventPriceField.delegate= self;
-//    self.alertViewController = [[ShowAlertViewController init] alloc];
-
+    self.pickerField.delegate = self;
 }
 
 
@@ -274,29 +318,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-////show error if missing fields for create post
-//- (void)showComposeError:(NSString *)errorMessage {
-//    //setup UIAlertController
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error Posting Event"
-//                                                                   message:errorMessage
-//                                                            preferredStyle:(UIAlertControllerStyleAlert)];
-//
-//    // create an OK action
-//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Okay"
-//                                                       style:UIAlertActionStyleDefault
-//                                                     handler:^(UIAlertAction * _Nonnull action) {
-//                                                         // handle response here.
-//                                                     }];
-//    // add the OK action to the alert controller
-//    [alert addAction:okAction];
-//
-//    [self presentViewController:alert animated:YES completion:^{
-//        // optional code for what happens after the alert controller has finished presenting
-//    }];
-//
-//}
-
-
 // for GMSAutocompleteViewControllerDelegate
 // Handle the user's selection.
 - (void)viewController:(GMSAutocompleteViewController *)viewController
@@ -335,6 +356,10 @@ didFailAutocompleteWithError:(NSError *)error {
 
 
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if (textField == self.pickerField) {
+        return NO;
+    }
     
     // allow empty field or digit 0 to 9 for price field
     if (!string.length || [string intValue])
