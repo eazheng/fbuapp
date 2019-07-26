@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "UITextView+Placeholder.h"
 #import <GooglePlaces/GooglePlaces.h>
+//#import "ShowAlertViewController.h"
+#import "UIViewController+Alerts.h"
 
 
 @interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate, UITextFieldDelegate>
@@ -115,6 +117,7 @@
     self.eventPriceField.leftView = priceImage;
     
     self.eventPriceField.delegate= self;
+//    self.alertViewController = [[ShowAlertViewController init] alloc];
 
 }
 
@@ -126,20 +129,27 @@
     // check if all necessary fields are filled in
     if ([self.eventTitleField.text isEqualToString:@""]) {
         NSLog(@"Need an event title");
-        [self showComposeError:@"Please enter an event title"];
+        [self showComposeError:@"Error Posting Event" withMessage:@"Please enter an event title"];
         return;
     }
     if ([self.eventDescriptionField.text isEqualToString:@""]) {
-        [self showComposeError:@"Please add a brief event description"];
+        [self showComposeError:@"Error Posting Event" withMessage:@"Please add a brief event description"];
         return;
     }
     if (self.eventCategory == -1) {
-        [self showComposeError:@"Please choose an event category"];
+        [self showComposeError:@"Error Posting Event" withMessage:@"Please choose an event category"];
+        return;
+    }
+    if ([self.eventLocationTextField.text isEqualToString:@""]) {
+        [self showComposeError:@"Error Posting Event" withMessage:@"Please specify a location for your event"];
         return;
     }
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
+    if ([self.eventPriceField.text isEqualToString:@""]) {
+        self.eventPriceField.text = @"0";
+    }
     NSNumber *price = [f numberFromString:self.eventPriceField.text];
     
     NSInteger authorSkill = [self.userLevelControl selectedSegmentIndex];
@@ -158,7 +168,7 @@
             CGSize size = CGSizeMake(400, 400);
             UIImage *resizedImage = [self resizeImage:self.eventImage.image withSize:size];
             //post the event
-            [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withLocationName: self.eventLocationTextField.text withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(!succeeded){
                     NSLog(@"Error posting Event: %@", error.localizedDescription);
                 }
@@ -264,27 +274,27 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//show error if missing fields for create post
-- (void)showComposeError:(NSString *)errorMessage {
-    //setup UIAlertController
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error Posting Event"
-                                                                   message:errorMessage
-                                                            preferredStyle:(UIAlertControllerStyleAlert)];
-    
-    // create an OK action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Okay"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                         // handle response here.
-                                                     }];
-    // add the OK action to the alert controller
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:^{
-        // optional code for what happens after the alert controller has finished presenting
-    }];
-    
-}
+////show error if missing fields for create post
+//- (void)showComposeError:(NSString *)errorMessage {
+//    //setup UIAlertController
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error Posting Event"
+//                                                                   message:errorMessage
+//                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+//
+//    // create an OK action
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Okay"
+//                                                       style:UIAlertActionStyleDefault
+//                                                     handler:^(UIAlertAction * _Nonnull action) {
+//                                                         // handle response here.
+//                                                     }];
+//    // add the OK action to the alert controller
+//    [alert addAction:okAction];
+//
+//    [self presentViewController:alert animated:YES completion:^{
+//        // optional code for what happens after the alert controller has finished presenting
+//    }];
+//
+//}
 
 
 // for GMSAutocompleteViewControllerDelegate
@@ -306,7 +316,7 @@ didFailAutocompleteWithError:(NSError *)error {
     [self dismissViewControllerAnimated:YES completion:nil];
     // TODO: handle the error.
     NSLog(@"Error: %@", [error description]);
-    [self showComposeError:[error description]];
+    [self showComposeError:@"Failed Autocomplete" withMessage:[error description]];
 }
 
 // User canceled the operation.

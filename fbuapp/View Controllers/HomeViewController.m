@@ -13,7 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
-
+#import "UIViewController+Alerts.h"
 static NSString *kTableViewPostCell = @"PostCell";
 
 
@@ -58,15 +58,19 @@ static NSString *kTableViewPostCell = @"PostCell";
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Location Services Error"
-                                                                   message:[NSString stringWithFormat:@"%@", error.localizedDescription]
-                                                            preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
+    [self showComposeError:@"Location Services Error" withMessage:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+//
+//    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Location Services Error"
+//                                                                   message:[NSString stringWithFormat:@"%@", error.localizedDescription]
+//                                                            preferredStyle:UIAlertControllerStyleAlert];
+//
+//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+//                                                          handler:^(UIAlertAction * action) {}];
+//
+//    [alert addAction:defaultAction];
+//    [self presentViewController:alert animated:YES completion:^{}];
     
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:^{}];
     NSLog(@"Error: %@",error.description);
 }
 

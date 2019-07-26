@@ -18,6 +18,7 @@
 		3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3827E30122E236BC008B8FA0 /* CreatePostViewController.m */; };
 		3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */; };
 		3827E30622E29935008B8FA0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3827E30522E29935008B8FA0 /* CoreLocation.framework */; };
+		3898B14122EB6DB70022B219 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */; };
 		38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */; };
 		38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */; };
 		38FBA5AD22E8EEA7002C1114 /* Key.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5AC22E8EEA7002C1114 /* Key.m */; };
@@ -80,6 +81,8 @@
 		3827E30122E236BC008B8FA0 /* CreatePostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatePostViewController.m; sourceTree = "<group>"; };
 		3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostViewController.xib; sourceTree = "<group>"; };
 		3827E30522E29935008B8FA0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3898B13F22EB6DB70022B219 /* UIViewController+Alerts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alerts.h"; sourceTree = "<group>"; };
+		3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alerts.m"; sourceTree = "<group>"; };
 		38FBA5A322E8E026002C1114 /* EnterLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterLocationViewController.h; sourceTree = "<group>"; };
 		38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterLocationViewController.m; sourceTree = "<group>"; };
 		38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterLocationViewController.xib; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				38FBA5B322EA1F43002C1114 /* ShowAlertViewController.h */,
 				38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */,
 				38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */,
+				3898B13F22EB6DB70022B219 /* UIViewController+Alerts.h */,
+				3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -510,6 +515,7 @@
 				38FBA5B622EA1F43002C1114 /* ShowAlertViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
+				3898B14122EB6DB70022B219 /* UIViewController+Alerts.m in Sources */,
 				0C01F9F322EA7A90009D4947 /* Post.m in Sources */,
 				A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */,
 				A496A5A322E25CF800F9E81A /* PostCell.m in Sources */,
