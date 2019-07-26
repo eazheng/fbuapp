@@ -2,7 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<<<<<<< HEAD
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -50,12 +49,10 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-=======
     <key>NSPhotoLibraryUsageDescription</key>               <!-- added this for photo library permission -->
     <string>Need library access to upload images</string> <!-- added this for photo library permission -->
     <key>NSCameraUsageDescription</key> <!-- added this for camera permission -->
     <string>Need camera access to take pictures</string> <!-- added this for camera permission -->
->>>>>>> bb02a2bf2d3d5a8953da0e3508d14b027b880632
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

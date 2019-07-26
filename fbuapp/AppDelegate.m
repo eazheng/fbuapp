@@ -58,37 +58,17 @@
 
     // set root view controller as CreatePostViewController
     CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
+    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
+
+    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[navigationController];
-    
-<<<<<<< HEAD
-    HomeViewController *vc = [[HomeViewController alloc] init];
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = navigationController;
-    
-//    //TEST
-//    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
-//    gameScore[@"score"] = @1337;
-//    gameScore[@"playerName"] = @"Test Plott";
-//    gameScore[@"cheatMode"] = @NO;
-//    [gameScore saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            NSLog(@"Object saved!");
-//        } else {
-//            NSLog(@"Error: %@", error.description);
-//        }
-//    }];
-=======
-    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    tabBarController.viewControllers = @[createPostNavigationController, homeViewControllerNavigationController];
     self.window.rootViewController = tabBarController;
->>>>>>> bb02a2bf2d3d5a8953da0e3508d14b027b880632
     
     return YES;
 }
-
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
