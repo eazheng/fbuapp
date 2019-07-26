@@ -16,21 +16,21 @@ PODS:
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.9.0)
   - DateTools (2.0.0)
-  - FBSDKCoreKit (5.1.1):
-    - FBSDKCoreKit/Basics (= 5.1.1)
-    - FBSDKCoreKit/Core (= 5.1.1)
-  - FBSDKCoreKit/Basics (5.1.1)
-  - FBSDKCoreKit/Core (5.1.1):
+  - FBSDKCoreKit (5.2.1):
+    - FBSDKCoreKit/Basics (= 5.2.1)
+    - FBSDKCoreKit/Core (= 5.2.1)
+  - FBSDKCoreKit/Basics (5.2.1)
+  - FBSDKCoreKit/Core (5.2.1):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.1.1):
+  - FBSDKLoginKit (5.2.1):
     - FBSDKCoreKit (~> 5.0)
-  - GoogleMaps (3.1.0):
-    - GoogleMaps/Maps (= 3.1.0)
-  - GoogleMaps/Base (3.1.0)
-  - GoogleMaps/Maps (3.1.0):
+  - GoogleMaps (3.2.0):
+    - GoogleMaps/Maps (= 3.2.0)
+  - GoogleMaps/Base (3.2.0)
+  - GoogleMaps/Maps (3.2.0):
     - GoogleMaps/Base
-  - GooglePlaces (3.1.0):
-    - GoogleMaps/Base (= 3.1.0)
+  - GooglePlaces (3.2.0):
+    - GoogleMaps/Base (= 3.2.0)
   - Parse (1.17.2):
     - Parse/Core (= 1.17.2)
   - Parse/Core (1.17.2):
@@ -40,6 +40,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - DateTools
+  - FBSDKCoreKit
   - FBSDKLoginKit
   - GoogleMaps
   - GooglePlaces
@@ -61,23 +62,14 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-<<<<<<< HEAD
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
-  FBSDKCoreKit: c29b6b65f6a171ca0a317960a622cff62c9ee269
-  FBSDKLoginKit: fdaf402766755e1175ed5c0382f25e2e7dab3c2a
-=======
   FBSDKCoreKit: e1ab8d86f5eea2d7aa6ab12acca3e1d2dcb11983
   FBSDKLoginKit: 6e20e44775ddf4b159a8ca676834325e13d12221
-  GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
-  GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
->>>>>>> bb02a2bf2d3d5a8953da0e3508d14b027b880632
+  GoogleMaps: 5046d7edfe381c1a0b20fdaf293915a375c3122b
+  GooglePlaces: 41bc2e480816b1234a48f4bec92e1c886f37cfe1
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 231093d8ec55b74ba12813f2a05e427bc8bfa3c7
-=======
-PODFILE CHECKSUM: 9af4733284c30eda7f6c769d0da4fec45de16685
->>>>>>> bb02a2bf2d3d5a8953da0e3508d14b027b880632
+PODFILE CHECKSUM: 75b7a57adb926fcae7972962ac6bba9960e7842d
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.7.4
