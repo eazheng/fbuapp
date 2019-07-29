@@ -14,7 +14,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
 #import "CategoryHeaderView.h"
-#import "EventCategory.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
