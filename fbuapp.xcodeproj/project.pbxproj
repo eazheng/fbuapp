@@ -317,6 +317,8 @@
 		A496A59722E24F9E00F9E81A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A419823A22EF95B700791E06 /* PostTableView.h */,
+				A419823B22EF95B700791E06 /* PostTableView.m */,
 				A496A5A022E25CF800F9E81A /* PostCell.h */,
 				A496A5A122E25CF800F9E81A /* PostCell.m */,
 				A496A5A222E25CF800F9E81A /* PostCell.xib */,
@@ -326,8 +328,6 @@
 				A419822922EBBC4300791E06 /* PillCell.h */,
 				A419822A22EBBC4300791E06 /* PillCell.m */,
 				A419822522EBBC4300791E06 /* PillCell.xib */,
-				A419823A22EF95B700791E06 /* PostTableView.h */,
-				A419823B22EF95B700791E06 /* PostTableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";

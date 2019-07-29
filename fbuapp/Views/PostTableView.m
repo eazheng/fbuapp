@@ -19,15 +19,14 @@
 
 static NSString *kTableViewPostCell = @"PostCell";
 
-@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSArray * posts;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation * currentLocation;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
-
-
 
 
 @implementation PostTableView
@@ -46,16 +45,20 @@ static NSString *kTableViewPostCell = @"PostCell";
 {
     self.frame = self.bounds;
     
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        [self.locationManager requestWhenInUseAuthorization];
-        [self.locationManager startUpdatingLocation];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startUpdatingLocation];
     
     [self registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.dataSource = self;
     self.delegate = self;
     [self fetchPosts];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [self addSubview:self.refreshControl];
     
 }
 
@@ -71,7 +74,7 @@ static NSString *kTableViewPostCell = @"PostCell";
         else {
             NSLog(@"Failed to fetch posts from server");
         }
-        //refreshing
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -85,15 +88,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-//    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Location Services Error"
-//                                                                   message:[NSString stringWithFormat:@"%@", error.localizedDescription]
-//                                                            preferredStyle:UIAlertControllerStyleAlert];
-//
-//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-//                                                          handler:^(UIAlertAction * action) {}];
-//
-//    [alert addAction:defaultAction];
-//    [self presentViewController:alert animated:YES completion:^{}];
     NSLog(@"Error: %@",error.description);
 }
 
@@ -108,9 +102,21 @@ static NSString *kTableViewPostCell = @"PostCell";
     PFGeoPoint *eventLocation = post[@"eventLocation"];
     double dist = [eventLocation distanceInMilesTo :[PFGeoPoint geoPointWithLocation :self.currentLocation]];
     cell.eventDistance.text = [NSString stringWithFormat:@"%.2f", dist];
+    cell.eventPrice.text = [post[@"eventPrice"] stringValue];
     
-    
-    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss z";
+    NSDate *date = post.createdAt;
+    NSDate *now = [[NSDate date] dateByAddingDays:-1];
+    BOOL postWasRecentBool = [date isLaterThan:now];
+    if (postWasRecentBool) {
+        cell.eventDaysAgo.text = [NSString stringWithFormat:@"%@%@", date.shortTimeAgoSinceNow, @" ago"];
+    }
+    else {
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterNoStyle;
+        cell.eventDaysAgo.text = [formatter stringFromDate:date];
+    }
     
     cell.eventDescription.text = post[@"eventDescription"];
     
