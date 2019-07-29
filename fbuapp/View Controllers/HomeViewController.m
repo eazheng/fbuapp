@@ -13,6 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
+#import "CategoryHeaderView.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
@@ -29,7 +30,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -42,6 +42,9 @@ static NSString *kTableViewPostCell = @"PostCell";
     self.tableView.delegate = self;
     
     [self fetchPosts];
+    
+    CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
+    self.tableView.tableHeaderView = pillSelector;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
@@ -80,13 +83,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     PFGeoPoint *eventLocation = post[@"eventLocation"];
     double dist = [eventLocation distanceInMilesTo :[PFGeoPoint geoPointWithLocation :self.currentLocation]];
     cell.eventDistance.text = [NSString stringWithFormat:@"%.2f", dist];
-    
-//    PFUser * cur =[PFUser currentUser]; waiting for user class
-//    double x = [eventLocation distanceInMilesTo :cur[@"userLocation"]];// may need nullable
-////    NSLog([NSString stringWithFormat:@"%.20lf", x]);
-////    //change location to an eventDistance here
-////    cell.eventDistance.text =
-//
     cell.eventPrice.text = [post[@"eventPrice"] stringValue];
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -106,15 +102,6 @@ static NSString *kTableViewPostCell = @"PostCell";
         // Convert Date to String
         cell.eventDaysAgo.text = [formatter stringFromDate:date];
     }
-    
-//    PFUser *eventAuthor = post[@"author"]; waiting for user class
-//
-////    [eventAuthor.userProfilePhoto getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-////        if (!error) {
-////            cell.userProfilePhoto.image = [UIImage imageWithData:data];
-////        }
-////    }];
-////    cell.eventAuthor.text = eventAuthor.name;
     cell.eventDescription.text = post[@"eventDescription"];
 
     PFFileObject *pfobj = post[@"image"];
@@ -126,7 +113,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     cell.layer.shadowRadius = 5.0;
     cell.layer.shadowColor = [UIColor blackColor].CGColor;
     cell.layer.shadowOffset = CGSizeMake(0, 0);
-
 
     return cell;
 }
@@ -143,7 +129,7 @@ static NSString *kTableViewPostCell = @"PostCell";
             [self.tableView reloadData];
         }
         else {
-            // handle error
+            NSLog(@"Failed to fetch posts from server");
         }
         [self.refreshControl endRefreshing];
     }];

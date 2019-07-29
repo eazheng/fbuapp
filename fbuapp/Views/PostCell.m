@@ -17,16 +17,12 @@
     self.eventImage.layer.cornerRadius = 17;
     self.eventImage.clipsToBounds = YES;
     self.eventImage.contentMode = UIViewContentModeScaleToFill;
-    
-    // Initialization code
 }
 - (IBAction)onFavoriteTapped:(id)sender {
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 @end
