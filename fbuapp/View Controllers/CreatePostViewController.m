@@ -78,15 +78,6 @@
     self.pickerView.alpha = 0;
     self.eventCategory = -1;
     
-    //var myMutableStringTitle = NSMutableAttributedString()
-    //let Name  = "Enter Title" // PlaceHolderText
-    
-    //myMutableStringTitle = NSMutableAttributedString(string:Name, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 20.0)!]) // Font
-    
-    //NSAttributedString *titlePlaceholderString = [[NSAttributedString alloc] initWithString:@"Event Title" attributes:@{NSFontAttributeName: [UIFont name]}];
-    //self.eventTitleField.attributedPlaceholder = titlePlaceholderString;
-    //[self.eventTitleField setValue:[UIColor colorWithRed:97.0/255.0 green:1.0/255.0 blue:17.0/255.0 alpha:1.0] forKeyPath:@"_placeholderLabel.textColor"];
-    //self.myLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     self.eventTitleField.font = [UIFont boldSystemFontOfSize:50.0f];
 //    self.eventTitleField.placeholder = @"Event Title";
     self.eventTitleField.borderStyle = UITextBorderStyleNone;
@@ -104,9 +95,6 @@
     frameRect.size.height = 60;
     self.eventTitleField.frame = frameRect;
     
-    //self.eventDescriptionField.layer.borderWidth = 0.3f;
-    //self.eventDescriptionField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    //self.eventDescriptionField.layer.cornerRadius = 8;
     self.eventDescriptionField.placeholder = @"Write a brief description of your event here!";
     self.eventDescriptionField.placeholderColor = [UIColor lightGrayColor];
     self.eventDescriptionField.font = [UIFont systemFontOfSize:16.0f];
@@ -114,22 +102,7 @@
     [self.eventDescriptionField.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
     [self.eventDescriptionField.layer setBorderColor: [[UIColor grayColor] CGColor]];
     [self.eventDescriptionField.layer setBorderWidth: 0.0];
-    //[txt.layer setCornerRadius:12.0f];
-//    [self.eventDescriptionField.layer setMasksToBounds:NO];
-//    [self.eventDescriptionField.layer setShadowRadius:2.0f];
-//    self.eventDescriptionField.layer.shadowColor = [[UIColor blackColor] CGColor];
-//    self.eventDescriptionField.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-//    self.eventDescriptionField.layer.shadowOpacity = 1.0f;
-//    self.eventDescriptionField.layer.shadowRadius = 1.0f;
-    
-//    CALayer *bottomLine = [[CALayer alloc] init];
-//    bottomLine.frame = CGRectMake(0.0, self.eventLocationTextField.frame.size.height - 1, self.eventLocationTextField.frame.size.width, 0.3);
-//    bottomLine.backgroundColor =[[UIColor lightGrayColor] CGColor];
-////    self.eventDescriptionField.frame border
-//    //self.eventDescriptionField.border
-//    //self.eventDescriptionField.borderStyle = UITextBorderStyleNone;
-//    [self.eventLocationTextField.layer addSublayer:bottomLine];
- 
+
     self.navigationItem.title=@"Create an Event";
     
     // first we create a button and set it's properties
@@ -173,19 +146,19 @@
     // check if all necessary fields are filled in
     if ([self.eventTitleField.text isEqualToString:@""]) {
         NSLog(@"Need an event title");
-        [self showComposeError:@"Error Posting Event" withMessage:@"Please enter an event title"];
+        [self showAlert:@"Error Posting Event" withMessage:@"Please enter an event title"];
         return;
     }
     if ([self.eventDescriptionField.text isEqualToString:@""]) {
-        [self showComposeError:@"Error Posting Event" withMessage:@"Please add a brief event description"];
+        [self showAlert:@"Error Posting Event" withMessage:@"Please add a brief event description"];
         return;
     }
     if (self.eventCategory == -1) {
-        [self showComposeError:@"Error Posting Event" withMessage:@"Please choose an event category"];
+        [self showAlert:@"Error Posting Event" withMessage:@"Please choose an event category"];
         return;
     }
     if ([self.eventLocationTextField.text isEqualToString:@""]) {
-        [self showComposeError:@"Error Posting Event" withMessage:@"Please specify a location for your event"];
+        [self showAlert:@"Error Posting Event" withMessage:@"Please specify a location for your event"];
         return;
     }
     
@@ -220,12 +193,12 @@
                     //refreshes timeline (delegate of createpostvc)
                     //[self.delegate didPost];
                     NSLog(@"Post Event Success!");
+                    [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
                 }
             }];
         }
     }];
-    
-    //[self presentViewController:homeVC animated:YES completion:nil];
+
 }
 
 /*
@@ -337,7 +310,7 @@ didFailAutocompleteWithError:(NSError *)error {
     [self dismissViewControllerAnimated:YES completion:nil];
     // TODO: handle the error.
     NSLog(@"Error: %@", [error description]);
-    [self showComposeError:@"Failed Autocomplete" withMessage:[error description]];
+    [self showAlert:@"Failed Autocomplete" withMessage:[error description]];
 }
 
 // User canceled the operation.

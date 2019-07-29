@@ -11,7 +11,7 @@
 @implementation UIViewController (Alerts)
 
 //show error if missing fields for create post
-- (void)showComposeError:(NSString *)errorTitle withMessage:(NSString *)errorMessage {
+- (void)showAlert:(NSString *)errorTitle withMessage:(NSString *)errorMessage {
     //setup UIAlertController
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:errorTitle
                                                                    message:errorMessage

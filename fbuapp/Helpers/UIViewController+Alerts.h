@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (Alerts)
 
-- (void)showComposeError:(NSString *)errorTitle withMessage:(NSString *)errorMessage;
+- (void)showAlert:(NSString *)errorTitle withMessage:(NSString *)errorMessage;
 
 @end
 

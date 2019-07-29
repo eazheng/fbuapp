@@ -59,7 +59,7 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     
-    [self showComposeError:@"Location Services Error" withMessage:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+    [self showAlert:@"Location Services Error" withMessage:[NSString stringWithFormat:@"%@", error.localizedDescription]];
     
     NSLog(@"Error: %@",error.description);
 }
