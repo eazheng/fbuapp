@@ -14,7 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
 #import "CategoryHeaderView.h"
-#import "Category.h"
+#import "EventCategory.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
@@ -31,7 +31,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;

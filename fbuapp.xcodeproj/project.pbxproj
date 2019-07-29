@@ -34,11 +34,12 @@
 		83657E8A22E8D00D002EB6A8 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657E8922E8D00D002EB6A8 /* Profile.m */; };
 		83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27622E234C10045B437 /* ProfileViewController.m */; };
 		83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E6B27722E234C10045B437 /* ProfileViewController.xib */; };
-		A419821822EB7ECE00791E06 /* PillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A419821522EB7ECE00791E06 /* PillCell.m */; };
-		A419821922EB7ECE00791E06 /* PillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A419821722EB7ECE00791E06 /* PillCell.xib */; };
-		A419821D22EB7EF700791E06 /* CategoryHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A419821A22EB7EF700791E06 /* CategoryHeaderView.xib */; };
-		A419821E22EB7EF700791E06 /* CategoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A419821B22EB7EF700791E06 /* CategoryHeaderView.m */; };
-		A419822422EB832D00791E06 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A419822322EB832D00791E06 /* Category.m */; };
+		A419822B22EBBC4300791E06 /* PillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A419822522EBBC4300791E06 /* PillCell.xib */; };
+		A419822C22EBBC4300791E06 /* CategoryHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A419822722EBBC4300791E06 /* CategoryHeaderView.xib */; };
+		A419822D22EBBC4300791E06 /* CategoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A419822822EBBC4300791E06 /* CategoryHeaderView.m */; };
+		A419822E22EBBC4300791E06 /* PillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A419822A22EBBC4300791E06 /* PillCell.m */; };
+		A419823122EF5C2700791E06 /* EventCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823022EF5C2700791E06 /* EventCategory.m */; };
+		A419823422EF675000791E06 /* UIColor+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823322EF675000791E06 /* UIColor+Helpers.m */; };
 		A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A59322E24C9B00F9E81A /* HomeViewController.m */; };
 		A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A59422E24C9B00F9E81A /* HomeViewController.xib */; };
 		A496A5A322E25CF800F9E81A /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A5A122E25CF800F9E81A /* PostCell.m */; };
@@ -111,14 +112,16 @@
 		83E6B27522E234C10045B437 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		83E6B27622E234C10045B437 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		83E6B27722E234C10045B437 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
-		A419821522EB7ECE00791E06 /* PillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PillCell.m; path = ../../../../../Documents/Backups/Saved/fbuapp/fbuapp/Views/PillCell.m; sourceTree = "<group>"; };
-		A419821622EB7ECE00791E06 /* PillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PillCell.h; path = ../../../../../Documents/Backups/Saved/fbuapp/fbuapp/Views/PillCell.h; sourceTree = "<group>"; };
-		A419821722EB7ECE00791E06 /* PillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PillCell.xib; path = ../../../../../Documents/Backups/Saved/fbuapp/fbuapp/Views/PillCell.xib; sourceTree = "<group>"; };
-		A419821A22EB7EF700791E06 /* CategoryHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CategoryHeaderView.xib; path = ../../../../../Documents/Backups/Saved/fbuapp/fbuapp/Views/CategoryHeaderView.xib; sourceTree = "<group>"; };
-		A419821B22EB7EF700791E06 /* CategoryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryHeaderView.m; path = ../../../../../Documents/Backups/Saved/fbuapp/fbuapp/Views/CategoryHeaderView.m; sourceTree = "<group>"; };
-		A419821C22EB7EF700791E06 /* CategoryHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryHeaderView.h; path = ../../../../../Documents/Backups/Saved/fbuapp/fbuapp/Views/CategoryHeaderView.h; sourceTree = "<group>"; };
-		A419822222EB832D00791E06 /* Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
-		A419822322EB832D00791E06 /* Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		A419822522EBBC4300791E06 /* PillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PillCell.xib; sourceTree = "<group>"; };
+		A419822622EBBC4300791E06 /* CategoryHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryHeaderView.h; sourceTree = "<group>"; };
+		A419822722EBBC4300791E06 /* CategoryHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryHeaderView.xib; sourceTree = "<group>"; };
+		A419822822EBBC4300791E06 /* CategoryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryHeaderView.m; sourceTree = "<group>"; };
+		A419822922EBBC4300791E06 /* PillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PillCell.h; sourceTree = "<group>"; };
+		A419822A22EBBC4300791E06 /* PillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PillCell.m; sourceTree = "<group>"; };
+		A419822F22EF5C2700791E06 /* EventCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCategory.h; sourceTree = "<group>"; };
+		A419823022EF5C2700791E06 /* EventCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCategory.m; sourceTree = "<group>"; };
+		A419823222EF675000791E06 /* UIColor+Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helpers.h"; sourceTree = "<group>"; };
+		A419823322EF675000791E06 /* UIColor+Helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helpers.m"; sourceTree = "<group>"; };
 		A496A59222E24C9B00F9E81A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		A496A59322E24C9B00F9E81A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		A496A59422E24C9B00F9E81A /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 				38FBA5B322EA1F43002C1114 /* ShowAlertViewController.h */,
 				38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */,
 				38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */,
+				A419823222EF675000791E06 /* UIColor+Helpers.h */,
+				A419823322EF675000791E06 /* UIColor+Helpers.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -263,8 +268,8 @@
 			children = (
 				0C01F9F122EA7A90009D4947 /* Post.h */,
 				0C01F9F222EA7A90009D4947 /* Post.m */,
-				A419822222EB832D00791E06 /* Category.h */,
-				A419822322EB832D00791E06 /* Category.m */,
+				A419822F22EF5C2700791E06 /* EventCategory.h */,
+				A419823022EF5C2700791E06 /* EventCategory.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,15 +314,15 @@
 		A496A59722E24F9E00F9E81A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A419821622EB7ECE00791E06 /* PillCell.h */,
-				A419821522EB7ECE00791E06 /* PillCell.m */,
-				A419821722EB7ECE00791E06 /* PillCell.xib */,
-				A419821C22EB7EF700791E06 /* CategoryHeaderView.h */,
-				A419821B22EB7EF700791E06 /* CategoryHeaderView.m */,
-				A419821A22EB7EF700791E06 /* CategoryHeaderView.xib */,
 				A496A5A022E25CF800F9E81A /* PostCell.h */,
 				A496A5A122E25CF800F9E81A /* PostCell.m */,
 				A496A5A222E25CF800F9E81A /* PostCell.xib */,
+				A419822622EBBC4300791E06 /* CategoryHeaderView.h */,
+				A419822822EBBC4300791E06 /* CategoryHeaderView.m */,
+				A419822722EBBC4300791E06 /* CategoryHeaderView.xib */,
+				A419822922EBBC4300791E06 /* PillCell.h */,
+				A419822A22EBBC4300791E06 /* PillCell.m */,
+				A419822522EBBC4300791E06 /* PillCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -430,14 +435,14 @@
 			files = (
 				38FBA5B722EA1F43002C1114 /* ShowAlertViewController.xib in Resources */,
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
-				A419821922EB7ECE00791E06 /* PillCell.xib in Resources */,
+				A419822B22EBBC4300791E06 /* PillCell.xib in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
 				A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
 				A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */,
 				3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */,
 				38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */,
-				A419821D22EB7EF700791E06 /* CategoryHeaderView.xib in Resources */,
+				A419822C22EBBC4300791E06 /* CategoryHeaderView.xib in Resources */,
 				83657DE122E24824002EB6A8 /* LogViewController.xib in Resources */,
 				83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
@@ -527,23 +532,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				38FBA5AD22E8EEA7002C1114 /* Key.m in Sources */,
-				A419821E22EB7EF700791E06 /* CategoryHeaderView.m in Sources */,
+				A419822D22EBBC4300791E06 /* CategoryHeaderView.m in Sources */,
+				A419823122EF5C2700791E06 /* EventCategory.m in Sources */,
 				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
-				A419822422EB832D00791E06 /* Category.m in Sources */,
 				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
 				38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */,
 				38FBA5B622EA1F43002C1114 /* ShowAlertViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
-				A419821822EB7ECE00791E06 /* PillCell.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
 				0C01F9F322EA7A90009D4947 /* Post.m in Sources */,
 				A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */,
 				A496A5A322E25CF800F9E81A /* PostCell.m in Sources */,
 				83657DF322E67798002EB6A8 /* EditViewController.m in Sources */,
 				83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */,
+				A419822E22EBBC4300791E06 /* PillCell.m in Sources */,
 				83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */,
 				83657E8A22E8D00D002EB6A8 /* Profile.m in Sources */,
 				83657DE022E24824002EB6A8 /* LogViewController.m in Sources */,
+				A419823422EF675000791E06 /* UIColor+Helpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

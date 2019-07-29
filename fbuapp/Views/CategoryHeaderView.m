@@ -8,7 +8,8 @@
 
 #import "CategoryHeaderView.h"
 #import "PillCell.h"
-#import "Category.h"
+#import "EventCategory.h"
+#import "UIColor+Helpers.h"
 
 static NSString *kCollectionViewPillCell = @"PillCell";
 
@@ -59,10 +60,10 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     UINib *cellNib = [UINib nibWithNibName:kCollectionViewPillCell bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:kCollectionViewPillCell];
     
-    PFQuery *postQuery = [Category query];
+    PFQuery *postQuery = [EventCategory query];
     [postQuery orderByDescending:@"createdAt"];
     postQuery.limit = 20;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Category *> * _Nullable categories, NSError * _Nullable error) {
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<EventCategory *> * _Nullable categories, NSError * _Nullable error) {
         if (categories) {
             self.categories = [NSArray arrayWithArray:categories] ;
             [self.collectionView reloadData];
@@ -82,13 +83,11 @@ static NSString *kCollectionViewPillCell = @"PillCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PillCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCollectionViewPillCell forIndexPath:indexPath];
-    Category* category = self.categories[indexPath.row];
+    EventCategory* category = self.categories[indexPath.row];
     
-    NSArray *colorRGB = category.eventCategoryColor;
-    cell.pillBackground.backgroundColor = [UIColor colorWithRed: [colorRGB[0] doubleValue]/255.0 green:[colorRGB[1] doubleValue]/255.0 blue:[colorRGB[2] doubleValue]/255.0 alpha:1.0];
-
-    cell.eventCategory.text = category.eventCategory;
-    cell.pillBackground.layer.cornerRadius = 17;
+    cell.pillBackground.backgroundColor = [UIColor colorWithRGB: category.color];
+    cell.eventCategory.text = category.name;
+    cell.pillBackground.layer.cornerRadius = cell.pillBackground.frame.size.height / 2;
     
     return cell;
 }
