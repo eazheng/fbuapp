@@ -10,7 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+@protocol CreatePostViewControllerDelegate
+
+- (void)didPost;
+
+@end
+
+
 @interface CreatePostViewController : UIViewController
+
+@property (nonatomic, weak) id<CreatePostViewControllerDelegate> delegate;
 
 @end
 

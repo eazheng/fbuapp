@@ -15,4 +15,13 @@
     // Initialization code
 }
 
+-(void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    
+    UIView *selectedBackgroundViewForCell = [UIView new];
+    [selectedBackgroundViewForCell setBackgroundColor:[UIColor lightGrayColor]];
+//    theCell.selectedBackgroundView = selectedBackgroundViewForCell;
+
+    self.selectedBackgroundView = selectedBackgroundViewForCell;
+}
 @end

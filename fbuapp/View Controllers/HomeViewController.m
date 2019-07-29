@@ -15,11 +15,12 @@
 #import "DateTools.h"
 #import "UIViewController+Alerts.h"
 #import "CategoryHeaderView.h"
+#import "CreatePostViewController.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, CreatePostViewControllerDelegate>
 @property (strong, nonatomic) NSArray * posts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) CLLocation * currentLocation;
@@ -140,5 +141,11 @@ static NSString *kTableViewPostCell = @"PostCell";
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)didPost {
+    [self fetchPosts];
+    [self.tableView reloadData];
+}
+
 
 @end

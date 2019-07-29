@@ -10,8 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol CategoryHeaderViewDelegate
+
+- (void)didSelectCell: (NSIndexPath *)indexPath;
+
+@end
+
 @interface CategoryHeaderView : UIView
+
+@property (nonatomic, weak) id<CategoryHeaderViewDelegate> delegate;
 
 @end
 
 NS_ASSUME_NONNULL_END
+

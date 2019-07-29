@@ -13,29 +13,24 @@
 #import "UITextView+Placeholder.h"
 #import <GooglePlaces/GooglePlaces.h>
 #import "UIViewController+Alerts.h"
+#import "HomeViewController.h"
+#import "PostCell.h"
+#import "CategoryHeaderView.h"
 
 
-@interface CreatePostViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate, UITextFieldDelegate>
+@interface CreatePostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate, UITextFieldDelegate, CategoryHeaderViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescriptionField;
 @property (weak, nonatomic) IBOutlet UITextField *eventLocationTextField;
 @property  NSString *addressString;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
-@property (weak, nonatomic) IBOutlet UIPickerView *eventCategoryPicker;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userLevelControl;
-@property (weak, nonatomic) IBOutlet UITextField *pickerField;
-@property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
-@property (weak, nonatomic) IBOutlet UIView *pickerView;
-
-
 @property (weak, nonatomic) IBOutlet UITextField *eventPriceField;
-@property NSArray *categoryList;
 @property NSInteger eventCategory;
-
+@property BOOL pickedImage;
 
 @end
 
@@ -66,20 +61,11 @@
     // Do any additional setup after loading the view from its nib.
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-
-    // Connect data:
-    self.eventCategoryPicker.delegate = self;
-    self.eventCategoryPicker.dataSource = self;
     
-    self.categoryList = [NSArray arrayWithObjects: @"Outdoor Active", @"Indoor Active", @"Lifestyle", @"Arts", @"Business", @"Finance", @"Music", @"Photography", nil];
-    
-    
-    self.pickerView.hidden = YES;
-    self.pickerView.alpha = 0;
+    self.pickedImage = false;
     self.eventCategory = -1;
     
     self.eventTitleField.font = [UIFont boldSystemFontOfSize:50.0f];
-//    self.eventTitleField.placeholder = @"Event Title";
     self.eventTitleField.borderStyle = UITextBorderStyleNone;
     self.eventTitleField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
@@ -104,6 +90,7 @@
     [self.eventDescriptionField.layer setBorderWidth: 0.0];
 
     self.navigationItem.title=@"Create an Event";
+    self.navigationController.navigationBar.translucent = NO;
     
     // first we create a button and set it's properties
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc]init];
@@ -135,8 +122,16 @@
     self.eventPriceField.leftView = priceImage;
     
     self.eventPriceField.delegate= self;
-    self.pickerField.delegate = self;
+    
+    
+    CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
+    [self.scrollView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor];
+    
+    [self.scrollView addSubview:pillSelector];
+    pillSelector.delegate = self;
+
 }
+
 
 
 - (IBAction)postEventAction:(id)sender {
@@ -161,6 +156,10 @@
         [self showAlert:@"Error Posting Event" withMessage:@"Please specify a location for your event"];
         return;
     }
+    if (!self.pickedImage) {
+        [self showAlert:@"Error Posting Event" withMessage:@"Please upload an event picture"];
+        return;
+    }
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
@@ -182,7 +181,7 @@
             CLPlacemark *placemark = [placemarks lastObject];
             CLLocation *loc = [[CLLocation alloc] initWithLatitude:placemark.location.coordinate.latitude longitude:placemark.location.coordinate.longitude];
 
-            CGSize size = CGSizeMake(400, 400);
+            CGSize size = CGSizeMake(390, 260);
             UIImage *resizedImage = [self resizeImage:self.eventImage.image withSize:size];
             //post the event
             [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withLocationName: self.eventLocationTextField.text withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -191,14 +190,14 @@
                 }
                 else{
                     //refreshes timeline (delegate of createpostvc)
-                    //[self.delegate didPost];
+                    [self.delegate didPost];
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
+                    [self.tabBarController setSelectedIndex:0];
                 }
             }];
         }
     }];
-
 }
 
 /*
@@ -211,56 +210,11 @@
 }
 */
 
-- (NSInteger)numberOfComponentsInPickerView:(nonnull UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(nonnull UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.categoryList.count;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return self.categoryList[row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.eventCategory = row;
-}
-
-// picker to choose a category
-- (IBAction)onTapPicker:(id)sender {
-    self.pickerView.hidden = NO;
-    NSLog(@"TAPPED PICKER");
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.3];
-    CGAffineTransform transform = CGAffineTransformMakeTranslation(0, -80);
-    self.pickerView.transform = transform;
-    self.pickerView.alpha = 1;
-    [UIView commitAnimations];
-}
-
-- (IBAction)onTapDone:(id)sender {
-    NSLog(@"TAPPED DONE");
-    if (self.eventCategory == -1) {
-        self.eventCategory = 0;
-    }
-    self.pickerField.text = self.categoryList[self.eventCategory];
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.3];
-    CGAffineTransform transform = CGAffineTransformMakeTranslation(0, 80);
-    self.pickerView.transform = transform;
-    self.pickerView.alpha = 0;
-    [UIView commitAnimations];
-    [self.pickerField endEditing:YES];
-}
-
 - (IBAction)uploadImageButton:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-    imagePickerVC.sourceType =UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
@@ -280,6 +234,7 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    self.pickedImage = true;
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
@@ -329,17 +284,24 @@ didFailAutocompleteWithError:(NSError *)error {
 
 
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    if (textField == self.pickerField) {
+    //disallow first input to be 0
+    if ([textField.text isEqualToString:@""] && [string isEqualToString:@"0"]) {
         return NO;
     }
-    
+
     // allow empty field or digit 0 to 9 for price field
-    if (!string.length || [string intValue])
+    if (!string.length || [string intValue] || [string isEqualToString:@"0"])
     {
         return YES;
     }
+    
     return NO;
+}
+
+// delegate for categoryHeaderView
+-(void)didSelectCell: (NSIndexPath *)indexPath {
+    NSLog(@"EVENT CATEGORY RECEIVED by createPost");
+    self.eventCategory = indexPath.row;
 }
 
 @end
