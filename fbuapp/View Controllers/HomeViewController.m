@@ -14,6 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
 #import "CategoryHeaderView.h"
+#import "PostTableView.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
@@ -30,25 +31,32 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [self.locationManager requestWhenInUseAuthorization];
-    [self.locationManager startUpdatingLocation];
     
-    [self.tableView registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
-    
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    
-    [self fetchPosts];
+//    self.locationManager = [[CLLocationManager alloc] init];
+//    self.locationManager.delegate = self;
+//    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//    [self.locationManager requestWhenInUseAuthorization];
+//    [self.locationManager startUpdatingLocation];
+//
+//    [self.tableView registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
+//
+//    self.tableView.dataSource = self;
+//    self.tableView.delegate = self;
+//
+//    [self fetchPosts];
+//
+    PostTableView *feed = [[PostTableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
-    self.tableView.tableHeaderView = pillSelector;
+    feed.tableHeaderView = pillSelector;
     
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refreshControl];
+    [self.view addSubview:feed];
+    
+
+//
+//    self.refreshControl = [[UIRefreshControl alloc] init];
+//    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+//    [self.tableView addSubview:self.refreshControl];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -119,10 +127,9 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 
 -(void)fetchPosts {
-    
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
-    postQuery.limit = 20;//infinite change
+    postQuery.limit = 20;
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.posts = [NSArray arrayWithArray:posts] ;
