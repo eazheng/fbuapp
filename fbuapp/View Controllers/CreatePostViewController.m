@@ -191,10 +191,12 @@
                 }
                 else{
                     //refreshes timeline (delegate of createpostvc)
-//                    [self.delegate didPost];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"PostEventComplete" object:nil userInfo:nil];
+                    
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
                     [self.tabBarController setSelectedIndex:0];
+
                 }
             }];
         }
