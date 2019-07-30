@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Parse/Parse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)signupButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 @property (strong, nonatomic) IBOutlet UITextField *emailField;
-- (IBAction)addPhotoButton:(id)sender;
+
 
 
 @end

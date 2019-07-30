@@ -10,11 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EditViewController : UIViewController <UIImagePickerControllerDelegate>
+@interface EditViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *changeImageView;
-@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
-@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *firstName;
+@property (weak, nonatomic) IBOutlet UITextField *lastName;
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UITextView *bio;
+@property (weak, nonatomic) IBOutlet UITextField *email;
+@property (weak, nonatomic) IBOutlet UITextField *password;
+
 - (IBAction)didEdit:(id)sender;
 - (IBAction)didCancel:(id)sender;
 - (IBAction)doneEditing:(id)sender;

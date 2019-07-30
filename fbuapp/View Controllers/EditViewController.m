@@ -7,6 +7,7 @@
 //
 
 #import "EditViewController.h"
+#import "Parse/Parse.h"
 
 @interface EditViewController ()
 @property (strong, nonatomic) UIImage *originalImage;
@@ -18,6 +19,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser != nil) {
+        NSLog(@"Current user: %@", currentUser.email);
+        [currentUser fetch];
+        self.changeImageView.image = currentUser[@"profilePicture"];
+        self.changeImageView.layer.cornerRadius = self.changeImageView.frame.size.width / 2;
+        self.changeImageView.clipsToBounds = YES;
+        self.firstName.text = currentUser[@"firstName"];
+        self.lastName.text = currentUser[@"lastName"];
+        self.username.text = currentUser.username;
+        self.email.text = currentUser.email;
+        self.password.text = currentUser.password;
+        
+        NSLog(@"First: %@", currentUser[@"firstName"]);
+    }
 }
 
 
@@ -35,18 +51,19 @@
 
 //access camera for user to change profile image
 - (IBAction)didEdit:(id)sender {
-    NSLog(@"Button was clicked");
-    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = self;
+    NSLog(@"User pressed the edit button");
+    UIImagePickerController *imagePickerController = [UIImagePickerController new];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     
+    //check if device has a camera
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
-        //for devices with no camera
-        NSLog(@"No Camera Found");
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        NSLog(@"No camera was found. Must use photolibrary instead.");
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
 }
 

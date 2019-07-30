@@ -10,6 +10,7 @@
 #import "ProfileViewController.h"
 #import "LogViewController.h"
 #import "RegisterViewController.h"
+#import "EditViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
 #import "HomeViewController.h"
@@ -33,13 +34,19 @@
     
     //present view controllers
     if ([FBSDKAccessToken currentAccessToken]) {
-        //take user to RegisterViewController
+//        //take user to RegisterViewController
         RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: registerViewController];
         self.window.rootViewController = navigationController;
+        
 //        //take user to ProfileViewController
-//        ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+//        ProfileViewController *profileViewController = [[ProfileViewController alloc]blnddgenu initWithNibName:@"ProfileViewController" bundle:nil];
 //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
+//        self.window.rootViewController = navigationController;
+        
+        //take user to EditViewController
+//        EditViewController *editViewController = [[EditViewController alloc] initWithNibName:@"EditViewController" bundle:nil];
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: editViewController];
 //        self.window.rootViewController = navigationController;
     }
     else {
@@ -56,16 +63,16 @@
     }];
     [Parse initializeWithConfiguration:config];
 
-    // set root view controller as CreatePostViewController
-    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
-    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
-
-    HomeViewController *homeViewController = [[HomeViewController alloc] init];
-    UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[createPostNavigationController, homeViewControllerNavigationController];
-    self.window.rootViewController = tabBarController;
+//    // set root view controller as CreatePostViewController
+//    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
+//    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
+//
+//    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+//    UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+//
+//    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+//    tabBarController.viewControllers = @[createPostNavigationController, homeViewControllerNavigationController];
+//    self.window.rootViewController = tabBarController;
     
     return YES;
 }
