@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *categoryView;
 @property (nonatomic, assign) BOOL isFavorited;
 @property (strong, nonatomic) Post *post;
-
+@property (strong, nonatomic) NSString *currentUserId;
 
 
 @end

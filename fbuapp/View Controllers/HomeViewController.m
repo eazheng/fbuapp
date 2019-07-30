@@ -15,6 +15,7 @@
 #import "DateTools.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
+#import "Masonry.h"
 
 
 @interface HomeViewController ()
@@ -27,11 +28,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    PostTableView *feed = [[PostTableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    PostTableView *feed = [[PostTableView alloc] initWithUserId:@"myuserid"]; //[PFUser currentUser].username
+    
+    [self.view addSubview:feed];
+    
+    [feed mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    
     CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
     feed.tableHeaderView = pillSelector;
     
-    [self.view addSubview:feed];
+    
 }
 
 @end

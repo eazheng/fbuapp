@@ -104,7 +104,7 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="contentMode" value="UIViewContentModeScaleAspectFit"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <view clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDe-cw-Aqz">
+                    <view clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDe-cw-Aqz">
                         <rect key="frame" x="29" y="27" width="117" height="36"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXy-3h-wqF">
@@ -127,7 +127,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvk-Bt-ktq">
+                    <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvk-Bt-ktq">
                         <rect key="frame" x="285" y="227" width="106" height="36"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f9-4X-59b">
@@ -150,7 +150,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-lA-oT0">
+                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-lA-oT0">
                         <rect key="frame" x="374" y="331" width="28" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Xh2-I2-ES6"/>
@@ -161,7 +161,7 @@
                             <action selector="onTapFavorited:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OBv-RC-Q1Q"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-18-Beu">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-18-Beu">
                         <rect key="frame" x="332" y="297" width="16" height="30"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
                         <nil key="textColor"/>
@@ -173,6 +173,7 @@
                     <constraint firstItem="s3x-5A-qta" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1Vx-jN-bAa"/>
                     <constraint firstItem="ijj-Vb-8rK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="2pt-Xc-EDa"/>
                     <constraint firstAttribute="trailing" secondItem="vtr-v8-NQe" secondAttribute="trailing" constant="18" id="3Fq-OP-ONz"/>
+                    <constraint firstItem="y4z-lA-oT0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vO5-kF-mhi" secondAttribute="trailing" constant="8" id="4ec-i4-4k9"/>
                     <constraint firstItem="gU8-5j-fRy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="5mZ-S6-kyb"/>
                     <constraint firstItem="s3x-5A-qta" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5mn-WO-UHY"/>
                     <constraint firstItem="y4z-lA-oT0" firstAttribute="trailing" secondItem="vtr-v8-NQe" secondAttribute="trailing" id="7SF-GO-nvP"/>
@@ -187,7 +188,6 @@
                     <constraint firstItem="lvk-Bt-ktq" firstAttribute="top" secondItem="ijj-Vb-8rK" secondAttribute="bottom" constant="-48" id="Uq3-6D-eFC"/>
                     <constraint firstAttribute="bottom" secondItem="s3x-5A-qta" secondAttribute="bottom" id="VQr-ON-zHu"/>
                     <constraint firstItem="vtr-v8-NQe" firstAttribute="centerY" secondItem="3wp-vl-Gw2" secondAttribute="centerY" id="Vlm-w0-2JK"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vO5-kF-mhi" secondAttribute="trailing" constant="20" id="Vxa-Jm-dlq"/>
                     <constraint firstAttribute="trailing" secondItem="s3x-5A-qta" secondAttribute="trailing" id="Vz9-YM-vuN"/>
                     <constraint firstItem="RDe-cw-Aqz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="27" id="aBQ-L8-FKC"/>
                     <constraint firstItem="vO5-kF-mhi" firstAttribute="top" secondItem="3wp-vl-Gw2" secondAttribute="bottom" constant="5" id="axW-XA-NE7"/>
@@ -218,7 +218,7 @@
                 <outlet property="favoriteButton" destination="y4z-lA-oT0" id="BFh-Kx-y06"/>
                 <outlet property="userProfilePhoto" destination="gU8-5j-fRy" id="2Ri-jy-Nt1"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="120.53571428571428"/>
+            <point key="canvasLocation" x="86" y="87"/>
         </tableViewCell>
     </objects>
     <resources>

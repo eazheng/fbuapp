@@ -28,17 +28,19 @@ static NSString *kTableViewPostCell = @"PostCell";
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSString * currentUserId;
 
 @end
 
 
 @implementation PostTableView
 
--(instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithUserId:(NSString *)userId
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectZero];
     if(self)
     {
+        self.currentUserId = userId;
         [self customInit];
     }
     return self;
@@ -54,6 +56,9 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
+    self.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self setShowsVerticalScrollIndicator:NO];
+    
     [self registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.dataSource = self;
     self.delegate = self;
@@ -62,7 +67,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.refreshControl];
-    
 }
 
 -(void)fetchPosts {
@@ -101,10 +105,11 @@ static NSString *kTableViewPostCell = @"PostCell";
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
     Post *post = self.posts[indexPath.row];
     cell.post = post;
+    cell.currentUserId = self.currentUserId;
     
     PFQuery *favoriteQuery = [Favorite query];
     [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
-    [favoriteQuery whereKey: @"userID" equalTo: @"one"];//need actual userID here
+    [favoriteQuery whereKey: @"userID" equalTo: self.currentUserId];//self.currentUserId
     [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
         if (favoritedPost) {
             [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
@@ -134,33 +139,27 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     cell.eventDescription.text = post[@"eventDescription"];
     
-//    PFUser *eventAuthor = post[@"author"];
-//    cell.eventAuthor.text = eventAuthor[@"firstName"];
-    
-//    cell.eventCategory =
     PFQuery *postQuery = [EventCategory query];
-    [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];//might need object key
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<EventCategory *> * _Nullable categories, NSError * _Nullable error) {
-        if (categories) {
-            cell.eventCategory.text = categories[0].name;// = [NSArray arrayWithArray:categories]
-            cell.categoryView.backgroundColor = [UIColor colorWithRGB: categories[0].color];
+    [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];
+    [postQuery getFirstObjectInBackgroundWithBlock:^(PFObject *category, NSError *error) {
+        if (category) {
+            cell.eventCategory.text = category[@"name"];
+            cell.categoryView.backgroundColor = [UIColor colorWithRGB: category[@"color"]];
         }
         else {
             NSLog(@"Failed to fetch categories.");
         }
     }];
     
-//    - (instancetype)whereKey:(NSString *)key equalTo:(id)object;
-    
     PFFileObject *pfobj = post[@"image"];
     NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];
     cell.eventImage.image = nil;
     [cell.eventImage setImageWithURL:eventImageURL];
     
-    cell.layer.shadowOpacity = 0.5;
-    cell.layer.shadowRadius = 5.0;
-    cell.layer.shadowColor = [UIColor blackColor].CGColor;
-    cell.layer.shadowOffset = CGSizeMake(0, 0);
+    cell.layer.shadowOffset = CGSizeMake(1, 0);
+    cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.layer.shadowRadius = 5;
+    cell.layer.shadowOpacity = .25;
     
     return cell;
 }

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PostTableView : UITableView
 
+- (instancetype)initWithUserId:(NSString *)userId;
+
 @end
 
 NS_ASSUME_NONNULL_END
