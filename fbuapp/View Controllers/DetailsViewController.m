@@ -7,8 +7,18 @@
 //
 
 #import "DetailsViewController.h"
+#import "Post.h"
+#import "ImageCell.h"
+#import "TitleCell.h"
+#import "DescriptionCell.h"
+#import "LocationCell.h"
+#import "AuthorCell.h"
+#import "CategoryCell.h"
 
-@interface DetailsViewController ()
+static NSString *kTableViewPostCell = @"PostCell";
+
+@interface DetailsViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -17,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 }
 
 /*

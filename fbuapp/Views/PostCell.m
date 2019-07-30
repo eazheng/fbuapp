@@ -25,4 +25,9 @@
     [super setSelected:selected animated:animated];
 }
 
+- (IBAction)onTapCell:(id)sender {
+    NSLog(@"Recognized onTapCell!!");
+}
+
+
 @end

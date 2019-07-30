@@ -312,7 +312,7 @@ didFailAutocompleteWithError:(NSError *)error {
     self.eventDescriptionField.text = @"";
     self.eventLocationTextField.text = @"";
     self.eventImage.image = [UIImage imageNamed:@"imageplaceholder-270x184"];
-TOOD: self.pillSelector = nil;
+TODO: self.pillSelector = nil;
     self.pickedImage = false;
     self.eventCategory = -1;
     self.userRoleControl.selectedSegmentIndex = 0;
