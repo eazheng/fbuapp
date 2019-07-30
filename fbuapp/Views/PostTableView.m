@@ -16,6 +16,7 @@
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
 #import "EventCategory.h"
+#import "UIColor+Helpers.h"
 
 
 static NSString *kTableViewPostCell = @"PostCell";
@@ -129,7 +130,8 @@ static NSString *kTableViewPostCell = @"PostCell";
     [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];//might need object key
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<EventCategory *> * _Nullable categories, NSError * _Nullable error) {
         if (categories) {
-            cell.eventCategory.text = categories[0].name;// = [NSArray arrayWithArray:categories] ;
+            cell.eventCategory.text = categories[0].name;// = [NSArray arrayWithArray:categories]
+            cell.categoryView.backgroundColor = [UIColor colorWithRGB: categories[0].color];
         }
         else {
             NSLog(@"Failed to fetch categories.");

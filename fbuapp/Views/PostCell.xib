@@ -101,7 +101,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvk-Bt-ktq">
+                    <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvk-Bt-ktq">
                         <rect key="frame" x="285" y="227" width="106" height="36"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f9-4X-59b">
@@ -167,6 +167,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="categoryView" destination="lvk-Bt-ktq" id="XZH-f8-OWQ"/>
                 <outlet property="eventAuthor" destination="3wp-vl-Gw2" id="CSt-KJ-6lk"/>
                 <outlet property="eventCategory" destination="9f9-4X-59b" id="zuC-Xv-6jZ"/>
                 <outlet property="eventDaysAgo" destination="7q6-pa-5HW" id="8MM-OC-noo"/>
