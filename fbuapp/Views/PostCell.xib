@@ -124,6 +124,14 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-lA-oT0">
+                        <rect key="frame" x="365" y="329" width="35" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Button" image="notfavorited"/>
+                        <connections>
+                            <action selector="onTapFavorited:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OBv-RC-Q1Q"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ijj-Vb-8rK" secondAttribute="trailing" constant="15" id="0gO-h1-XNE"/>
@@ -167,6 +175,7 @@
                 <outlet property="eventImage" destination="ijj-Vb-8rK" id="1Q9-Jw-ANk"/>
                 <outlet property="eventPrice" destination="vtr-v8-NQe" id="kH4-ZF-38r"/>
                 <outlet property="eventTitle" destination="jXy-3h-wqF" id="nQl-BD-44f"/>
+                <outlet property="isFavorited" destination="y4z-lA-oT0" id="SnP-sS-rkh"/>
                 <outlet property="userProfilePhoto" destination="gU8-5j-fRy" id="2Ri-jy-Nt1"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="120.53571428571428"/>
@@ -174,6 +183,7 @@
     </objects>
     <resources>
         <image name="Fly-Fishing" width="1800" height="1200"/>
+        <image name="notfavorited" width="512" height="411"/>
         <image name="profile_tab" width="25" height="25"/>
     </resources>
 </document>

@@ -15,6 +15,7 @@
 #import "DateTools.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
+#import "EventCategory.h"
 
 
 static NSString *kTableViewPostCell = @"PostCell";
@@ -119,6 +120,23 @@ static NSString *kTableViewPostCell = @"PostCell";
     }
     
     cell.eventDescription.text = post[@"eventDescription"];
+    
+//    PFUser *eventAuthor = post[@"author"];
+//    cell.eventAuthor.text = eventAuthor[@"firstName"];
+    
+//    cell.eventCategory =
+    PFQuery *postQuery = [EventCategory query];
+    [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];//might need object key
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<EventCategory *> * _Nullable categories, NSError * _Nullable error) {
+        if (categories) {
+            cell.eventCategory.text = categories[0].name;// = [NSArray arrayWithArray:categories] ;
+        }
+        else {
+            NSLog(@"Failed to fetch categories.");
+        }
+    }];
+    
+//    - (instancetype)whereKey:(NSString *)key equalTo:(id)object;
     
     PFFileObject *pfobj = post[@"image"];
     NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];

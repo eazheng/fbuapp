@@ -18,7 +18,9 @@
     self.eventImage.clipsToBounds = YES;
     self.eventImage.contentMode = UIViewContentModeScaleToFill;
 }
-- (IBAction)onFavoriteTapped:(id)sender {
+
+- (IBAction)onTapFavorited:(id)sender {
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
