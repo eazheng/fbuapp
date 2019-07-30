@@ -19,6 +19,8 @@
 		3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */; };
 		3827E30622E29935008B8FA0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3827E30522E29935008B8FA0 /* CoreLocation.framework */; };
 		3898B14122EB6DB70022B219 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */; };
+		3898B14F22F0BD790022B219 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898B14D22F0BD790022B219 /* DetailsViewController.m */; };
+		3898B15022F0BD790022B219 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3898B14E22F0BD790022B219 /* DetailsViewController.xib */; };
 		38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */; };
 		38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */; };
 		38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5B122EA1DEA002C1114 /* Utils.m */; };
@@ -87,6 +89,9 @@
 		3898B13F22EB6DB70022B219 /* UIViewController+Alerts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alerts.h"; sourceTree = "<group>"; };
 		3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alerts.m"; sourceTree = "<group>"; };
 		3898B14B22EF7C8F0022B219 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
+		3898B14C22F0BD790022B219 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		3898B14D22F0BD790022B219 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		3898B14E22F0BD790022B219 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
 		38FBA5A322E8E026002C1114 /* EnterLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterLocationViewController.h; sourceTree = "<group>"; };
 		38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterLocationViewController.m; sourceTree = "<group>"; };
 		38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterLocationViewController.xib; sourceTree = "<group>"; };
@@ -296,6 +301,9 @@
 				83657DF022E67798002EB6A8 /* EditViewController.h */,
 				83657DF122E67798002EB6A8 /* EditViewController.m */,
 				83657DF222E67798002EB6A8 /* EditViewController.xib */,
+				3898B14C22F0BD790022B219 /* DetailsViewController.h */,
+				3898B14D22F0BD790022B219 /* DetailsViewController.m */,
+				3898B14E22F0BD790022B219 /* DetailsViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -433,6 +441,7 @@
 			files = (
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
 				A419822B22EBBC4300791E06 /* PillCell.xib in Resources */,
+				3898B15022F0BD790022B219 /* DetailsViewController.xib in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
 				A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
@@ -530,6 +539,7 @@
 			files = (
 				A419822D22EBBC4300791E06 /* CategoryHeaderView.m in Sources */,
 				A419823122EF5C2700791E06 /* EventCategory.m in Sources */,
+				3898B14F22F0BD790022B219 /* DetailsViewController.m in Sources */,
 				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
 				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
 				38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */,

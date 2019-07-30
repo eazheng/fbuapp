@@ -25,6 +25,11 @@ static NSString *kCollectionViewPillCell = @"PillCell";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+//    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+//        NSLog(@"The Action I was waiting for is complete");
+//        [self clearColor];
+//    }];
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder

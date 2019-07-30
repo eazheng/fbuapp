@@ -112,7 +112,6 @@
     
     [self.scrollView addSubview:self.pillSelector];
     self.pillSelector.delegate = self;
-    self.pillSelector.clearsContextBeforeDrawing = YES;
 }
 
 // Present the autocomplete view controller when the button is pressed.
@@ -191,12 +190,13 @@
                 }
                 else{
                     //refreshes timeline (delegate of createpostvc)
+                    [self clearFields];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostEventComplete" object:nil userInfo:nil];
                     
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
                     [self.tabBarController setSelectedIndex:0];
-                    [self clearFields];
+
                 }
             }];
         }
@@ -311,8 +311,8 @@ didFailAutocompleteWithError:(NSError *)error {
     self.eventTitleField.text = @"";
     self.eventDescriptionField.text = @"";
     self.eventLocationTextField.text = @"";
-    //TODO: self.eventImage = 
-    //TODO: self.pillSelector =
+    self.eventImage.image = [UIImage imageNamed:@"imageplaceholder-270x184"];
+TOOD: self.pillSelector = nil;
     self.pickedImage = false;
     self.eventCategory = -1;
     self.userRoleControl.selectedSegmentIndex = 0;

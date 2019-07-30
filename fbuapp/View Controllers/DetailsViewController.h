@@ -1,8 +1,8 @@
 //
-//  CreatePostViewController.h
+//  DetailsViewController.h
 //  fbuapp
 //
-//  Created by eazheng on 7/19/19.
+//  Created by eazheng on 7/30/19.
 //  Copyright © 2019 eazheng. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CreatePostViewController : UIViewController
+@interface DetailsViewController : UIViewController
 
 @end
 

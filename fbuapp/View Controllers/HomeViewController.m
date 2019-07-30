@@ -57,11 +57,6 @@ static NSString *kTableViewPostCell = @"PostCell";
         [self fetchPosts];
     }];
     
-//    [[NSNotificationCenter defaultCenter] addObserverForName:@”SomeActionIsComplete” object:nil queue:nil usingBlock:^(NSNotification *note)
-//    {
-//        NSLog(@”The action I was waiting for is complete!!!”);
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
