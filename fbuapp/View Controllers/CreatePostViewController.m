@@ -32,29 +32,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventCategoryLabel;
 @property NSInteger eventCategory;
 @property BOOL pickedImage;
+@property CategoryHeaderView *pillSelector;
 
 @end
 
 @implementation CreatePostViewController
 
-// Present the autocomplete view controller when the button is pressed.
-- (void)searchClicked {
-    NSLog(@"Clicked on search");
-    GMSAutocompleteViewController *locationController = [[GMSAutocompleteViewController alloc] init];
-    locationController.delegate = self;
-    
-    // Specify the place data types to return.
-    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldFormattedAddress);
-    locationController.placeFields = fields;
-    
-    // Specify a filter.
-    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
-    filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
-    locationController.autocompleteFilter = filter;
-    
-    // Display the autocomplete view controller.
-    [self presentViewController:locationController animated:YES completion:nil];
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -124,15 +108,31 @@
     self.eventPriceField.delegate= self;
     
     
-    CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
-//    [pillSelector.centerYAnchor constraintEqualToAnchor:self.scrollView.safeAreaLayoutGuide.centerYAnchor];
-     //self.view.safeAreaLayoutGuide.topAnchor];
+    self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
     
-    [self.scrollView addSubview:pillSelector];
-    pillSelector.delegate = self;
-
+    [self.scrollView addSubview:self.pillSelector];
+    self.pillSelector.delegate = self;
+    self.pillSelector.clearsContextBeforeDrawing = YES;
 }
 
+// Present the autocomplete view controller when the button is pressed.
+- (void)searchClicked {
+    NSLog(@"Clicked on search");
+    GMSAutocompleteViewController *locationController = [[GMSAutocompleteViewController alloc] init];
+    locationController.delegate = self;
+    
+    // Specify the place data types to return.
+    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID | GMSPlaceFieldFormattedAddress);
+    locationController.placeFields = fields;
+    
+    // Specify a filter.
+    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
+    filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
+    locationController.autocompleteFilter = filter;
+    
+    // Display the autocomplete view controller.
+    [self presentViewController:locationController animated:YES completion:nil];
+}
 
 
 - (IBAction)postEventAction:(id)sender {
@@ -196,7 +196,7 @@
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
                     [self.tabBarController setSelectedIndex:0];
-
+                    [self clearFields];
                 }
             }];
         }
@@ -305,6 +305,19 @@ didFailAutocompleteWithError:(NSError *)error {
 -(void)didSelectCell: (NSIndexPath *)indexPath {
     NSLog(@"EVENT CATEGORY RECEIVED by createPost");
     self.eventCategory = indexPath.row;
+}
+
+-(void) clearFields {
+    self.eventTitleField.text = @"";
+    self.eventDescriptionField.text = @"";
+    self.eventLocationTextField.text = @"";
+    //TODO: self.eventImage = 
+    //TODO: self.pillSelector =
+    self.pickedImage = false;
+    self.eventCategory = -1;
+    self.userRoleControl.selectedSegmentIndex = 0;
+    self.userLevelControl.selectedSegmentIndex = 0;
+    self.eventPriceField.text = @"";
 }
 
 @end
