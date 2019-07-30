@@ -17,6 +17,7 @@
 #import "PostTableView.h"
 #import "EventCategory.h"
 #import "UIColor+Helpers.h"
+#import "Favorite.h"
 
 
 static NSString *kTableViewPostCell = @"PostCell";
@@ -99,6 +100,17 @@ static NSString *kTableViewPostCell = @"PostCell";
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
     Post *post = self.posts[indexPath.row];
+    cell.post = post;
+    
+    PFQuery *favoriteQuery = [Favorite query];
+    [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
+    [favoriteQuery whereKey: @"userID" equalTo: @"one"];//need actual userID here
+    [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
+        if (favoritedPost) {
+            [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
+            cell.isFavorited = YES;
+        }
+    }];
     
     cell.eventTitle.text = post[@"eventTitle"];
     PFGeoPoint *eventLocation = post[@"eventLocation"];

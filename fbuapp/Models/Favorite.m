@@ -21,6 +21,7 @@
     Favorite *newFavorite = [Favorite new];
     newFavorite.postID = post;
     newFavorite.userID = user;
+    [newFavorite saveInBackgroundWithBlock: completion];
 }
 
 @end

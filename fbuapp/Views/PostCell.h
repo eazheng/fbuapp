@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,8 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventDescription;
 @property (weak, nonatomic) IBOutlet UILabel *eventAuthor;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
-@property (weak, nonatomic) IBOutlet UIButton *isFavorited;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+
 @property (weak, nonatomic) IBOutlet UIView *categoryView;
+@property (nonatomic, assign) BOOL isFavorited;
+@property (strong, nonatomic) Post *post;
 
 
 

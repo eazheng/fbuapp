@@ -124,9 +124,12 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-lA-oT0">
-                        <rect key="frame" x="365" y="329" width="35" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-lA-oT0">
+                        <rect key="frame" x="367" y="329.5" width="35" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="Xh2-I2-ES6"/>
+                            <constraint firstAttribute="width" constant="35" id="uy1-h7-uZC"/>
+                        </constraints>
                         <state key="normal" title="Button" image="notfavorited"/>
                         <connections>
                             <action selector="onTapFavorited:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OBv-RC-Q1Q"/>
@@ -141,10 +144,12 @@
                     <constraint firstAttribute="trailing" secondItem="vtr-v8-NQe" secondAttribute="trailing" constant="18" id="3Fq-OP-ONz"/>
                     <constraint firstItem="gU8-5j-fRy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="5mZ-S6-kyb"/>
                     <constraint firstItem="s3x-5A-qta" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5mn-WO-UHY"/>
+                    <constraint firstItem="y4z-lA-oT0" firstAttribute="trailing" secondItem="vtr-v8-NQe" secondAttribute="trailing" id="7SF-GO-nvP"/>
                     <constraint firstItem="s3x-5A-qta" firstAttribute="top" secondItem="gU8-5j-fRy" secondAttribute="bottom" constant="17" id="85F-Tl-C8O"/>
                     <constraint firstItem="gU8-5j-fRy" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="1:9" id="Bmt-yW-UnI"/>
                     <constraint firstItem="RDe-cw-Aqz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="29" id="E96-0R-NUv"/>
                     <constraint firstItem="s3x-5A-qta" firstAttribute="top" secondItem="vO5-kF-mhi" secondAttribute="bottom" constant="14.5" id="G2G-5b-3zI"/>
+                    <constraint firstItem="y4z-lA-oT0" firstAttribute="centerY" secondItem="vO5-kF-mhi" secondAttribute="centerY" id="HSq-lF-anc"/>
                     <constraint firstItem="ijj-Vb-8rK" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="KUV-ef-urw"/>
                     <constraint firstItem="lvk-Bt-ktq" firstAttribute="top" secondItem="ijj-Vb-8rK" secondAttribute="bottom" constant="-48" id="Uq3-6D-eFC"/>
                     <constraint firstAttribute="bottom" secondItem="s3x-5A-qta" secondAttribute="bottom" id="VQr-ON-zHu"/>
@@ -176,7 +181,7 @@
                 <outlet property="eventImage" destination="ijj-Vb-8rK" id="1Q9-Jw-ANk"/>
                 <outlet property="eventPrice" destination="vtr-v8-NQe" id="kH4-ZF-38r"/>
                 <outlet property="eventTitle" destination="jXy-3h-wqF" id="nQl-BD-44f"/>
-                <outlet property="isFavorited" destination="y4z-lA-oT0" id="SnP-sS-rkh"/>
+                <outlet property="favoriteButton" destination="y4z-lA-oT0" id="BFh-Kx-y06"/>
                 <outlet property="userProfilePhoto" destination="gU8-5j-fRy" id="2Ri-jy-Nt1"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="120.53571428571428"/>

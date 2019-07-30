@@ -7,6 +7,7 @@
 //
 
 #import "PostCell.h"
+#import "Favorite.h"
 
 @implementation PostCell
 
@@ -20,7 +21,31 @@
 }
 
 - (IBAction)onTapFavorited:(id)sender {
-    
+    if(self.isFavorited == NO){
+        self.isFavorited = YES;
+        [self.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
+        [Favorite postID: self.post.objectId userID: @"one" withCompletion:^(BOOL succeeded, NSError * _Nullable error) {//need actual userID here
+            if(!succeeded){
+                NSLog(@"Error favoriting event: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Favoriting event success!");
+            }
+        }];//dka need actual userID
+        
+    }
+    else{
+        self.isFavorited = NO;
+        [self.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
+        PFQuery *favoriteQuery = [Favorite query];
+        [favoriteQuery whereKey: @"postID" equalTo: self.post.objectId];
+        [favoriteQuery whereKey: @"userID" equalTo: @"one"];//need actual userID here
+        [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
+            if (favoritedPost) {
+                [favoritedPost deleteInBackground];
+            }
+        }];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
