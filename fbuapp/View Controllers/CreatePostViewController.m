@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userLevelControl;
 @property (weak, nonatomic) IBOutlet UITextField *eventPriceField;
+@property (weak, nonatomic) IBOutlet UILabel *eventCategoryLabel;
 @property NSInteger eventCategory;
 @property BOOL pickedImage;
 
@@ -54,7 +55,6 @@
     // Display the autocomplete view controller.
     [self presentViewController:locationController animated:YES completion:nil];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -124,8 +124,9 @@
     self.eventPriceField.delegate= self;
     
     
-    CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
-    [self.scrollView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor];
+    CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
+//    [pillSelector.centerYAnchor constraintEqualToAnchor:self.scrollView.safeAreaLayoutGuide.centerYAnchor];
+     //self.view.safeAreaLayoutGuide.topAnchor];
     
     [self.scrollView addSubview:pillSelector];
     pillSelector.delegate = self;
@@ -190,7 +191,7 @@
                 }
                 else{
                     //refreshes timeline (delegate of createpostvc)
-                    [self.delegate didPost];
+//                    [self.delegate didPost];
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
                     [self.tabBarController setSelectedIndex:0];

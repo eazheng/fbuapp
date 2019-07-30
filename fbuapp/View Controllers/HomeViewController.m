@@ -20,7 +20,7 @@
 static NSString *kTableViewPostCell = @"PostCell";
 
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, CreatePostViewControllerDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) NSArray * posts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) CLLocation * currentLocation;
@@ -142,10 +142,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 }
 */
 
-- (void)didPost {
-    [self fetchPosts];
-    [self.tableView reloadData];
-}
 
 
 @end
