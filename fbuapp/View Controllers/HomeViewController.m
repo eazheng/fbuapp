@@ -39,7 +39,6 @@
     CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
     feed.tableHeaderView = pillSelector;
     
-    
 }
 
 @end
