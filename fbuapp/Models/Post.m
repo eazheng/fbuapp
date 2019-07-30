@@ -25,7 +25,7 @@
     return @"Post";
 }
 
-+ (void) postEvent: (NSString *)title withDescription: (NSString *)description withPrice: (NSNumber *) price withSkill: (NSInteger) authorSkill withLocation: (CLLocation *)location withRole: (NSInteger) authorRole withCategory: (NSInteger) cat withImage: (UIImage *)image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postEvent: (NSString *)title withDescription: (NSString *)description withPrice: (NSNumber *) price withSkill: (NSInteger) authorSkill withLocation: (CLLocation *) location withLocationName: (NSString *) locationName withRole: (NSInteger) authorRole withCategory: (NSInteger) cat withImage: (UIImage *)image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Post *newPost = [Post new];
     newPost.eventTitle = title;
@@ -39,6 +39,7 @@
     //create a geopoint for parse
     PFGeoPoint *parsePoint = [PFGeoPoint geoPointWithLocation:location];
     newPost.eventLocation = parsePoint;
+    newPost.eventLocationName = locationName;
     newPost.eventPrice = price;
     
     newPost.image = [self getPFFileFromImage:image];

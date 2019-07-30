@@ -25,7 +25,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //[GMSServices provideAPIKey:API_KEY];
     [GMSPlacesClient provideAPIKey:API_KEY];
 
     [[FBSDKApplicationDelegate sharedInstance] application:application

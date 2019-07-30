@@ -13,20 +13,18 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
+#import "UIViewController+Alerts.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
-
 
 @interface HomeViewController ()
 
 @end
 
-
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     PostTableView *feed = [[PostTableView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
     feed.tableHeaderView = pillSelector;

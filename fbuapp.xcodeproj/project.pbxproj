@@ -18,12 +18,12 @@
 		3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3827E30122E236BC008B8FA0 /* CreatePostViewController.m */; };
 		3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */; };
 		3827E30622E29935008B8FA0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3827E30522E29935008B8FA0 /* CoreLocation.framework */; };
+		3898B14122EB6DB70022B219 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */; };
+		3898B14F22F0BD790022B219 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898B14D22F0BD790022B219 /* DetailsViewController.m */; };
+		3898B15022F0BD790022B219 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3898B14E22F0BD790022B219 /* DetailsViewController.xib */; };
 		38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */; };
 		38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */; };
-		38FBA5AD22E8EEA7002C1114 /* Key.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5AC22E8EEA7002C1114 /* Key.m */; };
 		38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5B122EA1DEA002C1114 /* Utils.m */; };
-		38FBA5B622EA1F43002C1114 /* ShowAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */; };
-		38FBA5B722EA1F43002C1114 /* ShowAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */; };
 		63621F569495DE61AF213B2D /* Pods_fbuapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC76A9E39E04C6D89AFC7E1E /* Pods_fbuapp.framework */; };
 		83657DE022E24824002EB6A8 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DDE22E24824002EB6A8 /* LogViewController.m */; };
 		83657DE122E24824002EB6A8 /* LogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DDF22E24824002EB6A8 /* LogViewController.xib */; };
@@ -87,15 +87,18 @@
 		3827E30122E236BC008B8FA0 /* CreatePostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatePostViewController.m; sourceTree = "<group>"; };
 		3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostViewController.xib; sourceTree = "<group>"; };
 		3827E30522E29935008B8FA0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3898B13F22EB6DB70022B219 /* UIViewController+Alerts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alerts.h"; sourceTree = "<group>"; };
+		3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alerts.m"; sourceTree = "<group>"; };
+		3898B14B22EF7C8F0022B219 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
+		3898B14C22F0BD790022B219 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		3898B14D22F0BD790022B219 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		3898B14E22F0BD790022B219 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
 		38FBA5A322E8E026002C1114 /* EnterLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterLocationViewController.h; sourceTree = "<group>"; };
 		38FBA5A422E8E026002C1114 /* EnterLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterLocationViewController.m; sourceTree = "<group>"; };
 		38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterLocationViewController.xib; sourceTree = "<group>"; };
-		38FBA5AB22E8EEA7002C1114 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
-		38FBA5AC22E8EEA7002C1114 /* Key.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Key.m; sourceTree = "<group>"; };
 		38FBA5B022EA1DEA002C1114 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		38FBA5B122EA1DEA002C1114 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		38FBA5B322EA1F43002C1114 /* ShowAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowAlertViewController.h; sourceTree = "<group>"; };
-		38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowAlertViewController.m; sourceTree = "<group>"; };
 		38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowAlertViewController.xib; sourceTree = "<group>"; };
 		7E043F0558EB857B2995A1E8 /* Pods-fbuapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuapp.debug.xcconfig"; path = "Target Support Files/Pods-fbuapp/Pods-fbuapp.debug.xcconfig"; sourceTree = "<group>"; };
 		83657DDD22E24824002EB6A8 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
@@ -219,8 +222,7 @@
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
-				38FBA5AB22E8EEA7002C1114 /* Key.h */,
-				38FBA5AC22E8EEA7002C1114 /* Key.m */,
+				3898B14B22EF7C8F0022B219 /* Key.h */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";
@@ -248,8 +250,9 @@
 			children = (
 				38FBA5B022EA1DEA002C1114 /* Utils.h */,
 				38FBA5B122EA1DEA002C1114 /* Utils.m */,
+				3898B13F22EB6DB70022B219 /* UIViewController+Alerts.h */,
+				3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */,
 				38FBA5B322EA1F43002C1114 /* ShowAlertViewController.h */,
-				38FBA5B422EA1F43002C1114 /* ShowAlertViewController.m */,
 				38FBA5B522EA1F43002C1114 /* ShowAlertViewController.xib */,
 				A419823222EF675000791E06 /* UIColor+Helpers.h */,
 				A419823322EF675000791E06 /* UIColor+Helpers.m */,
@@ -301,6 +304,9 @@
 				83657DF022E67798002EB6A8 /* EditViewController.h */,
 				83657DF122E67798002EB6A8 /* EditViewController.m */,
 				83657DF222E67798002EB6A8 /* EditViewController.xib */,
+				3898B14C22F0BD790022B219 /* DetailsViewController.h */,
+				3898B14D22F0BD790022B219 /* DetailsViewController.m */,
+				3898B14E22F0BD790022B219 /* DetailsViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -438,9 +444,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38FBA5B722EA1F43002C1114 /* ShowAlertViewController.xib in Resources */,
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
 				A419822B22EBBC4300791E06 /* PillCell.xib in Resources */,
+				3898B15022F0BD790022B219 /* DetailsViewController.xib in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
 				A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
@@ -536,15 +542,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38FBA5AD22E8EEA7002C1114 /* Key.m in Sources */,
 				A419822D22EBBC4300791E06 /* CategoryHeaderView.m in Sources */,
 				A419823122EF5C2700791E06 /* EventCategory.m in Sources */,
+				3898B14F22F0BD790022B219 /* DetailsViewController.m in Sources */,
 				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
 				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
 				38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */,
-				38FBA5B622EA1F43002C1114 /* ShowAlertViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
+				3898B14122EB6DB70022B219 /* UIViewController+Alerts.m in Sources */,
 				0C01F9F322EA7A90009D4947 /* Post.m in Sources */,
 				A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */,
 				A496A5A322E25CF800F9E81A /* PostCell.m in Sources */,
