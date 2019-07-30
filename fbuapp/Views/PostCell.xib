@@ -49,22 +49,48 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7q6-pa-5HW">
                                 <rect key="frame" x="280" y="17" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Of-2x-Lbc">
                                 <rect key="frame" x="71.5" y="17" width="67" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="KiL-6O-FbF">
+                                <rect key="frame" x="52" y="19.5" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="Kjs-3c-giG"/>
+                                    <constraint firstAttribute="height" constant="16" id="h3t-M1-Tju"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock2" translatesAutoresizingMaskIntoConstraints="NO" id="bpo-SZ-p2h">
+                                <rect key="frame" x="260.5" y="19.5" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="VBb-e1-5ZY"/>
+                                    <constraint firstAttribute="width" constant="16" id="abZ-Oq-69q"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="miles away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKj-aR-Mkz">
+                                <rect key="frame" x="141.5" y="17" width="82" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.95603292781090576" green="0.96038950778084775" blue="0.9734592476906736" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="IKj-aR-Mkz" firstAttribute="centerY" secondItem="6Of-2x-Lbc" secondAttribute="centerY" id="0if-gn-Lrm"/>
                             <constraint firstAttribute="height" constant="55" id="4i3-uw-jqg"/>
                             <constraint firstItem="7q6-pa-5HW" firstAttribute="centerY" secondItem="s3x-5A-qta" secondAttribute="centerY" id="SI6-Kf-LkY"/>
+                            <constraint firstItem="bpo-SZ-p2h" firstAttribute="centerY" secondItem="7q6-pa-5HW" secondAttribute="centerY" id="YsR-Jc-tBI"/>
                             <constraint firstItem="6Of-2x-Lbc" firstAttribute="centerX" secondItem="s3x-5A-qta" secondAttribute="centerX" multiplier="0.5" id="ZoX-67-bkv"/>
+                            <constraint firstItem="7q6-pa-5HW" firstAttribute="leading" secondItem="bpo-SZ-p2h" secondAttribute="trailing" constant="3.5" id="aRh-Jw-W4o"/>
+                            <constraint firstItem="KiL-6O-FbF" firstAttribute="centerY" secondItem="6Of-2x-Lbc" secondAttribute="centerY" id="eza-E9-F5e"/>
+                            <constraint firstItem="6Of-2x-Lbc" firstAttribute="leading" secondItem="KiL-6O-FbF" secondAttribute="trailing" constant="3.5" id="g4j-G9-U7I"/>
                             <constraint firstItem="6Of-2x-Lbc" firstAttribute="centerY" secondItem="s3x-5A-qta" secondAttribute="centerY" id="j4l-Qu-Mzy"/>
+                            <constraint firstItem="IKj-aR-Mkz" firstAttribute="leading" secondItem="6Of-2x-Lbc" secondAttribute="trailing" constant="3" id="x3i-Np-fBc"/>
                             <constraint firstItem="7q6-pa-5HW" firstAttribute="centerX" secondItem="s3x-5A-qta" secondAttribute="centerX" multiplier="1.5" id="x5F-Sn-Xin"/>
                         </constraints>
                     </view>
@@ -189,6 +215,8 @@
     </objects>
     <resources>
         <image name="Fly-Fishing" width="1800" height="1200"/>
+        <image name="clock2" width="24" height="24"/>
+        <image name="location" width="22" height="22"/>
         <image name="notfavorited" width="512" height="411"/>
         <image name="profile_tab" width="25" height="25"/>
     </resources>
