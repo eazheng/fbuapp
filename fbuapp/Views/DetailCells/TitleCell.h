@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TitleCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property Post *post;
 
 @end
 

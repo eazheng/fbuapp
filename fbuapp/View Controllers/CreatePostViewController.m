@@ -195,8 +195,7 @@
                     
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
-                    [self.tabBarController setSelectedIndex:0];
-
+//                    [self.tabBarController setSelectedIndex:0];
                 }
             }];
         }

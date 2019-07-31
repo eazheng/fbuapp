@@ -55,7 +55,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
-                <outlet property="authoNameLabel" destination="kij-Wh-zVh" id="XrX-XI-gSt"/>
+                <outlet property="authorNameLabel" destination="kij-Wh-zVh" id="e7j-ua-LU5"/>
                 <outlet property="authorPriceLabel" destination="kGu-mw-F5n" id="RSA-na-xGt"/>
                 <outlet property="authorRoleLabel" destination="GXO-6x-oWq" id="iUZ-gQ-Svu"/>
                 <outlet property="profileImageView" destination="7lq-Jf-wU9" id="Lih-7g-IDT"/>

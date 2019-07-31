@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *locationCityStateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationStreetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationDistanceLabel;
+@property Post *post;
 
 @end
 

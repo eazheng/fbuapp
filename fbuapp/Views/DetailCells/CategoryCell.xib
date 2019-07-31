@@ -29,6 +29,9 @@
                 </subviews>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="categoryLabel" destination="dQw-MS-wSq" id="OfB-B5-Nsn"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

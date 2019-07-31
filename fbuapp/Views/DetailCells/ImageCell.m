@@ -13,6 +13,17 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    NSLog(@"In IMAGE CELL");
+//
+//    [self.post.image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+//                if (!error) {
+//                    self.eventImageView.image = [UIImage imageWithData:data];
+//                    NSLog(@"LINE 20");
+//                }
+//                else {
+//                    NSLog(@"Error getting image: %@", error.localizedDescription);
+//                }
+//        }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

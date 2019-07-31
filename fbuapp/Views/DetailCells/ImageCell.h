@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ImageCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
+
+@property Post *post;
 
 @end
 
