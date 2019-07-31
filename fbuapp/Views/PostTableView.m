@@ -166,11 +166,11 @@ static NSString *kTableViewPostCell = @"PostCell";
 }
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{
-    [self.homeDelegate favoritePost: post withUser: user];
+    [self.tableViewDelegate favoritePost: post withUser: user];
 }
 
 - (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
-    [self.homeDelegate unFavoritePost: post withUser: user];
+    [self.tableViewDelegate unFavoritePost: post withUser: user];
 }
 
 @end

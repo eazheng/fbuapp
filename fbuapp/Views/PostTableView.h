@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithUserId:(NSString *)userId;
 
-@property (nonatomic, weak) id <TableViewDelegate> homeDelegate;
+@property (nonatomic, weak) id <TableViewDelegate> tableViewDelegate;
 
 @end
 

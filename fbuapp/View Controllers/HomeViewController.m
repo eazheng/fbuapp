@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     PostTableView *feed = [[PostTableView alloc] initWithUserId:@"myuserid"]; //[PFUser currentUser].username
-    feed.homeDelegate = self;
+    feed.tableViewDelegate = self;
     [self.view addSubview:feed];
     
     [feed mas_makeConstraints:^(MASConstraintMaker *make) {
