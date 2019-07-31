@@ -8,7 +8,6 @@
 
 #import "HomeViewController.h"
 #import "PostCell.h"
-#import "Parse/Parse.h"
 #import "Post.h"
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
@@ -18,8 +17,9 @@
 #import "PostTableView.h"
 #import "Masonry.h"
 #import "Favorite.h"
+#import "FilterViewController.h"
 
-@interface HomeViewController () <PostCellDelegate, TableViewDelegate>
+@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate>
 
 @end
 
@@ -29,9 +29,9 @@
     [super viewDidLoad];
     
     PostTableView *feed = [[PostTableView alloc] initWithUserId:@"myuserid"]; //[PFUser currentUser].username
-    feed.tableViewDelegate = self;
+    feed.postTableViewDelegate = self;
+    self.homeDelegate = feed;
     [self.view addSubview:feed];
-    
     [feed mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
@@ -39,6 +39,23 @@
     CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
     feed.tableHeaderView = pillSelector;
     
+    UIBarButtonItem *myButton = [[UIBarButtonItem alloc]init];
+    
+    myButton.action = @selector(presentFilterViewController:);
+    myButton.title = @"Filter";
+    myButton.target = self;
+    self.navigationItem.rightBarButtonItem = myButton;
+}
+
+- (IBAction)presentFilterViewController:(id)sender {
+    FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:filterVCObj] animated:YES completion:nil];
+    filterVCObj.filterDelegate = self;
+//    self.delegate = filterVCObj;
+}
+
+- (void) filterPostsWithQuery: (PFQuery *) postQuery{
+    [self.homeDelegate filterPostsWithQuery: postQuery];
 }
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{

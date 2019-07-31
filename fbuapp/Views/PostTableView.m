@@ -18,17 +18,19 @@
 #import "EventCategory.h"
 #import "UIColor+Helpers.h"
 #import "Favorite.h"
-
+#import "HomeViewController.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
-@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, PostCellDelegate>
+@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, PostCellDelegate, HomeDelegate>
 
 @property (strong, nonatomic) NSArray * posts;
+@property (strong, nonatomic) NSArray * filteredPosts;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString * currentUserId;
+@property (strong, nonatomic) PFQuery *postQuery;
 
 @end
 
@@ -62,6 +64,7 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.dataSource = self;
     self.delegate = self;
+    self.postQuery = [Post query];
     [self fetchPosts];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -74,11 +77,15 @@ static NSString *kTableViewPostCell = @"PostCell";
     }];
 }
 
--(void)fetchPosts {
-    PFQuery *postQuery = [Post query];
-    [postQuery orderByDescending:@"createdAt"];
-    postQuery.limit = 20;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+- (void) filterPostsWithQuery: (PFQuery *) postQuery{
+    self.postQuery = postQuery;
+    [self fetchPosts];
+}
+
+-(void)fetchPosts{
+    [self.postQuery orderByDescending:@"createdAt"];
+    self.postQuery.limit = 20;
+    [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.posts = [NSArray arrayWithArray:posts] ;
             [self reloadData];
@@ -120,6 +127,10 @@ static NSString *kTableViewPostCell = @"PostCell";
         if (favoritedPost) {
             [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
             cell.isFavorited = YES;
+        }
+        else{
+            [cell.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
+            cell.isFavorited = NO;
         }
     }];
     
@@ -171,11 +182,11 @@ static NSString *kTableViewPostCell = @"PostCell";
 }
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{
-    [self.tableViewDelegate favoritePost: post withUser: user];
+    [self.postTableViewDelegate favoritePost: post withUser: user];
 }
 
 - (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
-    [self.tableViewDelegate unFavoritePost: post withUser: user];
+    [self.postTableViewDelegate unFavoritePost: post withUser: user];
 }
 
 @end
