@@ -15,27 +15,32 @@
 #import "DateTools.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
+#import "EventCategory.h"
+#import "UIColor+Helpers.h"
+#import "Favorite.h"
 
 
 static NSString *kTableViewPostCell = @"PostCell";
 
-@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate>
+@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, PostCellDelegate>
 
 @property (strong, nonatomic) NSArray * posts;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSString * currentUserId;
 
 @end
 
 
 @implementation PostTableView
 
--(instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithUserId:(NSString *)userId
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectZero];
     if(self)
     {
+        self.currentUserId = userId;
         [self customInit];
     }
     return self;
@@ -51,6 +56,9 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
+    self.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self setShowsVerticalScrollIndicator:NO];
+    
     [self registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.dataSource = self;
     self.delegate = self;
@@ -64,7 +72,6 @@ static NSString *kTableViewPostCell = @"PostCell";
         NSLog(@"The Action I was waiting for is complete");
         [self fetchPosts];
     }];
-    
 }
 
 -(void)fetchPosts {
@@ -101,7 +108,20 @@ static NSString *kTableViewPostCell = @"PostCell";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
+    cell.cellDelegate = self;
     Post *post = self.posts[indexPath.row];
+    cell.post = post;
+    cell.currentUserId = self.currentUserId;
+    
+    PFQuery *favoriteQuery = [Favorite query];
+    [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
+    [favoriteQuery whereKey: @"userID" equalTo: self.currentUserId];
+    [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
+        if (favoritedPost) {
+            [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
+            cell.isFavorited = YES;
+        }
+    }];
     
     cell.eventTitle.text = post[@"eventTitle"];
     PFGeoPoint *eventLocation = post[@"eventLocation"];
@@ -125,17 +145,37 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     cell.eventDescription.text = post[@"eventDescription"];
     
+    PFQuery *postQuery = [EventCategory query];
+    [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];
+    [postQuery getFirstObjectInBackgroundWithBlock:^(PFObject *category, NSError *error) {
+        if (category) {
+            cell.eventCategory.text = category[@"name"];
+            cell.categoryView.backgroundColor = [UIColor colorWithRGB: category[@"color"]];
+        }
+        else {
+            NSLog(@"Failed to fetch categories.");
+        }
+    }];
+    
     PFFileObject *pfobj = post[@"image"];
     NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];
     cell.eventImage.image = nil;
     [cell.eventImage setImageWithURL:eventImageURL];
     
-    cell.layer.shadowOpacity = 0.5;
-    cell.layer.shadowRadius = 5.0;
-    cell.layer.shadowColor = [UIColor blackColor].CGColor;
-    cell.layer.shadowOffset = CGSizeMake(0, 0);
+    cell.layer.shadowOffset = CGSizeMake(1, 0);
+    cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.layer.shadowRadius = 5;
+    cell.layer.shadowOpacity = .25;
     
     return cell;
+}
+
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user{
+    [self.tableViewDelegate favoritePost: post withUser: user];
+}
+
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
+    [self.tableViewDelegate unFavoritePost: post withUser: user];
 }
 
 @end

@@ -14,4 +14,5 @@ target 'fbuapp' do
   #pod 'GoogleAPIClientForREST'
   pod 'AFNetworking'
   pod 'DateTools'
+  pod 'Masonry'
 end

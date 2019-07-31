@@ -69,7 +69,7 @@ static NSString *kCollectionViewPillCell = @"PillCell";
             [self.collectionView reloadData];
             }
             else {
-                NSLog(@"Failed to fetch categories");
+                NSLog(@"Failed to fetch categories.");
             }
         }];
 }
