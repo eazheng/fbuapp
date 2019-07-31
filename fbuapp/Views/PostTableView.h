@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol TableViewDelegate <NSObject>
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user;
 - (void) unFavoritePost: (NSString *)post withUser: (NSString *)user;
+- (void) showDetails: (Post *)post;
 
 @end
 

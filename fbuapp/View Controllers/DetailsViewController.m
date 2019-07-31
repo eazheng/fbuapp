@@ -2,23 +2,14 @@
 //  DetailsViewController.m
 //  fbuapp
 //
-//  Created by eazheng on 7/30/19.
+//  Created by eazheng on 7/31/19.
 //  Copyright © 2019 eazheng. All rights reserved.
 //
 
 #import "DetailsViewController.h"
 #import "Post.h"
-#import "ImageCell.h"
-#import "TitleCell.h"
-#import "DescriptionCell.h"
-#import "LocationCell.h"
-#import "AuthorCell.h"
-#import "CategoryCell.h"
 
-static NSString *kTableViewPostCell = @"PostCell";
-
-@interface DetailsViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface DetailsViewController ()
 
 @end
 
@@ -27,9 +18,9 @@ static NSString *kTableViewPostCell = @"PostCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+    NSLog(@"In detailsView, %@", self.post.eventTitle);
 }
+
 
 /*
 #pragma mark - Navigation

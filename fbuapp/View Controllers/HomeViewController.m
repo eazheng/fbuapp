@@ -19,6 +19,7 @@
 #import "DetailsViewController.h"
 #import "Masonry.h"
 #import "Favorite.h"
+#import "AppDelegate.h"
 
 @interface HomeViewController () <PostCellDelegate, TableViewDelegate>
 
@@ -42,7 +43,7 @@
     
 }
 
-- (void) favoritePost: (NSString *)post withUser: (NSString *)user{
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user {
     [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(!succeeded){
             NSLog(@"Error favoriting event: %@", error.localizedDescription);
@@ -53,7 +54,7 @@
     }];
 }
 
-- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user {
     PFQuery *favoriteQuery = [Favorite query];
     [favoriteQuery whereKey: @"postID" equalTo: post];
     [favoriteQuery whereKey: @"userID" equalTo: user];
@@ -63,4 +64,11 @@
         }
     }];
 }
+
+- (void) showDetails: (Post *)post {
+    DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
+    detailsViewController.post = post;
+    [self.navigationController pushViewController:detailsViewController animated:YES];
+}
+
 @end

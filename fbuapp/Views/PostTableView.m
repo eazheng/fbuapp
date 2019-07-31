@@ -171,17 +171,19 @@ static NSString *kTableViewPostCell = @"PostCell";
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"CELL HAS BEEN SELECTED");
-    
-    DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailView" bundle:nil];
+    Post *post = self.posts[indexPath.row];
+    [self.tableViewDelegate showDetails: post];
 }
-- (void) favoritePost: (NSString *)post withUser: (NSString *)user{
+
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user {
     [self.tableViewDelegate favoritePost: post withUser: user];
 }
 
-- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user {
     [self.tableViewDelegate unFavoritePost: post withUser: user];
 }
+
 
 @end
