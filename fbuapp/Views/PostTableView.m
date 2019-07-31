@@ -19,6 +19,9 @@
 #import "UIColor+Helpers.h"
 #import "Favorite.h"
 #import "HomeViewController.h"
+#import "PFGeoPoint+Helpers.h"
+#import "NSDate+Helpers.h"
+#import "PFFileObject+Helpers.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
@@ -139,30 +142,6 @@ static NSString *kTableViewPostCell = @"PostCell";
         }
     }];
     
-    cell.eventTitle.text = post[@"eventTitle"];
-    PFGeoPoint *eventLocation = post[@"eventLocation"];
-    double dist = [eventLocation distanceInMilesTo :[PFGeoPoint geoPointWithLocation :self.currentLocation]];
-    cell.eventDistance.text = [NSString stringWithFormat:@"%.2f", dist];
-    cell.eventPrice.text = [post[@"eventPrice"] stringValue];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss z";
-    NSDate *date = post.createdAt;
-    NSDate *now = [[NSDate date] dateByAddingDays:-1];
-    
-    
-    BOOL postWasRecentBool = [date isLaterThan:now];
-    if (postWasRecentBool) {
-        cell.eventDaysAgo.text = [NSString stringWithFormat:@"%@%@", date.shortTimeAgoSinceNow, @" ago"];
-    }
-    else {
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
-        cell.eventDaysAgo.text = [formatter stringFromDate:date];
-    }
-    
-    cell.eventDescription.text = post[@"eventDescription"];
-    
     PFQuery *postQuery = [EventCategory query];
     [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];
     [postQuery getFirstObjectInBackgroundWithBlock:^(PFObject *category, NSError *error) {
@@ -175,11 +154,14 @@ static NSString *kTableViewPostCell = @"PostCell";
         }
     }];
     
-    PFFileObject *pfobj = post[@"image"];
-    NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];
-    cell.eventImage.image = nil;
-    [cell.eventImage setImageWithURL:eventImageURL];
+    cell.eventTitle.text = post.eventTitle;
+    cell.eventDistance.text = [PFGeoPoint distanceToPoint: post.eventLocation fromLocation: self.currentLocation];
+    cell.eventPrice.text = [post.eventPrice stringValue];
+    cell.eventDaysAgo.text = [NSDate daysAgoSince: post.createdAt];
+    cell.eventDescription.text = post.eventDescription;
+    [PFFileObject setImage: cell.eventImage withFile: post.image];
     
+
     cell.layer.shadowOffset = CGSizeMake(1, 0);
     cell.layer.shadowColor = [[UIColor blackColor] CGColor];
     cell.layer.shadowRadius = 5;
