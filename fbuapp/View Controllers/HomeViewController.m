@@ -19,7 +19,7 @@
 #import "Favorite.h"
 #import "FilterViewController.h"
 
-@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate>
+@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate>
 
 @end
 
@@ -37,6 +37,7 @@
     }];
     
     CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
+    pillSelector.delegate = self;
     feed.tableHeaderView = pillSelector;
     
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc]init];
@@ -78,5 +79,10 @@
             [favoritedPost deleteInBackground];
         }
     }];
+}
+
+-(void)didSelectCell: (NSIndexPath *)indexPath {
+    NSLog(@"EVENT CATEGORY RECEIVED by homeView");
+    [self.homeDelegate filterPostsWithCategory: indexPath.row];
 }
 @end

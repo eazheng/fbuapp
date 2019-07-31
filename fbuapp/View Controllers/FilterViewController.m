@@ -25,13 +25,6 @@
     myButton.title = @"Cancel";
     myButton.target = self;
     self.navigationItem.leftBarButtonItem = myButton;
-    PFQuery *postQuery = [Post query];
-    
-    [postQuery whereKey: @"eventCategory" equalTo: @0];
-    
-    
-    
-    [self.filterDelegate filterPostsWithQuery: postQuery];
 }
 
 - (IBAction)presentHomeViewController:(id)sender {

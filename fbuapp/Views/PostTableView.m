@@ -82,6 +82,11 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self fetchPosts];
 }
 
+- (void) filterPostsWithCategory: (NSInteger) category{
+    [self.postQuery whereKey: @"eventCategory" equalTo: @(category)];
+    [self fetchPosts];
+}
+
 -(void)fetchPosts{
     [self.postQuery orderByDescending:@"createdAt"];
     self.postQuery.limit = 20;
@@ -144,6 +149,8 @@ static NSString *kTableViewPostCell = @"PostCell";
     formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss z";
     NSDate *date = post.createdAt;
     NSDate *now = [[NSDate date] dateByAddingDays:-1];
+    
+    
     BOOL postWasRecentBool = [date isLaterThan:now];
     if (postWasRecentBool) {
         cell.eventDaysAgo.text = [NSString stringWithFormat:@"%@%@", date.shortTimeAgoSinceNow, @" ago"];
@@ -180,6 +187,8 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     return cell;
 }
+
+#pragma mark - PostTableViewDelegate
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{
     [self.postTableViewDelegate favoritePost: post withUser: user];

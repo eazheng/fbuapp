@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol HomeDelegate <NSObject>
 
 - (void) filterPostsWithQuery: (PFQuery *) postQuery;
+- (void) filterPostsWithCategory: (NSInteger) category;
 
 @end
 
