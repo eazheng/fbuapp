@@ -16,6 +16,7 @@
 #import "UIViewController+Alerts.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
+#import "DetailsViewController.h"
 
 @interface HomeViewController ()
 

@@ -15,6 +15,7 @@
 #import "DateTools.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
+#import "DetailsViewController.h"
 
 
 static NSString *kTableViewPostCell = @"PostCell";
@@ -138,4 +139,9 @@ static NSString *kTableViewPostCell = @"PostCell";
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"CELL HAS BEEN SELECTED");
+    
+    DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailView" bundle:nil];
+}
 @end
