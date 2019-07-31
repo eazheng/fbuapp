@@ -81,7 +81,7 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     return self.categories.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PillCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCollectionViewPillCell forIndexPath:indexPath];
     EventCategory* category = self.categories[indexPath.row];
     
@@ -90,6 +90,11 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     cell.pillBackground.layer.cornerRadius = cell.pillBackground.frame.size.height / 2;
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Selected a cell! %@, row is %ld", self.categories[indexPath.row], indexPath.row);
+    [self.delegate didSelectCell:indexPath];
 }
 
 

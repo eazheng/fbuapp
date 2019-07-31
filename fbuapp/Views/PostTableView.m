@@ -67,6 +67,11 @@ static NSString *kTableViewPostCell = @"PostCell";
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.refreshControl];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSLog(@"The Action I was waiting for is complete");
+        [self fetchPosts];
+    }];
 }
 
 -(void)fetchPosts {
@@ -110,7 +115,7 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     PFQuery *favoriteQuery = [Favorite query];
     [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
-    [favoriteQuery whereKey: @"userID" equalTo: self.currentUserId];//self.currentUserId
+    [favoriteQuery whereKey: @"userID" equalTo: self.currentUserId];
     [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
         if (favoritedPost) {
             [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];

@@ -1,8 +1,8 @@
 //
-//  ShowAlertViewController.h
+//  DetailsViewController.h
 //  fbuapp
 //
-//  Created by eazheng on 7/25/19.
+//  Created by eazheng on 7/30/19.
 //  Copyright © 2019 eazheng. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ShowAlertViewController : UIAlertController
+@interface DetailsViewController : UIViewController
 
 @end
 

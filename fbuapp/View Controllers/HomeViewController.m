@@ -13,16 +13,15 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
+#import "UIViewController+Alerts.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
 #import "Masonry.h"
 #import "Favorite.h"
 
-
 @interface HomeViewController () <PostCellDelegate, TableViewDelegate>
 
 @end
-
 
 @implementation HomeViewController
 
