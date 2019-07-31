@@ -53,6 +53,7 @@
 		A419823122EF5C2700791E06 /* EventCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823022EF5C2700791E06 /* EventCategory.m */; };
 		A419823422EF675000791E06 /* UIColor+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823322EF675000791E06 /* UIColor+Helpers.m */; };
 		A419823C22EF95B700791E06 /* PostTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823B22EF95B700791E06 /* PostTableView.m */; };
+		A419823F22EFB05900791E06 /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823E22EFB05900791E06 /* Favorite.m */; };
 		A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A59322E24C9B00F9E81A /* HomeViewController.m */; };
 		A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A59422E24C9B00F9E81A /* HomeViewController.xib */; };
 		A496A5A322E25CF800F9E81A /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A5A122E25CF800F9E81A /* PostCell.m */; };
@@ -156,6 +157,9 @@
 		A419823322EF675000791E06 /* UIColor+Helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helpers.m"; sourceTree = "<group>"; };
 		A419823A22EF95B700791E06 /* PostTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostTableView.h; sourceTree = "<group>"; };
 		A419823B22EF95B700791E06 /* PostTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostTableView.m; sourceTree = "<group>"; };
+		A419823D22EFB05900791E06 /* Favorite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
+		A419823E22EFB05900791E06 /* Favorite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
+		A456BCB922F1F6E6008C4E3B /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		A496A59222E24C9B00F9E81A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		A496A59322E24C9B00F9E81A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		A496A59422E24C9B00F9E81A /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -251,6 +255,7 @@
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
+				A456BCB922F1F6E6008C4E3B /* Key.h */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";
@@ -327,6 +332,8 @@
 				0C01F9F222EA7A90009D4947 /* Post.m */,
 				A419822F22EF5C2700791E06 /* EventCategory.h */,
 				A419823022EF5C2700791E06 /* EventCategory.m */,
+				A419823D22EFB05900791E06 /* Favorite.h */,
+				A419823E22EFB05900791E06 /* Favorite.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -600,6 +607,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A419823F22EFB05900791E06 /* Favorite.m in Sources */,
 				A419822D22EBBC4300791E06 /* CategoryHeaderView.m in Sources */,
 				A419823122EF5C2700791E06 /* EventCategory.m in Sources */,
 				3898B14F22F0BD790022B219 /* DetailsViewController.m in Sources */,
