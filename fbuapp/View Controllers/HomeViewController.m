@@ -16,9 +16,10 @@
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
 #import "Masonry.h"
+#import "Favorite.h"
 
 
-@interface HomeViewController ()
+@interface HomeViewController () <PostCellDelegate, TableViewDelegate>
 
 @end
 
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     
     PostTableView *feed = [[PostTableView alloc] initWithUserId:@"myuserid"]; //[PFUser currentUser].username
-    
+    feed.homeDelegate = self;
     [self.view addSubview:feed];
     
     [feed mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,4 +42,25 @@
     
 }
 
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user{
+    [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if(!succeeded){
+            NSLog(@"Error favoriting event: %@", error.localizedDescription);
+        }
+        else{
+            NSLog(@"Favoriting event success!");
+        }
+    }];
+}
+
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
+    PFQuery *favoriteQuery = [Favorite query];
+    [favoriteQuery whereKey: @"postID" equalTo: post];
+    [favoriteQuery whereKey: @"userID" equalTo: user];
+    [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
+        if (favoritedPost) {
+            [favoritedPost deleteInBackground];
+        }
+    }];
+}
 @end

@@ -22,7 +22,7 @@
 
 static NSString *kTableViewPostCell = @"PostCell";
 
-@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate>
+@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, PostCellDelegate>
 
 @property (strong, nonatomic) NSArray * posts;
 @property (nonatomic,strong) CLLocationManager *locationManager;
@@ -103,6 +103,7 @@ static NSString *kTableViewPostCell = @"PostCell";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
+    cell.cellDelegate = self;
     Post *post = self.posts[indexPath.row];
     cell.post = post;
     cell.currentUserId = self.currentUserId;
@@ -162,6 +163,14 @@ static NSString *kTableViewPostCell = @"PostCell";
     cell.layer.shadowOpacity = .25;
     
     return cell;
+}
+
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user{
+    [self.homeDelegate favoritePost: post withUser: user];
+}
+
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
+    [self.homeDelegate unFavoritePost: post withUser: user];
 }
 
 @end

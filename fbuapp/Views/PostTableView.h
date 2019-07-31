@@ -9,10 +9,18 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol TableViewDelegate <NSObject>
+
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user;
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user;
+
+@end
 
 @interface PostTableView : UITableView
 
 - (instancetype)initWithUserId:(NSString *)userId;
+
+@property (nonatomic, weak) id <TableViewDelegate> homeDelegate;
 
 @end
 

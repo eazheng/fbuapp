@@ -11,6 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PostCellDelegate <NSObject>
+
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user;
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user;
+
+@end
+
 @interface PostCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *eventTitle;
@@ -29,7 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Post *post;
 @property (strong, nonatomic) NSString *currentUserId;
 
+@property (nonatomic, weak) id <PostCellDelegate> cellDelegate;
 
 @end
+
 
 NS_ASSUME_NONNULL_END
