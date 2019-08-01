@@ -19,14 +19,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category: Outdoors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQw-MS-wSq">
-                        <rect key="frame" x="16" y="11" width="163" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category: Outdoors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQw-MS-wSq">
+                        <rect key="frame" x="16" y="10" width="162.5" height="23.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="dQw-MS-wSq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="4Pl-ld-YIK"/>
+                    <constraint firstAttribute="bottom" secondItem="dQw-MS-wSq" secondAttribute="bottom" constant="10" id="VLq-ag-SIX"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dQw-MS-wSq" secondAttribute="trailingMargin" id="oLf-dx-nJF"/>
+                    <constraint firstItem="dQw-MS-wSq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="oZJ-sE-ggw"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>

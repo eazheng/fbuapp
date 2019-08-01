@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LocationCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *locationNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *locationCityStateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *locationStreetLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *locationCityStateLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *locationStreetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationDistanceLabel;
 @property Post *post;
 

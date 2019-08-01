@@ -126,7 +126,7 @@
     
     // Specify a filter.
     GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
-    filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
+    filter.type = kGMSPlacesAutocompleteTypeFilterNoFilter;
     locationController.autocompleteFilter = filter;
     
     // Display the autocomplete view controller.
@@ -188,8 +188,7 @@
                 if(!succeeded){
                     NSLog(@"Error posting Event: %@", error.localizedDescription);
                 }
-                else{
-                    //refreshes timeline (delegate of createpostvc)
+                else {
                     [self clearFields];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostEventComplete" object:nil userInfo:nil];
                     

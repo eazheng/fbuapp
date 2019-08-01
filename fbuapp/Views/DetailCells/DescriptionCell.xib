@@ -19,14 +19,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="96.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event description is here! Contains additional details of the event." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4Y-6a-3q1">
-                        <rect key="frame" x="16" y="0.0" width="288" height="97"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event description is here! Contains additional details of the event." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4Y-6a-3q1">
+                        <rect key="frame" x="16" y="10" width="285" height="68.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="z4Y-6a-3q1" secondAttribute="bottom" constant="18" id="3Tg-Jc-snb"/>
+                    <constraint firstItem="z4Y-6a-3q1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="FXy-UZ-97D"/>
+                    <constraint firstItem="z4Y-6a-3q1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ZXh-9K-3Rv"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z4Y-6a-3q1" secondAttribute="trailingMargin" id="rNU-Hh-yb4"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>

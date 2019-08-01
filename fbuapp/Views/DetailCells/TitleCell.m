@@ -13,8 +13,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-//    NSLog(@"Title Label: %@", self.post.eventTitle);
-//    self.titleLabel.text = self.post.eventTitle;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
