@@ -21,6 +21,7 @@
 
 @interface CreatePostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate, UITextFieldDelegate, CategoryHeaderViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *pillLocationView;
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

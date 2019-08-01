@@ -13,6 +13,7 @@
 #import "LocationCell.h"
 #import "AuthorCell.h"
 #import "CategoryCell.h"
+#import "Masonry.h"
 
 static NSUInteger const kNumberOfCellTypes = 6;
 typedef NS_ENUM(NSUInteger, DetailsCellType) {
@@ -38,7 +39,8 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 @interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *detailsTableView;
+@property (strong, nonatomic) IBOutlet UIView *overallView;
+@property (strong, nonatomic) IBOutlet UITableView *detailsTableView;
 
 @end
 
@@ -48,15 +50,33 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
+    self.detailsTableView = [[UITableView alloc] init]; //[PFUser currentUser].username
+    [self.view addSubview:self.detailsTableView];
+
+    [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
     self.detailsTableView.dataSource = self;
     self.detailsTableView.delegate = self;
-    
     for (NSUInteger i = 0; i < kNumberOfCellTypes; i++) {
         NSString *currentType = [self cellIdentifierForType:i];
         [self.detailsTableView registerNib:[UINib nibWithNibName:currentType bundle:nil] forCellReuseIdentifier:currentType];
     }
     self.detailsTableView.tableFooterView = [[UIView alloc]
                                       initWithFrame:CGRectZero];
+    
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    NSLog(@"Height: %f Width: %f", self.overallView.frame.size.height, self.overallView.frame.size.width);
+    button.frame = CGRectMake(0, self.overallView.frame.size.height-300, self.overallView.frame.size.width, 50);
+    [button addTarget:self
+               action:@selector(contactAuthorButtonAction:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"Send a message" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor blueColor];
+
+    [self.overallView addSubview:button];
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -65,7 +85,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    
     NSString *cellIdentifier = [self cellIdentifierForType:indexPath.item];
     switch (indexPath.row) {
         case DetailsCellTypeImageCell: {
@@ -126,6 +145,15 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             NSLog(@"I shouldn't have reached here");
             return nil;
     };
+}
+
+- (IBAction)contactAuthorButtonAction:(id)sender {
+    NSLog(@"I want to contact the author!");
+    NSString *userId = @"emily.zheng.96780";
+    NSString *linkString = [NSString stringWithFormat:@"m.me/%@", userId];
+    NSURL *linkUrl = [NSURL URLWithString:linkString];
+    UIApplication *application = [UIApplication sharedApplication];
+    [application openURL:linkUrl options:@{} completionHandler:nil];
 }
 
 
