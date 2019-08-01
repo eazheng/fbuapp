@@ -11,10 +11,10 @@
 
 @implementation PFFileObject (Helpers)
 
-+ (void) setImage: (UIImageView *) image withFile: (PFFileObject *) pfobj{
++ (void) setImage: (UIImageView *) imageView withFile: (PFFileObject *) pfobj{
     NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];
-    image.image = nil;
-    [image setImageWithURL:eventImageURL];
+    imageView.image = nil;
+    [imageView setImageWithURL:eventImageURL];
 }
 
 @end
