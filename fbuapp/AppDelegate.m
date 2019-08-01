@@ -45,13 +45,13 @@
 //        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 //        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-//        self.window.rootViewController = navigationController;
+
         
         ProfileViewController *logViewController = [[ProfileViewController alloc] init];
         logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-        self.window.rootViewController = navigationController;
+        
 
     }
     else {
@@ -62,6 +62,7 @@
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
     }
+    self.window.rootViewController = navigationController;
     
     
 
