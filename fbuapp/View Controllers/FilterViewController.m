@@ -71,11 +71,11 @@
     NSInteger authorRole = [self.roleControl selectedSegmentIndex];
     [postQuery whereKey: @"authorRole" equalTo: @(authorRole)];
     NSIndexSet *authorLevels = self.levelMultiControl.selectedSegmentIndexes;
-    if([authorLevels count] != nil){
-        for (NSNumber* selectedIndex in authorLevels) {
-            [postQuery whereKey: @"authorSkillLevel" equalTo: selectedIndex];
-        }
-    }
+//    if([authorLevels count] != nil){
+//        for (NSNumber* selectedIndex in authorLevels) {
+//            [postQuery whereKey: @"authorSkillLevel" equalTo: selectedIndex];
+//        }
+//    }
     
     
     
