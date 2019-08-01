@@ -112,8 +112,6 @@
     self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
     
     [self.scrollView addSubview:self.pillSelector];
-//    [self.contentView addSubview:self.pillSelector];
-//    [self.scrollView addSubview:self.contentView];
     self.pillSelector.delegate = self;
 }
 
