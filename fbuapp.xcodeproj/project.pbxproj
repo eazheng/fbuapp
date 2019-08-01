@@ -54,6 +54,11 @@
 		A419823422EF675000791E06 /* UIColor+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823322EF675000791E06 /* UIColor+Helpers.m */; };
 		A419823C22EF95B700791E06 /* PostTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823B22EF95B700791E06 /* PostTableView.m */; };
 		A419823F22EFB05900791E06 /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823E22EFB05900791E06 /* Favorite.m */; };
+		A456BCBE22F204D2008C4E3B /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A456BCBC22F204D2008C4E3B /* FilterViewController.m */; };
+		A456BCBF22F204D2008C4E3B /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A456BCBD22F204D2008C4E3B /* FilterViewController.xib */; };
+		A456BCC222F24317008C4E3B /* PFGeoPoint+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A456BCC122F24317008C4E3B /* PFGeoPoint+Helpers.m */; };
+		A456BCC522F24829008C4E3B /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A456BCC422F24829008C4E3B /* NSDate+Helpers.m */; };
+		A456BCC822F24AE2008C4E3B /* PFFileObject+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A456BCC722F24AE2008C4E3B /* PFFileObject+Helpers.m */; };
 		A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A59322E24C9B00F9E81A /* HomeViewController.m */; };
 		A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A59422E24C9B00F9E81A /* HomeViewController.xib */; };
 		A496A5A322E25CF800F9E81A /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A5A122E25CF800F9E81A /* PostCell.m */; };
@@ -159,7 +164,16 @@
 		A419823B22EF95B700791E06 /* PostTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostTableView.m; sourceTree = "<group>"; };
 		A419823D22EFB05900791E06 /* Favorite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
 		A419823E22EFB05900791E06 /* Favorite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
-		A456BCB922F1F6E6008C4E3B /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
+		A456BCBA22F1FA7F008C4E3B /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
+		A456BCBB22F204D2008C4E3B /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		A456BCBC22F204D2008C4E3B /* FilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		A456BCBD22F204D2008C4E3B /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		A456BCC022F24317008C4E3B /* PFGeoPoint+Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PFGeoPoint+Helpers.h"; sourceTree = "<group>"; };
+		A456BCC122F24317008C4E3B /* PFGeoPoint+Helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PFGeoPoint+Helpers.m"; sourceTree = "<group>"; };
+		A456BCC322F24829008C4E3B /* NSDate+Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helpers.h"; sourceTree = "<group>"; };
+		A456BCC422F24829008C4E3B /* NSDate+Helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helpers.m"; sourceTree = "<group>"; };
+		A456BCC622F24AE2008C4E3B /* PFFileObject+Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PFFileObject+Helpers.h"; sourceTree = "<group>"; };
+		A456BCC722F24AE2008C4E3B /* PFFileObject+Helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PFFileObject+Helpers.m"; sourceTree = "<group>"; };
 		A496A59222E24C9B00F9E81A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		A496A59322E24C9B00F9E81A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		A496A59422E24C9B00F9E81A /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -255,7 +269,7 @@
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
-				A456BCB922F1F6E6008C4E3B /* Key.h */,
+				A456BCBA22F1FA7F008C4E3B /* Key.h */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";
@@ -287,6 +301,12 @@
 				3898B14022EB6DB70022B219 /* UIViewController+Alerts.m */,
 				A419823222EF675000791E06 /* UIColor+Helpers.h */,
 				A419823322EF675000791E06 /* UIColor+Helpers.m */,
+				A456BCC022F24317008C4E3B /* PFGeoPoint+Helpers.h */,
+				A456BCC122F24317008C4E3B /* PFGeoPoint+Helpers.m */,
+				A456BCC322F24829008C4E3B /* NSDate+Helpers.h */,
+				A456BCC422F24829008C4E3B /* NSDate+Helpers.m */,
+				A456BCC622F24AE2008C4E3B /* PFFileObject+Helpers.h */,
+				A456BCC722F24AE2008C4E3B /* PFFileObject+Helpers.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -344,6 +364,9 @@
 				A496A59222E24C9B00F9E81A /* HomeViewController.h */,
 				A496A59322E24C9B00F9E81A /* HomeViewController.m */,
 				A496A59422E24C9B00F9E81A /* HomeViewController.xib */,
+				A456BCBB22F204D2008C4E3B /* FilterViewController.h */,
+				A456BCBC22F204D2008C4E3B /* FilterViewController.m */,
+				A456BCBD22F204D2008C4E3B /* FilterViewController.xib */,
 				3827E30022E236BC008B8FA0 /* CreatePostViewController.h */,
 				3827E30122E236BC008B8FA0 /* CreatePostViewController.m */,
 				3827E30222E236BC008B8FA0 /* CreatePostViewController.xib */,
@@ -523,6 +546,7 @@
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
 				83657DEF22E67606002EB6A8 /* RegisterViewController.xib in Resources */,
 				3898B16C22F0EEC10022B219 /* AuthorCell.xib in Resources */,
+				A456BCBF22F204D2008C4E3B /* FilterViewController.xib in Resources */,
 				83657DF422E67798002EB6A8 /* EditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,6 +637,11 @@
 				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
 				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
 				3898B17522F0EFC50022B219 /* CategoryCell.m in Sources */,
+				A456BCC822F24AE2008C4E3B /* PFFileObject+Helpers.m in Sources */,
+				3898B14F22F0BD790022B219 /* DetailsViewController.m in Sources */,
+				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
+				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
+				A456BCC222F24317008C4E3B /* PFGeoPoint+Helpers.m in Sources */,
 				38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
@@ -621,6 +650,8 @@
 				A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */,
 				A496A5A322E25CF800F9E81A /* PostCell.m in Sources */,
 				A419823C22EF95B700791E06 /* PostTableView.m in Sources */,
+				A456BCBE22F204D2008C4E3B /* FilterViewController.m in Sources */,
+				A456BCC522F24829008C4E3B /* NSDate+Helpers.m in Sources */,
 				83657DF322E67798002EB6A8 /* EditViewController.m in Sources */,
 				83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */,
 				A419822E22EBBC4300791E06 /* PillCell.m in Sources */,

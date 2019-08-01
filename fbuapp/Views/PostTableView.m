@@ -11,25 +11,27 @@
 #import "PostCell.h"
 #import "Parse/Parse.h"
 #import <CoreLocation/CoreLocation.h>
-#import "UIImageView+AFNetworking.h"
-#import "DateTools.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
 #import "DetailsViewController.h"
 #import "EventCategory.h"
 #import "UIColor+Helpers.h"
 #import "Favorite.h"
-
+#import "HomeViewController.h"
+#import "PFGeoPoint+Helpers.h"
+#import "NSDate+Helpers.h"
+#import "PFFileObject+Helpers.h"
 
 static NSString *kTableViewPostCell = @"PostCell";
 
 @interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, PostCellDelegate>
 
-@property (strong, nonatomic) NSArray * posts;
+
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString * currentUserId;
+@property (strong, nonatomic) PFQuery *postQuery;
 
 @end
 
@@ -63,32 +65,15 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.dataSource = self;
     self.delegate = self;
-    [self fetchPosts];
+    self.postQuery = [Post query];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.refreshControl];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        NSLog(@"The Action I was waiting for is complete");
-        [self fetchPosts];
-    }];
 }
 
--(void)fetchPosts {
-    PFQuery *postQuery = [Post query];
-    [postQuery orderByDescending:@"createdAt"];
-    postQuery.limit = 20;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            self.posts = [NSArray arrayWithArray:posts] ;
-            [self reloadData];
-        }
-        else {
-            NSLog(@"Failed to fetch posts from server");
-        }
-        [self.refreshControl endRefreshing];
-    }];
+-(void)fetchPosts{
+    [self.delegate fetchPosts];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -109,7 +94,7 @@ static NSString *kTableViewPostCell = @"PostCell";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
-    cell.cellDelegate = self;
+    cell.delegate = self;
     Post *post = self.posts[indexPath.row];
     cell.post = post;
     cell.currentUserId = self.currentUserId;
@@ -122,29 +107,11 @@ static NSString *kTableViewPostCell = @"PostCell";
             [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
             cell.isFavorited = YES;
         }
+        else{
+            [cell.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
+            cell.isFavorited = NO;
+        }
     }];
-    
-    cell.eventTitle.text = post[@"eventTitle"];
-    PFGeoPoint *eventLocation = post[@"eventLocation"];
-    double dist = [eventLocation distanceInMilesTo :[PFGeoPoint geoPointWithLocation :self.currentLocation]];
-    cell.eventDistance.text = [NSString stringWithFormat:@"%.2f", dist];
-    cell.eventPrice.text = [post[@"eventPrice"] stringValue];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss z";
-    NSDate *date = post.createdAt;
-    NSDate *now = [[NSDate date] dateByAddingDays:-1];
-    BOOL postWasRecentBool = [date isLaterThan:now];
-    if (postWasRecentBool) {
-        cell.eventDaysAgo.text = [NSString stringWithFormat:@"%@%@", date.shortTimeAgoSinceNow, @" ago"];
-    }
-    else {
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
-        cell.eventDaysAgo.text = [formatter stringFromDate:date];
-    }
-    
-    cell.eventDescription.text = post[@"eventDescription"];
     
     PFQuery *postQuery = [EventCategory query];
     [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];
@@ -158,11 +125,13 @@ static NSString *kTableViewPostCell = @"PostCell";
         }
     }];
     
-    PFFileObject *pfobj = post[@"image"];
-    NSURL *eventImageURL = [NSURL URLWithString :pfobj.url];
-    cell.eventImage.image = nil;
-    [cell.eventImage setImageWithURL:eventImageURL];
-    
+    cell.eventTitle.text = post.eventTitle;
+    cell.eventDistance.text = [PFGeoPoint distanceToPoint: post.eventLocation fromLocation: self.currentLocation];
+    cell.eventPrice.text = [post.eventPrice stringValue];
+    cell.eventDaysAgo.text = [NSDate daysAgoSince: post.createdAt];
+    cell.eventDescription.text = post.eventDescription;
+    [PFFileObject setImage: cell.eventImage withFile: post.image];
+
     cell.layer.shadowOffset = CGSizeMake(1, 0);
     cell.layer.shadowColor = [[UIColor blackColor] CGColor];
     cell.layer.shadowRadius = 5;
@@ -174,15 +143,18 @@ static NSString *kTableViewPostCell = @"PostCell";
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"CELL HAS BEEN SELECTED");
     Post *post = self.posts[indexPath.row];
-    [self.tableViewDelegate showDetails: post];
+    [self.delegate showDetails: post];
 }
 
-- (void) favoritePost: (NSString *)post withUser: (NSString *)user {
-    [self.tableViewDelegate favoritePost: post withUser: user];
+#pragma mark - PostTableViewDelegate
+
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user{
+    [self.delegate favoritePost: post withUser: user];
 }
 
-- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user {
-    [self.tableViewDelegate unFavoritePost: post withUser: user];
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
+    [self.delegate unFavoritePost: post withUser: user];
+
 }
 
 

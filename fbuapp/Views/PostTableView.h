@@ -10,11 +10,12 @@
 #import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@protocol TableViewDelegate <NSObject>
+@protocol PostTableViewDelegate <NSObject>
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user;
 - (void) unFavoritePost: (NSString *)post withUser: (NSString *)user;
 - (void) showDetails: (Post *)post;
+- (void) fetchPosts;
 
 @end
 
@@ -22,7 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithUserId:(NSString *)userId;
 
-@property (nonatomic, weak) id <TableViewDelegate> tableViewDelegate;
+@property (nonatomic, weak) id <PostTableViewDelegate> delegate;
+@property (strong, nonatomic) NSArray * posts;
+//@property (nonatomic) NSArray<Post *> *posts;
 
 @end
 
