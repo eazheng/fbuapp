@@ -73,9 +73,9 @@
             HomeViewController *homeViewController = [[HomeViewController alloc] init];
             homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
             homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
             [self presentViewController:navigationController animated:YES completion: nil];
+            
         }
         else {
             //If email does not match an existing user, take user to RegisterViewController to create an account

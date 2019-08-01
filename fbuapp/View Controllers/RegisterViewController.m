@@ -17,6 +17,7 @@
 
 @interface RegisterViewController ()
 @property (strong, nonatomic) UIImage *picImage;
+@property (strong, nonatomic) NSString *userId;
 @end
 
 @implementation RegisterViewController
@@ -40,9 +41,11 @@
                      }
                  }];
                 
-                //get user's first and last name
+                //get user's first,last name and userID
                 self.firstNameField.text = profile.firstName;
                 self.lastNameField.text = profile.lastName;
+                self.userId = profile.userID;
+                
                 //test
                 NSLog(@"Hello %@!", profile.firstName);
                 
@@ -70,13 +73,13 @@
 
 
 - (void)didCancel {
-    //Dismiss RegisterViewController and head back to LogViewController.
-    RegisterViewController *registerViewController = [[RegisterViewController alloc] init];
-    registerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    registerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    //Take User back to LogViewController
+    LogViewController *logViewController = [[LogViewController alloc] init];
+    logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:registerViewController];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController ];
+    [self presentViewController:navigationController animated:YES completion: nil];
 }
 
 
@@ -92,6 +95,7 @@
     newUser.username = self.usernameField.text;
     newUser.email = self.emailField.text;
     newUser.password = @" ";
+    newUser[@"userId"] = self.userId;
     
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {

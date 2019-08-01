@@ -22,8 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 - (IBAction)signupButton:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *signupButton;
 //edit design of button
+@property (weak, nonatomic) IBOutlet UIButton *signupButton;
 @property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *profilePictureView;
 
 @end
