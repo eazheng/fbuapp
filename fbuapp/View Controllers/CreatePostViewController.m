@@ -107,7 +107,6 @@
     
     self.eventPriceField.delegate= self;
     
-    
     self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
     
     [self.scrollView addSubview:self.pillSelector];
