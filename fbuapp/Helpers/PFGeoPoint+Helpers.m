@@ -11,7 +11,7 @@
 @implementation PFGeoPoint (Helpers)
 
 + (NSString *)distanceToPoint: (PFGeoPoint *) point fromLocation: (CLLocation *) location{
-     double dist =[point distanceInMilesTo :[PFGeoPoint geoPointWithLocation: location]];
+    double dist =[point distanceInMilesTo :[PFGeoPoint geoPointWithLocation: location]];
     return [NSString stringWithFormat:@"%.1f", dist];
 }
 
