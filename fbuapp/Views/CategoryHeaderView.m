@@ -27,9 +27,9 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     [super awakeFromNib];
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder
+-(instancetype)initWithZero
 {
-    self = [super initWithCoder:aDecoder];
+    self = [super initWithFrame:CGRectZero];
     if(self)
     {
         [self customInit];

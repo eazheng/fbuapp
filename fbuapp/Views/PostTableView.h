@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithUserId:(NSString *)userId;
 
+
 @property (nonatomic, weak) id <PostTableViewDelegate> delegate;
 @property (strong, nonatomic) NSArray * posts;
 //@property (nonatomic) NSArray<Post *> *posts;

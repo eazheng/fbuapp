@@ -35,6 +35,7 @@
     [self fetchPosts];
     self.feed.delegate = self;
     [self.view addSubview:self.feed];
+    
     [self.feed mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
@@ -50,9 +51,14 @@
     self.navigationItem.rightBarButtonItem = myButton;
 }
 
+
+
+
+
 - (IBAction)presentFilterViewController:(id)sender {
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:filterVCObj] animated:YES completion:nil];
+    
     filterVCObj.delegate = self;
 }
 
