@@ -20,6 +20,7 @@
 
 @interface CreatePostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate, UITextFieldDelegate, CategoryHeaderViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescriptionField;
@@ -111,6 +112,8 @@
     self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
     
     [self.scrollView addSubview:self.pillSelector];
+//    [self.contentView addSubview:self.pillSelector];
+//    [self.scrollView addSubview:self.contentView];
     self.pillSelector.delegate = self;
 }
 

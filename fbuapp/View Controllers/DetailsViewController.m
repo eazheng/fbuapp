@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return kNumberOfCellTypes;//self.cellTypes.count;
+    return kNumberOfCellTypes;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
