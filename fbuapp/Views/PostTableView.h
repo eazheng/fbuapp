@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol PostTableViewDelegate <NSObject>
@@ -23,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id <PostTableViewDelegate> delegate;
 @property (strong, nonatomic) NSArray * posts;
-//@property (nonatomic) NSArray<Post *> *posts;
 
 @end
 

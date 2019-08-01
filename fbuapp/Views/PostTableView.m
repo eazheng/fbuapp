@@ -13,6 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
+#import "DetailsViewController.h"
 #import "EventCategory.h"
 #import "UIColor+Helpers.h"
 #import "Favorite.h"
@@ -63,7 +64,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     [self registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.dataSource = self;
-    self.delegate = self;
     self.postQuery = [Post query];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -139,6 +139,7 @@ static NSString *kTableViewPostCell = @"PostCell";
     return cell;
 }
 
+
 #pragma mark - PostTableViewDelegate
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{
@@ -147,6 +148,8 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
     [self.delegate unFavoritePost: post withUser: user];
+
 }
+
 
 @end

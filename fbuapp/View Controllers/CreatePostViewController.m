@@ -16,10 +16,14 @@
 #import "HomeViewController.h"
 #import "PostCell.h"
 #import "CategoryHeaderView.h"
+#import "Masonry.h"
 
 
 @interface CreatePostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate, UITextFieldDelegate, CategoryHeaderViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *pillLocationView;
+
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescriptionField;
@@ -109,7 +113,7 @@
     
     self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
     
-    [self.scrollView addSubview:self.pillSelector];
+    [self.contentView addSubview:self.pillSelector];
     self.pillSelector.delegate = self;
 }
 
@@ -125,7 +129,7 @@
     
     // Specify a filter.
     GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
-    filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
+    filter.type = kGMSPlacesAutocompleteTypeFilterNoFilter;
     locationController.autocompleteFilter = filter;
     
     // Display the autocomplete view controller.
@@ -187,15 +191,13 @@
                 if(!succeeded){
                     NSLog(@"Error posting Event: %@", error.localizedDescription);
                 }
-                else{
-                    //refreshes timeline (delegate of createpostvc)
+                else {
                     [self clearFields];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostEventComplete" object:nil userInfo:nil];
                     
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
-                    [self.tabBarController setSelectedIndex:0];
-
+//                    [self.tabBarController setSelectedIndex:0];
                 }
             }];
         }
@@ -311,7 +313,7 @@ didFailAutocompleteWithError:(NSError *)error {
     self.eventDescriptionField.text = @"";
     self.eventLocationTextField.text = @"";
     self.eventImage.image = [UIImage imageNamed:@"imageplaceholder-270x184"];
-TOOD: self.pillSelector = nil;
+TODO: self.pillSelector = nil;
     self.pickedImage = false;
     self.eventCategory = -1;
     self.userRoleControl.selectedSegmentIndex = 0;
