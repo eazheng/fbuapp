@@ -11,8 +11,6 @@
 #import "PostCell.h"
 #import "Parse/Parse.h"
 #import <CoreLocation/CoreLocation.h>
-#import "UIImageView+AFNetworking.h"
-#import "DateTools.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
 #import "EventCategory.h"
@@ -25,10 +23,9 @@
 
 static NSString *kTableViewPostCell = @"PostCell";
 
-@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, PostCellDelegate, HomeDelegate>
+@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, PostCellDelegate>
 
-@property (strong, nonatomic) NSArray * posts;
-@property (strong, nonatomic) NSArray * filteredPosts;
+
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -68,41 +65,14 @@ static NSString *kTableViewPostCell = @"PostCell";
     self.dataSource = self;
     self.delegate = self;
     self.postQuery = [Post query];
-    [self fetchPosts];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.refreshControl];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        NSLog(@"The Action I was waiting for is complete");
-        [self fetchPosts];
-    }];
-}
-
-- (void) filterPostsWithQuery: (PFQuery *) postQuery{
-    self.postQuery = postQuery;
-    [self fetchPosts];
-}
-
-- (void) filterPostsWithCategory: (NSInteger) category{
-    [self.postQuery whereKey: @"eventCategory" equalTo: @(category)];
-    [self fetchPosts];
 }
 
 -(void)fetchPosts{
-    [self.postQuery orderByDescending:@"createdAt"];
-    self.postQuery.limit = 20;
-    [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            self.posts = [NSArray arrayWithArray:posts] ;
-            [self reloadData];
-        }
-        else {
-            NSLog(@"Failed to fetch posts from server");
-        }
-        [self.refreshControl endRefreshing];
-    }];
+    [self.delegate fetchPosts];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -123,7 +93,7 @@ static NSString *kTableViewPostCell = @"PostCell";
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
-    cell.cellDelegate = self;
+    cell.delegate = self;
     Post *post = self.posts[indexPath.row];
     cell.post = post;
     cell.currentUserId = self.currentUserId;
@@ -160,7 +130,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     cell.eventDaysAgo.text = [NSDate daysAgoSince: post.createdAt];
     cell.eventDescription.text = post.eventDescription;
     [PFFileObject setImage: cell.eventImage withFile: post.image];
-    
 
     cell.layer.shadowOffset = CGSizeMake(1, 0);
     cell.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -173,11 +142,11 @@ static NSString *kTableViewPostCell = @"PostCell";
 #pragma mark - PostTableViewDelegate
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{
-    [self.postTableViewDelegate favoritePost: post withUser: user];
+    [self.delegate favoritePost: post withUser: user];
 }
 
 - (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
-    [self.postTableViewDelegate unFavoritePost: post withUser: user];
+    [self.delegate unFavoritePost: post withUser: user];
 }
 
 @end

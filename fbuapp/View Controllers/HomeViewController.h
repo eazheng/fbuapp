@@ -11,18 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol HomeDelegate <NSObject>
-
-- (void) filterPostsWithQuery: (PFQuery *) postQuery;
-- (void) filterPostsWithCategory: (NSInteger) category;
-
-@end
-
 @interface HomeViewController : UIViewController
 
 @property(strong,nonatomic)IBOutlet UITableView *tableView;
 
-@property (nonatomic, weak) id <HomeDelegate> homeDelegate;
 
 @end
 

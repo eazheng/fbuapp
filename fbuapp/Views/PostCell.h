@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Post *post;
 @property (strong, nonatomic) NSString *currentUserId;
 
-@property (nonatomic, weak) id <PostCellDelegate> cellDelegate;
+@property (nonatomic, weak) id <PostCellDelegate> delegate;
 
 @end
 
