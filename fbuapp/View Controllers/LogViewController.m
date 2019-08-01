@@ -32,6 +32,12 @@
     //ask user for access to information
     fbloginButton.permissions = @[@"public_profile"];
     fbloginButton.permissions = @[@"email"];
+    // Shadow and Radius of signupButton
+    fbloginButton.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
+    fbloginButton.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    fbloginButton.layer.shadowOpacity = 1.0f;
+    fbloginButton.layer.shadowRadius = 0.0f;
+    fbloginButton.layer.cornerRadius = 4.0f;
     
     [self.view addSubview:fbloginButton];
 }

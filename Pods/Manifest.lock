@@ -31,6 +31,7 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (3.2.0):
     - GoogleMaps/Base (= 3.2.0)
+  - Masonry (1.1.0)
   - Parse (1.17.2):
     - Parse/Core (= 1.17.2)
   - Parse/Core (1.17.2):
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - GoogleMaps
   - GooglePlaces
+  - Masonry
   - Parse
   - "UITextView+Placeholder"
 
@@ -56,6 +58,7 @@ SPEC REPOS:
     - FBSDKLoginKit
     - GoogleMaps
     - GooglePlaces
+    - Masonry
     - Parse
     - "UITextView+Placeholder"
 
@@ -67,9 +70,10 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 6e20e44775ddf4b159a8ca676834325e13d12221
   GoogleMaps: 5046d7edfe381c1a0b20fdaf293915a375c3122b
   GooglePlaces: 41bc2e480816b1234a48f4bec92e1c886f37cfe1
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
-PODFILE CHECKSUM: 75b7a57adb926fcae7972962ac6bba9960e7842d
+PODFILE CHECKSUM: 9ecddc90944389ccb4718ef8c2c737ecb82f5539
 
 COCOAPODS: 1.7.2

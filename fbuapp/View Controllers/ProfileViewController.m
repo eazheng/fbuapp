@@ -36,6 +36,16 @@
         self.usernameLabel.text = currentUser.username;
         
         NSLog(@"First: %@", currentUser[@"firstName"]);
+        
+        //make profile image circular
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+        self.profileImage.clipsToBounds = YES;
+        //give profileView a shadow
+        self.profileView.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
+        self.profileView.layer.shadowOffset = CGSizeMake(0, 2.0f);
+        self.profileView.layer.shadowOpacity = 1.0f;
+        self.profileView.layer.shadowRadius = 0.0f;
+        self.profileView.layer.cornerRadius = 4.0f;
     }
 }
 
