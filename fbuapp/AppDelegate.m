@@ -61,7 +61,6 @@
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-        self.window.rootViewController = navigationController;
     }
     
     
