@@ -61,13 +61,13 @@
     HomeViewController *homeViewController = [[HomeViewController alloc] init];
     UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
     
-    tabBarController.tabBar.items[0].title = @"Home";
-    tabBarController.tabBar.items[1].title = @"Create Post";
+    self.tabBarController.tabBar.items[0].title = @"Home";
+    self.tabBarController.tabBar.items[1].title = @"Create Post";
     
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = self.tabBarController;
     
     return YES;
 }

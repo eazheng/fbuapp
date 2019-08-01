@@ -55,6 +55,8 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         NSString *currentType = [self cellIdentifierForType:i];
         [self.detailsTableView registerNib:[UINib nibWithNibName:currentType bundle:nil] forCellReuseIdentifier:currentType];
     }
+    self.detailsTableView.tableFooterView = [[UIView alloc]
+                                      initWithFrame:CGRectZero];
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -101,7 +103,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             cell.usernameLabel.text = self.post.eventAuthor.username;
             
             if (self.post.authorRole == 1 && ![self.post.eventPrice isEqual:@0]) { //author wants to teach
-                cell.authorPriceLabel.text = [NSString stringWithFormat:@"You'll pay: $%@", self.post.eventPrice];
+                cell.authorPriceLabel.text = [NSString stringWithFormat:@"Your cost: $%@", self.post.eventPrice];
             }
             else if (self.post.authorRole == 0 && ![self.post.eventPrice isEqual:@0]) { //author wants to learn
                 cell.authorPriceLabel.text = [NSString stringWithFormat:@"You'll earn: $%@", self.post.eventPrice];

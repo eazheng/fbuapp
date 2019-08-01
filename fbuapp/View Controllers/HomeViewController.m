@@ -40,7 +40,12 @@
     
     CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
     feed.tableHeaderView = pillSelector;
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController.tabBar setHidden:NO];
 }
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user {
@@ -69,6 +74,8 @@
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
     [self.navigationController pushViewController:detailsViewController animated:YES];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController.tabBar setHidden:YES];
 }
 
 @end

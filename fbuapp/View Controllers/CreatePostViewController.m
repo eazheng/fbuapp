@@ -16,9 +16,11 @@
 #import "HomeViewController.h"
 #import "PostCell.h"
 #import "CategoryHeaderView.h"
+#import "Masonry.h"
 
 
 @interface CreatePostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate, UITextFieldDelegate, CategoryHeaderViewDelegate>
+
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -111,7 +113,7 @@
     
     self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
     
-    [self.scrollView addSubview:self.pillSelector];
+    [self.contentView addSubview:self.pillSelector];
     self.pillSelector.delegate = self;
 }
 
