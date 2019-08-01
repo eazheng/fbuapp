@@ -23,12 +23,15 @@ xcuserdata/
 *.xcscmblueprint
 Key.h
 Key.m
+*Key.h
+*Key.m
 
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
 *.dSYM.zip
 *.dSYM
+*.DS_Store
 
 ## Playgrounds
 timeline.xctimeline

@@ -7,6 +7,8 @@
 //
 
 #import "PostCell.h"
+#import "Favorite.h"
+#import "HomeViewController.h"
 
 @implementation PostCell
 
@@ -18,15 +20,23 @@
     self.eventImage.clipsToBounds = YES;
     self.eventImage.contentMode = UIViewContentModeScaleToFill;
     
-    // Initialization code
 }
-- (IBAction)onFavoriteTapped:(id)sender {
+
+- (IBAction)onTapFavorited:(id)sender {
+    if(self.isFavorited == NO){
+        self.isFavorited = YES;
+        [self.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
+        [self.cellDelegate favoritePost: self.post.objectId withUser: self.currentUserId];
+    }
+    else{
+        self.isFavorited = NO;
+        [self.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
+        [self.cellDelegate unFavoritePost: self.post.objectId withUser: self.currentUserId];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 @end

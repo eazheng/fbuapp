@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol PostCellDelegate <NSObject>
+
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user;
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user;
+
+@end
 
 @interface PostCell : UITableViewCell
 
@@ -21,10 +29,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventDescription;
 @property (weak, nonatomic) IBOutlet UILabel *eventAuthor;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
-@property (weak, nonatomic) IBOutlet UIButton *isFavorited;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 
+@property (weak, nonatomic) IBOutlet UIView *categoryView;
+@property (nonatomic, assign) BOOL isFavorited;
+@property (strong, nonatomic) Post *post;
+@property (strong, nonatomic) NSString *currentUserId;
 
+@property (nonatomic, weak) id <PostCellDelegate> cellDelegate;
 
 @end
+
 
 NS_ASSUME_NONNULL_END
