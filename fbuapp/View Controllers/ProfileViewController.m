@@ -24,15 +24,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Auto-fill user profile
+    //Set current user's information to their profile page.
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser != nil) {
-        NSLog(@"Current user: %@", currentUser.email);
         [currentUser fetch];
+        NSLog(@"Current user: %@", currentUser.email);
+        
         self.profileImage.image = currentUser[@"profilePicture"];
-        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
-        self.profileImage.clipsToBounds = YES;
-        self.firstNameLabel.text = currentUser[@"firstName"];
+        self.firstNameLabel.text = [NSString stringWithFormat:@"@%@", currentUser[@"firstName"]];
         self.lastNameLabel.text = currentUser[@"lastName"];
         self.usernameLabel.text = currentUser.username;
         

@@ -10,7 +10,6 @@
 #import "ProfileViewController.h"
 #import "LogViewController.h"
 #import "RegisterViewController.h"
-#import "EditViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
 #import "HomeViewController.h"
@@ -31,38 +30,36 @@
 
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
-    
-    //present view controllers
-    if ([FBSDKAccessToken currentAccessToken]) {
-//        //take user to RegisterViewController
-        RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: registerViewController];
-        self.window.rootViewController = navigationController;
-        
-//        //take user to ProfileViewController
-//        ProfileViewController *profileViewController = [[ProfileViewController alloc]blnddgenu initWithNibName:@"ProfileViewController" bundle:nil];
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
-//        self.window.rootViewController = navigationController;
-        
-        //take user to EditViewController
-//        EditViewController *editViewController = [[EditViewController alloc] initWithNibName:@"EditViewController" bundle:nil];
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: editViewController];
-//        self.window.rootViewController = navigationController;
-    }
-    else {
-        //take user to logViewController
-        LogViewController *logViewController = [[LogViewController alloc] initWithNibName:@"LogViewController" bundle:nil];
-        self.window.rootViewController = logViewController;
-    }
-    
+
     //initialize parse
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+            
+            configuration.applicationId = @"skillAppId";
+            configuration.server = @"https://skill--app.herokuapp.com/parse";
+        }];
+        [Parse initializeWithConfiguration:config];
+    
+    //create for persisting user
+    if ([PFUser currentUser] != nil) {
+        //if user is already logged in, take them to HomeViewController
+        HomeViewController *homeViewController = [[HomeViewController alloc] init];
+        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
-        configuration.applicationId = @"skillAppId";
-        configuration.server = @"https://skill--app.herokuapp.com/parse";
-    }];
-    [Parse initializeWithConfiguration:config];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+        self.window.rootViewController = navigationController;
 
+    }
+    else {
+        //If user if not logged in, take them to LogViewController
+        LogViewController *logViewController = [[LogViewController alloc] init];
+        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+        self.window.rootViewController = navigationController;
+    }
+    
 //    // set root view controller as CreatePostViewController
 //    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
 //    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
@@ -72,11 +69,11 @@
 //
 //    UITabBarController *tabBarController = [[UITabBarController alloc] init];
 //    tabBarController.viewControllers = @[createPostNavigationController, homeViewControllerNavigationController];
-//    self.window.rootViewController = tabBarController;
+////    self.window.rootViewController = tabBarController;
     
     return YES;
 }
-
+    
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {

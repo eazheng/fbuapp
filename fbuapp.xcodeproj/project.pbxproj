@@ -29,8 +29,6 @@
 		83657DE122E24824002EB6A8 /* LogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DDF22E24824002EB6A8 /* LogViewController.xib */; };
 		83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DEC22E67606002EB6A8 /* RegisterViewController.m */; };
 		83657DEF22E67606002EB6A8 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DED22E67606002EB6A8 /* RegisterViewController.xib */; };
-		83657DF322E67798002EB6A8 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DF122E67798002EB6A8 /* EditViewController.m */; };
-		83657DF422E67798002EB6A8 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DF222E67798002EB6A8 /* EditViewController.xib */; };
 		83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27622E234C10045B437 /* ProfileViewController.m */; };
 		83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E6B27722E234C10045B437 /* ProfileViewController.xib */; };
 		A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A59322E24C9B00F9E81A /* HomeViewController.m */; };
@@ -96,9 +94,6 @@
 		83657DEB22E67606002EB6A8 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		83657DEC22E67606002EB6A8 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		83657DED22E67606002EB6A8 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
-		83657DF022E67798002EB6A8 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
-		83657DF122E67798002EB6A8 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
-		83657DF222E67798002EB6A8 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
 		83E6B27222E137AF0045B437 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		83E6B27522E234C10045B437 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		83E6B27622E234C10045B437 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -270,9 +265,6 @@
 				83E6B27522E234C10045B437 /* ProfileViewController.h */,
 				83E6B27622E234C10045B437 /* ProfileViewController.m */,
 				83E6B27722E234C10045B437 /* ProfileViewController.xib */,
-				83657DF022E67798002EB6A8 /* EditViewController.h */,
-				83657DF122E67798002EB6A8 /* EditViewController.m */,
-				83657DF222E67798002EB6A8 /* EditViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -414,7 +406,6 @@
 				83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
 				83657DEF22E67606002EB6A8 /* RegisterViewController.xib in Resources */,
-				83657DF422E67798002EB6A8 /* EditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,7 +499,6 @@
 				0C01F9F322EA7A90009D4947 /* Post.m in Sources */,
 				A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */,
 				A496A5A322E25CF800F9E81A /* PostCell.m in Sources */,
-				83657DF322E67798002EB6A8 /* EditViewController.m in Sources */,
 				83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */,
 				83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */,
 				83657DE022E24824002EB6A8 /* LogViewController.m in Sources */,
