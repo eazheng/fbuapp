@@ -64,7 +64,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     [self registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.dataSource = self;
-    self.delegate = self;
     self.postQuery = [Post query];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -140,11 +139,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     return cell;
 }
 
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"CELL HAS BEEN SELECTED");
-    Post *post = self.posts[indexPath.row];
-    [self.delegate showDetails: post];
-}
 
 #pragma mark - PostTableViewDelegate
 

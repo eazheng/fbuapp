@@ -93,6 +93,7 @@
 
 
 - (void) showDetails: (Post *)post {
+    NSLog(@"HELLO");
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
     [self.navigationController pushViewController:detailsViewController animated:YES];
@@ -120,6 +121,12 @@
     }];
     [self.feed.refreshControl endRefreshing];
 
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"CELL HAS BEEN SELECTED");
+    Post *post = self.feed.posts[indexPath.row];
+    [self showDetails: post];
 }
 
 @end
