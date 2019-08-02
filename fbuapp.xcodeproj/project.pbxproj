@@ -37,13 +37,12 @@
 		38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA5A522E8E026002C1114 /* EnterLocationViewController.xib */; };
 		38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBA5B122EA1DEA002C1114 /* Utils.m */; };
 		63621F569495DE61AF213B2D /* Pods_fbuapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC76A9E39E04C6D89AFC7E1E /* Pods_fbuapp.framework */; };
+		830B5C0322F365BC002FCC24 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C0122F365BC002FCC24 /* SettingsViewController.m */; };
+		830B5C0422F365BC002FCC24 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B5C0222F365BC002FCC24 /* SettingsViewController.xib */; };
 		83657DE022E24824002EB6A8 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DDE22E24824002EB6A8 /* LogViewController.m */; };
 		83657DE122E24824002EB6A8 /* LogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DDF22E24824002EB6A8 /* LogViewController.xib */; };
 		83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DEC22E67606002EB6A8 /* RegisterViewController.m */; };
 		83657DEF22E67606002EB6A8 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DED22E67606002EB6A8 /* RegisterViewController.xib */; };
-		83657DF322E67798002EB6A8 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DF122E67798002EB6A8 /* EditViewController.m */; };
-		83657DF422E67798002EB6A8 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DF222E67798002EB6A8 /* EditViewController.xib */; };
-		83657E8A22E8D00D002EB6A8 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657E8922E8D00D002EB6A8 /* Profile.m */; };
 		83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6B27622E234C10045B437 /* ProfileViewController.m */; };
 		83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E6B27722E234C10045B437 /* ProfileViewController.xib */; };
 		A419822B22EBBC4300791E06 /* PillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A419822522EBBC4300791E06 /* PillCell.xib */; };
@@ -135,17 +134,16 @@
 		38FBA5B022EA1DEA002C1114 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		38FBA5B122EA1DEA002C1114 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		7E043F0558EB857B2995A1E8 /* Pods-fbuapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuapp.debug.xcconfig"; path = "Target Support Files/Pods-fbuapp/Pods-fbuapp.debug.xcconfig"; sourceTree = "<group>"; };
+		830B5BFA22F353C8002FCC24 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
+		830B5C0022F365BC002FCC24 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		830B5C0122F365BC002FCC24 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		830B5C0222F365BC002FCC24 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		83657DDD22E24824002EB6A8 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		83657DDE22E24824002EB6A8 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		83657DDF22E24824002EB6A8 /* LogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogViewController.xib; sourceTree = "<group>"; };
 		83657DEB22E67606002EB6A8 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		83657DEC22E67606002EB6A8 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		83657DED22E67606002EB6A8 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
-		83657DF022E67798002EB6A8 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
-		83657DF122E67798002EB6A8 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
-		83657DF222E67798002EB6A8 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
-		83657E8822E8D00D002EB6A8 /* Profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
-		83657E8922E8D00D002EB6A8 /* Profile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		83E6B27222E137AF0045B437 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		83E6B27522E234C10045B437 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		83E6B27622E234C10045B437 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 			children = (
 				A496A59722E24F9E00F9E81A /* Views */,
 				3827E30722E7C09F008B8FA0 /* Helpers */,
-				83657DE522E6451B002EB6A8 /* Views */,
 				83E6B27422E148E40045B437 /* View Controllers */,
 				83E6B27022E136FD0045B437 /* Models */,
 				3827E2C422DE98F8008B8FA0 /* AppDelegate.h */,
@@ -269,6 +266,7 @@
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
+				830B5BFA22F353C8002FCC24 /* Key.h */,
 				A456BCBA22F1FA7F008C4E3B /* Key.h */,
 			);
 			path = fbuapp;
@@ -382,6 +380,12 @@
 				83E6B27522E234C10045B437 /* ProfileViewController.h */,
 				83E6B27622E234C10045B437 /* ProfileViewController.m */,
 				83E6B27722E234C10045B437 /* ProfileViewController.xib */,
+				3898B14C22F0BD790022B219 /* DetailsViewController.h */,
+				3898B14D22F0BD790022B219 /* DetailsViewController.m */,
+				3898B14E22F0BD790022B219 /* DetailsViewController.xib */,
+				830B5C0022F365BC002FCC24 /* SettingsViewController.h */,
+				830B5C0122F365BC002FCC24 /* SettingsViewController.m */,
+				830B5C0222F365BC002FCC24 /* SettingsViewController.xib */,
 				83657DF022E67798002EB6A8 /* EditViewController.h */,
 				83657DF122E67798002EB6A8 /* EditViewController.m */,
 				83657DF222E67798002EB6A8 /* EditViewController.xib */,
@@ -531,6 +535,7 @@
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
 				A419822B22EBBC4300791E06 /* PillCell.xib in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
+				830B5C0422F365BC002FCC24 /* SettingsViewController.xib in Resources */,
 				A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */,
 				3898B16722F0EEAB0022B219 /* LocationCell.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
@@ -643,6 +648,7 @@
 				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
 				A456BCC222F24317008C4E3B /* PFGeoPoint+Helpers.m in Sources */,
 				38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */,
+				830B5C0322F365BC002FCC24 /* SettingsViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
 				3898B14122EB6DB70022B219 /* UIViewController+Alerts.m in Sources */,

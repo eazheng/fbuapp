@@ -9,96 +9,110 @@
 #import "RegisterViewController.h"
 #import "AppDelegate.h"
 #import "LogViewController.h"
+#import "ProfileViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "Parse/Parse.h"
 #import "FBSDKProfile.h"
 
 @interface RegisterViewController ()
-
-
+@property (strong, nonatomic) UIImage *picImage;
+@property (strong, nonatomic) NSString *userId;
 @end
 
 @implementation RegisterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // maybe use --> dispatch_async(dispatch_get_main_queue(), ^{
+    
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(didCancel)];
+    
     if ([FBSDKAccessToken currentAccessToken]) {
-        
-        //FBSDK --> gets user's name and user ID
         [FBSDKProfile loadCurrentProfileWithCompletion:^(FBSDKProfile *profile, NSError *error) {
             if (profile){
-                //access to user's email --> error: only getting "email" and not the actual value
+                //Get access to user's facebook email
                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email"}]
                  startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                      if (!error) {
                          NSLog(@"user:%@", result);
-                         //setting property to result dictionary value
                          self.emailField.text = result[@"email"];
                      }
                  }];
-    
-                //get user's first and last name
-                //setting my created properties to currentProfile properties
+                
+                
                 self.firstNameField.text = profile.firstName;
                 self.lastNameField.text = profile.lastName;
+                self.userId = profile.userID;
                 
-                //test
+                
                 NSLog(@"Hello %@!", profile.firstName);
                 
-                //welcome user to app in navigation bar
-                self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", profile.firstName];
                 
-                //display users's facebook profile picture
-                FBSDKProfilePictureView *profilePictureView = [[FBSDKProfilePictureView alloc] init];
-                //manual placement of profile page
-                profilePictureView.frame = CGRectMake(137, 103, 100, 100);
-                //show profile of current user logged in
-                profilePictureView.profileID = [[FBSDKAccessToken currentAccessToken] userID];
-                [self.view addSubview:profilePictureView];
+                self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", profile.firstName];
             }
         }];
     }
+    
+    
+    self.signupButton.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
+    self.signupButton.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    self.signupButton.layer.shadowOpacity = 1.0f;
+    self.signupButton.layer.shadowRadius = 0.0f;
+    self.signupButton.layer.cornerRadius = 4.0f;
+    
+    
+    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
+    self.profilePictureView.clipsToBounds = YES;
+    
+    self.profilePictureView.layer.borderWidth = 3.0f;
+    self.profilePictureView.layer.borderColor = [UIColor whiteColor].CGColor;
+
+}
+
+
+- (void)didCancel {
+    //Take User back to LogViewController
+    LogViewController *logViewController = [[LogViewController alloc] init];
+    logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController ];
+    [self presentViewController:navigationController animated:YES completion: nil];
 }
 
 
 - (IBAction)signupButton:(id)sender {
+    
     //initialize the object
     PFUser *newUser = [PFUser user];
     
-    //initialize full name and email from facebook
-    // set properties user's app profile
-    newUser[@"profilePicture"] = self.pictureView.image;
+    UIImage *image = [[FBSDKProfile currentProfile] imageURLForPictureMode:FBSDKProfilePictureModeSquare size:CGSizeMake(100, 100)];
+    newUser[@"profilePicture"] = [PFFileObject fileObjectWithData:UIImagePNGRepresentation(image)];
     newUser[@"firstName"] = self.firstNameField.text;
     newUser[@"lastName"] = self.lastNameField.text;
     newUser.username = self.usernameField.text;
     newUser.email = self.emailField.text;
-  
+    newUser.password = @" ";
+    newUser[@"userId"] = self.userId;
+    
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (error!= nil){
+        if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
         }
         else {
             NSLog(@"User registered successfully");
-            //present ProfileViewController
+            //take newUser to their profile page
+            ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
+            profileViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+            [self presentViewController:navigationController animated:YES completion: nil];
         }
     }];
 }
 
-
-- (IBAction)addPhotoButton:(id)sender {
-}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
