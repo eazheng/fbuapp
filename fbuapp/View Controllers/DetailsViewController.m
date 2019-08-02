@@ -40,7 +40,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 @interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) IBOutlet UIView *overallView;
 @property (strong, nonatomic) IBOutlet UITableView *detailsTableView;
 
 @end
@@ -49,6 +48,8 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    self.view.frame = screenBounds;
     
     // Do any additional setup after loading the view from its nib.
     self.detailsTableView = [[UITableView alloc] init]; //[PFUser currentUser].username
@@ -66,10 +67,10 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     self.detailsTableView.tableFooterView = [[UIView alloc]
                                       initWithFrame:CGRectZero];
     
-    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    NSLog(@"Height: %f Width: %f", self.overallView.frame.size.height, self.overallView.frame.size.width);
-    button.frame = CGRectMake(0, self.overallView.frame.size.height-300, self.overallView.frame.size.width, 50);
+    CGFloat buttonHeight = 50;
+    NSLog(@"Height: %f Width: %f", self.view.frame.size.height, self.view.frame.size.width);
+    button.frame = CGRectMake(0, self.view.frame.size.height - buttonHeight, self.view.frame.size.width, buttonHeight);
     [button addTarget:self
                action:@selector(contactAuthorButtonAction:)
      forControlEvents:UIControlEventTouchUpInside];
@@ -77,7 +78,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.backgroundColor = [UIColor blueColor];
 
-    [self.overallView addSubview:button];
+    [self.view addSubview:button];
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
