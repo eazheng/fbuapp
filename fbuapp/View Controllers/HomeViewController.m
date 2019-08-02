@@ -15,8 +15,10 @@
 #import "UIViewController+Alerts.h"
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
+#import "DetailsViewController.h"
 #import "Masonry.h"
 #import "Favorite.h"
+#import "AppDelegate.h"
 #import "FilterViewController.h"
 
 @interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate>
@@ -67,7 +69,13 @@
     [self fetchPosts];
 }
 
-- (void) favoritePost: (NSString *)post withUser: (NSString *)user{
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController.tabBar setHidden:NO];
+}
+
+- (void) favoritePost: (NSString *)post withUser: (NSString *)user {
     [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(!succeeded){
             NSLog(@"Error favoriting event: %@", error.localizedDescription);
@@ -78,7 +86,7 @@
     }];
 }
 
-- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
+- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user {
     PFQuery *favoriteQuery = [Favorite query];
     [favoriteQuery whereKey: @"postID" equalTo: post];
     [favoriteQuery whereKey: @"userID" equalTo: user];
@@ -87,6 +95,16 @@
             [favoritedPost deleteInBackground];
         }
     }];
+}
+
+
+- (void) showDetails: (Post *)post {
+    NSLog(@"HELLO");
+    DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
+    detailsViewController.post = post;
+    [self.navigationController pushViewController:detailsViewController animated:YES];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController.tabBar setHidden:YES];
 }
 
 -(void)didSelectCell: (NSIndexPath *)indexPath {
@@ -108,6 +126,13 @@
         }
     }];
     [self.feed.refreshControl endRefreshing];
+
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"CELL HAS BEEN SELECTED");
+    Post *post = self.feed.posts[indexPath.row];
+    [self showDetails: post];
 }
 
 @end

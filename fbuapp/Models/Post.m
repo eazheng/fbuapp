@@ -18,6 +18,7 @@
 @dynamic authorRole;
 @dynamic createdAt;
 @dynamic eventLocation;
+@dynamic eventLocationName;
 @dynamic eventPrice;
 @dynamic image;
 

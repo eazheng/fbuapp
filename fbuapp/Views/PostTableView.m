@@ -13,6 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
+#import "DetailsViewController.h"
 #import "EventCategory.h"
 #import "UIColor+Helpers.h"
 #import "Favorite.h"
@@ -138,6 +139,7 @@ static NSString *kTableViewPostCell = @"PostCell";
     return cell;
 }
 
+
 #pragma mark - PostTableViewDelegate
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{
@@ -146,6 +148,8 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 - (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
     [self.delegate unFavoritePost: post withUser: user];
+
 }
+
 
 @end

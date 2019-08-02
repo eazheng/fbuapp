@@ -25,6 +25,7 @@ Key.h
 Key.m
 *Key.h
 *Key.m
+fbuapp/.DS_Store
 
 ## Obj-C/Swift specific
 *.hmap
