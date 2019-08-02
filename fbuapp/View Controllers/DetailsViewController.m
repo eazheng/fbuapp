@@ -77,9 +77,9 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     [button setTitle:@"Send a message" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.backgroundColor = [UIColor blueColor];
-    UIImage *buttonImage = [UIImage imageNamed:@"messenger_icon"];
-    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-    button.imageEdgeInsets = UIEdgeInsetsMake(0., button.frame.size.width - (buttonImage.size.width + 15.), 0., 0.);
+//    UIImage *buttonImage = [UIImage imageNamed:@"messenger_icon"];
+//    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+//    button.imageEdgeInsets = UIEdgeInsetsMake(0., button.frame.size.width - (buttonImage.size.width + 15.), 0., 0.);
     [self.view addSubview:button];
 }
 
