@@ -115,7 +115,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             cell.locationNameLabel.text = self.post.eventLocationName;
 
             
-            //TODO: get distance away from current user.
             NSString *dist = [PFGeoPoint distanceToPoint: self.post.eventLocation fromLocation: self.currentLocation];
             cell.locationDistanceLabel.text = [NSString stringWithFormat:@"About %@ miles away", dist];
             return cell;

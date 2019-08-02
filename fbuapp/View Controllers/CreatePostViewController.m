@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userLevelControl;
 @property (weak, nonatomic) IBOutlet UITextField *eventPriceField;
-@property (weak, nonatomic) IBOutlet UILabel *eventCategoryLabel;
+
 @property NSInteger eventCategory;
 @property BOOL pickedImage;
 @property CategoryHeaderView *pillSelector;
@@ -47,9 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-    
+
     self.pickedImage = false;
     self.eventCategory = -1;
     
@@ -111,10 +109,13 @@
     
     self.eventPriceField.delegate= self;
     
-    self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
     
-    [self.contentView addSubview:self.pillSelector];
+    self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,screenBounds.size.width,60)];
+    
+    [self.pillLocationView addSubview:self.pillSelector];
     self.pillSelector.delegate = self;
+    NSLog(@"%f %f", self.view.frame.size.height, self.view.frame.size.width);
 }
 
 // Present the autocomplete view controller when the button is pressed.

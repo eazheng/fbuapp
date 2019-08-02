@@ -64,10 +64,10 @@
 //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
 //        self.window.rootViewController = navigationController;
 //    }
-//
+
     CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
     UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
-    
+
     HomeViewController *homeViewController = [[HomeViewController alloc] init];
     UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     
