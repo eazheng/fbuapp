@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Parse/Parse.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,13 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RegisterViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
+//user interaction disabled
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
 - (IBAction)signupButton:(id)sender;
-@property (weak, nonatomic) IBOutlet UIImageView *pictureView;
-@property (strong, nonatomic) IBOutlet UITextField *emailField;
-- (IBAction)addPhotoButton:(id)sender;
-
+//edit design of button
+@property (weak, nonatomic) IBOutlet UIButton *signupButton;
+@property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *profilePictureView;
 
 @end
 
