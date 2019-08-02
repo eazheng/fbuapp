@@ -49,7 +49,7 @@
         NSLog(@"First: %@", currentUser[@"firstName"]);
     }
     else {
-        NSLog(@"Error, user not found")
+        NSLog(@"Error, user not found");
     }
     
     //make profile image circular

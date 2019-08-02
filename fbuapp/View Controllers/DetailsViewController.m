@@ -15,6 +15,7 @@
 #import "CategoryCell.h"
 #import "Masonry.h"
 #import "PFGeoPoint+Helpers.h"
+#import "UIColor+Helpers.h"
 
 static NSUInteger const kNumberOfCellTypes = 6;
 typedef NS_ENUM(NSUInteger, DetailsCellType) {
@@ -54,9 +55,9 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     // Do any additional setup after loading the view from its nib.
     self.detailsTableView = [[UITableView alloc] init]; //[PFUser currentUser].username
     [self.view addSubview:self.detailsTableView];
-
+    CGFloat buttonHeight = 50;
     [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, buttonHeight, 0));
     }];
     self.detailsTableView.dataSource = self;
     self.detailsTableView.delegate = self;
@@ -68,7 +69,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
                                       initWithFrame:CGRectZero];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    CGFloat buttonHeight = 50;
     NSLog(@"Height: %f Width: %f", self.view.frame.size.height, self.view.frame.size.width);
     button.frame = CGRectMake(0, self.view.frame.size.height - buttonHeight, self.view.frame.size.width, buttonHeight);
     [button addTarget:self
@@ -77,7 +77,9 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     [button setTitle:@"Send a message" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.backgroundColor = [UIColor blueColor];
-
+    UIImage *buttonImage = [UIImage imageNamed:@"messenger_icon"];
+    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    button.imageEdgeInsets = UIEdgeInsetsMake(0., button.frame.size.width - (buttonImage.size.width + 15.), 0., 0.);
     [self.view addSubview:button];
 }
 
@@ -152,10 +154,16 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 - (IBAction)contactAuthorButtonAction:(id)sender {
     NSLog(@"I want to contact the author!");
     NSString *userId = @"emily.zheng.96780";
-    NSString *linkString = [NSString stringWithFormat:@"m.me/%@", userId];
-    NSURL *linkUrl = [NSURL URLWithString:linkString];
-    UIApplication *application = [UIApplication sharedApplication];
-    [application openURL:linkUrl options:@{} completionHandler:nil];
+//    NSString *linkString = [NSString stringWithFormat:@"google.com"];
+
+    NSString *linkString = [NSString stringWithFormat:@"http://m.me/%@", userId];
+    NSLog(@"Line string: %@", linkString);
+//    NSURL *linkUrl = [NSURL URLWithString:linkString];
+//    UIApplication *application = [UIApplication sharedApplication];
+//    [application openURL:linkUrl options:@{} completionHandler:nil];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: linkString] options:@{} completionHandler:nil];
+    
 }
 
 
