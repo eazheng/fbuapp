@@ -30,7 +30,7 @@
                     <constraint firstAttribute="bottom" secondItem="z4Y-6a-3q1" secondAttribute="bottom" constant="18" id="3Tg-Jc-snb"/>
                     <constraint firstItem="z4Y-6a-3q1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="FXy-UZ-97D"/>
                     <constraint firstItem="z4Y-6a-3q1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ZXh-9K-3Rv"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z4Y-6a-3q1" secondAttribute="trailingMargin" id="rNU-Hh-yb4"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="z4Y-6a-3q1" secondAttribute="trailingMargin" id="rNU-Hh-yb4"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>

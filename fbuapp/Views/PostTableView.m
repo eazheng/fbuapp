@@ -69,6 +69,11 @@ static NSString *kTableViewPostCell = @"PostCell";
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.refreshControl];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSLog(@"The Action I was waiting for is complete");
+        [self fetchPosts];
+    }];
 }
 
 -(void)fetchPosts{

@@ -17,6 +17,12 @@
 #import <GooglePlaces/GooglePlaces.h>
 #import "Key.h"
 
+typedef NS_ENUM(NSUInteger, TabBarItems) {
+    TabBarHome,
+    TabBarCompose,
+    TabBarProfile
+};
+
 @interface AppDelegate ()
 @property (strong, nonatomic) UIView *view;
 @end
@@ -65,30 +71,45 @@
 //        self.window.rootViewController = navigationController;
 //    }
 
-    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
-    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
-
-    HomeViewController *homeViewController = [[HomeViewController alloc] init];
-    UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    UINavigationController *createPostNavigationController = [self initializeCreatePostTab];
+    UINavigationController *homeViewNavigationController = [self initializeHomeTab];
     
-
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
-
-    tabBarController.tabBar.items[0].title = @"Home";
-    tabBarController.tabBar.items[1].title = @"Create Post";
-
-    self.window.rootViewController = tabBarController;
-
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
+    self.tabBarController.viewControllers = @[homeViewNavigationController, createPostNavigationController];
 
-    self.tabBarController.tabBar.items[0].title = @"Home";
-    self.tabBarController.tabBar.items[1].title = @"Create Post";
+    self.tabBarController.tabBar.items[TabBarHome].title = [self tabIdentifierForType:TabBarHome];
+    self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
 
     self.window.rootViewController = self.tabBarController;
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSLog(@"The Action I was waiting for is complete");
+        [self.tabBarController setSelectedIndex:0];
+        UINavigationController *createPostNavigationController = [self initializeCreatePostTab];
+        self.tabBarController.viewControllers = @[homeViewNavigationController, createPostNavigationController];
+        self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
+        
+    }];
+    
     return YES;
+}
+
+- (UINavigationController *) initializeHomeTab {
+    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    return homeViewControllerNavigationController;
+}
+
+- (UINavigationController *) initializeCreatePostTab {
+    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
+    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
+    return createPostNavigationController;
+}
+
+- (UINavigationController *) initializeProfileTab {
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
+    UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    return profileNavigationController;
 }
     
 - (BOOL)application:(UIApplication *)application
@@ -128,6 +149,22 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Private
+
+- (NSString *)tabIdentifierForType:(TabBarItems)type
+{
+    switch (type) {
+        case TabBarHome:
+            return @"Home";
+        case TabBarCompose:
+            return @"Create Post";
+        case TabBarProfile:
+            return @"Profile";
+        default:
+            NSLog(@"TabBarItem: I shouldn't be here");
+    }
 }
 
 @end
