@@ -1,8 +1,8 @@
 //
-//  DetailsViewController.h
+//  TitleCell.h
 //  fbuapp
 //
-//  Created by eazheng on 7/31/19.
+//  Created by eazheng on 7/30/19.
 //  Copyright © 2019 eazheng. All rights reserved.
 //
 
@@ -11,9 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DetailsViewController : UIViewController
+@interface TitleCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (weak, nonatomic) Post *post;
+@property Post *post;
 
 @end
 

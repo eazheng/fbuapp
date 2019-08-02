@@ -218,7 +218,7 @@
                 <outlet property="favoriteButton" destination="y4z-lA-oT0" id="BFh-Kx-y06"/>
                 <outlet property="userProfilePhoto" destination="gU8-5j-fRy" id="2Ri-jy-Nt1"/>
             </connections>
-            <point key="canvasLocation" x="86" y="87"/>
+            <point key="canvasLocation" x="85.507246376811594" y="86.383928571428569"/>
         </tableViewCell>
     </objects>
     <resources>
