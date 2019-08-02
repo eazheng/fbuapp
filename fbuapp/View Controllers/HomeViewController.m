@@ -96,6 +96,7 @@
     NSLog(@"HELLO");
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
+    detailsViewController.currentLocation = self.feed.currentLocation;
     [self.navigationController pushViewController:detailsViewController animated:YES];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [appDelegate.tabBarController.tabBar setHidden:YES];

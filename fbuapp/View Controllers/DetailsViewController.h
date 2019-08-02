@@ -11,9 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol DetailsViewDelegate <NSObject>
+
+
+
+@end
+
 @interface DetailsViewController : UIViewController
 
 @property (weak, nonatomic) Post *post;
+@property (strong, nonatomic) CLLocation * currentLocation;
 
 @end
 

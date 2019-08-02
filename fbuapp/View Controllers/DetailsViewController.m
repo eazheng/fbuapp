@@ -14,6 +14,7 @@
 #import "AuthorCell.h"
 #import "CategoryCell.h"
 #import "Masonry.h"
+#import "PFGeoPoint+Helpers.h"
 
 static NSUInteger const kNumberOfCellTypes = 6;
 typedef NS_ENUM(NSUInteger, DetailsCellType) {
@@ -109,10 +110,10 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         case DetailsCellTypeLocationCell: {
             LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             cell.locationNameLabel.text = self.post.eventLocationName;
+
             
-            PFGeoPoint *point = self.post.eventLocation;
             //TODO: get distance away from current user.
-            NSString *dist = @"1.9";
+            NSString *dist = [PFGeoPoint distanceToPoint: self.post.eventLocation fromLocation: self.currentLocation];
             cell.locationDistanceLabel.text = [NSString stringWithFormat:@"About %@ miles away", dist];
             return cell;
         }
