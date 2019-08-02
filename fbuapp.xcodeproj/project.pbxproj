@@ -39,6 +39,22 @@
 		63621F569495DE61AF213B2D /* Pods_fbuapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC76A9E39E04C6D89AFC7E1E /* Pods_fbuapp.framework */; };
 		830B5C0322F365BC002FCC24 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C0122F365BC002FCC24 /* SettingsViewController.m */; };
 		830B5C0422F365BC002FCC24 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B5C0222F365BC002FCC24 /* SettingsViewController.xib */; };
+		830B5C1322F3C01A002FCC24 /* LGSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C0722F3C019002FCC24 /* LGSideMenuView.m */; };
+		830B5C1422F3C01A002FCC24 /* LGSideMenuBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C0922F3C019002FCC24 /* LGSideMenuBorderView.m */; };
+		830B5C1522F3C01A002FCC24 /* LGSideMenuGesturesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C0B22F3C019002FCC24 /* LGSideMenuGesturesHandler.m */; };
+		830B5C1622F3C01A002FCC24 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C0C22F3C019002FCC24 /* LGSideMenuController.m */; };
+		830B5C1722F3C01A002FCC24 /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C1022F3C019002FCC24 /* LGSideMenuHelper.m */; };
+		830B5C1822F3C01A002FCC24 /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C1122F3C019002FCC24 /* LGSideMenuSegue.m */; };
+		830B5C1922F3C01A002FCC24 /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C1222F3C01A002FCC24 /* UIViewController+LGSideMenuController.m */; };
+		830B5C4D22F4AAD7002FCC24 /* RightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C4B22F4AAD7002FCC24 /* RightMenuViewController.m */; };
+		830B5C4E22F4AAD7002FCC24 /* RightMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B5C4C22F4AAD7002FCC24 /* RightMenuViewController.xib */; };
+		830B5C5122F4B0DA002FCC24 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C5022F4B0DA002FCC24 /* MainNavigationController.m */; };
+		830B5C5522F4B10A002FCC24 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C5322F4B10A002FCC24 /* EditViewController.m */; };
+		830B5C5622F4B10A002FCC24 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B5C5422F4B10A002FCC24 /* EditViewController.xib */; };
+		830B5C5A22F4B131002FCC24 /* SavedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C5822F4B131002FCC24 /* SavedViewController.m */; };
+		830B5C5B22F4B131002FCC24 /* SavedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B5C5922F4B131002FCC24 /* SavedViewController.xib */; };
+		830B5C5F22F4B140002FCC24 /* LogoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830B5C5D22F4B140002FCC24 /* LogoutViewController.m */; };
+		830B5C6022F4B140002FCC24 /* LogoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830B5C5E22F4B140002FCC24 /* LogoutViewController.xib */; };
 		83657DE022E24824002EB6A8 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DDE22E24824002EB6A8 /* LogViewController.m */; };
 		83657DE122E24824002EB6A8 /* LogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83657DDF22E24824002EB6A8 /* LogViewController.xib */; };
 		83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83657DEC22E67606002EB6A8 /* RegisterViewController.m */; };
@@ -138,6 +154,34 @@
 		830B5C0022F365BC002FCC24 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		830B5C0122F365BC002FCC24 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		830B5C0222F365BC002FCC24 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		830B5C0522F3C018002FCC24 /* LGSideMenuBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuBorderView.h; sourceTree = "<group>"; };
+		830B5C0622F3C018002FCC24 /* LGSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuView.h; sourceTree = "<group>"; };
+		830B5C0722F3C019002FCC24 /* LGSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuView.m; sourceTree = "<group>"; };
+		830B5C0822F3C019002FCC24 /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
+		830B5C0922F3C019002FCC24 /* LGSideMenuBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuBorderView.m; sourceTree = "<group>"; };
+		830B5C0A22F3C019002FCC24 /* LGSideMenuGesturesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuGesturesHandler.h; sourceTree = "<group>"; };
+		830B5C0B22F3C019002FCC24 /* LGSideMenuGesturesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuGesturesHandler.m; sourceTree = "<group>"; };
+		830B5C0C22F3C019002FCC24 /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; };
+		830B5C0D22F3C019002FCC24 /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
+		830B5C0E22F3C019002FCC24 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; };
+		830B5C0F22F3C019002FCC24 /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; };
+		830B5C1022F3C019002FCC24 /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
+		830B5C1122F3C019002FCC24 /* LGSideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuSegue.m; sourceTree = "<group>"; };
+		830B5C1222F3C01A002FCC24 /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; };
+		830B5C4A22F4AAD7002FCC24 /* RightMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RightMenuViewController.h; sourceTree = "<group>"; };
+		830B5C4B22F4AAD7002FCC24 /* RightMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RightMenuViewController.m; sourceTree = "<group>"; };
+		830B5C4C22F4AAD7002FCC24 /* RightMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RightMenuViewController.xib; sourceTree = "<group>"; };
+		830B5C4F22F4B0DA002FCC24 /* MainNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
+		830B5C5022F4B0DA002FCC24 /* MainNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
+		830B5C5222F4B10A002FCC24 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		830B5C5322F4B10A002FCC24 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		830B5C5422F4B10A002FCC24 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
+		830B5C5722F4B131002FCC24 /* SavedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavedViewController.h; sourceTree = "<group>"; };
+		830B5C5822F4B131002FCC24 /* SavedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavedViewController.m; sourceTree = "<group>"; };
+		830B5C5922F4B131002FCC24 /* SavedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedViewController.xib; sourceTree = "<group>"; };
+		830B5C5C22F4B140002FCC24 /* LogoutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogoutViewController.h; sourceTree = "<group>"; };
+		830B5C5D22F4B140002FCC24 /* LogoutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogoutViewController.m; sourceTree = "<group>"; };
+		830B5C5E22F4B140002FCC24 /* LogoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoutViewController.xib; sourceTree = "<group>"; };
 		83657DDD22E24824002EB6A8 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		83657DDE22E24824002EB6A8 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		83657DDF22E24824002EB6A8 /* LogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogViewController.xib; sourceTree = "<group>"; };
@@ -254,6 +298,7 @@
 		3827E2C322DE98F8008B8FA0 /* fbuapp */ = {
 			isa = PBXGroup;
 			children = (
+				830B5C1A22F485E9002FCC24 /* New Group */,
 				A496A59722E24F9E00F9E81A /* Views */,
 				3827E30722E7C09F008B8FA0 /* Helpers */,
 				83E6B27422E148E40045B437 /* View Controllers */,
@@ -334,13 +379,25 @@
 			path = DetailCells;
 			sourceTree = "<group>";
 		};
-		83657DE522E6451B002EB6A8 /* Views */ = {
+		830B5C1A22F485E9002FCC24 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				83657E8822E8D00D002EB6A8 /* Profile.h */,
-				83657E8922E8D00D002EB6A8 /* Profile.m */,
+				830B5C0522F3C018002FCC24 /* LGSideMenuBorderView.h */,
+				830B5C0922F3C019002FCC24 /* LGSideMenuBorderView.m */,
+				830B5C0E22F3C019002FCC24 /* LGSideMenuController.h */,
+				830B5C0C22F3C019002FCC24 /* LGSideMenuController.m */,
+				830B5C0A22F3C019002FCC24 /* LGSideMenuGesturesHandler.h */,
+				830B5C0B22F3C019002FCC24 /* LGSideMenuGesturesHandler.m */,
+				830B5C0D22F3C019002FCC24 /* LGSideMenuHelper.h */,
+				830B5C1022F3C019002FCC24 /* LGSideMenuHelper.m */,
+				830B5C0822F3C019002FCC24 /* LGSideMenuSegue.h */,
+				830B5C1122F3C019002FCC24 /* LGSideMenuSegue.m */,
+				830B5C0622F3C018002FCC24 /* LGSideMenuView.h */,
+				830B5C0722F3C019002FCC24 /* LGSideMenuView.m */,
+				830B5C0F22F3C019002FCC24 /* UIViewController+LGSideMenuController.h */,
+				830B5C1222F3C01A002FCC24 /* UIViewController+LGSideMenuController.m */,
 			);
-			path = Views;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		83E6B27022E136FD0045B437 /* Models */ = {
@@ -380,18 +437,26 @@
 				83E6B27522E234C10045B437 /* ProfileViewController.h */,
 				83E6B27622E234C10045B437 /* ProfileViewController.m */,
 				83E6B27722E234C10045B437 /* ProfileViewController.xib */,
-				3898B14C22F0BD790022B219 /* DetailsViewController.h */,
-				3898B14D22F0BD790022B219 /* DetailsViewController.m */,
-				3898B14E22F0BD790022B219 /* DetailsViewController.xib */,
 				830B5C0022F365BC002FCC24 /* SettingsViewController.h */,
 				830B5C0122F365BC002FCC24 /* SettingsViewController.m */,
 				830B5C0222F365BC002FCC24 /* SettingsViewController.xib */,
-				83657DF022E67798002EB6A8 /* EditViewController.h */,
-				83657DF122E67798002EB6A8 /* EditViewController.m */,
-				83657DF222E67798002EB6A8 /* EditViewController.xib */,
 				3898B17D22F210E70022B219 /* DetailsViewController.h */,
 				3898B17E22F210E70022B219 /* DetailsViewController.m */,
 				3898B17F22F210E70022B219 /* DetailsViewController.xib */,
+				830B5C4A22F4AAD7002FCC24 /* RightMenuViewController.h */,
+				830B5C4B22F4AAD7002FCC24 /* RightMenuViewController.m */,
+				830B5C4C22F4AAD7002FCC24 /* RightMenuViewController.xib */,
+				830B5C4F22F4B0DA002FCC24 /* MainNavigationController.h */,
+				830B5C5022F4B0DA002FCC24 /* MainNavigationController.m */,
+				830B5C5222F4B10A002FCC24 /* EditViewController.h */,
+				830B5C5322F4B10A002FCC24 /* EditViewController.m */,
+				830B5C5422F4B10A002FCC24 /* EditViewController.xib */,
+				830B5C5722F4B131002FCC24 /* SavedViewController.h */,
+				830B5C5822F4B131002FCC24 /* SavedViewController.m */,
+				830B5C5922F4B131002FCC24 /* SavedViewController.xib */,
+				830B5C5C22F4B140002FCC24 /* LogoutViewController.h */,
+				830B5C5D22F4B140002FCC24 /* LogoutViewController.m */,
+				830B5C5E22F4B140002FCC24 /* LogoutViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -530,17 +595,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830B5C6022F4B140002FCC24 /* LogoutViewController.xib in Resources */,
 				3898B15D22F0EC1F0022B219 /* TitleCell.xib in Resources */,
 				3898B17622F0EFC50022B219 /* CategoryCell.xib in Resources */,
 				3827E2D122DE98F9008B8FA0 /* LaunchScreen.storyboard in Resources */,
 				A419822B22EBBC4300791E06 /* PillCell.xib in Resources */,
 				3827E2CE22DE98F9008B8FA0 /* Assets.xcassets in Resources */,
 				830B5C0422F365BC002FCC24 /* SettingsViewController.xib in Resources */,
+				830B5C4E22F4AAD7002FCC24 /* RightMenuViewController.xib in Resources */,
 				A496A5A422E25CF800F9E81A /* PostCell.xib in Resources */,
 				3898B16722F0EEAB0022B219 /* LocationCell.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
 				A496A59622E24C9B00F9E81A /* HomeViewController.xib in Resources */,
 				3827E30422E236BC008B8FA0 /* CreatePostViewController.xib in Resources */,
+				830B5C5622F4B10A002FCC24 /* EditViewController.xib in Resources */,
 				38FBA5A722E8E026002C1114 /* EnterLocationViewController.xib in Resources */,
 				A419822C22EBBC4300791E06 /* CategoryHeaderView.xib in Resources */,
 				3898B16222F0EE980022B219 /* DescriptionCell.xib in Resources */,
@@ -549,10 +617,10 @@
 				83657DE122E24824002EB6A8 /* LogViewController.xib in Resources */,
 				83E6B27922E234C10045B437 /* ProfileViewController.xib in Resources */,
 				3827E2CC22DE98F8008B8FA0 /* Main.storyboard in Resources */,
+				830B5C5B22F4B131002FCC24 /* SavedViewController.xib in Resources */,
 				83657DEF22E67606002EB6A8 /* RegisterViewController.xib in Resources */,
 				3898B16C22F0EEC10022B219 /* AuthorCell.xib in Resources */,
 				A456BCBF22F204D2008C4E3B /* FilterViewController.xib in Resources */,
-				83657DF422E67798002EB6A8 /* EditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,19 +706,26 @@
 			files = (
 				A419823F22EFB05900791E06 /* Favorite.m in Sources */,
 				A419822D22EBBC4300791E06 /* CategoryHeaderView.m in Sources */,
+				830B5C1622F3C01A002FCC24 /* LGSideMenuController.m in Sources */,
 				A419823122EF5C2700791E06 /* EventCategory.m in Sources */,
 				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
 				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
+				830B5C1322F3C01A002FCC24 /* LGSideMenuView.m in Sources */,
 				3898B17522F0EFC50022B219 /* CategoryCell.m in Sources */,
 				A456BCC822F24AE2008C4E3B /* PFFileObject+Helpers.m in Sources */,
-				3898B14F22F0BD790022B219 /* DetailsViewController.m in Sources */,
 				3827E30322E236BC008B8FA0 /* CreatePostViewController.m in Sources */,
+				830B5C5522F4B10A002FCC24 /* EditViewController.m in Sources */,
 				38FBA5B222EA1DEA002C1114 /* Utils.m in Sources */,
+				830B5C5122F4B0DA002FCC24 /* MainNavigationController.m in Sources */,
 				A456BCC222F24317008C4E3B /* PFGeoPoint+Helpers.m in Sources */,
 				38FBA5A622E8E026002C1114 /* EnterLocationViewController.m in Sources */,
 				830B5C0322F365BC002FCC24 /* SettingsViewController.m in Sources */,
+				830B5C4D22F4AAD7002FCC24 /* RightMenuViewController.m in Sources */,
 				3827E2D422DE98F9008B8FA0 /* main.m in Sources */,
 				3827E2C622DE98F8008B8FA0 /* AppDelegate.m in Sources */,
+				830B5C1522F3C01A002FCC24 /* LGSideMenuGesturesHandler.m in Sources */,
+				830B5C5A22F4B131002FCC24 /* SavedViewController.m in Sources */,
+				830B5C1422F3C01A002FCC24 /* LGSideMenuBorderView.m in Sources */,
 				3898B14122EB6DB70022B219 /* UIViewController+Alerts.m in Sources */,
 				0C01F9F322EA7A90009D4947 /* Post.m in Sources */,
 				A496A59522E24C9B00F9E81A /* HomeViewController.m in Sources */,
@@ -658,18 +733,20 @@
 				A419823C22EF95B700791E06 /* PostTableView.m in Sources */,
 				A456BCBE22F204D2008C4E3B /* FilterViewController.m in Sources */,
 				A456BCC522F24829008C4E3B /* NSDate+Helpers.m in Sources */,
-				83657DF322E67798002EB6A8 /* EditViewController.m in Sources */,
 				83657DEE22E67606002EB6A8 /* RegisterViewController.m in Sources */,
+				830B5C5F22F4B140002FCC24 /* LogoutViewController.m in Sources */,
 				A419822E22EBBC4300791E06 /* PillCell.m in Sources */,
 				3898B17022F0EFA60022B219 /* ImageCell.m in Sources */,
 				3898B16622F0EEAB0022B219 /* LocationCell.m in Sources */,
 				83E6B27822E234C10045B437 /* ProfileViewController.m in Sources */,
 				3898B16B22F0EEC10022B219 /* AuthorCell.m in Sources */,
-				83657E8A22E8D00D002EB6A8 /* Profile.m in Sources */,
 				83657DE022E24824002EB6A8 /* LogViewController.m in Sources */,
+				830B5C1722F3C01A002FCC24 /* LGSideMenuHelper.m in Sources */,
 				3898B15C22F0EC1F0022B219 /* TitleCell.m in Sources */,
 				3898B18022F210E70022B219 /* DetailsViewController.m in Sources */,
+				830B5C1922F3C01A002FCC24 /* UIViewController+LGSideMenuController.m in Sources */,
 				3898B16122F0EE980022B219 /* DescriptionCell.m in Sources */,
+				830B5C1822F3C01A002FCC24 /* LGSideMenuSegue.m in Sources */,
 				A419823422EF675000791E06 /* UIColor+Helpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

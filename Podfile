@@ -15,4 +15,6 @@ target 'fbuapp' do
   pod 'AFNetworking'
   pod 'DateTools'
   pod 'Masonry'
+  pod 'LMSideBarController'
+
 end

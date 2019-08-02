@@ -19,10 +19,18 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "FBSDKProfile.h"
 #import "Parse/Parse.h"
+//creating sidebar
+#import "UIViewController+LMSideBarController.h"
+
 
 
 @interface ProfileViewController () <PostCellDelegate, UITableViewDelegate>
 @property (nonatomic, strong) UIImage *image;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIButton *button;
+
+
+
 
 @end
 
@@ -31,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
     //Navigation bar button to send user back to HomeViewController.
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Exit" style:UIBarButtonItemStylePlain target:self action:@selector(didTapBack)];
     
@@ -49,7 +58,7 @@
         NSLog(@"First: %@", currentUser[@"firstName"]);
     }
     else {
-        NSLog(@"Error, user not found")
+        NSLog(@"Error, user not found");
     }
     
     //make profile image circular
@@ -81,14 +90,10 @@
 
 
 - (void)didTapSettings {
-    //Take User back to SettingsViewController
-    SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
-    settingsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    settingsViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-    [self presentViewController:navigationController animated:YES completion: nil];    
+    //Display side menu
+    [self.sideBarController showMenuViewControllerInDirection:LMSideBarControllerDirectionRight];
 }
+
 
 
 @end

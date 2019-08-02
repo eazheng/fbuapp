@@ -17,6 +17,7 @@
 #import <GooglePlaces/GooglePlaces.h>
 #import "Key.h"
 
+
 @interface AppDelegate ()
 @property (strong, nonatomic) UIView *view;
 @end
@@ -24,7 +25,9 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+//    ChooseNavigationController *navigationController = [ChooseNavigationController new];
+//    self.window.rootViewController = navigationController;
+                                     
     [GMSPlacesClient provideAPIKey:API_KEY];
 
     [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -45,12 +48,14 @@
 //        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 //        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+//        self.window.rootViewController = navigationController;
 
         
         ProfileViewController *logViewController = [[ProfileViewController alloc] init];
         logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+        self.window.rootViewController = navigationController;
         
 
     }
@@ -61,8 +66,8 @@
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+        self.window.rootViewController = navigationController;
     }
-    self.window.rootViewController = navigationController;
     
     
 
