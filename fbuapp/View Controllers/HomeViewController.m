@@ -26,6 +26,7 @@
 @property (strong, nonatomic) PFQuery *postQuery;
 @property PostTableView * feed;
 
+
 @end
 
 @implementation HomeViewController
@@ -59,7 +60,9 @@
 
 - (IBAction)presentFilterViewController:(id)sender {
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
+    filterVCObj.currentLocation = [PFGeoPoint geoPointWithLocation: self.feed.currentLocation];
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:filterVCObj] animated:YES completion:nil];
+    
     
     filterVCObj.delegate = self;
 }

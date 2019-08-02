@@ -33,17 +33,12 @@
     
     self.eventCategory = -1;
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]init];
-    cancelButton.action = @selector(presentHomeViewController:);
-    cancelButton.title = @"Cancel";
-    cancelButton.target = self;
-    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeViewController:)];
     
-    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc]init];
-    searchButton.action = @selector(presentHomeOnFilter:);
-    searchButton.title = @"Search";
-    searchButton.target = self;
-    self.navigationItem.rightBarButtonItem = searchButton;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
+    
+    [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
+    [self.maxDistance setKeyboardType:UIKeyboardTypeNumberPad];
     
     
     CategoryHeaderView* pillSelector = [[CategoryHeaderView alloc] initWithZero];
@@ -62,14 +57,26 @@
 - (IBAction)presentHomeOnFilter:(id)sender {
     self.postQuery = [Post query];
     if(![self.eventTitle.text isEqualToString:@""]){
-        [self.postQuery whereKey: @"eventTitle" equalTo: self.eventTitle.text];
+        [self.postQuery whereKey: @"eventTitle" matchesRegex: self.eventTitle.text modifiers: @"i"];
     }
     if(self.eventCategory != -1){
         [self.postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory)];
     }
     
-    [self queryWithArray: self.roleControl.selectedSegmentTitles withValueArray: @[@"Beginner", @"Intermediate", @"Expert"] withKey: @"authorSkillLevel"];
-    [self queryWithArray: self.levelMultiControl.selectedSegmentTitles withValueArray: @[@"Learn", @"Teach", @"Collaborate"] withKey: @"authorRole"];
+    [self queryWithArray: self.levelMultiControl.selectedSegmentTitles withValueArray: @[@"Beginner", @"Intermediate", @"Expert"] withKey: @"authorSkillLevel"];
+    [self queryWithArray: self.roleControl.selectedSegmentTitles withValueArray: @[@"Learn", @"Teach", @"Collaborate"] withKey: @"authorRole"];
+    
+    if(![self.maxPrice.text isEqualToString:@""]){
+//        if ([self isValidNumber: self.maxPrice.text]){
+            [self.postQuery whereKey:@"eventPrice" lessThanOrEqualTo:@([self.maxPrice.text floatValue])];
+//        }
+    }
+    if(![self.maxDistance.text isEqualToString:@""]){
+//        if([self isValidNumber: self.maxDistance.text]){
+            [self.postQuery whereKey:@"eventLocation" nearGeoPoint:self.currentLocation withinMiles: [self.maxDistance.text floatValue]];
+//        }
+    }
+    
     
     [self.delegate filterPostsWithQuery: self.postQuery];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -94,6 +101,12 @@
         }
         [self.postQuery whereKey:key containedIn: queryArray];
     }
+}
+
+-(BOOL)isValidNumber: (NSString *) string{
+    NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
+    NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString: string];
+    return [alphaNums isSupersetOfSet:inStringSet];
 }
 
 - (IBAction)presentHomeViewController:(id)sender {

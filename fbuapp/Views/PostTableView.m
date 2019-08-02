@@ -28,7 +28,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 
 @property (nonatomic,strong) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString * currentUserId;
 @property (strong, nonatomic) PFQuery *postQuery;
