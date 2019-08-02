@@ -89,7 +89,7 @@
                 [queryArray addObject:@2];
             }
             else{
-                NSLog(@"Error: Invalid skill selection.");
+                NSLog(@"Error: Invalid selection.");
             }
         }
         [self.postQuery whereKey:key containedIn: queryArray];
