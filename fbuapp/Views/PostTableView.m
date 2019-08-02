@@ -63,7 +63,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     [self registerNib:[UINib nibWithNibName:kTableViewPostCell bundle:nil] forCellReuseIdentifier:kTableViewPostCell];
     self.dataSource = self;
-    self.delegate = self;
     self.postQuery = [Post query];
     
     self.refreshControl = [[UIRefreshControl alloc] init];

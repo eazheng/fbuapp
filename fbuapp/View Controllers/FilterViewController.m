@@ -17,11 +17,12 @@
 @property NSInteger eventCategory;
 @property (weak, nonatomic) IBOutlet UITextField *eventTitle;
 @property (weak, nonatomic) IBOutlet UIView *eventCategoryView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *roleControl;
+@property (weak, nonatomic) IBOutlet MultiSelectSegmentedControl *roleControl;
+
 @property (weak, nonatomic) IBOutlet MultiSelectSegmentedControl *levelMultiControl;
 @property (weak, nonatomic) IBOutlet UITextField *maxPrice;
 @property (weak, nonatomic) IBOutlet UITextField *maxDistance;
-
+@property (strong, nonatomic) PFQuery *postQuery;
 
 @end
 
@@ -55,32 +56,44 @@
     
     
     
-    NSInteger authorRole = [self.roleControl selectedSegmentIndex];
-    NSArray *authorLevels = self.levelMultiControl.selectedSegmentTitles;
     
 }
 
 - (IBAction)presentHomeOnFilter:(id)sender {
-    PFQuery * postQuery = [Post query];
+    self.postQuery = [Post query];
     if(![self.eventTitle.text isEqualToString:@""]){
-        [postQuery whereKey: @"eventTitle" equalTo: self.eventTitle.text];
+        [self.postQuery whereKey: @"eventTitle" equalTo: self.eventTitle.text];
     }
     if(self.eventCategory != -1){
-        [postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory)];
+        [self.postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory)];
     }
-    NSInteger authorRole = [self.roleControl selectedSegmentIndex];
-    [postQuery whereKey: @"authorRole" equalTo: @(authorRole)];
-    NSIndexSet *authorLevels = self.levelMultiControl.selectedSegmentIndexes;
-//    if([authorLevels count] != nil){
-//        for (NSNumber* selectedIndex in authorLevels) {
-//            [postQuery whereKey: @"authorSkillLevel" equalTo: selectedIndex];
-//        }
-//    }
     
+    [self queryWithArray: self.roleControl.selectedSegmentTitles withValueArray: @[@"Beginner", @"Intermediate", @"Expert"] withKey: @"authorSkillLevel"];
+    [self queryWithArray: self.levelMultiControl.selectedSegmentTitles withValueArray: @[@"Learn", @"Teach", @"Collaborate"] withKey: @"authorRole"];
     
-    
-    [self.delegate filterPostsWithQuery: postQuery];
+    [self.delegate filterPostsWithQuery: self.postQuery];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) queryWithArray: (NSArray *) arrayToQuery withValueArray: (NSArray *) valueArray withKey: (NSString *) key{
+    if([arrayToQuery count] != nil){
+        NSMutableArray * queryArray = [NSMutableArray array];
+        for (NSString* selectedIndex in arrayToQuery) {
+            if([selectedIndex isEqualToString: valueArray[0]]){
+                [queryArray addObject:@0];
+            }
+            else if([selectedIndex isEqualToString: valueArray[1]]){
+                [queryArray addObject:@1];
+            }
+            else if([selectedIndex isEqualToString: valueArray[2]]){
+                [queryArray addObject:@2];
+            }
+            else{
+                NSLog(@"Error: Invalid skill selection.");
+            }
+        }
+        [self.postQuery whereKey:key containedIn: queryArray];
+    }
 }
 
 - (IBAction)presentHomeViewController:(id)sender {

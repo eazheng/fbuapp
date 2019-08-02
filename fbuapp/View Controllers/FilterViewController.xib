@@ -17,7 +17,7 @@
                 <outlet property="levelMultiControl" destination="wNt-PW-M1G" id="nJB-Me-esH"/>
                 <outlet property="maxDistance" destination="h3y-oY-5vw" id="JZ0-V3-7qn"/>
                 <outlet property="maxPrice" destination="ula-pj-oU9" id="Sah-Gy-x3G"/>
-                <outlet property="roleControl" destination="Bno-ed-Ts9" id="B2U-XQ-LN6"/>
+                <outlet property="roleControl" destination="Bno-ed-Ts9" id="AI5-Zj-XBF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -39,7 +39,7 @@
                         <constraint firstAttribute="height" constant="60" id="Fxc-4b-9fI"/>
                     </constraints>
                 </view>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bno-ed-Ts9">
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bno-ed-Ts9" customClass="MultiSelectSegmentedControl">
                     <rect key="frame" x="17" y="161" width="380" height="31"/>
                     <segments>
                         <segment title="Learn"/>
