@@ -48,6 +48,9 @@
         
         NSLog(@"First: %@", currentUser[@"firstName"]);
     }
+    else {
+        NSLog(@"Error, user not found")
+    }
     
     //make profile image circular
     self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;

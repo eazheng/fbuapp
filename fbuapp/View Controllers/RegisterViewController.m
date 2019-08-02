@@ -26,7 +26,7 @@
     [super viewDidLoad];
     
     
-    //Creating navigation bar button to send user back to LogViewController.
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(didCancel)];
     
     if ([FBSDKAccessToken currentAccessToken]) {
@@ -41,31 +41,31 @@
                      }
                  }];
                 
-                //get user's first,last name and userID
+                
                 self.firstNameField.text = profile.firstName;
                 self.lastNameField.text = profile.lastName;
                 self.userId = profile.userID;
                 
-                //test
+                
                 NSLog(@"Hello %@!", profile.firstName);
                 
-                //Welcome user
+                
                 self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", profile.firstName];
             }
         }];
     }
     
-    // Shadow and Radius of signupButton
+    
     self.signupButton.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
     self.signupButton.layer.shadowOffset = CGSizeMake(0, 2.0f);
     self.signupButton.layer.shadowOpacity = 1.0f;
     self.signupButton.layer.shadowRadius = 0.0f;
     self.signupButton.layer.cornerRadius = 4.0f;
     
-    //make profile image circular
+    
     self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
     self.profilePictureView.clipsToBounds = YES;
-    //add border to profile image
+    
     self.profilePictureView.layer.borderWidth = 3.0f;
     self.profilePictureView.layer.borderColor = [UIColor whiteColor].CGColor;
 
