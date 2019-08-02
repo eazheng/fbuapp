@@ -21,7 +21,7 @@
 #import "AppDelegate.h"
 #import "FilterViewController.h"
 
-@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate>
+@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, DetailsViewDelegate>
 
 @property (strong, nonatomic) PFQuery *postQuery;
 @property PostTableView * feed;
@@ -93,10 +93,10 @@
 
 
 - (void) showDetails: (Post *)post {
-    NSLog(@"HELLO");
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
     detailsViewController.currentLocation = self.feed.currentLocation;
+    detailsViewController.delegate = self;
     [self.navigationController pushViewController:detailsViewController animated:YES];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [appDelegate.tabBarController.tabBar setHidden:YES];

@@ -115,7 +115,6 @@
     
     [self.pillLocationView addSubview:self.pillSelector];
     self.pillSelector.delegate = self;
-    NSLog(@"%f %f", self.view.frame.size.height, self.view.frame.size.width);
 }
 
 // Present the autocomplete view controller when the button is pressed.
@@ -193,12 +192,10 @@
                     NSLog(@"Error posting Event: %@", error.localizedDescription);
                 }
                 else {
-                    [self clearFields];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostEventComplete" object:nil userInfo:nil];
                     
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
-//                    [self.tabBarController setSelectedIndex:0];
                 }
             }];
         }
@@ -298,19 +295,6 @@ didFailAutocompleteWithError:(NSError *)error {
 -(void)didSelectCell: (NSIndexPath *)indexPath {
     NSLog(@"EVENT CATEGORY RECEIVED by createPost");
     self.eventCategory = indexPath.row;
-}
-
--(void) clearFields {
-    self.eventTitleField.text = @"";
-    self.eventDescriptionField.text = @"";
-    self.eventLocationTextField.text = @"";
-    self.eventImage.image = [UIImage imageNamed:@"imageplaceholder-270x184"];
-TODO: self.pillSelector = nil;
-    self.pickedImage = false;
-    self.eventCategory = -1;
-    self.userRoleControl.selectedSegmentIndex = 0;
-    self.userLevelControl.selectedSegmentIndex = 0;
-    self.eventPriceField.text = @"";
 }
 
 @end

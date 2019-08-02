@@ -16,6 +16,8 @@
 #import "Masonry.h"
 #import "PFGeoPoint+Helpers.h"
 #import "UIColor+Helpers.h"
+#import "PostCell.h"
+#import "Favorite.h"
 
 static NSUInteger const kNumberOfCellTypes = 6;
 typedef NS_ENUM(NSUInteger, DetailsCellType) {
@@ -39,9 +41,10 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     ExpertSkill
 };
 
-@interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource, PostCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *detailsTableView;
+@property UIBarButtonItem *navButton;
 
 @end
 
@@ -69,19 +72,74 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
                                       initWithFrame:CGRectZero];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    NSLog(@"Height: %f Width: %f", self.view.frame.size.height, self.view.frame.size.width);
     button.frame = CGRectMake(0, self.view.frame.size.height - buttonHeight, self.view.frame.size.width, buttonHeight);
     [button addTarget:self
                action:@selector(contactAuthorButtonAction:)
      forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Send a message" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor blueColor];
-//    UIImage *buttonImage = [UIImage imageNamed:@"messenger_icon"];
-//    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-//    button.imageEdgeInsets = UIEdgeInsetsMake(0., button.frame.size.width - (buttonImage.size.width + 15.), 0., 0.);
+    NSArray *buttonColor = @[@0, @100, @255];
+    button.backgroundColor = [UIColor colorWithRGB:buttonColor];
     [self.view addSubview:button];
+    
+    self.navButton = [[UIBarButtonItem alloc]init];
+    //    myButton.title = @"Favorite!";
+    
+    
+    NSLog(@"%@", [PFUser currentUser]);
+    if (NO) { //}[PFUser currentUser] == self.post.eventAuthor) {
+        NSLog(@"This is my post");
+        [self.navButton setImage:[UIImage imageNamed:@"basket"]];
+//        self.navButton.title = @"";
+        self.navButton.action = @selector(onTapDelete:);
+    }
+    else {
+        NSLog(@"This is someone else's post");
+        [self.navButton setImage:[UIImage imageNamed:@"notfavorited"]];
+        self.navButton.action = @selector(onTapFavorited:);
+        
+        PFQuery *favoriteQuery = [Favorite query];
+        [favoriteQuery whereKey: @"postID" equalTo: self.post.objectId];
+        [favoriteQuery whereKey: @"userID" equalTo: @"myuserid"]; //[PFUser currentUser].username];
+        [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
+            if (favoritedPost) {
+                [self.navButton setImage:[UIImage imageNamed:@"favorited"]];
+                self.isFavorited = YES;
+            }
+            else{
+                [self.navButton setImage:[UIImage imageNamed:@"notfavorited"]];
+                self.isFavorited = NO;
+            }
+        }];
+    }
+    
+    self.navButton.target = self;
+    // then we add the button to the navigation bar
+    self.navigationItem.rightBarButtonItem = self.navButton;
 }
+
+- (IBAction)onTapFavorited:(id)sender {
+    if (self.isFavorited == NO){
+        NSLog(@"favoriting post");
+        [self.delegate favoritePost:self.post.objectId withUser:@"myuserid"]; //[PFUser currentUser].username];
+        [self.navButton setImage:[UIImage imageNamed:@"favorited"]];
+        self.isFavorited = YES;
+    }
+    else {
+        NSLog(@"unfavoriting post");
+        [self.delegate unFavoritePost: self.post.objectId withUser: @"myuserid"]; //[PFUser currentUser].username];
+        [self.navButton setImage:[UIImage imageNamed:@"notfavorited"]];
+        self.isFavorited = NO;
+    }
+}
+
+- (IBAction)onTapDelete:(id)sender {
+    NSLog(@"I want to delete this post");
+    // show alert to confirm if they want to delete post
+    // acutally delete the post
+    // send out NSNotification that the post was deleted so refresh timeline
+}
+
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return kNumberOfCellTypes;
@@ -113,7 +171,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         case DetailsCellTypeLocationCell: {
             LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             cell.locationNameLabel.text = self.post.eventLocationName;
-
             
             NSString *dist = [PFGeoPoint distanceToPoint: self.post.eventLocation fromLocation: self.currentLocation];
             cell.locationDistanceLabel.text = [NSString stringWithFormat:@"About %@ miles away", dist];
@@ -124,11 +181,15 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             
             cell.usernameLabel.text = self.post.eventAuthor.username;
             
-            if (self.post.authorRole == 1 && ![self.post.eventPrice isEqual:@0]) { //author wants to teach
+            if (self.post.authorRole != LearnRole && ![self.post.eventPrice isEqual:@0]) { //author wants to teach
                 cell.authorPriceLabel.text = [NSString stringWithFormat:@"Your cost: $%@", self.post.eventPrice];
+                NSArray *redColor = @[@180, @0, @0];
+                cell.authorPriceLabel.textColor = [UIColor colorWithRGB: redColor];
             }
-            else if (self.post.authorRole == 0 && ![self.post.eventPrice isEqual:@0]) { //author wants to learn
+            else if (self.post.authorRole != TeachRole && ![self.post.eventPrice isEqual:@0]) { //author wants to learn
                 cell.authorPriceLabel.text = [NSString stringWithFormat:@"You'll earn: $%@", self.post.eventPrice];
+                NSArray *greenColor = @[@0, @102, @51];
+                cell.authorPriceLabel.textColor = [UIColor colorWithRGB: greenColor];
             }
             else {
                 cell.authorPriceLabel.text = @"";
