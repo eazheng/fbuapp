@@ -51,8 +51,7 @@
         logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-        
-
+        self.window.rootViewController = navigationController;
     }
     else {
         //If user if not logged in, take them to LogViewController
@@ -61,8 +60,9 @@
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+        self.window.rootViewController = navigationController;
     }
-    self.window.rootViewController = navigationController;
+    
     
     
 
