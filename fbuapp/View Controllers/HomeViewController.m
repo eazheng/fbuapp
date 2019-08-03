@@ -61,7 +61,7 @@
 - (void) fetchPosts {
     [self.postQuery orderByDescending:@"createdAt"];
     self.postQuery.skip = self.feed.numberOfPosts;
-    self.postQuery.limit = 5;
+    self.postQuery.limit = 20;
     [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if ([posts count] != nil) {
             if(self.feed.numberOfPosts == 0){
@@ -87,7 +87,7 @@
             self.feed.isMoreDataLoading = YES;
             self.feed.loadingMoreView.frame = CGRectMake(0, self.feed.contentSize.height, self.feed.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
             [self.feed.loadingMoreView startAnimating];
-            self.feed.numberOfPosts += 5;
+            self.feed.numberOfPosts += 20;
             [self fetchPosts];
         }
         
