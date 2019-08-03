@@ -18,6 +18,7 @@
 #import "UIColor+Helpers.h"
 #import "PostCell.h"
 #import "Favorite.h"
+#import "UIViewController+Alerts.h"
 
 static NSUInteger const kNumberOfCellTypes = 6;
 typedef NS_ENUM(NSUInteger, DetailsCellType) {
@@ -45,6 +46,9 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 @property (strong, nonatomic) IBOutlet UITableView *detailsTableView;
 @property UIBarButtonItem *navButton;
+@property NSString *currentUser;
+@property NSString *currentPost;
+@property NSString *postAuthor;
 
 @end
 
@@ -52,6 +56,12 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.currentUser = @"myuserid";//[PFUser currentUser].username;
+    self.currentPost = self.post.objectId;
+    self.postAuthor = self.post.eventAuthor.username;
+    
+    
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     self.view.frame = screenBounds;
     
@@ -82,15 +92,13 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     button.backgroundColor = [UIColor colorWithRGB:buttonColor];
     [self.view addSubview:button];
     
+
     self.navButton = [[UIBarButtonItem alloc]init];
-    //    myButton.title = @"Favorite!";
     
-    
-    NSLog(@"%@", [PFUser currentUser]);
-    if (NO) { //}[PFUser currentUser] == self.post.eventAuthor) {
+    NSLog(@"%@", self.currentUser);
+    if (YES) { //[self.currentUser isEqualToString:self.postAuthor) {
         NSLog(@"This is my post");
         [self.navButton setImage:[UIImage imageNamed:@"basket"]];
-//        self.navButton.title = @"";
         self.navButton.action = @selector(onTapDelete:);
     }
     else {
@@ -100,7 +108,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         
         PFQuery *favoriteQuery = [Favorite query];
         [favoriteQuery whereKey: @"postID" equalTo: self.post.objectId];
-        [favoriteQuery whereKey: @"userID" equalTo: @"myuserid"]; //[PFUser currentUser].username];
+        [favoriteQuery whereKey: @"userID" equalTo: self.currentUser];
         [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
             if (favoritedPost) {
                 [self.navButton setImage:[UIImage imageNamed:@"favorited"]];
@@ -116,18 +124,19 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     self.navButton.target = self;
     // then we add the button to the navigation bar
     self.navigationItem.rightBarButtonItem = self.navButton;
+
 }
 
 - (IBAction)onTapFavorited:(id)sender {
     if (self.isFavorited == NO){
         NSLog(@"favoriting post");
-        [self.delegate favoritePost:self.post.objectId withUser:@"myuserid"]; //[PFUser currentUser].username];
+        [self.delegate favoritePost:self.post.objectId withUser:self.currentUser];
         [self.navButton setImage:[UIImage imageNamed:@"favorited"]];
         self.isFavorited = YES;
     }
     else {
         NSLog(@"unfavoriting post");
-        [self.delegate unFavoritePost: self.post.objectId withUser: @"myuserid"]; //[PFUser currentUser].username];
+        [self.delegate unFavoritePost: self.post.objectId withUser:self.currentUser];
         [self.navButton setImage:[UIImage imageNamed:@"notfavorited"]];
         self.isFavorited = NO;
     }
@@ -135,6 +144,35 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 - (IBAction)onTapDelete:(id)sender {
     NSLog(@"I want to delete this post");
+//    [self showAlertwithCancel:@"" withMessage:@"Are you sure you want to delete this post?"];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+                                                                   message:@"Are you sure you want to delete this post?"
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // handle response here.
+        NSLog(@"Yes, i'm sure i want to delete!");
+        [self.post deleteInBackground];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteEventComplete" object:nil userInfo:nil];
+        
+        NSLog(@"Delete Event Success!");
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+    // create a cancel action
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle response here.
+                                                         }];
+    // add actions to the alert controller
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+
     // show alert to confirm if they want to delete post
     // acutally delete the post
     // send out NSNotification that the post was deleted so refresh timeline

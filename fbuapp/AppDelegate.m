@@ -84,7 +84,7 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
     
     [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         NSLog(@"The Action I was waiting for is complete");
-        [self.tabBarController setSelectedIndex:0];
+        [self.tabBarController setSelectedIndex:TabBarHome];
         UINavigationController *createPostNavigationController = [self initializeCreatePostTab];
         self.tabBarController.viewControllers = @[homeViewNavigationController, createPostNavigationController];
         self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
