@@ -8,20 +8,17 @@
 
 #import "InfiniteScrollActivityView.h"
 
-@implementation InfiniteScrollActivityView
+@interface InfiniteScrollActivityView()
 
-UIActivityIndicatorView* activityIndicatorView;
+@property (strong, nonatomic) UIActivityIndicatorView* activityIndicatorView;
+
+@end
+
+
+@implementation InfiniteScrollActivityView
 
 + (CGFloat)defaultHeight{
     return 60.0;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder{
-    self = [super initWithCoder:aDecoder];
-    if(self){
-        [self setupActivityIndicator];
-    }
-    return self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -34,24 +31,24 @@ UIActivityIndicatorView* activityIndicatorView;
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    activityIndicatorView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+    self.activityIndicatorView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
 }
 
 - (void)setupActivityIndicator{
-    activityIndicatorView = [[UIActivityIndicatorView alloc] init];
-    activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-    activityIndicatorView.hidesWhenStopped = true;
-    [self addSubview:activityIndicatorView];
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] init];
+    self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    self.activityIndicatorView.hidesWhenStopped = true;
+    [self addSubview:self.activityIndicatorView];
 }
 
 -(void)stopAnimating{
-    [activityIndicatorView stopAnimating];
+    [self.activityIndicatorView stopAnimating];
     self.hidden = true;
 }
 
 -(void)startAnimating{
     self.hidden = false;
-    [activityIndicatorView startAnimating];
+    [self.activityIndicatorView startAnimating];
 }
 
 

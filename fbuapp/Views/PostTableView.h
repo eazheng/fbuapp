@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithUserId:(NSString *)userId;
 
-
 @property (nonatomic, weak) id <PostTableViewDelegate> delegate;
 @property (strong, nonatomic) NSMutableArray * posts;
 @property (strong, nonatomic) CLLocation * currentLocation;

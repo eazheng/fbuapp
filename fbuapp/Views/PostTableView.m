@@ -27,7 +27,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 
 @interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, PostCellDelegate>
 
-
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString * currentUserId;
@@ -49,13 +48,11 @@ static NSString *kTableViewPostCell = @"PostCell";
     return self;
 }
 
-
-
 -(void)customInit
 {
     self.frame = self.bounds;
-    
     self.isMoreDataLoading = NO;
+    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -81,7 +78,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     UIEdgeInsets insets = self.contentInset;
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.contentInset = insets;
-   
 }
 
 -(void)fetchPosts{
@@ -100,7 +96,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     NSLog(@"Error: %@",error.description);
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,7 +146,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     return cell;
 }
-
 
 #pragma mark - PostTableViewDelegate
 

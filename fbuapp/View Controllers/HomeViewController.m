@@ -26,30 +26,10 @@
 @property (strong, nonatomic) PFQuery *postQuery;
 @property PostTableView * feed;
 
-
 @end
 
+
 @implementation HomeViewController
-
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if(!self.feed.isMoreDataLoading){
-        int scrollViewContentHeight = self.feed.contentSize.height;
-        int scrollOffsetThreshold = scrollViewContentHeight - self.feed.bounds.size.height;
-        
-        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.feed.isDragging) {
-            self.feed.isMoreDataLoading = YES;
-            CGRect frame = CGRectMake(0, self.feed.contentSize.height, self.feed.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
-            self.feed.loadingMoreView.frame = frame;
-            [self.feed.loadingMoreView startAnimating];
-            self.feed.numberOfPosts += 5;
-            [self fetchPosts];
-        }
-        
-    }
-}
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,16 +48,8 @@
     pillSelector.delegate = self;
     self.feed.tableHeaderView = pillSelector;
     
-    UIBarButtonItem *myButton = [[UIBarButtonItem alloc]init];
-    myButton.action = @selector(presentFilterViewController:);
-    myButton.title = @"Filter";
-    myButton.target = self;
-    self.navigationItem.rightBarButtonItem = myButton;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterViewController:)];
 }
-
-
-
-
 
 - (IBAction)presentFilterViewController:(id)sender {
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
@@ -102,11 +74,24 @@
             [self.feed reloadData];
         }
         else {
-            NSLog(@"Reached the bottom.");
+            NSLog(@"No more posts to reload.");
         }
         [self.feed.loadingMoreView stopAnimating];
         [self.feed.refreshControl endRefreshing];
     }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.feed.isMoreDataLoading){
+        if(scrollView.contentOffset.y > (self.feed.contentSize.height - self.feed.bounds.size.height) && self.feed.isDragging) {
+            self.feed.isMoreDataLoading = YES;
+            self.feed.loadingMoreView.frame = CGRectMake(0, self.feed.contentSize.height, self.feed.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+            [self.feed.loadingMoreView startAnimating];
+            self.feed.numberOfPosts += 5;
+            [self fetchPosts];
+        }
+        
+    }
 }
 
 - (void) filterPostsWithQuery: (PFQuery *) postQuery{
@@ -143,7 +128,6 @@
     }];
 }
 
-
 - (void) showDetails: (Post *)post {
     NSLog(@"HELLO");
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
@@ -159,8 +143,6 @@
      self.feed.numberOfPosts = 0;
     [self fetchPosts];
 }
-
-
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"CELL HAS BEEN SELECTED");

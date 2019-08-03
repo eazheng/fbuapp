@@ -16,5 +16,4 @@ target 'fbuapp' do
   pod 'DateTools'
   pod 'Masonry'
   pod 'MultiSelectSegmentedControl'
-  pod 'SVPullToRefresh'
 end
