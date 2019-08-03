@@ -95,15 +95,21 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
     self.navButton = [[UIBarButtonItem alloc]init];
     
+//    UIImage *faveImage = [UIImage imageNamed:@"favorited"];
+//    UIButton *fave = [UIButton buttonWithType:UIButtonTypeCustom];
+//    fave.bounds = CGRectMake( 0, 0, faveImage.size.width, faveImage.size.height );
+//    [fave setImage:faveImage forState:UIControlStateNormal];
+//    UIBarButtonItem *faveBtn = [[UIBarButtonItem alloc] initWithCustomView:fave];
+    
     NSLog(@"%@", self.currentUser);
-    if (YES) { //[self.currentUser isEqualToString:self.postAuthor) {
+    if (NO) { //[self.currentUser isEqualToString:self.postAuthor) {
         NSLog(@"This is my post");
         [self.navButton setImage:[UIImage imageNamed:@"basket"]];
         self.navButton.action = @selector(onTapDelete:);
     }
     else {
         NSLog(@"This is someone else's post");
-        [self.navButton setImage:[UIImage imageNamed:@"notfavorited"]];
+        [self.navButton setImage:[UIImage imageNamed:@"staroutline"]];
         self.navButton.action = @selector(onTapFavorited:);
         
         PFQuery *favoriteQuery = [Favorite query];
@@ -115,7 +121,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
                 self.isFavorited = YES;
             }
             else{
-                [self.navButton setImage:[UIImage imageNamed:@"notfavorited"]];
+                [self.navButton setImage:[UIImage imageNamed:@"staroutline"]];
                 self.isFavorited = NO;
             }
         }];
@@ -124,7 +130,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     self.navButton.target = self;
     // then we add the button to the navigation bar
     self.navigationItem.rightBarButtonItem = self.navButton;
-
 }
 
 - (IBAction)onTapFavorited:(id)sender {
@@ -137,13 +142,13 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     else {
         NSLog(@"unfavoriting post");
         [self.delegate unFavoritePost: self.post.objectId withUser:self.currentUser];
-        [self.navButton setImage:[UIImage imageNamed:@"notfavorited"]];
+        [self.navButton setImage:[UIImage imageNamed:@"staroutline"]];
         self.isFavorited = NO;
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeEventComplete" object:nil userInfo:nil];
 }
 
 - (IBAction)onTapDelete:(id)sender {
-    NSLog(@"I want to delete this post");
 //    [self showAlertwithCancel:@"" withMessage:@"Are you sure you want to delete this post?"];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
                                                                    message:@"Are you sure you want to delete this post?"
@@ -151,31 +156,23 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     // create an OK action
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         // handle response here.
-        NSLog(@"Yes, i'm sure i want to delete!");
         [self.post deleteInBackground];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteEventComplete" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeEventComplete" object:nil userInfo:nil];
         
         NSLog(@"Delete Event Success!");
         [self.navigationController popViewControllerAnimated:YES];
         
     }];
     // create a cancel action
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction * _Nonnull action) {
-                                                             // handle response here.
-                                                         }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        // handle response here.
+    }];
+    
     // add actions to the alert controller
     [alert addAction:okAction];
     [alert addAction:cancelAction];
     
-    [self presentViewController:alert animated:YES completion:^{
-        // optional code for what happens after the alert controller has finished presenting
-    }];
-
-    // show alert to confirm if they want to delete post
-    // acutally delete the post
-    // send out NSNotification that the post was deleted so refresh timeline
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

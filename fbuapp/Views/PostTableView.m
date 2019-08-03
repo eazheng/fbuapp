@@ -74,7 +74,7 @@ static NSString *kTableViewPostCell = @"PostCell";
         [self fetchPosts];
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"DeleteEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ChangeEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         NSLog(@"fetching posts after deletion...");
         [self fetchPosts];
     }];
