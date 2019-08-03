@@ -21,7 +21,7 @@
 #import "AppDelegate.h"
 #import "FilterViewController.h"
 
-@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate>
+@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) PFQuery *postQuery;
 @property PostTableView * feed;
@@ -31,10 +31,31 @@
 
 @implementation HomeViewController
 
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.feed.isMoreDataLoading){
+        int scrollViewContentHeight = self.feed.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.feed.bounds.size.height;
+        
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.feed.isDragging) {
+            self.feed.isMoreDataLoading = YES;
+            CGRect frame = CGRectMake(0, self.feed.contentSize.height, self.feed.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+            self.feed.loadingMoreView.frame = frame;
+            [self.feed.loadingMoreView startAnimating];
+            self.feed.numberOfPosts += 5;
+            [self fetchPosts];
+        }
+        
+    }
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.feed.numberOfPosts = 0;
     self.postQuery = [Post query];
-    self.feed = [[PostTableView alloc] initWithUserId:@"myuserid"]; //[PFUser currentUser].username
+    self.feed = [[PostTableView alloc] initWithUserId:@"myuserid"];
     [self fetchPosts];
     self.feed.delegate = self;
     [self.view addSubview:self.feed];
@@ -62,13 +83,35 @@
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
     filterVCObj.currentLocation = [PFGeoPoint geoPointWithLocation: self.feed.currentLocation];
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:filterVCObj] animated:YES completion:nil];
-    
-    
     filterVCObj.delegate = self;
+}
+
+- (void) fetchPosts {
+    [self.postQuery orderByDescending:@"createdAt"];
+    self.postQuery.skip = self.feed.numberOfPosts;
+    self.postQuery.limit = 5;
+    [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if ([posts count] != nil) {
+            if(self.feed.numberOfPosts == 0){
+                self.feed.posts = [NSMutableArray arrayWithArray:posts];
+            }
+            else{
+                [self.feed.posts addObjectsFromArray:posts];
+            }
+            self.feed.isMoreDataLoading = NO;
+            [self.feed reloadData];
+        }
+        else {
+            NSLog(@"Reached the bottom.");
+        }
+        [self.feed.loadingMoreView stopAnimating];
+        [self.feed.refreshControl endRefreshing];
+    }];
 }
 
 - (void) filterPostsWithQuery: (PFQuery *) postQuery{
     self.postQuery = postQuery;
+    self.feed.numberOfPosts = 0;
     [self fetchPosts];
 }
 
@@ -113,24 +156,11 @@
 -(void)didSelectCell: (NSIndexPath *)indexPath {
     NSLog(@"EVENT CATEGORY RECEIVED by homeView");
     [self.postQuery whereKey: @"eventCategory" equalTo: @(indexPath.row)];
+     self.feed.numberOfPosts = 0;
     [self fetchPosts];
 }
 
-- (void) fetchPosts {
-    [self.postQuery orderByDescending:@"createdAt"];
-    self.postQuery.limit = 20;
-    [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            self.feed.posts = [NSArray arrayWithArray:posts] ;
-            [self.feed reloadData];
-        }
-        else {
-            NSLog(@"Failed to fetch posts from server");
-        }
-    }];
-    [self.feed.refreshControl endRefreshing];
 
-}
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"CELL HAS BEEN SELECTED");

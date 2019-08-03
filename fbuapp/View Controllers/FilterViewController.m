@@ -67,14 +67,14 @@
     [self queryWithArray: self.roleControl.selectedSegmentTitles withValueArray: @[@"Learn", @"Teach", @"Collaborate"] withKey: @"authorRole"];
     
     if(![self.maxPrice.text isEqualToString:@""]){
-//        if ([self isValidNumber: self.maxPrice.text]){
+        if ([self isValidNumber: self.maxPrice.text]){
             [self.postQuery whereKey:@"eventPrice" lessThanOrEqualTo:@([self.maxPrice.text floatValue])];
-//        }
+        }
     }
     if(![self.maxDistance.text isEqualToString:@""]){
-//        if([self isValidNumber: self.maxDistance.text]){
+        if([self isValidNumber: self.maxDistance.text]){
             [self.postQuery whereKey:@"eventLocation" nearGeoPoint:self.currentLocation withinMiles: [self.maxDistance.text floatValue]];
-//        }
+        }
     }
     
     
@@ -104,7 +104,8 @@
 }
 
 -(BOOL)isValidNumber: (NSString *) string{
-    NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
+    NSMutableCharacterSet *alphaNums = [NSMutableCharacterSet decimalDigitCharacterSet];
+    [alphaNums addCharactersInString: @"."];
     NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString: string];
     return [alphaNums isSupersetOfSet:inStringSet];
 }

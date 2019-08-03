@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Post.h"
+#import "InfiniteScrollActivityView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol PostTableViewDelegate <NSObject>
@@ -24,8 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property (nonatomic, weak) id <PostTableViewDelegate> delegate;
-@property (strong, nonatomic) NSArray * posts;
+@property (strong, nonatomic) NSMutableArray * posts;
 @property (strong, nonatomic) CLLocation * currentLocation;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
+@property (assign, nonatomic) int numberOfPosts;
+@property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 
 @end
 
