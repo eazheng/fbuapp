@@ -10,6 +10,8 @@
 #import "ProfileViewController.h"
 #import "LogViewController.h"
 #import "RegisterViewController.h"
+#import "EditViewController.h"
+#import "HomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
 #import "HomeViewController.h"
@@ -43,21 +45,12 @@
     
     //create for persisting user
     if ([PFUser currentUser] != nil) {
-        //if user is already logged in, take them to HomeViewController
-//        HomeViewController *homeViewController = [[HomeViewController alloc] init];
-//        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-//        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-//        self.window.rootViewController = navigationController;
-
-        
-        ProfileViewController *logViewController = [[ProfileViewController alloc] init];
-        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+//        if user is already logged in, take them to HomeViewController
+        HomeViewController *homeViewController = [[HomeViewController alloc] init];
+        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
         self.window.rootViewController = navigationController;
-        
-
     }
     else {
         //If user if not logged in, take them to LogViewController
@@ -68,7 +61,6 @@
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
         self.window.rootViewController = navigationController;
     }
-    
     
 
 //    UITabBarController *tabBarController = [[UITabBarController alloc] init];

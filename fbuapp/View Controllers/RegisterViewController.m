@@ -40,6 +40,16 @@
                          self.emailField.text = result[@"email"];
                      }
                  }];
+                FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                              initWithGraphPath:@"/{user-id}/picture"
+                                              parameters:nil
+                                              HTTPMethod:@"GET"];
+                [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                    if (!error) {
+                        NSLog(@"url: %@", result);
+                    }
+                }];
+        
                 
                 
                 self.firstNameField.text = profile.firstName;
@@ -96,6 +106,7 @@
     newUser.email = self.emailField.text;
     newUser.password = @" ";
     newUser[@"userId"] = self.userId;
+    newUser[@"bio"] = @" ";
     
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {

@@ -17,6 +17,8 @@
 @interface LogViewController ()
 @property (strong, nonatomic) NSString *userEmail;
 
+
+
 @end
 
 @implementation LogViewController
@@ -45,15 +47,18 @@
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
     
-    //access to user's email
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email"}]
-     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-         if (!error) {
-             NSLog(@"user:%@", result);
-             //call query
-             [self createQuery:result[@"email"]];
-         }
-     }];
+    
+    if ([FBSDKAccessToken currentAccessToken]) {
+        //access to user's email
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email"}]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSLog(@"user:%@", result);
+                 //call query
+                 [self createQuery:result[@"email"]];
+             }
+         }];
+    }
 }
 
 
