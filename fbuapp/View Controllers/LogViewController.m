@@ -47,9 +47,7 @@
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
     
-    
-    if ([FBSDKAccessToken currentAccessToken]) {
-        //access to user's email
+    //access to user's email
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
@@ -58,7 +56,7 @@
                  [self createQuery:result[@"email"]];
              }
          }];
-    }
+
 }
 
 
@@ -70,8 +68,8 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         PFUser *user = objects.firstObject;
         if (user) {
-            //If email matches an existing user, log user into app.
             NSLog(@"Existing user found");
+            //log user into app.
             [PFUser logInWithUsername:user.username password:@" "];
 
             //Take existing user to HomeViewController

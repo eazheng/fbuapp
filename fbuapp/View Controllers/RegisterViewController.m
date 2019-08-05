@@ -14,10 +14,13 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "Parse/Parse.h"
 #import "FBSDKProfile.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface RegisterViewController ()
 @property (strong, nonatomic) UIImage *picImage;
 @property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *profileId;
+
 @end
 
 @implementation RegisterViewController
@@ -40,25 +43,24 @@
                          self.emailField.text = result[@"email"];
                      }
                  }];
-                FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                              initWithGraphPath:@"/{user-id}/picture"
-                                              parameters:nil
-                                              HTTPMethod:@"GET"];
-                [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                    if (!error) {
-                        NSLog(@"url: %@", result);
-                    }
-                }];
-        
-                
                 
                 self.firstNameField.text = profile.firstName;
                 self.lastNameField.text = profile.lastName;
                 self.userId = profile.userID;
+                self.profileId = self.profilePictureView.profileID;
                 
                 
                 NSLog(@"Hello %@!", profile.firstName);
                 
+                //profile image
+
+                
+                self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
+                self.profilePictureView.clipsToBounds = YES;
+                self.profilePictureView.layer.borderWidth = 3.0f;
+                self.profilePictureView.layer.borderColor = [UIColor whiteColor].CGColor;
+
+            
                 
                 self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", profile.firstName];
             }
@@ -71,14 +73,6 @@
     self.signupButton.layer.shadowOpacity = 1.0f;
     self.signupButton.layer.shadowRadius = 0.0f;
     self.signupButton.layer.cornerRadius = 4.0f;
-    
-    
-    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
-    self.profilePictureView.clipsToBounds = YES;
-    
-    self.profilePictureView.layer.borderWidth = 3.0f;
-    self.profilePictureView.layer.borderColor = [UIColor whiteColor].CGColor;
-
 }
 
 
@@ -98,8 +92,7 @@
     //initialize the object
     PFUser *newUser = [PFUser user];
     
-    UIImage *image = [[FBSDKProfile currentProfile] imageURLForPictureMode:FBSDKProfilePictureModeSquare size:CGSizeMake(100, 100)];
-    newUser[@"profilePicture"] = [PFFileObject fileObjectWithData:UIImagePNGRepresentation(image)];
+    newUser[@"profileId"] = self.profileId;
     newUser[@"firstName"] = self.firstNameField.text;
     newUser[@"lastName"] = self.lastNameField.text;
     newUser.username = self.usernameField.text;
@@ -124,6 +117,7 @@
         }
     }];
 }
+
 
 
 @end

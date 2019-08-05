@@ -7,7 +7,6 @@
 //
 
 #import "EditViewController.h"
-#import "SettingsViewController.h"
 #import "RegisterViewController.h"
 #import "ProfileViewController.h"
 
@@ -24,21 +23,25 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(didTapSave)];
     
-    [self outline];
+    self.navigationItem.title = [NSString stringWithFormat:@"Edit Profile"];
+    
+    [self formatting];
 }
 
 
 - (void)didTapCancel {
-    SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
-    settingsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    settingsViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
+    profileViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
     [self presentViewController:navigationController animated:YES completion: nil];
 }
 
 
 - (void)didTapSave {
+    //display old informaiton first before user changes
+    [self fetchInfo];
     
     PFUser *currentUser = [PFUser currentUser];
     if ([PFUser currentUser]) {
@@ -66,28 +69,48 @@
 }
 
 
+- (void)fetchInfo {
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser != nil) {
+        [currentUser fetch];
+        NSLog(@"Current user: %@", currentUser.email);
+        self.editFirstName.text = currentUser[@"firstName"];
+        self.editLastName.text = currentUser[@"lastName"];
+        self.editUsername.text = currentUser.username;
+        self.editBio.text = currentUser[@"bio"];
+        self.editEmail.text = currentUser.email;
+    }
+    else {
+        NSLog(@"No information to display");
+    }
+}
 
-- (void)outline {
+- (void)formatting {
     self.editFirstName.layer.borderWidth = 0.5f;
-    self.editFirstName.layer.borderColor = [UIColor blackColor].CGColor;
+    self.editFirstName.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.editFirstName.layer.cornerRadius = 5.0f;
     
     self.editLastName.layer.borderWidth = 0.5f;
-    self.editLastName.layer.borderColor = [UIColor blackColor].CGColor;
+    self.editLastName.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.editLastName.layer.cornerRadius = 5.0f;
     
-    self.editUsername.layer.borderWidth = 0.5f;
-    self.editUsername.layer.borderColor = [UIColor blackColor].CGColor;
-    self.editUsername.layer.cornerRadius = 5.0f;
+    self.editEmail.layer.borderWidth = 0.5f;
+    self.editEmail.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.editEmail.layer.cornerRadius = 5.0f;
     
     self.editBio.layer.borderWidth = 0.5f;
-    self.editBio.layer.borderColor = [UIColor blackColor].CGColor;
+    self.editBio.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.editBio.layer.cornerRadius = 5.0f;
     
     self.editEmail.layer.borderWidth = 0.5f;
-    self.editEmail.layer.borderColor = [UIColor blackColor].CGColor;
+    self.editEmail.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.editEmail.layer.cornerRadius = 5.0f;
+    
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    self.profileImage.clipsToBounds = YES;
 }
 
 
+- (IBAction)didTapEdit:(id)sender {
+}
 @end
