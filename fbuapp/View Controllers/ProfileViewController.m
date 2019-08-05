@@ -28,7 +28,7 @@
 
 
 
-@interface ProfileViewController () <PostCellDelegate, PostTableViewDelegate> 
+@interface ProfileViewController () <PostTableViewDelegate>
 @property (nonatomic, strong) UIImage *image;
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) PFQuery *postQuery;
@@ -39,12 +39,6 @@
 @property (nonatomic, strong) NSArray *userFavorites;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 
-
-
-
-
-
-
 @end
 
 @implementation ProfileViewController
@@ -53,7 +47,7 @@
     [super viewDidLoad];
     
     //Navigation bar button to send user back to HomeViewController.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(didTapLogout)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonDidLogOut:)];
     
     //Navigation bar button to send user to SettingsViewController.
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(didTapEdit)];
@@ -116,12 +110,25 @@
     if(self.mainSegment.selectedSegmentIndex == 0)
     {
         // action for the first button (Current or Default)
+        [self.postQuery orderByDescending:@"createdAt"];
+        self.postQuery.limit = 20;
+        [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+            if (posts) {
+                self.feed.posts = [NSArray arrayWithArray:posts];
+                [self.feed reloadData];
+            }
+            else {
+                NSLog(@"Failed to fetch posts from server");
+            }
+        }];
+        
+        
         PFQuery *postQuery = [Post query];
         [postQuery whereKey:@"userId" equalTo:[PFUser currentUser].objectId];
         [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
             if (error) {
                 NSLog(@"%@", error.localizedDescription);
-                
+
             }
             else {
                 //If posts associated with current user's parse Id are found, and them into an array. Those posts within the array to to be loaded onto table.
@@ -130,6 +137,7 @@
                 [self.feed reloadData];
             }
         }];
+        [self.feed.refreshControl endRefreshing];
     }
     else if(self.mainSegment.selectedSegmentIndex == 1) {
         ///query for posts that have been saved
@@ -147,27 +155,12 @@
             }
         }];
     }
-        [self.feed.refreshControl endRefreshing];
+//        [self.feed.refreshControl endRefreshing];
 }
 
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self fetchPosts];
-}
-
-
-- (void)didTapLogout {
-    //Clearing out current PFUser --> will now be nil
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        //Take User back to LogViewController
-        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        LogViewController *logViewController = [[LogViewController alloc] init];
-        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-            appDelegate.window.rootViewController = navigationController;
-    }];
 }
 
 
@@ -181,12 +174,30 @@
 }
 
 
+- (void)loginButtonDidLogOut:(nonnull FBSDKLoginButton *)loginButton {
+    //Clearing out current PFUser --> will now be nil
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        //Take User back to LogViewController
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        LogViewController *logViewController = [[LogViewController alloc] init];
+        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+        appDelegate.window.rootViewController = navigationController;
+    }];
+    //logout of actual facebook account
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logOut];
+}
+
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{
     
 }
 - (void) unFavoritePost: (NSString *)post withUser: (NSString *)user{
     
 }
+
 
 
 @end

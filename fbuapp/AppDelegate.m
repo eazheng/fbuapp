@@ -27,8 +27,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    ChooseNavigationController *navigationController = [ChooseNavigationController new];
-//    self.window.rootViewController = navigationController;
+
                                      
     [GMSPlacesClient provideAPIKey:API_KEY];
 
@@ -43,67 +42,40 @@
         }];
         [Parse initializeWithConfiguration:config];
     
-    //create for persisting user
-//    if ([PFUser currentUser] != nil) {
-////        if user is already logged in, take them to HomeViewController
-//        HomeViewController *homeViewController = [[HomeViewController alloc] init];
-//        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-//        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-//        self.window.rootViewController = navigationController;
-//    }
-//    else {
-//        //If user if not logged in, take them to LogViewController
-//        LogViewController *logViewController = [[LogViewController alloc] init];
-//        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-//        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-//        self.window.rootViewController = navigationController;
-//    }
-    
-//    HomeViewController *homeViewController = [[ HomeViewController alloc] init];
-//    homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-//    homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-//    self.window.rootViewController = navigationController;
-    
-    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
-    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
-    
-    HomeViewController *homeViewController = [[HomeViewController alloc] init];
-    UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
-    
-    tabBarController.tabBar.items[0].title = @"Home";
-    tabBarController.tabBar.items[1].title = @"Create Post";
-    
-    self.window.rootViewController = tabBarController;
-    
-//    RegisterViewController *homeViewController = [[RegisterViewController alloc] init];
-//    homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-//    homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-//    self.window.rootViewController = navigationController;
+    //persisting user
+    if ([PFUser currentUser] != nil) {
+        NSLog(@"Logged in");
+        //if a user is logged in they were will be taken to item[0] which is home view
+        HomeViewController *homeViewController = [[HomeViewController alloc] init];
+        UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+        
+        CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
+        UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
+        
+        ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
+        UINavigationController *profileViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+        
+        self.tabBarController = [[UITabBarController alloc] init];
+        self.tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController, profileViewControllerNavigationController];
+        
+        self.tabBarController.tabBar.items[0].title = @"Home";
+        self.tabBarController.tabBar.items[1].title = @"Create Post";
+        self.tabBarController.tabBar.items[2].title = @"Profile";
+        self.window.rootViewController = self.tabBarController;
+        
+        //to choose which view controller to display
+//        [self.tabBarController setSelectedIndex:2];
+    }
+    else {
+        //If user if not logged in, take them to LogViewController
+        LogViewController *logViewController = [[LogViewController alloc] init];
+        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
-//    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-//    tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
-//
-//    tabBarController.tabBar.items[0].title = @"Home";
-//    tabBarController.tabBar.items[1].title = @"Create Post";
-//
-//    self.window.rootViewController = tabBarController;
-//
-//    self.tabBarController = [[UITabBarController alloc] init];
-//    self.tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
-//
-//    self.tabBarController.tabBar.items[0].title = @"Home";
-//    self.tabBarController.tabBar.items[1].title = @"Create Post";
-//
-//    self.window.rootViewController = self.tabBarController;
-    
+        UINavigationController *logViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+        self.window.rootViewController = logViewControllerNavigationController;
+    }
+
     return YES;
 }
     
