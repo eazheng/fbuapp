@@ -19,6 +19,7 @@
 #import "PostCell.h"
 #import "Favorite.h"
 #import "UIViewController+Alerts.h"
+#import "EventCategory.h"
 
 static NSUInteger const kNumberOfCellTypes = 6;
 typedef NS_ENUM(NSUInteger, DetailsCellType) {
@@ -238,6 +239,20 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             
         case DetailsCellTypeCategoryCell: {
             CategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+            
+            PFQuery *postQuery = [EventCategory query];
+            [postQuery whereKey: @"idNumber" equalTo: self.post[@"eventCategory"]];
+            [postQuery getFirstObjectInBackgroundWithBlock:^(PFObject *category, NSError *error) {
+                if (category) {
+                    cell.categoryLabel.text = [NSString stringWithFormat:@"Category: %@", category[@"name"]];
+                    cell.labelbgView.backgroundColor = [UIColor colorWithRGB: category[@"color"]];
+//                     cell.view.backgroundColor = [UIColor colorWithRGB: category[@"color"]];
+                }
+                else {
+                    NSLog(@"Failed to fetch categories.");
+                }
+            }];
+//            cell.categoryLabel.text = [NSString stringWithFormat:@"Category: %@", self.post.eventCategory];
             return cell;
         }
         default:
