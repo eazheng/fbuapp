@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *eventTitle;
 @property (weak, nonatomic) IBOutlet UIView *eventCategoryView;
 @property (weak, nonatomic) IBOutlet MultiSelectSegmentedControl *roleControl;
-
 @property (weak, nonatomic) IBOutlet MultiSelectSegmentedControl *levelMultiControl;
 @property (weak, nonatomic) IBOutlet UITextField *maxPrice;
 @property (weak, nonatomic) IBOutlet UITextField *maxDistance;
@@ -34,12 +33,10 @@
     self.eventCategory = -1;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeViewController:)];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
     
     [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
     [self.maxDistance setKeyboardType:UIKeyboardTypeNumberPad];
-    
     
     CategoryHeaderView* pillSelector = [[CategoryHeaderView alloc] initWithZero];
     pillSelector.delegate = self;
@@ -48,10 +45,6 @@
     [pillSelector mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.eventCategoryView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
-    
-    
-    
-    
 }
 
 - (IBAction)presentHomeOnFilter:(id)sender {
@@ -76,8 +69,6 @@
             [self.postQuery whereKey:@"eventLocation" nearGeoPoint:self.currentLocation withinMiles: [self.maxDistance.text floatValue]];
         }
     }
-    
-    
     [self.delegate filterPostsWithQuery: self.postQuery];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -96,7 +87,7 @@
                 [queryArray addObject:@2];
             }
             else{
-                NSLog(@"Error: Invalid selection.");
+                NSLog(@"Error: Invalid multipane selection.");
             }
         }
         [self.postQuery whereKey:key containedIn: queryArray];

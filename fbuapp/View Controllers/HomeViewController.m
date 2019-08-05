@@ -90,7 +90,6 @@
             self.feed.numberOfPosts += 20;
             [self fetchPosts];
         }
-        
     }
 }
 
