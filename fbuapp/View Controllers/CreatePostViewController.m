@@ -108,6 +108,7 @@
     self.eventPriceField.leftView = priceImage;
     
     self.eventPriceField.delegate= self;
+    [self.eventPriceField setKeyboardType:UIKeyboardTypeNumberPad];
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     
@@ -115,6 +116,17 @@
     
     [self.pillLocationView addSubview:self.pillSelector];
     self.pillSelector.delegate = self;
+    
+    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
+              initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
+    
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
 }
 
 // Present the autocomplete view controller when the button is pressed.
