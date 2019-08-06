@@ -26,6 +26,8 @@
     self.navigationItem.title = [NSString stringWithFormat:@"Edit Profile"];
     
     [self formatting];
+    
+    [self fetchInfo];
 }
 
 
@@ -41,10 +43,11 @@
 
 - (void)didTapSave {
     //display old informaiton first before user changes
-    [self fetchInfo];
     
     PFUser *currentUser = [PFUser currentUser];
-    if ([PFUser currentUser]) {
+    if ([PFUser currentUser] != nil) {
+        [currentUser fetch];
+        
         currentUser[@"firstName"] = self.editFirstName.text;
         currentUser[@"lastName"] = self.editLastName.text;
         currentUser.username = self.editUsername.text;

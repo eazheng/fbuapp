@@ -124,7 +124,6 @@
 		3898B17222F0EFC50022B219 /* CategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCell.h; sourceTree = "<group>"; };
 		3898B17322F0EFC50022B219 /* CategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryCell.m; sourceTree = "<group>"; };
 		3898B17422F0EFC50022B219 /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
-		3898B17C22F10B6B0022B219 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		3898B17D22F210E70022B219 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		3898B17E22F210E70022B219 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		3898B17F22F210E70022B219 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
@@ -134,10 +133,10 @@
 		38FBA5B022EA1DEA002C1114 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		38FBA5B122EA1DEA002C1114 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		7E043F0558EB857B2995A1E8 /* Pods-fbuapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuapp.debug.xcconfig"; path = "Target Support Files/Pods-fbuapp/Pods-fbuapp.debug.xcconfig"; sourceTree = "<group>"; };
-		830B5BFA22F353C8002FCC24 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		830B5C5222F4B10A002FCC24 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		830B5C5322F4B10A002FCC24 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		830B5C5422F4B10A002FCC24 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
+		830B5C6522F8E6AB002FCC24 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Key.h; path = /Users/belchercd/Desktop/fbuapp/fbuapp/Key.h; sourceTree = "<absolute>"; };
 		83657DDD22E24824002EB6A8 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		83657DDE22E24824002EB6A8 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		83657DDF22E24824002EB6A8 /* LogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogViewController.xib; sourceTree = "<group>"; };
@@ -162,7 +161,6 @@
 		A419823B22EF95B700791E06 /* PostTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostTableView.m; sourceTree = "<group>"; };
 		A419823D22EFB05900791E06 /* Favorite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
 		A419823E22EFB05900791E06 /* Favorite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
-		A456BCBA22F1FA7F008C4E3B /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		A456BCBB22F204D2008C4E3B /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		A456BCBC22F204D2008C4E3B /* FilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		A456BCBD22F204D2008C4E3B /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
@@ -260,14 +258,12 @@
 				83E6B27022E136FD0045B437 /* Models */,
 				3827E2C422DE98F8008B8FA0 /* AppDelegate.h */,
 				3827E2C522DE98F8008B8FA0 /* AppDelegate.m */,
-				3898B17C22F10B6B0022B219 /* Key.h */,
 				3827E2CA22DE98F8008B8FA0 /* Main.storyboard */,
 				3827E2CD22DE98F9008B8FA0 /* Assets.xcassets */,
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
-				830B5BFA22F353C8002FCC24 /* Key.h */,
-				A456BCBA22F1FA7F008C4E3B /* Key.h */,
+				830B5C6522F8E6AB002FCC24 /* Key.h */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";

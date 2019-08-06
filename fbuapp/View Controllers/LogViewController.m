@@ -84,7 +84,6 @@
             
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
             appDelegate.window.rootViewController = navigationController;
-//            [self presentViewController:navigationController animated:YES completion: nil];
         }
         else {
             //If email does not match an existing user, take user to RegisterViewController to create an account
