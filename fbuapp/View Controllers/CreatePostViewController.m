@@ -38,8 +38,6 @@
 @property BOOL pickedImage;
 @property CategoryHeaderView *pillSelector;
 @property BOOL editingPrice;
-@property CGRect originalFrame;
-@property CGFloat bottomOffset;
 @property CGFloat prevY;
 
 @end
@@ -55,9 +53,6 @@
     self.pickedImage = false;
     self.eventCategory = -1;
     self.editingPrice = NO;
-    self.originalFrame = self.view.frame;
-    self.bottomOffset = self.view.safeAreaInsets.bottom;
-    NSLog(@"original frame: %f %f %f %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
     self.prevY = self.view.frame.origin.y;
 
     
@@ -120,12 +115,13 @@
     self.eventPriceField.delegate= self;
     [self.eventPriceField setKeyboardType:UIKeyboardTypeNumberPad];
     
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    
-    self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,screenBounds.size.width,60)];
-    
-    [self.pillLocationView addSubview:self.pillSelector];
+    self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.pillSelector.delegate = self;
+    [self.view addSubview:self.pillSelector];
+    
+    [self.pillSelector mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.pillLocationView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
     
     UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
               initWithTarget:self action:@selector(handleSingleTap:)];
@@ -138,6 +134,7 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -148,20 +145,12 @@
 
 
 - (IBAction)onTapPriceField:(id)sender {
-    NSLog(@"Tapping price");
     self.editingPrice = YES;
     [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillChangeFrameNotification object:nil userInfo:nil];
-
-
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
 {
-
-//    if (self.editingPrice == YES) {
-////        [[NSNotificationCenter defaultCenter] postNotificationName:@"EndEditPrice" object:nil userInfo:nil];
-//        self.editingPrice = NO;
-//    }
     [self.view endEditing:YES];
 }
 
@@ -346,41 +335,28 @@ didFailAutocompleteWithError:(NSError *)error {
 }
 
 #pragma mark - keyboard movements
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    NSLog(@"in keyboardWillShow");
-    NSLog(@"frame before change: %f %f %f %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+- (void)keyboardWillShow:(NSNotification *)notification {
     if (self.editingPrice == YES) {
         CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
 
         [UIView animateWithDuration:0.3 animations:^{
             CGRect f = self.view.frame;
-            NSLog(@"height: %f", keyboardSize.height);
-            NSLog(@"Safe area: %f",self.bottomOffset);
             self.prevY = self.view.frame.origin.y;
-            f.origin.y = self.view.frame.origin.y - keyboardSize.height; // + self.bottomOffset;
+            f.origin.y = self.view.frame.origin.y - keyboardSize.height;
             self.view.frame = f;
         }];
     }
-    NSLog(@"frame after change: %f %f %f %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
 }
--(void)keyboardWillHide:(NSNotification *)notification
-{
-    NSLog(@"in keyboardWillHide");
+-(void)keyboardWillHide:(NSNotification *)notification {
     if (self.editingPrice == YES) {
         [UIView animateWithDuration:0.3 animations:^{
-//            self.view.frame = self.originalFrame;
             CGRect f = self.view.frame;
             f.origin.y = self.prevY;
-//            0.0f;
             self.view.frame = f;
-//            self.view.frame.origin.y = self.prevY;
-            //[self.view setFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height)];
 
         }];
     self.editingPrice = NO;
     }
-    NSLog(@"frame restored: %f %f %f %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
 }
 
 @end
