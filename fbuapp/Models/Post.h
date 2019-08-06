@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Post : PFObject <PFSubclassing>
 
 @property (nonatomic, strong) NSString *eventTitle;
-@property (nonatomic, strong) PFUser *eventAuthor;
+@property (nonatomic, strong) NSString *eventAuthor;
 @property (nonatomic, strong) NSString *eventDescription;
 @property (nonatomic, assign) NSInteger eventCategory;
 @property (nonatomic, assign) NSInteger authorSkillLevel;

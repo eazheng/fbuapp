@@ -31,7 +31,7 @@
     Post *newPost = [Post new];
     newPost.eventTitle = title;
     newPost.eventDescription = description;
-    newPost.eventAuthor = [PFUser currentUser];
+    newPost.eventAuthor = [PFUser currentUser].objectId;
     newPost.authorSkillLevel = authorSkill;
     newPost.authorRole = authorRole;
     newPost.eventCategory = cat;

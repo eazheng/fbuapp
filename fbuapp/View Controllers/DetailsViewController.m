@@ -20,6 +20,7 @@
 #import "Favorite.h"
 #import "UIViewController+Alerts.h"
 #import "EventCategory.h"
+#import "FBSDKProfile.h"
 
 static NSUInteger const kNumberOfCellTypes = 6;
 typedef NS_ENUM(NSUInteger, DetailsCellType) {
@@ -43,13 +44,14 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     ExpertSkill
 };
 
-@interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource, PostCellDelegate>
+@interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource>//, PostCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *detailsTableView;
 @property UIBarButtonItem *navButton;
 @property NSString *currentUser;
 @property NSString *currentPost;
-@property NSString *postAuthor;
+@property PFUser *postAuthor;
+@property (strong, nonatomic) PFQuery *postQuery;
 
 @end
 
@@ -58,10 +60,9 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.currentUser = @"myuserid";//[PFUser currentUser].username;
+    self.currentUser = @"Q78qpytNf5";//[PFUser currentUser].objectId;
     self.currentPost = self.post.objectId;
-    self.postAuthor = self.post.eventAuthor.username;
-    
+    self.postAuthor = [PFQuery getUserObjectWithId: self.post.eventAuthor];
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     self.view.frame = screenBounds;
@@ -102,8 +103,8 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 //    [fave setImage:faveImage forState:UIControlStateNormal];
 //    UIBarButtonItem *faveBtn = [[UIBarButtonItem alloc] initWithCustomView:fave];
     
-    NSLog(@"%@", self.currentUser);
-    if (NO) { //[self.currentUser isEqualToString:self.postAuthor) {
+    NSLog(@"current user: %@", self.currentUser);
+    if ([self.currentUser isEqualToString:self.postAuthor]) {
         NSLog(@"This is my post");
         [self.navButton setImage:[UIImage imageNamed:@"basket"]];
         self.navButton.action = @selector(onTapDelete:);
@@ -215,7 +216,10 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         case DetailsCellTypeAuthorCell: {
             AuthorCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             
-            cell.usernameLabel.text = self.post.eventAuthor.username;
+            cell.authorNameLabel.text = [NSString stringWithFormat:@"%@ %@", self.postAuthor[@"firstName"], self.postAuthor[@"lastName"]];
+            cell.usernameLabel.text = self.postAuthor[@"username"];
+            
+            cell.fbProfileView.profileID = self.postAuthor[@"fbUserId"];
             
             if (self.post.authorRole != LearnRole && ![self.post.eventPrice isEqual:@0]) { //author wants to teach
                 cell.authorPriceLabel.text = [NSString stringWithFormat:@"Your cost: $%@", self.post.eventPrice];
@@ -233,7 +237,9 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             
             NSString *role = [self roleIdentifierForType:self.post.authorRole];
             NSString *skill = [self skillIdentifierForType:self.post.authorSkillLevel];
-            cell.authorRoleLabel.text = [NSString stringWithFormat:@"%@ is of %@ skill level, looking to %@.", self.post.eventAuthor.username, skill, role];
+            cell.authorRoleLabel.text = [NSString stringWithFormat:@"%@ has %@ skill level, looking to %@.", self.postAuthor[@"firstName"], skill, role];
+            
+            
             return cell;
         }
             
@@ -268,12 +274,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
     NSString *linkString = [NSString stringWithFormat:@"http://m.me/%@", userId];
     NSLog(@"Line string: %@", linkString);
-//    NSURL *linkUrl = [NSURL URLWithString:linkString];
-//    UIApplication *application = [UIApplication sharedApplication];
-//    [application openURL:linkUrl options:@{} completionHandler:nil];
-    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: linkString] options:@{} completionHandler:nil];
-    
 }
 
 
