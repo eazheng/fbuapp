@@ -11,12 +11,10 @@
 
 @implementation Query
 
-- (id) init{ //(NSString *)eventName withCategory: (NSInteger) eventCategory withRole: (NSArray *)authorRole withLevel: (NSArray *)authorLevel withPrice: (NSNumber *) eventPrice withDistance: (float) eventDistance{
+- (id) init{
     self = [super init];
     self.name = @"";
     self.category = -1;
-//    self.role = [[NSIndexSet alloc] init];
-//    self.level = nil;
     self.price = -1.0;
     self.distance = -1.0;
     return self;

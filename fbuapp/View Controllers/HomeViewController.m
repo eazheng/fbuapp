@@ -81,8 +81,13 @@
             self.feed.isMoreDataLoading = NO;
             [self.feed reloadData];
         }
-        else {
+        else if(posts){
+            self.feed.posts = [NSMutableArray arrayWithArray:posts];
+            [self.feed reloadData];
             NSLog(@"No more posts to reload.");
+        }
+        else{
+            NSLog(@"Error fetching posts.");
         }
         [self.feed.loadingMoreView stopAnimating];
         [self.feed.refreshControl endRefreshing];

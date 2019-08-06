@@ -33,7 +33,7 @@
     
     self.eventCategory = -1;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeViewController:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(clearFilters:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
     
     [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
@@ -95,9 +95,19 @@
         }
     }
     
-    
     [self.delegate filterPostsWithQuery: self.postQuery withSavedQuery:filterQuery];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)clearFilters:(id)sender {
+    self.eventTitle.text = @"";
+    
+    //eventCategory clear here
+    self.eventTitle.text = @"";
+    self.levelMultiControl.selectedSegmentIndexes = [NSIndexSet indexSet];
+    self.roleControl.selectedSegmentIndexes = [NSIndexSet indexSet];
+    self.maxPrice.text = @"";
+    self.maxDistance.text = @"";
 }
 
 -(void) queryWithArray: (NSArray *) arrayToQuery withValueArray: (NSArray *) valueArray withKey: (NSString *) key{
@@ -126,10 +136,6 @@
     [alphaNums addCharactersInString: @"."];
     NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString: string];
     return [alphaNums isSupersetOfSet:inStringSet];
-}
-
-- (IBAction)presentHomeViewController:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didSelectCell: (NSIndexPath *)indexPath{
