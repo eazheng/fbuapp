@@ -111,6 +111,7 @@
     self.savedQuery = saved;
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
+    [self.feed setContentOffset:CGPointMake(0,-60)];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
