@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<CategoryHeaderViewDelegate> delegate;
  -(instancetype)initWithZero;
+ -(void)resetCells;
 
 @end
 

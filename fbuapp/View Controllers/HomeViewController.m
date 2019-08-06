@@ -20,11 +20,15 @@
 #import "Favorite.h"
 #import "AppDelegate.h"
 #import "FilterViewController.h"
+#import "PillCell.h"
+#import "Query.h"
 
 @interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) PFQuery *postQuery;
 @property PostTableView * feed;
+@property (strong, nonatomic) CategoryHeaderView *pillSelector;
+@property (strong, nonatomic) Query *savedQuery;
 
 @end
 
@@ -44,16 +48,20 @@
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
     
-    CategoryHeaderView *pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
-    pillSelector.delegate = self;
-    self.feed.tableHeaderView = pillSelector;
+    self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
+    self.pillSelector.delegate = self;
+    self.feed.tableHeaderView = self.pillSelector;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterViewController:)];
 }
 
 - (IBAction)presentFilterViewController:(id)sender {
+    [self.pillSelector resetCells];
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
     filterVCObj.currentLocation = [PFGeoPoint geoPointWithLocation: self.feed.currentLocation];
+    filterVCObj.savedQuery = self.savedQuery;
+    
+    
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:filterVCObj] animated:YES completion:nil];
     filterVCObj.delegate = self;
 }
@@ -93,8 +101,9 @@
     }
 }
 
-- (void) filterPostsWithQuery: (PFQuery *) postQuery{
+- (void) filterPostsWithQuery: (PFQuery *) postQuery withSavedQuery:(Query *)saved{
     self.postQuery = postQuery;
+    self.savedQuery = saved;
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
 }

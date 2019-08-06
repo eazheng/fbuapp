@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Parse/Parse.h"
+#import "Query.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol FilterDelegate <NSObject>
 
-- (void) filterPostsWithQuery: (PFQuery *) postQuery;
+- (void) filterPostsWithQuery: (PFQuery *) postQuery withSavedQuery: (Query *)saved;
 
 @end
 
@@ -21,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id <FilterDelegate> delegate;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;
+@property (strong, nonatomic) Query *savedQuery;
 
 @end
 

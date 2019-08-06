@@ -47,6 +47,18 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     return self;
 }
 
+-(void)resetCells
+{
+    for (NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems]) {
+        [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+        PillCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:kCollectionViewPillCell forIndexPath:indexPath];
+        UIView *selectedBackgroundViewForCell = [UIView new];
+        [selectedBackgroundViewForCell setBackgroundColor:[UIColor whiteColor]];
+        
+        cell.selectedBackgroundView = selectedBackgroundViewForCell;
+    }
+}
+
 -(void)customInit
 {
     [[NSBundle mainBundle] loadNibNamed:@"CategoryHeaderView" owner:self options:nil];
@@ -88,6 +100,8 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     cell.pillBackground.backgroundColor = [UIColor colorWithRGB: category.color];
     cell.eventCategory.text = category.name;
     cell.pillBackground.layer.cornerRadius = cell.pillBackground.frame.size.height / 2;
+    
+    
     
     return cell;
 }
