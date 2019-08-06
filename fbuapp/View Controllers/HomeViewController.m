@@ -81,7 +81,7 @@
             self.feed.isMoreDataLoading = NO;
             [self.feed reloadData];
         }
-        else if(posts){
+        else if(posts && self.feed.numberOfPosts == 0){
             self.feed.posts = [NSMutableArray arrayWithArray:posts];
             [self.feed reloadData];
             NSLog(@"No more posts to reload.");
