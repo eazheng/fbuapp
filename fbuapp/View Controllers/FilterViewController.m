@@ -53,6 +53,9 @@
 
 -(void) initializeWithQuery{
     self.eventTitle.text = self.savedQuery.name;
+    self.eventCategory = self.savedQuery.category;
+    [self.pillSelector selectItemAtIndexPath :self.eventCategory animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+
     self.roleControl.selectedSegmentIndexes = self.savedQuery.role;
     self.levelMultiControl.selectedSegmentIndexes = self.savedQuery.level;
     if(self.savedQuery.price >= 0){
