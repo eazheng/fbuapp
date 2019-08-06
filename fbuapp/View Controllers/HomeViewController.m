@@ -29,6 +29,7 @@
 @property PostTableView * feed;
 @property (strong, nonatomic) CategoryHeaderView *pillSelector;
 @property (strong, nonatomic) Query *savedQuery;
+@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 
 @end
 
@@ -56,7 +57,8 @@
 }
 
 - (IBAction)presentFilterViewController:(id)sender {
-    [self.pillSelector resetCells];
+    [self.pillSelector deselectItemAtIndexPath: self.selectedIndexPath animated:NO];
+    self.savedQuery.category = self.selectedIndexPath;
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
     filterVCObj.currentLocation = [PFGeoPoint geoPointWithLocation: self.feed.currentLocation];
     filterVCObj.savedQuery = self.savedQuery;
@@ -109,9 +111,10 @@
 - (void) filterPostsWithQuery: (PFQuery *) postQuery withSavedQuery:(Query *)saved{
     self.postQuery = postQuery;
     self.savedQuery = saved;
+    [self.pillSelector selectItemAtIndexPath:self.savedQuery.category animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
-    [self.feed setContentOffset:CGPointMake(0,-60)];
+    [self.feed setContentOffset:CGPointMake(0,-62)];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -153,6 +156,7 @@
 
 -(void)didSelectCell: (NSIndexPath *)indexPath {
     NSLog(@"EVENT CATEGORY RECEIVED by homeView");
+    self.selectedIndexPath = indexPath;
     [self.postQuery whereKey: @"eventCategory" equalTo: @(indexPath.row)];
      self.feed.numberOfPosts = 0;
     [self fetchPosts];

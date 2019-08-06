@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<CategoryHeaderViewDelegate> delegate;
  -(instancetype)initWithZero;
  -(void)resetCells;
+- (void)deselectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
+- (void)selectItemAtIndexPath:(nullable NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UICollectionViewScrollPosition)scrollPosition;
 
 @end
 

@@ -15,7 +15,7 @@
 
 @interface FilterViewController () <CategoryHeaderViewDelegate>
 
-@property NSInteger eventCategory;
+@property NSIndexPath *eventCategory;
 @property (weak, nonatomic) IBOutlet UITextField *eventTitle;
 @property (weak, nonatomic) IBOutlet UIView *eventCategoryView;
 @property (weak, nonatomic) IBOutlet MultiSelectSegmentedControl *roleControl;
@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *maxPrice;
 @property (weak, nonatomic) IBOutlet UITextField *maxDistance;
 @property (strong, nonatomic) PFQuery *postQuery;
+@property (strong, nonatomic) CategoryHeaderView* pillSelector;
 
 @end
 
@@ -31,19 +32,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.eventCategory = -1;
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(clearFilters:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
     
     [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
     [self.maxDistance setKeyboardType:UIKeyboardTypeNumberPad];
     
-    CategoryHeaderView* pillSelector = [[CategoryHeaderView alloc] initWithZero];
-    pillSelector.delegate = self;
-    [self.view addSubview:pillSelector];
+    self.pillSelector = [[CategoryHeaderView alloc] initWithZero];
+    self.pillSelector.delegate = self;
+    [self.view addSubview:self.pillSelector];
     
-    [pillSelector mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.pillSelector mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.eventCategoryView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
     if(self.savedQuery != nil){
@@ -72,8 +71,8 @@
         [self.postQuery whereKey: @"eventTitle" matchesRegex: self.eventTitle.text modifiers: @"i"];
         filterQuery.name = self.eventTitle.text;
     }
-    if(self.eventCategory != -1){
-        [self.postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory)];
+    if(self.eventCategory != nil){
+        [self.postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory.row)];
         filterQuery.category = self.eventCategory;
     }
     
@@ -139,7 +138,7 @@
 }
 
 - (void)didSelectCell: (NSIndexPath *)indexPath{
-    self.eventCategory = indexPath.row;
+    self.eventCategory = indexPath;
 }
 /*
 #pragma mark - Navigation

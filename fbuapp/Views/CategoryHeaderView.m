@@ -47,17 +47,7 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     return self;
 }
 
--(void)resetCells
-{
-    for (NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems]) {
-        [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
-        PillCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:kCollectionViewPillCell forIndexPath:indexPath];
-        UIView *selectedBackgroundViewForCell = [UIView new];
-        [selectedBackgroundViewForCell setBackgroundColor:[UIColor whiteColor]];
-        
-        cell.selectedBackgroundView = selectedBackgroundViewForCell;
-    }
-}
+
 
 -(void)customInit
 {
@@ -107,10 +97,18 @@ static NSString *kCollectionViewPillCell = @"PillCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     NSLog(@"Selected a cell! %@, row is %ld", self.categories[indexPath.row], indexPath.row);
     [self.delegate didSelectCell:indexPath];
 }
 
+- (void)deselectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated{
+    [self.collectionView deselectItemAtIndexPath:indexPath animated:animated];
+}
+
+- (void)selectItemAtIndexPath:(nullable NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UICollectionViewScrollPosition)scrollPosition{
+    [self.collectionView selectItemAtIndexPath: indexPath animated: animated scrollPosition: scrollPosition];
+}
 
 @end
 
