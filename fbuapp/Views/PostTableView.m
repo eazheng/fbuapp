@@ -68,7 +68,7 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
-     [self addSubview:self.refreshControl];
+    [self addSubview:self.refreshControl];
     
     CGRect frame = CGRectMake(0, self.contentSize.height, self.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
     self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
