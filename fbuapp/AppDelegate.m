@@ -39,43 +39,31 @@
         [Parse initializeWithConfiguration:config];
     
     //create for persisting user
-//    if ([PFUser currentUser] != nil) {
-//        //if user is already logged in, take them to HomeViewController
-////        HomeViewController *homeViewController = [[HomeViewController alloc] init];
-////        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-////        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-////        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-//
-//
-//        ProfileViewController *logViewController = [[ProfileViewController alloc] init];
-//        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-//        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-//        self.window.rootViewController = navigationController;
-//    }
-//    else {
-//        //If user if not logged in, take them to LogViewController
-//        LogViewController *logViewController = [[LogViewController alloc] init];
-//        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-//        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-//        self.window.rootViewController = navigationController;
-//    }
+    if ([PFUser currentUser] != nil) {
+        //if user is already logged in, take them to HomeViewController
+//        HomeViewController *homeViewController = [[HomeViewController alloc] init];
+//        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+//        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+
+        
+        ProfileViewController *logViewController = [[ProfileViewController alloc] init];
+        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+        
+
+    }
+    else {
+        //If user if not logged in, take them to LogViewController
+        LogViewController *logViewController = [[LogViewController alloc] init];
+        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+    }
+    self.window.rootViewController = navigationController;
     
-    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
-    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
-    
-    HomeViewController *homeViewController = [[HomeViewController alloc] init];
-    UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController];
-    
-    tabBarController.tabBar.items[0].title = @"Home";
-    tabBarController.tabBar.items[1].title = @"Create Post";
-    
-    self.window.rootViewController = tabBarController;
     
 
 //    UITabBarController *tabBarController = [[UITabBarController alloc] init];
