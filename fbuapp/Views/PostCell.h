@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventPrice;
 @property (weak, nonatomic) IBOutlet UILabel *eventDaysAgo;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfilePhoto;
+@property (weak, nonatomic) IBOutlet UIView *fbProfilePhoto;
+
 @property (weak, nonatomic) IBOutlet UILabel *eventCategory;
 @property (weak, nonatomic) IBOutlet UILabel *eventDescription;
 @property (weak, nonatomic) IBOutlet UILabel *eventAuthor;

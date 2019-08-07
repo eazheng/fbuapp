@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     self.view.frame = screenBounds;
     
     // Do any additional setup after loading the view from its nib.
-    self.detailsTableView = [[UITableView alloc] init]; //[PFUser currentUser].username
+    self.detailsTableView = [[UITableView alloc] init];
     [self.view addSubview:self.detailsTableView];
     CGFloat buttonHeight = 50;
     [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,15 +96,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     
 
     self.navButton = [[UIBarButtonItem alloc]init];
-    
-//    UIImage *faveImage = [UIImage imageNamed:@"favorited"];
-//    UIButton *fave = [UIButton buttonWithType:UIButtonTypeCustom];
-//    fave.bounds = CGRectMake( 0, 0, faveImage.size.width, faveImage.size.height );
-//    [fave setImage:faveImage forState:UIControlStateNormal];
-//    UIBarButtonItem *faveBtn = [[UIBarButtonItem alloc] initWithCustomView:fave];
-    
-    NSLog(@"current user: %@", self.currentUser);
-    if ([self.currentUser isEqualToString:self.postAuthor]) {
+    if ([self.currentUser isEqualToString:self.postAuthor.objectId]) {
         NSLog(@"This is my post");
         [self.navButton setImage:[UIImage imageNamed:@"basket"]];
         self.navButton.action = @selector(onTapDelete:);
@@ -151,7 +143,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 }
 
 - (IBAction)onTapDelete:(id)sender {
-//    [self showAlertwithCancel:@"" withMessage:@"Are you sure you want to delete this post?"];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
                                                                    message:@"Are you sure you want to delete this post?"
                                                             preferredStyle:(UIAlertControllerStyleAlert)];
@@ -252,13 +243,11 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
                 if (category) {
                     cell.categoryLabel.text = [NSString stringWithFormat:@"Category: %@", category[@"name"]];
                     cell.labelbgView.backgroundColor = [UIColor colorWithRGB: category[@"color"]];
-//                     cell.view.backgroundColor = [UIColor colorWithRGB: category[@"color"]];
                 }
                 else {
                     NSLog(@"Failed to fetch categories.");
                 }
             }];
-//            cell.categoryLabel.text = [NSString stringWithFormat:@"Category: %@", self.post.eventCategory];
             return cell;
         }
         default:
@@ -270,7 +259,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 - (IBAction)contactAuthorButtonAction:(id)sender {
     NSLog(@"I want to contact the author!");
     NSString *userId = @"emily.zheng.96780";
-//    NSString *linkString = [NSString stringWithFormat:@"google.com"];
 
     NSString *linkString = [NSString stringWithFormat:@"http://m.me/%@", userId];
     NSLog(@"Line string: %@", linkString);
