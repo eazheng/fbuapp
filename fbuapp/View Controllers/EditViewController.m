@@ -9,6 +9,7 @@
 #import "EditViewController.h"
 #import "RegisterViewController.h"
 #import "ProfileViewController.h"
+#import "AppDelegate.h"
 
 @interface EditViewController ()
 
@@ -27,23 +28,19 @@
     
     [self formatting];
     
+    //display old informaiton first before user changes
     [self fetchInfo];
 }
 
 
 - (void)didTapCancel {
-    ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
-    profileViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-    [self presentViewController:navigationController animated:YES completion: nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController.tabBar setHidden:NO];
 }
 
 
 - (void)didTapSave {
-    //display old informaiton first before user changes
-    
     PFUser *currentUser = [PFUser currentUser];
     if ([PFUser currentUser] != nil) {
         [currentUser fetch];
@@ -59,16 +56,15 @@
                 NSLog(@"Error: %@", error.localizedDescription);
             }
             else {
-                NSLog(@"User information updated successfully");
-                ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
-                profileViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-                profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                
-                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-                [self presentViewController:navigationController animated:YES completion: nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"informationSaved" object:nil userInfo:nil];
+                NSLog(@"User information updated! %@", [PFUser currentUser]);
             }
         }];
     }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController.tabBar setHidden:NO];
 }
 
 
@@ -87,6 +83,7 @@
         NSLog(@"No information to display");
     }
 }
+
 
 - (void)formatting {
     self.editFirstName.layer.borderWidth = 0.5f;
@@ -108,12 +105,7 @@
     self.editEmail.layer.borderWidth = 0.5f;
     self.editEmail.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.editEmail.layer.cornerRadius = 5.0f;
-    
-    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
-    self.profileImage.clipsToBounds = YES;
 }
 
 
-- (IBAction)didTapEdit:(id)sender {
-}
 @end

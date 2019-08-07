@@ -14,6 +14,7 @@
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
 #import "DetailsViewController.h"
+#import "RegisterViewController.h"
 #import "EventCategory.h"
 #import "UIColor+Helpers.h"
 #import "Favorite.h"
@@ -97,6 +98,12 @@ static NSString *kTableViewPostCell = @"PostCell";
     Post *post = self.posts[indexPath.row];
     cell.post = post;
     cell.currentUserId = self.currentUserId;
+    cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
+    [[NSNotificationCenter defaultCenter] addObserverForName:(@"informationSaved") object:(nil) queue:(nil) usingBlock:^(NSNotification * _Nonnull note) {
+        cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
+
+    }];
+    
     
     PFQuery *favoriteQuery = [Favorite query];
     [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
@@ -123,12 +130,12 @@ static NSString *kTableViewPostCell = @"PostCell";
             NSLog(@"Failed to fetch categories.");
         }
     }];
-    
     cell.eventTitle.text = post.eventTitle;
     cell.eventDistance.text = [PFGeoPoint distanceToPoint: post.eventLocation fromLocation: self.currentLocation];
     cell.eventPrice.text = [post.eventPrice stringValue];
     cell.eventDaysAgo.text = [NSDate daysAgoSince: post.createdAt];
     cell.eventDescription.text = post.eventDescription;
+
     [PFFileObject setImage: cell.eventImage withFile: post.image];
 
     cell.layer.shadowOffset = CGSizeMake(1, 0);

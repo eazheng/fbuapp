@@ -16,9 +16,6 @@
 #import "Parse/Parse.h"
 
 @interface LogViewController ()
-@property (strong, nonatomic) NSString *userEmail;
-
-
 
 @end
 
@@ -29,6 +26,7 @@
 
     //create facebook login button
     self.fbloginButton = [[FBSDKLoginButton alloc] init];
+    self.fbloginButton.loginBehavior = FBSDKLoginBehaviorBrowser;
     self.fbloginButton.delegate = self;
     //connected to a visible view
     self.fbloginButton.center = self.loginButtonView.center;
@@ -77,13 +75,9 @@
             [PFUser logInWithUsername:user.username password:@" "];
 
             //Take existing user to HomeViewController
-            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
-            profileViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-            appDelegate.window.rootViewController = navigationController;
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            appDelegate.window.rootViewController = appDelegate.tabBarController;
+            [appDelegate.tabBarController setSelectedIndex:0];
         }
         else {
             //If email does not match an existing user, take user to RegisterViewController to create an account
