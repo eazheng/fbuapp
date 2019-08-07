@@ -23,13 +23,12 @@
 #import "NSDate+Helpers.h"
 #import "PFFileObject+Helpers.h"
 
+
 static NSString *kTableViewPostCell = @"PostCell";
 
-@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UIScrollViewDelegate, PostCellDelegate>
-
+@interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, PostCellDelegate>
 
 @property (nonatomic,strong) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation * currentLocation;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString * currentUserId;
 @property (strong, nonatomic) PFQuery *postQuery;
@@ -53,6 +52,7 @@ static NSString *kTableViewPostCell = @"PostCell";
 -(void)customInit
 {
     self.frame = self.bounds;
+    self.isMoreDataLoading = NO;
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -70,6 +70,15 @@ static NSString *kTableViewPostCell = @"PostCell";
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.refreshControl];
+    
+    CGRect frame = CGRectMake(0, self.contentSize.height, self.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    self.loadingMoreView.hidden = true;
+    [self addSubview:self.loadingMoreView];
+
+    UIEdgeInsets insets = self.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.contentInset = insets;
 }
 
 -(void)fetchPosts{
@@ -88,7 +97,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     NSLog(@"Error: %@",error.description);
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,7 +153,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     return cell;
 }
-
 
 #pragma mark - PostTableViewDelegate
 

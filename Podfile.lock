@@ -32,6 +32,7 @@ PODS:
   - GooglePlaces (3.2.0):
     - GoogleMaps/Base (= 3.2.0)
   - Masonry (1.1.0)
+  - MultiSelectSegmentedControl (1.2.1)
   - Parse (1.17.2):
     - Parse/Core (= 1.17.2)
   - Parse/Core (1.17.2):
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - Masonry
+  - MultiSelectSegmentedControl
   - Parse
   - "UITextView+Placeholder"
 
@@ -59,6 +61,7 @@ SPEC REPOS:
     - GoogleMaps
     - GooglePlaces
     - Masonry
+    - MultiSelectSegmentedControl
     - Parse
     - "UITextView+Placeholder"
 
@@ -71,9 +74,11 @@ SPEC CHECKSUMS:
   GoogleMaps: 5046d7edfe381c1a0b20fdaf293915a375c3122b
   GooglePlaces: 41bc2e480816b1234a48f4bec92e1c886f37cfe1
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MultiSelectSegmentedControl: 495230a5a5fbb6edb03d541f173433922ef0c592
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
 PODFILE CHECKSUM: bfc659703f7771e0fb62992c950d773fbf434346
+
 
 COCOAPODS: 1.7.2

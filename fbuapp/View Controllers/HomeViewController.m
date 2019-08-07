@@ -21,22 +21,25 @@
 #import "AppDelegate.h"
 #import "FilterViewController.h"
 
-@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate>
+@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) PFQuery *postQuery;
 @property PostTableView * feed;
 
 @end
 
+
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.feed.numberOfPosts = 0;
     self.postQuery = [Post query];
-    self.feed = [[PostTableView alloc] initWithUserId:@"myuserid"]; //[PFUser currentUser].username
+    self.feed = [[PostTableView alloc] initWithUserId:@"myuserid"];
     [self fetchPosts];
     self.feed.delegate = self;
     [self.view addSubview:self.feed];
+    
     [self.feed mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
@@ -45,21 +48,54 @@
     pillSelector.delegate = self;
     self.feed.tableHeaderView = pillSelector;
     
-    UIBarButtonItem *myButton = [[UIBarButtonItem alloc]init];
-    myButton.action = @selector(presentFilterViewController:);
-    myButton.title = @"Filter";
-    myButton.target = self;
-    self.navigationItem.rightBarButtonItem = myButton;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterViewController:)];
 }
 
 - (IBAction)presentFilterViewController:(id)sender {
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
+    filterVCObj.currentLocation = [PFGeoPoint geoPointWithLocation: self.feed.currentLocation];
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:filterVCObj] animated:YES completion:nil];
     filterVCObj.delegate = self;
 }
 
+- (void) fetchPosts {
+    [self.postQuery orderByDescending:@"createdAt"];
+    self.postQuery.skip = self.feed.numberOfPosts;
+    self.postQuery.limit = 20;
+    [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if ([posts count] != nil) {
+            if(self.feed.numberOfPosts == 0){
+                self.feed.posts = [NSMutableArray arrayWithArray:posts];
+            }
+            else{
+                [self.feed.posts addObjectsFromArray:posts];
+            }
+            self.feed.isMoreDataLoading = NO;
+            [self.feed reloadData];
+        }
+        else {
+            NSLog(@"No more posts to reload.");
+        }
+        [self.feed.loadingMoreView stopAnimating];
+        [self.feed.refreshControl endRefreshing];
+    }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.feed.isMoreDataLoading){
+        if(scrollView.contentOffset.y > (self.feed.contentSize.height - self.feed.bounds.size.height) && self.feed.isDragging) {
+            self.feed.isMoreDataLoading = YES;
+            self.feed.loadingMoreView.frame = CGRectMake(0, self.feed.contentSize.height, self.feed.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+            [self.feed.loadingMoreView startAnimating];
+            self.feed.numberOfPosts += 20;
+            [self fetchPosts];
+        }
+    }
+}
+
 - (void) filterPostsWithQuery: (PFQuery *) postQuery{
     self.postQuery = postQuery;
+    self.feed.numberOfPosts = 0;
     [self fetchPosts];
 }
 
@@ -91,7 +127,6 @@
     }];
 }
 
-
 - (void) showDetails: (Post *)post {
     NSLog(@"HELLO");
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
@@ -104,23 +139,8 @@
 -(void)didSelectCell: (NSIndexPath *)indexPath {
     NSLog(@"EVENT CATEGORY RECEIVED by homeView");
     [self.postQuery whereKey: @"eventCategory" equalTo: @(indexPath.row)];
+     self.feed.numberOfPosts = 0;
     [self fetchPosts];
-}
-
-- (void) fetchPosts {
-    [self.postQuery orderByDescending:@"createdAt"];
-    self.postQuery.limit = 20;
-    [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            self.feed.posts = [NSArray arrayWithArray:posts] ;
-            [self.feed reloadData];
-        }
-        else {
-            NSLog(@"Failed to fetch posts from server");
-        }
-    }];
-    [self.feed.refreshControl endRefreshing];
-
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
