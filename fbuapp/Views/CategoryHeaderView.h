@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CategoryHeaderView : UIView
 
 @property (nonatomic, weak) id<CategoryHeaderViewDelegate> delegate;
+ -(instancetype)initWithZero;
 
 @end
 
