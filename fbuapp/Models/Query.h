@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSIndexSet *role;
 @property (nonatomic, strong) NSIndexSet *level;
-@property (nonatomic, strong) NSIndexPath *category;
+@property (nonatomic, assign) NSInteger category;
 @property (nonatomic, assign) float price;
 @property (nonatomic, assign) float distance;
 

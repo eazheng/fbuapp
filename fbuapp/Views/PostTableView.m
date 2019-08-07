@@ -98,8 +98,6 @@ static NSString *kTableViewPostCell = @"PostCell";
 }
 
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

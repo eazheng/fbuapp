@@ -29,7 +29,6 @@
 @property PostTableView * feed;
 @property (strong, nonatomic) CategoryHeaderView *pillSelector;
 @property (strong, nonatomic) Query *savedQuery;
-@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 
 @end
 
@@ -40,7 +39,9 @@
     [super viewDidLoad];
     self.feed.numberOfPosts = 0;
     self.postQuery = [Post query];
-    self.feed = [[PostTableView alloc] initWithUserId:@"myuserid"];
+    self.savedQuery = [[Query alloc] init];
+    
+    self.feed = [[PostTableView alloc] initWithUserId:@"myuserid"];//[try current user here]
     [self fetchPosts];
     self.feed.delegate = self;
     [self.view addSubview:self.feed];
@@ -57,8 +58,6 @@
 }
 
 - (IBAction)presentFilterViewController:(id)sender {
-    [self.pillSelector deselectItemAtIndexPath: self.selectedIndexPath animated:NO];
-    self.savedQuery.category = self.selectedIndexPath;
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
     filterVCObj.currentLocation = [PFGeoPoint geoPointWithLocation: self.feed.currentLocation];
     filterVCObj.savedQuery = self.savedQuery;
@@ -110,8 +109,10 @@
 
 - (void) filterPostsWithQuery: (PFQuery *) postQuery withSavedQuery:(Query *)saved{
     self.postQuery = postQuery;
+    [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem: self.savedQuery.category inSection:0] animated:NO];
     self.savedQuery = saved;
-    [self.pillSelector selectItemAtIndexPath:self.savedQuery.category animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    [self.pillSelector.collectionView selectItemAtIndexPath: [NSIndexPath indexPathForItem: self.savedQuery.category inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
     [self.feed setContentOffset:CGPointMake(0,-62)];
@@ -156,7 +157,7 @@
 
 -(void)didSelectCell: (NSIndexPath *)indexPath {
     NSLog(@"EVENT CATEGORY RECEIVED by homeView");
-    self.selectedIndexPath = indexPath;
+    self.savedQuery.category = indexPath.row;
     [self.postQuery whereKey: @"eventCategory" equalTo: @(indexPath.row)];
      self.feed.numberOfPosts = 0;
     [self fetchPosts];

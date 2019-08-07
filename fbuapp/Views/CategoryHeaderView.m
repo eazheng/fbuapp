@@ -17,11 +17,11 @@ static NSString *kCollectionViewPillCell = @"PillCell";
 
 @property (strong, nonatomic) NSArray * categories;
 @property (strong, nonatomic) IBOutlet CategoryHeaderView *headerView;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
 @implementation CategoryHeaderView
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -46,8 +46,6 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     }
     return self;
 }
-
-
 
 -(void)customInit
 {
@@ -97,7 +95,7 @@ static NSString *kCollectionViewPillCell = @"PillCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];//dka not nec
     NSLog(@"Selected a cell! %@, row is %ld", self.categories[indexPath.row], indexPath.row);
     [self.delegate didSelectCell:indexPath];
 }

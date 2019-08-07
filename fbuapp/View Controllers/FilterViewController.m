@@ -15,7 +15,7 @@
 
 @interface FilterViewController () <CategoryHeaderViewDelegate>
 
-@property NSIndexPath *eventCategory;
+@property NSInteger eventCategory;
 @property (weak, nonatomic) IBOutlet UITextField *eventTitle;
 @property (weak, nonatomic) IBOutlet UIView *eventCategoryView;
 @property (weak, nonatomic) IBOutlet MultiSelectSegmentedControl *roleControl;
@@ -32,29 +32,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.eventCategory = -1;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(clearFilters:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
     
     [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
     [self.maxDistance setKeyboardType:UIKeyboardTypeNumberPad];
     
+    
     self.pillSelector = [[CategoryHeaderView alloc] initWithZero];
     self.pillSelector.delegate = self;
     [self.view addSubview:self.pillSelector];
+    [self.pillSelector.collectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld context:NULL];
     
     [self.pillSelector mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.eventCategoryView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
-    if(self.savedQuery != nil){
-        [self initializeWithQuery];
-    }
-    
+
+    [self initializeWithQuery];
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
+{
+    [self.pillSelector.collectionView selectItemAtIndexPath : [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];//dka
+}
+
+- (void)dealloc
+{
+    [self.pillSelector.collectionView removeObserver:self forKeyPath:@"contentSize" context:NULL];
 }
 
 -(void) initializeWithQuery{
     self.eventTitle.text = self.savedQuery.name;
     self.eventCategory = self.savedQuery.category;
-    [self.pillSelector selectItemAtIndexPath :self.eventCategory animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+    [self.pillSelector.collectionView selectItemAtIndexPath :[NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+    
+    
 
     self.roleControl.selectedSegmentIndexes = self.savedQuery.role;
     self.levelMultiControl.selectedSegmentIndexes = self.savedQuery.level;
@@ -68,14 +83,15 @@
 }
 
 - (IBAction)presentHomeOnFilter:(id)sender {
+    
     self.postQuery = [Post query];
     Query *filterQuery = [[Query alloc] init];
     if(![self.eventTitle.text isEqualToString:@""]){
         [self.postQuery whereKey: @"eventTitle" matchesRegex: self.eventTitle.text modifiers: @"i"];
         filterQuery.name = self.eventTitle.text;
     }
-    if(self.eventCategory != nil){
-        [self.postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory.row)];
+    if(self.eventCategory != -1){
+        [self.postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory)];
         filterQuery.category = self.eventCategory;
     }
     
@@ -97,6 +113,7 @@
         }
     }
     
+//    [self.pillSelector deselectItemAtIndexPath: [NSIndexPath indexPathForItem:self.eventCategory.row inSection:0] animated:NO];//dka
     [self.delegate filterPostsWithQuery: self.postQuery withSavedQuery:filterQuery];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -104,8 +121,8 @@
 - (IBAction)clearFilters:(id)sender {
     self.eventTitle.text = @"";
     
-    //eventCategory clear here
-    self.eventTitle.text = @"";
+    [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated:NO];
+    self.eventCategory = -1;//dka not necessary?
     self.levelMultiControl.selectedSegmentIndexes = [NSIndexSet indexSet];
     self.roleControl.selectedSegmentIndexes = [NSIndexSet indexSet];
     self.maxPrice.text = @"";
@@ -141,7 +158,7 @@
 }
 
 - (void)didSelectCell: (NSIndexPath *)indexPath{
-    self.eventCategory = indexPath;
+    self.eventCategory = indexPath.row;
 }
 /*
 #pragma mark - Navigation
