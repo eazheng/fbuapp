@@ -78,10 +78,6 @@ SPEC CHECKSUMS:
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: bfc659703f7771e0fb62992c950d773fbf434346
-=======
 PODFILE CHECKSUM: c5703da6652d4c52c687c90ffee01ed7c98318f0
->>>>>>> master
 
 COCOAPODS: 1.7.2
