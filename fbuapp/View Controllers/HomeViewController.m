@@ -26,7 +26,7 @@
 @interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) PFQuery *postQuery;
-@property PostTableView * feed;
+@property PostTableView *feed;
 @property (strong, nonatomic) CategoryHeaderView *pillSelector;
 @property (strong, nonatomic) Query *savedQuery;
 
@@ -35,7 +35,7 @@
 
 @implementation HomeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad{
     [super viewDidLoad];
     self.feed.numberOfPosts = 0;
     self.postQuery = [Post query];
@@ -57,17 +57,15 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterViewController:)];
 }
 
-- (IBAction)presentFilterViewController:(id)sender {
+- (IBAction)presentFilterViewController:(id)sender{
     FilterViewController *filterVCObj =[[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];
     filterVCObj.currentLocation = [PFGeoPoint geoPointWithLocation: self.feed.currentLocation];
     filterVCObj.savedQuery = self.savedQuery;
-    
-    
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:filterVCObj] animated:YES completion:nil];
     filterVCObj.delegate = self;
 }
 
-- (void) fetchPosts {
+- (void)fetchPosts{
     [self.postQuery orderByDescending:@"createdAt"];
     self.postQuery.skip = self.feed.numberOfPosts;
     self.postQuery.limit = 20;
@@ -107,24 +105,23 @@
     }
 }
 
-- (void) filterPostsWithQuery: (PFQuery *) postQuery withSavedQuery:(Query *)saved{
+- (void)filterPostsWithQuery:(PFQuery *)postQuery withSavedQuery:(Query *)savedQuery{
     self.postQuery = postQuery;
     [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem: self.savedQuery.category inSection:0] animated:NO];
-    self.savedQuery = saved;
+    self.savedQuery = savedQuery;
     [self.pillSelector.collectionView selectItemAtIndexPath: [NSIndexPath indexPathForItem: self.savedQuery.category inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-    
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
     [self.feed setContentOffset:CGPointMake(0,-62)];
 }
 
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [appDelegate.tabBarController.tabBar setHidden:NO];
 }
 
-- (void) favoritePost: (NSString *)post withUser: (NSString *)user {
+- (void)favoritePost:(NSString *)post withUser:(NSString *)user{
     [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(!succeeded){
             NSLog(@"Error favoriting event: %@", error.localizedDescription);
@@ -135,7 +132,7 @@
     }];
 }
 
-- (void) unFavoritePost: (NSString *)post withUser: (NSString *)user {
+- (void) unFavoritePost:(NSString *)post withUser:(NSString *)user{
     PFQuery *favoriteQuery = [Favorite query];
     [favoriteQuery whereKey: @"postID" equalTo: post];
     [favoriteQuery whereKey: @"userID" equalTo: user];
@@ -146,8 +143,7 @@
     }];
 }
 
-- (void) showDetails: (Post *)post {
-    NSLog(@"HELLO");
+- (void)showDetails:(Post *)post{
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
     [self.navigationController pushViewController:detailsViewController animated:YES];
@@ -156,15 +152,13 @@
 }
 
 -(void)didSelectCell: (NSIndexPath *)indexPath {
-    NSLog(@"EVENT CATEGORY RECEIVED by homeView");
     self.savedQuery.category = indexPath.row;
     [self.postQuery whereKey: @"eventCategory" equalTo: @(indexPath.row)];
-     self.feed.numberOfPosts = 0;
+    self.feed.numberOfPosts = 0;
     [self fetchPosts];
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"CELL HAS BEEN SELECTED");
     Post *post = self.feed.posts[indexPath.row];
     [self showDetails: post];
 }

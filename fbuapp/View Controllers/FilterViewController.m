@@ -29,17 +29,15 @@
 
 @implementation FilterViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.eventCategory = -1;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(clearFilters:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
     
     [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
     [self.maxDistance setKeyboardType:UIKeyboardTypeNumberPad];
-    
     
     self.pillSelector = [[CategoryHeaderView alloc] initWithZero];
     self.pillSelector.delegate = self;
@@ -50,9 +48,8 @@
         make.edges.equalTo(self.eventCategoryView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
 
-    [self initializeWithQuery];
+    [self initializeWithSavedQuery];
 }
-
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
 {
@@ -64,26 +61,29 @@
     [self.pillSelector.collectionView removeObserver:self forKeyPath:@"contentSize" context:NULL];
 }
 
--(void) initializeWithQuery{
-    self.eventTitle.text = self.savedQuery.name;
-    self.eventCategory = self.savedQuery.category;
-    [self.pillSelector.collectionView selectItemAtIndexPath :[NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
-    
-    
-
-    self.roleControl.selectedSegmentIndexes = self.savedQuery.role;
-    self.levelMultiControl.selectedSegmentIndexes = self.savedQuery.level;
+-(void) initializeWithSavedQuery{
+    if(![self.savedQuery.name isEqualToString:@""]){
+        self.eventTitle.text = self.savedQuery.name;
+    }
+    if(self.savedQuery.category >= 0){
+        self.eventCategory = self.savedQuery.category;
+        [self.pillSelector.collectionView selectItemAtIndexPath :[NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+    }
+    if(self.savedQuery.role != nil){
+        self.roleControl.selectedSegmentIndexes = self.savedQuery.role;
+    }
+    if(self.savedQuery.level != nil){
+        self.levelMultiControl.selectedSegmentIndexes = self.savedQuery.level;
+    }
     if(self.savedQuery.price >= 0){
         self.maxPrice.text = @(self.savedQuery.price).stringValue;
     }
     if(self.savedQuery.distance >= 0){
         self.maxDistance.text = @(self.savedQuery.distance).stringValue;
     }
-    
 }
 
 - (IBAction)presentHomeOnFilter:(id)sender {
-    
     self.postQuery = [Post query];
     Query *filterQuery = [[Query alloc] init];
     if(![self.eventTitle.text isEqualToString:@""]){
@@ -112,17 +112,14 @@
             filterQuery.distance = [self.maxDistance.text floatValue];
         }
     }
-    
-//    [self.pillSelector deselectItemAtIndexPath: [NSIndexPath indexPathForItem:self.eventCategory.row inSection:0] animated:NO];//dka
     [self.delegate filterPostsWithQuery: self.postQuery withSavedQuery:filterQuery];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)clearFilters:(id)sender {
     self.eventTitle.text = @"";
-    
     [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated:NO];
-    self.eventCategory = -1;//dka not necessary?
+    self.eventCategory = -1;
     self.levelMultiControl.selectedSegmentIndexes = [NSIndexSet indexSet];
     self.roleControl.selectedSegmentIndexes = [NSIndexSet indexSet];
     self.maxPrice.text = @"";
