@@ -138,7 +138,6 @@
 		830B5C5222F4B10A002FCC24 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		830B5C5322F4B10A002FCC24 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		830B5C5422F4B10A002FCC24 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
-		830B5C6522F8E6AB002FCC24 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Key.h; path = /Users/belchercd/Desktop/fbuapp/fbuapp/Key.h; sourceTree = "<absolute>"; };
 		83657DDD22E24824002EB6A8 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		83657DDE22E24824002EB6A8 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		83657DDF22E24824002EB6A8 /* LogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogViewController.xib; sourceTree = "<group>"; };
@@ -165,7 +164,7 @@
 		A419823E22EFB05900791E06 /* Favorite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
 		A4434DEC22F900CD00A72120 /* Query.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Query.h; sourceTree = "<group>"; };
 		A4434DED22F900CD00A72120 /* Query.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Query.m; sourceTree = "<group>"; };
-		A456BCBA22F1FA7F008C4E3B /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
+		A44E737B22FC985E000CF38F /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		A456BCBB22F204D2008C4E3B /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		A456BCBC22F204D2008C4E3B /* FilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		A456BCBD22F204D2008C4E3B /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
@@ -270,7 +269,7 @@
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
-				830B5C6522F8E6AB002FCC24 /* Key.h */,
+				A44E737B22FC985E000CF38F /* Key.h */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";
@@ -376,9 +375,6 @@
 				83E6B27522E234C10045B437 /* ProfileViewController.h */,
 				83E6B27622E234C10045B437 /* ProfileViewController.m */,
 				83E6B27722E234C10045B437 /* ProfileViewController.xib */,
-				830B5C0022F365BC002FCC24 /* SettingsViewController.h */,
-				830B5C0122F365BC002FCC24 /* SettingsViewController.m */,
-				830B5C0222F365BC002FCC24 /* SettingsViewController.xib */,
 				3898B17D22F210E70022B219 /* DetailsViewController.h */,
 				3898B17E22F210E70022B219 /* DetailsViewController.m */,
 				3898B17F22F210E70022B219 /* DetailsViewController.xib */,

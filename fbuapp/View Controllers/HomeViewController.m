@@ -42,7 +42,7 @@
     self.postQuery = [Post query];
     self.savedQuery = [[Query alloc] init];
     
-    self.feed = [[PostTableView alloc] initWithUserId:@"myuserid"];//[try current user here]
+    self.feed = [[PostTableView alloc] initWithUserId:[PFUser currentUser].objectId];
     [self fetchPosts];
     self.feed.delegate = self;
     [self.view addSubview:self.feed];

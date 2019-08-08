@@ -38,6 +38,7 @@
     
     [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
     [self.maxDistance setKeyboardType:UIKeyboardTypeNumberPad];
+    self.eventCategory = -1;
     
     self.pillSelector = [[CategoryHeaderView alloc] initWithZero];
     self.pillSelector.delegate = self;
@@ -65,7 +66,7 @@
     if(![self.savedQuery.name isEqualToString:@""]){
         self.eventTitle.text = self.savedQuery.name;
     }
-    if(self.savedQuery.category >= 0){
+    if(self.savedQuery.category != -1){
         self.eventCategory = self.savedQuery.category;
         [self.pillSelector.collectionView selectItemAtIndexPath :[NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
     }
