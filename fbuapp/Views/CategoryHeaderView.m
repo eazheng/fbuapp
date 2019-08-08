@@ -95,7 +95,7 @@ static NSString *kCollectionViewPillCell = @"PillCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];//dka not nec
+    [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
     NSLog(@"Selected a cell! %@, row is %ld", self.categories[indexPath.row], indexPath.row);
     [self.delegate didSelectCell:indexPath];
 }
