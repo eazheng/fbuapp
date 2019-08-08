@@ -156,6 +156,7 @@
 }
 
 -(void)didSelectCell: (NSIndexPath *)indexPath {
+    
     self.savedQuery.category = indexPath.row;
     [self.postQuery whereKey: @"eventCategory" equalTo: @(indexPath.row)];
     self.feed.numberOfPosts = 0;

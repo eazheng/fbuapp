@@ -124,7 +124,7 @@ static NSString *kTableViewPostCell = @"PostCell";
         cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
 
     }];
-    
+
     cell.fbProfilePhoto.profileID = [PFQuery getUserObjectWithId: post.eventAuthor][@"fbUserId"];
     
     if([post.eventAuthor isEqualToString: self.currentUserId]){
