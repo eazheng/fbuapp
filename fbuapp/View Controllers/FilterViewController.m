@@ -53,7 +53,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
 {
-    [self.pillSelector.collectionView selectItemAtIndexPath : [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];//dka
+    [self.pillSelector.collectionView selectItemAtIndexPath : [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
 }
 
 - (void)dealloc
