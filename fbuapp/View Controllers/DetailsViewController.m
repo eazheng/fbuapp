@@ -47,10 +47,10 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 @interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *detailsTableView;
-@property UIBarButtonItem *navButton;
-@property NSString *currentUser;
-@property NSString *currentPost;
-@property PFUser *postAuthor;
+@property (strong, nonatomic) UIBarButtonItem *navButton;
+@property (strong, nonatomic) NSString *currentUser;
+@property (strong, nonatomic) NSString *currentPost;
+@property (strong, nonatomic) PFUser *postAuthor;
 @property (strong, nonatomic) PFQuery *postQuery;
 
 @end
@@ -70,10 +70,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     // Do any additional setup after loading the view from its nib.
     self.detailsTableView = [[UITableView alloc] init];
     [self.view addSubview:self.detailsTableView];
-    CGFloat buttonHeight = 50;
-    [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, buttonHeight, 0));
-    }];
+
     self.detailsTableView.dataSource = self;
     self.detailsTableView.delegate = self;
     for (NSUInteger i = 0; i < kNumberOfCellTypes; i++) {
@@ -83,21 +80,12 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     self.detailsTableView.tableFooterView = [[UIView alloc]
                                       initWithFrame:CGRectZero];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.frame = CGRectMake(0, self.view.frame.size.height - buttonHeight, self.view.frame.size.width, buttonHeight);
-    [button addTarget:self
-               action:@selector(contactAuthorButtonAction:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Send a message" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    NSArray *buttonColor = @[@0, @100, @255];
-    button.backgroundColor = [UIColor colorWithRGB:buttonColor];
-    [self.view addSubview:button];
-    
-
     self.navButton = [[UIBarButtonItem alloc]init];
     if ([self.currentUser isEqualToString:self.postAuthor.objectId]) {
         NSLog(@"This is my post");
+        [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+        }];
         [self.navButton setImage:[UIImage imageNamed:@"basket"]];
         self.navButton.action = @selector(onTapDelete:);
     }
@@ -119,6 +107,20 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
                 self.isFavorited = NO;
             }
         }];
+        CGFloat buttonHeight = 50;
+        [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, buttonHeight, 0));
+        }];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.frame = CGRectMake(0, self.view.frame.size.height - buttonHeight, self.view.frame.size.width, buttonHeight);
+        [button addTarget:self
+                   action:@selector(contactAuthorButtonAction:)
+         forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Send a message" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        NSArray *buttonColor = @[@0, @100, @255];
+        button.backgroundColor = [UIColor colorWithRGB:buttonColor];
+        [self.view addSubview:button];
     }
     
     self.navButton.target = self;
@@ -128,13 +130,11 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 - (IBAction)onTapFavorited:(id)sender {
     if (self.isFavorited == NO){
-        NSLog(@"favoriting post");
         [self.delegate favoritePost:self.post.objectId withUser:self.currentUser];
         [self.navButton setImage:[UIImage imageNamed:@"favorited"]];
         self.isFavorited = YES;
     }
     else {
-        NSLog(@"unfavoriting post");
         [self.delegate unFavoritePost: self.post.objectId withUser:self.currentUser];
         [self.navButton setImage:[UIImage imageNamed:@"staroutline"]];
         self.isFavorited = NO;

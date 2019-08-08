@@ -115,7 +115,7 @@
     self.eventPriceField.delegate= self;
     [self.eventPriceField setKeyboardType:UIKeyboardTypeNumberPad];
     
-    self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    self.pillSelector = [[CategoryHeaderView alloc] initWithZero];
     self.pillSelector.delegate = self;
     [self.view addSubview:self.pillSelector];
     
