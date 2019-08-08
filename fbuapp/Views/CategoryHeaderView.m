@@ -53,8 +53,6 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     [self addSubview:self.headerView];
     self.headerView.frame = self.bounds;
     
-    self.collectionView.allowsMultipleSelection = YES;
-    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     [self.collectionView setShowsHorizontalScrollIndicator:NO];
@@ -96,10 +94,12 @@ static NSString *kCollectionViewPillCell = @"PillCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-    NSLog(@"Selected a cell! %@, row is %ld", self.categories[indexPath.row], indexPath.row);
     [self.delegate didSelectCell:indexPath];
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self.delegate didDeselectCell: indexPath];
+}
 
 
 @end

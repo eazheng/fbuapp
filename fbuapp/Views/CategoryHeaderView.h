@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CategoryHeaderViewDelegate
 
 - (void)didSelectCell: (NSIndexPath *)indexPath;
+- (void)didDeselectCell: (NSIndexPath *)indexPath;
 
 @end
 
