@@ -14,6 +14,7 @@
 #import "CategoryHeaderView.h"
 #import "PostTableView.h"
 #import "DetailsViewController.h"
+#import "RegisterViewController.h"
 #import "EventCategory.h"
 #import "UIColor+Helpers.h"
 #import "Favorite.h"
@@ -28,6 +29,7 @@ static NSString *kTableViewPostCell = @"PostCell";
 @interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, PostCellDelegate>
 
 @property (nonatomic,strong) CLLocationManager *locationManager;
+
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString * currentUserId;
 @property (strong, nonatomic) PFQuery *postQuery;
@@ -68,8 +70,17 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
-     [self addSubview:self.refreshControl];
+    [self addSubview:self.refreshControl];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [self fetchPosts];
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ChangeEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSLog(@"fetching posts after deletion...");
+        [self fetchPosts];
+    }];
+
     CGRect frame = CGRectMake(0, self.contentSize.height, self.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
     self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
     self.loadingMoreView.hidden = true;
@@ -108,6 +119,14 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     cell.post = post;
     cell.currentUserId = self.currentUserId;
+    cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
+    [[NSNotificationCenter defaultCenter] addObserverForName:(@"informationSaved") object:(nil) queue:(nil) usingBlock:^(NSNotification * _Nonnull note) {
+        cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
+
+    }];
+    
+    cell.fbProfilePhoto.profileID = [PFQuery getUserObjectWithId: post.eventAuthor][@"fbUserId"];
+    
     
     PFQuery *favoriteQuery = [Favorite query];
     [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
@@ -134,12 +153,12 @@ static NSString *kTableViewPostCell = @"PostCell";
             NSLog(@"Failed to fetch categories.");
         }
     }];
-    
     cell.eventTitle.text = post.eventTitle;
     cell.eventDistance.text = [PFGeoPoint distanceToPoint: post.eventLocation fromLocation: self.currentLocation];
     cell.eventPrice.text = [post.eventPrice stringValue];
     cell.eventDaysAgo.text = [NSDate daysAgoSince: post.createdAt];
     cell.eventDescription.text = post.eventDescription;
+
     [PFFileObject setImage: cell.eventImage withFile: post.image];
 
     cell.layer.shadowOffset = CGSizeMake(1, 0);

@@ -14,11 +14,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.userProfilePhoto.layer.cornerRadius = 25;
-    self.userProfilePhoto.clipsToBounds = YES;
     self.eventImage.layer.cornerRadius = 17;
     self.eventImage.clipsToBounds = YES;
     self.eventImage.contentMode = UIViewContentModeScaleToFill;
+    self.fbProfilePhoto.layer.cornerRadius = self.fbProfilePhoto.frame.size.width / 2;
+    self.fbProfilePhoto.clipsToBounds = YES;
     
 }
 

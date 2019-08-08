@@ -23,7 +23,8 @@
 #import "PillCell.h"
 #import "Query.h"
 
-@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, UIScrollViewDelegate>
+
+@interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, DetailsViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) PFQuery *postQuery;
 @property PostTableView *feed;
@@ -143,9 +144,12 @@
     }];
 }
 
-- (void)showDetails:(Post *)post{
+
+- (void) showDetails: (Post *)post {
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
+    detailsViewController.currentLocation = self.feed.currentLocation;
+    detailsViewController.delegate = self;
     [self.navigationController pushViewController:detailsViewController animated:YES];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [appDelegate.tabBarController.tabBar setHidden:YES];
