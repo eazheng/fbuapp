@@ -156,7 +156,10 @@
             
         }];
     }
-        [self.feed.refreshControl endRefreshing];
+    else {
+        NSLog(@"Should not have reached here");
+    }
+    [self.feed.refreshControl endRefreshing];
 }
 
 
