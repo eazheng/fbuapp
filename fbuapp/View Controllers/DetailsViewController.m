@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     ExpertSkill
 };
 
-@interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource>//, PostCellDelegate>
+@interface DetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *detailsTableView;
 @property UIBarButtonItem *navButton;
