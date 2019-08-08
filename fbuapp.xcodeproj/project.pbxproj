@@ -53,6 +53,7 @@
 		A419823422EF675000791E06 /* UIColor+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823322EF675000791E06 /* UIColor+Helpers.m */; };
 		A419823C22EF95B700791E06 /* PostTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823B22EF95B700791E06 /* PostTableView.m */; };
 		A419823F22EFB05900791E06 /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = A419823E22EFB05900791E06 /* Favorite.m */; };
+		A4434DEE22F900CD00A72120 /* Query.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DED22F900CD00A72120 /* Query.m */; };
 		A456BCBE22F204D2008C4E3B /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A456BCBC22F204D2008C4E3B /* FilterViewController.m */; };
 		A456BCBF22F204D2008C4E3B /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A456BCBD22F204D2008C4E3B /* FilterViewController.xib */; };
 		A456BCC222F24317008C4E3B /* PFGeoPoint+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A456BCC122F24317008C4E3B /* PFGeoPoint+Helpers.m */; };
@@ -162,6 +163,9 @@
 		A419823B22EF95B700791E06 /* PostTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostTableView.m; sourceTree = "<group>"; };
 		A419823D22EFB05900791E06 /* Favorite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
 		A419823E22EFB05900791E06 /* Favorite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
+		A4434DEC22F900CD00A72120 /* Query.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Query.h; sourceTree = "<group>"; };
+		A4434DED22F900CD00A72120 /* Query.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Query.m; sourceTree = "<group>"; };
+		A456BCBA22F1FA7F008C4E3B /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		A456BCBB22F204D2008C4E3B /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		A456BCBC22F204D2008C4E3B /* FilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		A456BCBD22F204D2008C4E3B /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
@@ -342,6 +346,8 @@
 				A419823022EF5C2700791E06 /* EventCategory.m */,
 				A419823D22EFB05900791E06 /* Favorite.h */,
 				A419823E22EFB05900791E06 /* Favorite.m */,
+				A4434DEC22F900CD00A72120 /* Query.h */,
+				A4434DED22F900CD00A72120 /* Query.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -656,6 +662,7 @@
 				3898B15C22F0EC1F0022B219 /* TitleCell.m in Sources */,
 				3898B18022F210E70022B219 /* DetailsViewController.m in Sources */,
 				3898B16122F0EE980022B219 /* DescriptionCell.m in Sources */,
+				A4434DEE22F900CD00A72120 /* Query.m in Sources */,
 				A419823422EF675000791E06 /* UIColor+Helpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -831,7 +838,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P77LWX87UK;
+				DEVELOPMENT_TEAM = 62N42H7N6L;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -890,7 +897,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P77LWX87UK;
+				DEVELOPMENT_TEAM = 62N42H7N6L;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

@@ -17,11 +17,11 @@ static NSString *kCollectionViewPillCell = @"PillCell";
 
 @property (strong, nonatomic) NSArray * categories;
 @property (strong, nonatomic) IBOutlet CategoryHeaderView *headerView;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
 @implementation CategoryHeaderView
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -89,14 +89,24 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     cell.eventCategory.text = category.name;
     cell.pillBackground.layer.cornerRadius = cell.pillBackground.frame.size.height / 2;
     
+    
+    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
     NSLog(@"Selected a cell! %@, row is %ld", self.categories[indexPath.row], indexPath.row);
     [self.delegate didSelectCell:indexPath];
 }
 
+- (void)deselectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated{
+    [self.collectionView deselectItemAtIndexPath:indexPath animated:animated];
+}
+
+- (void)selectItemAtIndexPath:(nullable NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UICollectionViewScrollPosition)scrollPosition{
+    [self.collectionView selectItemAtIndexPath: indexPath animated: animated scrollPosition: scrollPosition];
+}
 
 @end
 

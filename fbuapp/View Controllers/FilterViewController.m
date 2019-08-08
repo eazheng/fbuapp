@@ -11,6 +11,7 @@
 #import "CategoryHeaderView.h"
 #import "Masonry.h"
 #import "MultiSelectSegmentedControl.h"
+#import "Query.h"
 
 @interface FilterViewController () <CategoryHeaderViewDelegate>
 
@@ -22,55 +23,107 @@
 @property (weak, nonatomic) IBOutlet UITextField *maxPrice;
 @property (weak, nonatomic) IBOutlet UITextField *maxDistance;
 @property (strong, nonatomic) PFQuery *postQuery;
+@property (strong, nonatomic) CategoryHeaderView* pillSelector;
 
 @end
 
 @implementation FilterViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.eventCategory = -1;
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeViewController:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(clearFilters:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
     
     [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
     [self.maxDistance setKeyboardType:UIKeyboardTypeNumberPad];
     
-    CategoryHeaderView* pillSelector = [[CategoryHeaderView alloc] initWithZero];
-    pillSelector.delegate = self;
-    [self.view addSubview:pillSelector];
+    self.pillSelector = [[CategoryHeaderView alloc] initWithZero];
+    self.pillSelector.delegate = self;
+    [self.view addSubview:self.pillSelector];
+    [self.pillSelector.collectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld context:NULL];
     
-    [pillSelector mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.pillSelector mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.eventCategoryView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
+
+    [self initializeWithSavedQuery];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
+{
+    [self.pillSelector.collectionView selectItemAtIndexPath : [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+}
+
+- (void)dealloc
+{
+    [self.pillSelector.collectionView removeObserver:self forKeyPath:@"contentSize" context:NULL];
+}
+
+-(void) initializeWithSavedQuery{
+    if(![self.savedQuery.name isEqualToString:@""]){
+        self.eventTitle.text = self.savedQuery.name;
+    }
+    if(self.savedQuery.category >= 0){
+        self.eventCategory = self.savedQuery.category;
+        [self.pillSelector.collectionView selectItemAtIndexPath :[NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+    }
+    if(self.savedQuery.role != nil){
+        self.roleControl.selectedSegmentIndexes = self.savedQuery.role;
+    }
+    if(self.savedQuery.level != nil){
+        self.levelMultiControl.selectedSegmentIndexes = self.savedQuery.level;
+    }
+    if(self.savedQuery.price >= 0){
+        self.maxPrice.text = @(self.savedQuery.price).stringValue;
+    }
+    if(self.savedQuery.distance >= 0){
+        self.maxDistance.text = @(self.savedQuery.distance).stringValue;
+    }
 }
 
 - (IBAction)presentHomeOnFilter:(id)sender {
     self.postQuery = [Post query];
+    Query *filterQuery = [[Query alloc] init];
     if(![self.eventTitle.text isEqualToString:@""]){
         [self.postQuery whereKey: @"eventTitle" matchesRegex: self.eventTitle.text modifiers: @"i"];
+        filterQuery.name = self.eventTitle.text;
     }
     if(self.eventCategory != -1){
         [self.postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory)];
+        filterQuery.category = self.eventCategory;
     }
     
     [self queryWithArray: self.levelMultiControl.selectedSegmentTitles withValueArray: @[@"Beginner", @"Intermediate", @"Expert"] withKey: @"authorSkillLevel"];
+    filterQuery.level = [[NSIndexSet alloc] initWithIndexSet: self.levelMultiControl.selectedSegmentIndexes];
     [self queryWithArray: self.roleControl.selectedSegmentTitles withValueArray: @[@"Learn", @"Teach", @"Collaborate"] withKey: @"authorRole"];
+    filterQuery.role = [[NSIndexSet alloc] initWithIndexSet: self.roleControl.selectedSegmentIndexes];
     
     if(![self.maxPrice.text isEqualToString:@""]){
         if ([self isValidNumber: self.maxPrice.text]){
             [self.postQuery whereKey:@"eventPrice" lessThanOrEqualTo:@([self.maxPrice.text floatValue])];
+            filterQuery.price = [self.maxPrice.text floatValue];
         }
     }
     if(![self.maxDistance.text isEqualToString:@""]){
         if([self isValidNumber: self.maxDistance.text]){
             [self.postQuery whereKey:@"eventLocation" nearGeoPoint:self.currentLocation withinMiles: [self.maxDistance.text floatValue]];
+            filterQuery.distance = [self.maxDistance.text floatValue];
         }
     }
-    [self.delegate filterPostsWithQuery: self.postQuery];
+    [self.delegate filterPostsWithQuery: self.postQuery withSavedQuery:filterQuery];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)clearFilters:(id)sender {
+    self.eventTitle.text = @"";
+    [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated:NO];
+    self.eventCategory = -1;
+    self.levelMultiControl.selectedSegmentIndexes = [NSIndexSet indexSet];
+    self.roleControl.selectedSegmentIndexes = [NSIndexSet indexSet];
+    self.maxPrice.text = @"";
+    self.maxDistance.text = @"";
 }
 
 -(void) queryWithArray: (NSArray *) arrayToQuery withValueArray: (NSArray *) valueArray withKey: (NSString *) key{
@@ -99,10 +152,6 @@
     [alphaNums addCharactersInString: @"."];
     NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString: string];
     return [alphaNums isSupersetOfSet:inStringSet];
-}
-
-- (IBAction)presentHomeViewController:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didSelectCell: (NSIndexPath *)indexPath{

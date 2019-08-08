@@ -19,7 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CategoryHeaderView : UIView
 
 @property (nonatomic, weak) id<CategoryHeaderViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
  -(instancetype)initWithZero;
+- (void)deselectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
+- (void)selectItemAtIndexPath:(nullable NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UICollectionViewScrollPosition)scrollPosition;
+
+
 
 @end
 

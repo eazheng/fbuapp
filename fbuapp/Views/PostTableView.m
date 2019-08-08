@@ -108,12 +108,15 @@ static NSString *kTableViewPostCell = @"PostCell";
     NSLog(@"Error: %@",error.description);
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:kTableViewPostCell];
     cell.delegate = self;
     Post *post = self.posts[indexPath.row];
+    
+    
     cell.post = post;
     cell.currentUserId = self.currentUserId;
     cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
