@@ -85,7 +85,7 @@
     newUser[@"lastName"] = self.lastNameField.text;
     newUser.username = self.usernameField.text;
     newUser.email = self.emailField.text;
-    newUser.password = @"";
+    newUser.password = @" ";
     newUser[@"fbUserId"] = self.userId;
     newUser[@"bio"] = @"";
     
@@ -96,13 +96,14 @@
         else {
             NSLog(@"User registered successfully");
             //take newUser to their profile page
-            ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
-            profileViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-            [self presentViewController:navigationController animated:YES completion: nil];
+//            ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
+//            profileViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+//            profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//
+//            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+//            [self presentViewController:navigationController animated:YES completion: nil];
             AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            appDelegate.window.rootViewController = appDelegate.tabBarController;
             [appDelegate.tabBarController.tabBar setHidden:NO];
         }
     }];

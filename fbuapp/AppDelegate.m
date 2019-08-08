@@ -20,6 +20,12 @@
 #import "Key.h"
 
 
+typedef NS_ENUM(NSUInteger, TabBarItems) {
+    TabBarHome,
+    TabBarCompose,
+    TabBarProfile
+};
+
 @interface AppDelegate ()
 @property (strong, nonatomic) UIView *view;
 @end
@@ -30,39 +36,33 @@
 
                                      
     [GMSPlacesClient provideAPIKey:API_KEY];
-
+    
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
-
+    
     //initialize parse
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-            
-            configuration.applicationId = @"skillAppId";
-            configuration.server = @"https://skill--app.herokuapp.com/parse";
-        }];
-        [Parse initializeWithConfiguration:config];
+        
+        configuration.applicationId = @"skillAppId";
+        configuration.server = @"https://skill--app.herokuapp.com/parse";
+    }];
+    [Parse initializeWithConfiguration:config];
     
+    UINavigationController *homeViewNavigationController = [self initializeHomeTab];
+    UINavigationController *createPostNavigationController = [self initializeCreatePostTab];
+    UINavigationController *profileViewNavigationController = [self initializeProfileTab];
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.viewControllers = @[homeViewNavigationController, createPostNavigationController, profileViewNavigationController];
+    
+    self.tabBarController.tabBar.items[TabBarHome].title = [self tabIdentifierForType:TabBarHome];
+    self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
+    self.tabBarController.tabBar.items[TabBarProfile].title = [self tabIdentifierForType:TabBarProfile];
     //persisting user
     if ([PFUser currentUser] != nil) {
         NSLog(@"Logged in");
         //if a user is logged in they were will be taken to item[0] which is home view
-        HomeViewController *homeViewController = [[HomeViewController alloc] init];
-        UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-        
-        CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
-        UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
-        
-        ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
-        UINavigationController *profileViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-        
-        self.tabBarController = [[UITabBarController alloc] init];
-        self.tabBarController.viewControllers = @[homeViewControllerNavigationController, createPostNavigationController, profileViewControllerNavigationController];
-        
-        self.tabBarController.tabBar.items[0].title = @"Home";
-        self.tabBarController.tabBar.items[1].title = @"Create Post";
-        self.tabBarController.tabBar.items[2].title = @"Profile";
         self.window.rootViewController = self.tabBarController;
-        
         //to choose which view controller to display
 //        [self.tabBarController setSelectedIndex:2];
     }
@@ -72,13 +72,45 @@
         logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
-        UINavigationController *logViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-        self.window.rootViewController = logViewControllerNavigationController;
+        UINavigationController *logViewNavigationController = [self initializeLogView];
+        self.window.rootViewController = logViewNavigationController;
     }
 
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSLog(@"The Action I was waiting for is complete");
+        [self.tabBarController setSelectedIndex:TabBarHome];
+        UINavigationController *newCreatePostNavigationController = [self initializeCreatePostTab];
+        self.tabBarController.viewControllers = @[homeViewNavigationController, newCreatePostNavigationController, profileViewNavigationController];
+        self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
+        
+    }];
     return YES;
 }
-    
+
+- (UINavigationController *) initializeHomeTab {
+    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    UINavigationController *homeViewControllerNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    return homeViewControllerNavigationController;
+}
+
+- (UINavigationController *) initializeCreatePostTab {
+    CreatePostViewController *createPostViewController = [[CreatePostViewController alloc] init];
+    UINavigationController *createPostNavigationController = [[UINavigationController alloc] initWithRootViewController:createPostViewController];
+    return createPostNavigationController;
+}
+
+- (UINavigationController *) initializeProfileTab {
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
+    UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    return profileNavigationController;
+}
+
+- (UINavigationController *) initializeLogView {
+    LogViewController *logViewController = [[LogViewController alloc] init];
+    UINavigationController *logViewNavigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+    return logViewNavigationController;
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
@@ -116,6 +148,22 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Private
+
+- (NSString *)tabIdentifierForType:(TabBarItems)type
+{
+    switch (type) {
+        case TabBarHome:
+            return @"Home";
+        case TabBarCompose:
+            return @"Create Post";
+        case TabBarProfile:
+            return @"Profile";
+        default:
+            NSLog(@"TabBarItem: I shouldn't be here");
+    }
 }
 
 @end

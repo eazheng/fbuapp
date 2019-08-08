@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.fbProfileView.layer.cornerRadius = self.fbProfileView.frame.size.width / 2;
+    self.fbProfileView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -29,6 +29,7 @@ static NSString *kTableViewPostCell = @"PostCell";
 @interface PostTableView() <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, PostCellDelegate>
 
 @property (nonatomic,strong) CLLocationManager *locationManager;
+
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString * currentUserId;
 @property (strong, nonatomic) PFQuery *postQuery;
@@ -71,6 +72,15 @@ static NSString *kTableViewPostCell = @"PostCell";
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.refreshControl];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [self fetchPosts];
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ChangeEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSLog(@"fetching posts after deletion...");
+        [self fetchPosts];
+    }];
+
     CGRect frame = CGRectMake(0, self.contentSize.height, self.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
     self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
     self.loadingMoreView.hidden = true;
@@ -111,6 +121,8 @@ static NSString *kTableViewPostCell = @"PostCell";
         cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
 
     }];
+    
+    cell.fbProfilePhoto.profileID = [PFQuery getUserObjectWithId: post.eventAuthor][@"fbUserId"];
     
     
     PFQuery *favoriteQuery = [Favorite query];

@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/belchercd/Desktop/fbuapp/fbuapp/Key.h">
-   </FileRef>
-   <FileRef
       location = "group:fbuapp.xcodeproj">
    </FileRef>
    <FileRef

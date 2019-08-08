@@ -33,10 +33,12 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userLevelControl;
 @property (weak, nonatomic) IBOutlet UITextField *eventPriceField;
-@property (weak, nonatomic) IBOutlet UILabel *eventCategoryLabel;
+
 @property NSInteger eventCategory;
 @property BOOL pickedImage;
 @property CategoryHeaderView *pillSelector;
+@property BOOL editingPrice;
+@property CGFloat prevY;
 
 @end
 
@@ -47,11 +49,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-    
+
     self.pickedImage = false;
     self.eventCategory = -1;
+    self.editingPrice = NO;
+    self.prevY = self.view.frame.origin.y;
+
     
     self.eventTitleField.font = [UIFont boldSystemFontOfSize:50.0f];
     self.eventTitleField.borderStyle = UITextBorderStyleNone;
@@ -110,11 +113,45 @@
     self.eventPriceField.leftView = priceImage;
     
     self.eventPriceField.delegate= self;
+    [self.eventPriceField setKeyboardType:UIKeyboardTypeNumberPad];
     
-    self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0, self.eventCategoryLabel.frame.origin.y,self.scrollView.frame.size.width,60)];
-    
-    [self.contentView addSubview:self.pillSelector];
+    self.pillSelector = [[CategoryHeaderView alloc] initWithZero];
     self.pillSelector.delegate = self;
+    [self.view addSubview:self.pillSelector];
+    
+    [self.pillSelector mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.pillLocationView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    
+    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
+              initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+
+- (IBAction)onTapPriceField:(id)sender {
+    self.editingPrice = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillChangeFrameNotification object:nil userInfo:nil];
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
 }
 
 // Present the autocomplete view controller when the button is pressed.
@@ -192,12 +229,10 @@
                     NSLog(@"Error posting Event: %@", error.localizedDescription);
                 }
                 else {
-                    [self clearFields];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostEventComplete" object:nil userInfo:nil];
                     
                     NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
-//                    [self.tabBarController setSelectedIndex:0];
                 }
             }];
         }
@@ -299,17 +334,29 @@ didFailAutocompleteWithError:(NSError *)error {
     self.eventCategory = indexPath.row;
 }
 
--(void) clearFields {
-    self.eventTitleField.text = @"";
-    self.eventDescriptionField.text = @"";
-    self.eventLocationTextField.text = @"";
-    self.eventImage.image = [UIImage imageNamed:@"imageplaceholder-270x184"];
-TODO: self.pillSelector = nil;
-    self.pickedImage = false;
-    self.eventCategory = -1;
-    self.userRoleControl.selectedSegmentIndex = 0;
-    self.userLevelControl.selectedSegmentIndex = 0;
-    self.eventPriceField.text = @"";
+#pragma mark - keyboard movements
+- (void)keyboardWillShow:(NSNotification *)notification {
+    if (self.editingPrice == YES) {
+        CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect f = self.view.frame;
+            self.prevY = self.view.frame.origin.y;
+            f.origin.y = self.view.frame.origin.y - keyboardSize.height;
+            self.view.frame = f;
+        }];
+    }
+}
+-(void)keyboardWillHide:(NSNotification *)notification {
+    if (self.editingPrice == YES) {
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect f = self.view.frame;
+            f.origin.y = self.prevY;
+            self.view.frame = f;
+
+        }];
+    self.editingPrice = NO;
+    }
 }
 
 @end

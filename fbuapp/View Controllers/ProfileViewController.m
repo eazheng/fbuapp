@@ -23,13 +23,9 @@
 #import "Parse/Parse.h"
 #import "Masonry.h"
 #import "AppDelegate.h"
+#import "DetailsViewController.h"
 
-
-
-
-
-
-@interface ProfileViewController () <PostTableViewDelegate>
+@interface ProfileViewController () <PostTableViewDelegate, DetailsViewDelegate>
 
 @property (strong, nonatomic) PFQuery *postQuery;
 @property (strong, nonatomic) PostTableView * feed;
@@ -102,6 +98,12 @@
     self.navigationItem.title = [NSString stringWithFormat:@"Profile"];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController.tabBar setHidden:NO];
+}
+
 
 //load user's posts to their profile
 - (void)fetchPosts {
@@ -117,7 +119,7 @@
             }
             else {
                 NSLog(@"Loaded User's posts");
-                self.feed.posts = [NSArray arrayWithArray:posts];
+                self.feed.posts = [NSMutableArray arrayWithArray:posts];
                 NSLog(@"%@", posts);
                 [self.feed reloadData];
             }
@@ -135,7 +137,7 @@
             }
             else{
                 NSLog(@"Accessed User's favorties");
-                self.feed.posts = [NSArray arrayWithArray:favoritePosts];
+                self.feed.posts = [NSMutableArray arrayWithArray:favoritePosts];
                 NSLog(@"%@", favoritePosts);
                 
                 PFQuery *postQuery = [Post query];
@@ -147,7 +149,7 @@
                     }
                     else {
                         NSLog(@"Loaded User's favorties");
-                        self.feed.posts = [NSArray arrayWithArray:objects];
+                        self.feed.posts = [NSMutableArray arrayWithArray:objects];
                         NSLog(@"%@", objects);
                         [self.feed reloadData];
                     }
@@ -233,6 +235,21 @@
     }];
 }
 
+- (void) showDetails: (Post *)post {
+    DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
+    detailsViewController.post = post;
+    detailsViewController.currentLocation = self.feed.currentLocation;
+    detailsViewController.delegate = self;
+    [self.navigationController pushViewController:detailsViewController animated:YES];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController.tabBar setHidden:YES];
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"CELL HAS BEEN SELECTED");
+    Post *post = self.feed.posts[indexPath.row];
+    [self showDetails: post];
+}
 
 
 @end
