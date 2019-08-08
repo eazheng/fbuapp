@@ -119,7 +119,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         case DetailsCellTypeAuthorCell: {
             AuthorCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             
-            cell.usernameLabel.text = self.post.eventAuthor.username;
+//            cell.usernameLabel.text = self.post.eventAuthor.username;
             
             if (self.post.authorRole == 1 && ![self.post.eventPrice isEqual:@0]) { //author wants to teach
                 cell.authorPriceLabel.text = [NSString stringWithFormat:@"Your cost: $%@", self.post.eventPrice];
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             
             NSString *role = [self roleIdentifierForType:self.post.authorRole];
             NSString *skill = [self skillIdentifierForType:self.post.authorSkillLevel];
-            cell.authorRoleLabel.text = [NSString stringWithFormat:@"%@ is of %@ skill level, looking to %@.", self.post.eventAuthor.username, skill, role];
+//            cell.authorRoleLabel.text = [NSString stringWithFormat:@"%@ is of %@ skill level, looking to %@.", self.post.eventAuthor.username, skill, role];
             return cell;
         }
             

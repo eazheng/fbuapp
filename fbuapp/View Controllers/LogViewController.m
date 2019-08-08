@@ -7,6 +7,7 @@
 //
 
 #import "LogViewController.h"
+#import "AppDelegate.h"
 #import "RegisterViewController.h"
 #import "HomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -15,7 +16,6 @@
 #import "Parse/Parse.h"
 
 @interface LogViewController ()
-@property (strong, nonatomic) NSString *userEmail;
 
 @end
 
@@ -25,35 +25,38 @@
     [super viewDidLoad];
 
     //create facebook login button
-    FBSDKLoginButton *fbloginButton = [[FBSDKLoginButton alloc] init];
-    fbloginButton.delegate = self;
+    self.fbloginButton = [[FBSDKLoginButton alloc] init];
+    self.fbloginButton.loginBehavior = FBSDKLoginBehaviorBrowser;
+    self.fbloginButton.delegate = self;
     //connected to a visible view
-    fbloginButton.center = self.loginButtonView.center;
+    self.fbloginButton.center = self.loginButtonView.center;
     //ask user for access to information
-    fbloginButton.permissions = @[@"public_profile"];
-    fbloginButton.permissions = @[@"email"];
+    self.fbloginButton.permissions = @[@"public_profile"];
+    self.fbloginButton.permissions = @[@"email"];
     // Shadow and Radius of signupButton
-    fbloginButton.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
-    fbloginButton.layer.shadowOffset = CGSizeMake(0, 2.0f);
-    fbloginButton.layer.shadowOpacity = 1.0f;
-    fbloginButton.layer.shadowRadius = 0.0f;
-    fbloginButton.layer.cornerRadius = 4.0f;
+    self.fbloginButton.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
+    self.fbloginButton.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    self.fbloginButton.layer.shadowOpacity = 1.0f;
+    self.fbloginButton.layer.shadowRadius = 0.0f;
+    self.fbloginButton.layer.cornerRadius = 4.0f;
     
-    [self.view addSubview:fbloginButton];
+    [self.view addSubview:self.fbloginButton];
 }
 
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
-    
-    //access to user's email
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email"}]
-     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-         if (!error) {
-             NSLog(@"user:%@", result);
-             //call query
-             [self createQuery:result[@"email"]];
-         }
-     }];
+    if ([FBSDKAccessToken currentAccessToken]) {
+        
+        //access to user's email
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email"}]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSLog(@"user:%@", result);
+                 //call query
+                 [self createQuery:result[@"email"]];
+             }
+         }];
+    }
 }
 
 
@@ -63,19 +66,18 @@
     PFQuery *query = [PFUser query];
     [query whereKey:@"email" equalTo:email];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        NSLog(@"%@", objects);
         PFUser *user = objects.firstObject;
         if (user) {
-            //If email matches an existing user, log user into app.
             NSLog(@"Existing user found");
+    
+            //log user into app.
             [PFUser logInWithUsername:user.username password:@" "];
 
             //Take existing user to HomeViewController
-            HomeViewController *homeViewController = [[HomeViewController alloc] init];
-            homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-            [self presentViewController:navigationController animated:YES completion: nil];
-            
+            AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+            appDelegate.window.rootViewController = appDelegate.tabBarController;
+            [appDelegate.tabBarController setSelectedIndex:0];
         }
         else {
             //If email does not match an existing user, take user to RegisterViewController to create an account

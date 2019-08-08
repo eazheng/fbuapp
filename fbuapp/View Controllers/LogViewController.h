@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIView *loginButtonView;
 @property (copy, nonatomic) NSArray<NSString *> *permissions;
+@property (strong, nonatomic) FBSDKLoginButton *fbloginButton;
 
 @end
 

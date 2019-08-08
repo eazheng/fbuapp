@@ -15,7 +15,7 @@
                 <outlet property="emailField" destination="lRC-c9-bf0" id="OEK-oE-4cp"/>
                 <outlet property="firstNameField" destination="8Kr-j6-4GE" id="fHy-iv-3nQ"/>
                 <outlet property="lastNameField" destination="hdL-7A-pcT" id="2Ru-QA-ffM"/>
-                <outlet property="profilePictureView" destination="oQX-4r-HHw" id="r3S-rl-3XH"/>
+                <outlet property="profilePictureView" destination="TH2-Qt-xlY" id="bhh-q2-b4D"/>
                 <outlet property="signupButton" destination="OiW-2q-0u0" id="CrZ-yV-mls"/>
                 <outlet property="usernameField" destination="u2A-Id-bjx" id="kit-Bb-HPs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -39,11 +39,6 @@
                             <color key="shadowColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                             <size key="shadowOffset" width="2" height="2"/>
                         </label>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oQX-4r-HHw" customClass="FBSDKProfilePictureView">
-                            <rect key="frame" x="121" y="179" width="135" height="135"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.1156280323" green="0.57956323440000002" blue="0.2199809009" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
@@ -118,6 +113,11 @@
                         <action selector="signupButton:" destination="-1" eventType="touchUpInside" id="tgY-0u-wvS"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TH2-Qt-xlY" customClass="FBSDKProfilePictureView">
+                    <rect key="frame" x="121" y="179" width="135" height="135"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.1156280323" green="0.57956323440000002" blue="0.2199809009" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
