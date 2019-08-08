@@ -193,10 +193,11 @@
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
         appDelegate.window.rootViewController = navigationController;
+        //logout of actual facebook account
+        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+        [login logOut];
     }];
-    //logout of actual facebook account
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logOut];
+
 }
 
 

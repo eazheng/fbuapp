@@ -74,6 +74,9 @@
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController ];
     [self presentViewController:navigationController animated:YES completion: nil];
+    //logout of FB to retry registration
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logOut];
 }
 
 
@@ -90,8 +93,11 @@
     newUser[@"bio"] = @"";
     
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (error != nil) {
+        if (error) {
             NSLog(@"Error: %@", error.localizedDescription);
+            //logout of FB to retry registration
+            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+            [login logOut];
         }
         else {
             NSLog(@"User registered successfully");
