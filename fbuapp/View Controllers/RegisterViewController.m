@@ -85,9 +85,9 @@
     newUser[@"lastName"] = self.lastNameField.text;
     newUser.username = self.usernameField.text;
     newUser.email = self.emailField.text;
-    newUser.password = @" ";
+    newUser.password = @"";
     newUser[@"fbUserId"] = self.userId;
-    newUser[@"bio"] = @" ";
+    newUser[@"bio"] = @"";
     
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
