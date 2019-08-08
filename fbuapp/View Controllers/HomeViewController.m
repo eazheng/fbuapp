@@ -181,4 +181,9 @@
     [self fetchPosts];
 }
 
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Post *post = self.feed.posts[indexPath.row];
+    [self showDetails: post];
+}
+
 @end
