@@ -82,7 +82,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
     
     self.navButton = [[UIBarButtonItem alloc]init];
     if ([self.currentUser isEqualToString:self.postAuthor.objectId]) {
-        NSLog(@"This is my post");
         [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
         }];
@@ -90,7 +89,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         self.navButton.action = @selector(onTapDelete:);
     }
     else {
-        NSLog(@"This is someone else's post");
         [self.navButton setImage:[UIImage imageNamed:@"staroutline"]];
         self.navButton.action = @selector(onTapFavorited:);
         
