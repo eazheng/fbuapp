@@ -89,8 +89,6 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     cell.eventCategory.text = category.name;
     cell.pillBackground.layer.cornerRadius = cell.pillBackground.frame.size.height / 2;
     
-    
-    
     return cell;
 }
 
@@ -100,13 +98,6 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     [self.delegate didSelectCell:indexPath];
 }
 
-- (void)deselectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated{
-    [self.collectionView deselectItemAtIndexPath:indexPath animated:animated];
-}
-
-- (void)selectItemAtIndexPath:(nullable NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UICollectionViewScrollPosition)scrollPosition{
-    [self.collectionView selectItemAtIndexPath: indexPath animated: animated scrollPosition: scrollPosition];
-}
 
 @end
 
