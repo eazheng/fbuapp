@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Post.h"
+#import "FBSDKProfile.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,8 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventDistance;
 @property (weak, nonatomic) IBOutlet UILabel *eventPrice;
 @property (weak, nonatomic) IBOutlet UILabel *eventDaysAgo;
-@property (weak, nonatomic) IBOutlet UIImageView *userProfilePhoto;
-@property (weak, nonatomic) IBOutlet UIView *fbProfilePhoto;
+@property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *fbProfilePhoto;
 
 @property (weak, nonatomic) IBOutlet UILabel *eventCategory;
 @property (weak, nonatomic) IBOutlet UILabel *eventDescription;

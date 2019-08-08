@@ -10,12 +10,15 @@
 #import "ProfileViewController.h"
 #import "LogViewController.h"
 #import "RegisterViewController.h"
+#import "EditViewController.h"
+#import "HomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Parse/Parse.h>
 #import "HomeViewController.h"
 #import "CreatePostViewController.h"
 #import <GooglePlaces/GooglePlaces.h>
 #import "Key.h"
+
 
 typedef NS_ENUM(NSUInteger, TabBarItems) {
     TabBarHome,
@@ -30,7 +33,8 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
+                                     
     [GMSPlacesClient provideAPIKey:API_KEY];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -44,53 +48,42 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
     }];
     [Parse initializeWithConfiguration:config];
     
-    //    //create for persisting user
-    //    if ([PFUser currentUser] != nil) {
-    //        //if user is already logged in, take them to HomeViewController
-    ////        HomeViewController *homeViewController = [[HomeViewController alloc] init];
-    ////        homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    ////        homeViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    ////        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-    //
-    //
-    //        ProfileViewController *logViewController = [[ProfileViewController alloc] init];
-    //        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    //        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-    //        self.window.rootViewController = navigationController;
-    //
-    //
-    //    }
-    //    else {
-    //        //If user if not logged in, take them to LogViewController
-    //        LogViewController *logViewController = [[LogViewController alloc] init];
-    //        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    //        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    //
-    //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-    //        self.window.rootViewController = navigationController;
-    //    }
-    
-    UINavigationController *createPostNavigationController = [self initializeCreatePostTab];
     UINavigationController *homeViewNavigationController = [self initializeHomeTab];
+    UINavigationController *createPostNavigationController = [self initializeCreatePostTab];
+    UINavigationController *profileViewNavigationController = [self initializeProfileTab];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[homeViewNavigationController, createPostNavigationController];
+    self.tabBarController.viewControllers = @[homeViewNavigationController, createPostNavigationController, profileViewNavigationController];
     
     self.tabBarController.tabBar.items[TabBarHome].title = [self tabIdentifierForType:TabBarHome];
     self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
-    
-    self.window.rootViewController = self.tabBarController;
-    
+    self.tabBarController.tabBar.items[TabBarProfile].title = [self tabIdentifierForType:TabBarProfile];
+    //persisting user
+    if ([PFUser currentUser] != nil) {
+        NSLog(@"Logged in");
+        //if a user is logged in they were will be taken to item[0] which is home view
+        self.window.rootViewController = self.tabBarController;
+        //to choose which view controller to display
+//        [self.tabBarController setSelectedIndex:2];
+    }
+    else {
+        //If user if not logged in, take them to LogViewController
+        LogViewController *logViewController = [[LogViewController alloc] init];
+        logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+
+        UINavigationController *logViewNavigationController = [self initializeLogView];
+        self.window.rootViewController = logViewNavigationController;
+    }
+
     [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         NSLog(@"The Action I was waiting for is complete");
         [self.tabBarController setSelectedIndex:TabBarHome];
-        UINavigationController *createPostNavigationController = [self initializeCreatePostTab];
-        self.tabBarController.viewControllers = @[homeViewNavigationController, createPostNavigationController];
+        UINavigationController *newCreatePostNavigationController = [self initializeCreatePostTab];
+        self.tabBarController.viewControllers = @[homeViewNavigationController, newCreatePostNavigationController, profileViewNavigationController];
         self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
         
     }];
-    
     return YES;
 }
 
@@ -110,6 +103,12 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
     ProfileViewController *profileViewController = [[ProfileViewController alloc] init];
     UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
     return profileNavigationController;
+}
+
+- (UINavigationController *) initializeLogView {
+    LogViewController *logViewController = [[LogViewController alloc] init];
+    UINavigationController *logViewNavigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
+    return logViewNavigationController;
 }
 
 - (BOOL)application:(UIApplication *)application

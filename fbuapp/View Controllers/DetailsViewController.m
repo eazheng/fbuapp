@@ -60,7 +60,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.currentUser = @"Q78qpytNf5";//[PFUser currentUser].objectId;
+    self.currentUser = [PFUser currentUser].objectId;
     self.currentPost = self.post.objectId;
     self.postAuthor = [PFQuery getUserObjectWithId: self.post.eventAuthor];
     
@@ -228,8 +228,8 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             
             NSString *role = [self roleIdentifierForType:self.post.authorRole];
             NSString *skill = [self skillIdentifierForType:self.post.authorSkillLevel];
+
             cell.authorRoleLabel.text = [NSString stringWithFormat:@"%@ has %@ skill level, looking to %@.", self.postAuthor[@"firstName"], skill, role];
-            
             
             return cell;
         }
