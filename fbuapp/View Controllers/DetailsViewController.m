@@ -256,17 +256,10 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 
 - (IBAction)contactAuthorButtonAction:(id)sender {
     NSLog(@"I want to contact the author!");
-//    NSString *userId = @"emily.zheng.96780";
-    NSString *userId = self.postAuthor[@"fbUsername"];//@"397280117801304";
-////    NSLog(@"Username? %@", [FBUser name]);
+    NSString *userId = self.postAuthor[@"fbUsername"];
     NSString *linkString = [NSString stringWithFormat:@"http://m.me/%@", userId];
 
-//    https://m.facebook.com/messages/read/?fbid={user_id} 
-//    NSString *linkString = [NSString stringWithFormat:@"fb-messenger://user-thread/%@", userId];
-    NSLog(@"Line string: %@", linkString);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: linkString] options:@{} completionHandler:nil];
-    
-//    return Uri.parse((new StringBuilder("fb-messenger://thread/")).append(Uri.encode(s)).toString());
 }
 
 
