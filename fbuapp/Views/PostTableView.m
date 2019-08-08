@@ -105,9 +105,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     cell.delegate = self;
     Post *post = self.posts[indexPath.row];
     
-
-    
-//    cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
     
     cell.post = post;
     cell.currentUserId = self.currentUserId;
