@@ -119,9 +119,9 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     cell.post = post;
     cell.currentUserId = self.currentUserId;
-    if(post.authorName != nil){//there are pots in database before
+    if(post.authorName != nil){//only assign eventAuthor if authorName is in the database
         cell.eventAuthor.text = post.authorName;
-        cell.fbProfilePhoto.profileID = post.authorName;
+        cell.fbProfilePhoto.profileID = post.authorPhoto;
     }
     if([post.eventAuthor isEqualToString: self.currentUserId]){
         [cell.favoriteButton removeFromSuperview];
