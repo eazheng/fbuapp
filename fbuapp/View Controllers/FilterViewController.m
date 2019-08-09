@@ -15,7 +15,7 @@
 
 @interface FilterViewController () <CategoryHeaderViewDelegate>
 
-@property NSInteger eventCategory;
+@property NSMutableArray *eventCategory;
 @property (weak, nonatomic) IBOutlet UITextField *eventTitle;
 @property (weak, nonatomic) IBOutlet UIView *eventCategoryView;
 @property (weak, nonatomic) IBOutlet MultiSelectSegmentedControl *roleControl;
@@ -38,9 +38,11 @@
     
     [self.maxPrice setKeyboardType:UIKeyboardTypeNumberPad];
     [self.maxDistance setKeyboardType:UIKeyboardTypeNumberPad];
+    self.eventCategory = [[NSMutableArray alloc] init];
     
     self.pillSelector = [[CategoryHeaderView alloc] initWithZero];
     self.pillSelector.delegate = self;
+    self.pillSelector.collectionView.allowsMultipleSelection = YES;
     [self.view addSubview:self.pillSelector];
     [self.pillSelector.collectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld context:NULL];
     
@@ -53,7 +55,10 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
 {
-    [self.pillSelector.collectionView selectItemAtIndexPath : [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+    for(NSNumber *indexPathRow in self.eventCategory){
+        [self.pillSelector.collectionView selectItemAtIndexPath : [NSIndexPath indexPathForItem:[indexPathRow intValue] inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+    }
+    
 }
 
 - (void)dealloc
@@ -65,9 +70,11 @@
     if(![self.savedQuery.name isEqualToString:@""]){
         self.eventTitle.text = self.savedQuery.name;
     }
-    if(self.savedQuery.category >= 0){
-        self.eventCategory = self.savedQuery.category;
-        [self.pillSelector.collectionView selectItemAtIndexPath :[NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+    if([self.savedQuery.category count] > 0){
+        self.eventCategory = [NSMutableArray arrayWithArray:self.savedQuery.category];
+        for (NSNumber *indexPathRow in self.savedQuery.category){
+            [self.pillSelector.collectionView selectItemAtIndexPath :[NSIndexPath indexPathForItem:[indexPathRow intValue] inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
+        }
     }
     if(self.savedQuery.role != nil){
         self.roleControl.selectedSegmentIndexes = self.savedQuery.role;
@@ -90,9 +97,9 @@
         [self.postQuery whereKey: @"eventTitle" matchesRegex: self.eventTitle.text modifiers: @"i"];
         filterQuery.name = self.eventTitle.text;
     }
-    if(self.eventCategory != -1){
-        [self.postQuery whereKey: @"eventCategory" equalTo: @(self.eventCategory)];
-        filterQuery.category = self.eventCategory;
+    if([self.eventCategory count] > 0){
+        [self.postQuery whereKey: @"eventCategory" containedIn: self.eventCategory];
+        filterQuery.category = [NSMutableArray arrayWithArray:self.eventCategory];
     }
     
     [self queryWithArray: self.levelMultiControl.selectedSegmentTitles withValueArray: @[@"Beginner", @"Intermediate", @"Expert"] withKey: @"authorSkillLevel"];
@@ -118,8 +125,10 @@
 
 - (IBAction)clearFilters:(id)sender {
     self.eventTitle.text = @"";
-    [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem:self.eventCategory inSection:0] animated:NO];
-    self.eventCategory = -1;
+    for (NSNumber *indexPathRow in self.savedQuery.category){
+        [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem:[indexPathRow intValue] inSection:0] animated:NO];
+    }
+    [self.eventCategory removeAllObjects];
     self.levelMultiControl.selectedSegmentIndexes = [NSIndexSet indexSet];
     self.roleControl.selectedSegmentIndexes = [NSIndexSet indexSet];
     self.maxPrice.text = @"";
@@ -155,7 +164,19 @@
 }
 
 - (void)didSelectCell: (NSIndexPath *)indexPath{
-    self.eventCategory = indexPath.row;
+    [self.eventCategory addObject:@(indexPath.row)];
+}
+
+- (void)didDeselectCell: (NSIndexPath *)indexPath{
+    [self.eventCategory removeObject:@(indexPath.row)];
+    if([self.eventCategory count] > 0)
+    {
+        [self.postQuery whereKey: @"eventCategory" containedIn:self.eventCategory];
+        
+    }
+    else{
+        [self.postQuery whereKey: @"eventCategory" containedIn:@[@0, @1, @2, @3, @4, @5, @6, @7]];
+    }
 }
 /*
 #pragma mark - Navigation

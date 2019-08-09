@@ -334,6 +334,9 @@ didFailAutocompleteWithError:(NSError *)error {
     self.eventCategory = indexPath.row;
 }
 
+- (void)didDeselectCell: (NSIndexPath *)indexPath{
+}
+
 #pragma mark - keyboard movements
 - (void)keyboardWillShow:(NSNotification *)notification {
     if (self.editingPrice == YES) {
