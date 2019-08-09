@@ -20,7 +20,9 @@
 
     UIView *selectedBackgroundViewForCell = [UIView new];
     [selectedBackgroundViewForCell setBackgroundColor:[UIColor lightGrayColor]];
-
+    
     self.selectedBackgroundView = selectedBackgroundViewForCell;
+//    self.pillBackground.backgroundColor = [UIColor lightGrayColor];
+    
 }
 @end

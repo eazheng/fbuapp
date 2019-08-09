@@ -210,6 +210,8 @@
     NSInteger authorSkill = [self.userLevelControl selectedSegmentIndex];
     NSInteger authorRole = [self.userRoleControl selectedSegmentIndex];
     
+    NSString *authorName = [PFUser currentUser][@"firstName"];
+    NSString *authorPhoto = [PFUser currentUser][@"fbUserId"];
 
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:self.addressString completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
@@ -224,7 +226,7 @@
             CGSize size = CGSizeMake(390, 260);
             UIImage *resizedImage = [self resizeImage:self.eventImage.image withSize:size];
             //post the event
-            [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withLocationName: self.eventLocationTextField.text withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withLocationName: self.eventLocationTextField.text withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withAuthorName:authorName withAuthorPhoto:authorPhoto withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(!succeeded){
                     NSLog(@"Error posting Event: %@", error.localizedDescription);
                     [self showAlert:@"Error Posting Event" withMessage:error.localizedDescription];
