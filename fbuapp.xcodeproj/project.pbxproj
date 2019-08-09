@@ -165,6 +165,7 @@
 		A419823E22EFB05900791E06 /* Favorite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
 		A4434DEC22F900CD00A72120 /* Query.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Query.h; sourceTree = "<group>"; };
 		A4434DED22F900CD00A72120 /* Query.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Query.m; sourceTree = "<group>"; };
+		A44E737B22FC985E000CF38F /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		A456BCBB22F204D2008C4E3B /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		A456BCBC22F204D2008C4E3B /* FilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		A456BCBD22F204D2008C4E3B /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
+				A44E737B22FC985E000CF38F /* Key.h */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";

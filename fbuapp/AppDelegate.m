@@ -60,6 +60,11 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
     self.tabBarController.tabBar.items[TabBarHome].title = [self tabIdentifierForType:TabBarHome];
     self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
     self.tabBarController.tabBar.items[TabBarProfile].title = [self tabIdentifierForType:TabBarProfile];
+    
+    [self.tabBarController.tabBar.items[TabBarHome] setImage:[UIImage imageNamed:@"Home"]];
+    [self.tabBarController.tabBar.items[TabBarCompose] setImage:[UIImage imageNamed:@"Createpost"]];
+    [self.tabBarController.tabBar.items[TabBarProfile] setImage:[UIImage imageNamed:@"Profile"]];
+    
     //persisting user
     if ([PFUser currentUser] != nil) {
         NSLog(@"Logged in");
@@ -84,6 +89,7 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
         UINavigationController *newCreatePostNavigationController = [self initializeCreatePostTab];
         self.tabBarController.viewControllers = @[homeViewNavigationController, newCreatePostNavigationController, profileViewNavigationController];
         self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
+        [self.tabBarController.tabBar.items[TabBarCompose] setImage:[UIImage imageNamed:@"Createpost"]];
         
     }];
     return YES;

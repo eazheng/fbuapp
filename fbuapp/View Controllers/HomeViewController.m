@@ -42,7 +42,7 @@
     self.postQuery = [Post query];
     self.savedQuery = [[Query alloc] init];
     
-    self.feed = [[PostTableView alloc] initWithUserId:@"myuserid"];//[try current user here]
+    self.feed = [[PostTableView alloc] initWithUserId:[PFUser currentUser].objectId];
     [self fetchPosts];
     self.feed.delegate = self;
     [self.view addSubview:self.feed];
@@ -53,6 +53,7 @@
     
     self.pillSelector = [[CategoryHeaderView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,60)];
     self.pillSelector.delegate = self;
+    self.pillSelector.collectionView.allowsMultipleSelection = YES;
     self.feed.tableHeaderView = self.pillSelector;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterViewController:)];
@@ -108,9 +109,13 @@
 
 - (void)filterPostsWithQuery:(PFQuery *)postQuery withSavedQuery:(Query *)savedQuery{
     self.postQuery = postQuery;
-    [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem: self.savedQuery.category inSection:0] animated:NO];
+    for (NSNumber *indexPathRow in self.savedQuery.category){
+        [self.pillSelector.collectionView deselectItemAtIndexPath: [NSIndexPath indexPathForItem: [indexPathRow intValue] inSection:0] animated:NO];
+    }
     self.savedQuery = savedQuery;
-    [self.pillSelector.collectionView selectItemAtIndexPath: [NSIndexPath indexPathForItem: self.savedQuery.category inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    for (NSNumber *indexPathRow in self.savedQuery.category){
+        [self.pillSelector.collectionView selectItemAtIndexPath: [NSIndexPath indexPathForItem: [indexPathRow intValue] inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    }
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
     [self.feed setContentOffset:CGPointMake(0,-62)];
@@ -156,8 +161,22 @@
 }
 
 -(void)didSelectCell: (NSIndexPath *)indexPath {
-    self.savedQuery.category = indexPath.row;
-    [self.postQuery whereKey: @"eventCategory" equalTo: @(indexPath.row)];
+    [self.savedQuery.category addObject:@(indexPath.row)];
+    [self.postQuery whereKey: @"eventCategory" containedIn:self.savedQuery.category];
+    self.feed.numberOfPosts = 0;
+    [self fetchPosts];
+}
+
+- (void)didDeselectCell: (NSIndexPath *)indexPath{
+    [self.savedQuery.category removeObject:@(indexPath.row)];
+    if([self.savedQuery.category count] > 0)
+    {
+        [self.postQuery whereKey: @"eventCategory" containedIn:self.savedQuery.category];
+
+    }
+    else{
+        [self.postQuery whereKey: @"eventCategory" containedIn:@[@0, @1, @2, @3, @4, @5, @6, @7]];
+    }
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
 }
