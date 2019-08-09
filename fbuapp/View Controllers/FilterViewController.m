@@ -24,8 +24,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *maxDistance;
 @property (strong, nonatomic) PFQuery *postQuery;
 @property (strong, nonatomic) CategoryHeaderView* pillSelector;
-@property (nonatomic, assign) BOOL editingFields;
-@property (nonatomic, assign) CGFloat prevY;
 
 @end
 
@@ -39,9 +37,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.editingFields = NO;
-    self.prevY = self.view.frame.origin.y;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(clearFilters:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
