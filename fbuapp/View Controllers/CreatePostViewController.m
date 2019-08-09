@@ -28,17 +28,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *eventTitleField;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescriptionField;
 @property (weak, nonatomic) IBOutlet UITextField *eventLocationTextField;
-@property  NSString *addressString;
+@property (strong, nonatomic) NSString *addressString;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userRoleControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userLevelControl;
 @property (weak, nonatomic) IBOutlet UITextField *eventPriceField;
 
-@property NSInteger eventCategory;
-@property BOOL pickedImage;
-@property CategoryHeaderView *pillSelector;
-@property BOOL editingPrice;
-@property CGFloat prevY;
+@property (nonatomic, assign) NSInteger eventCategory;
+@property (nonatomic, assign) BOOL pickedImage;
+@property (strong, nonatomic) CategoryHeaderView *pillSelector;
+@property (nonatomic, assign) BOOL editingPrice;
+@property (nonatomic, assign) CGFloat prevY;
 
 @end
 
@@ -332,6 +332,9 @@ didFailAutocompleteWithError:(NSError *)error {
 -(void)didSelectCell: (NSIndexPath *)indexPath {
     NSLog(@"EVENT CATEGORY RECEIVED by createPost");
     self.eventCategory = indexPath.row;
+}
+
+- (void)didDeselectCell: (NSIndexPath *)indexPath{
 }
 
 #pragma mark - keyboard movements

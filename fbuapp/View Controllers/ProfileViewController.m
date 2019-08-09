@@ -39,6 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self checkCount];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonDidLogOut:)];
     
@@ -97,6 +98,7 @@
     }];
     
     self.navigationItem.title = [NSString stringWithFormat:@"Profile"];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -203,7 +205,7 @@
 
 
 - (void)checkCount {
-    if (self.feed.posts.count == 0) {
+    if (self.feed.posts.count < 1) {
         NSLog(@"No posts");
         self.emptyPostsLabel.text = @"[You have no posts to display]";
     }

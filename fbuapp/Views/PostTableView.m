@@ -123,23 +123,27 @@ static NSString *kTableViewPostCell = @"PostCell";
     [[NSNotificationCenter defaultCenter] addObserverForName:(@"informationSaved") object:(nil) queue:(nil) usingBlock:^(NSNotification * _Nonnull note) {
         cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
     }];
-    
+
     cell.fbProfilePhoto.profileID = [PFQuery getUserObjectWithId: post.eventAuthor][@"fbUserId"];
     
-    
-    PFQuery *favoriteQuery = [Favorite query];
-    [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
-    [favoriteQuery whereKey: @"userID" equalTo: self.currentUserId];
-    [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
-        if (favoritedPost) {
-            [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
-            cell.isFavorited = YES;
-        }
-        else{
-            [cell.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
-            cell.isFavorited = NO;
-        }
-    }];
+    if([post.eventAuthor isEqualToString: self.currentUserId]){
+        [cell.favoriteButton removeFromSuperview];
+    }
+    else{
+        PFQuery *favoriteQuery = [Favorite query];
+        [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
+        [favoriteQuery whereKey: @"userID" equalTo: self.currentUserId];
+        [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
+            if (favoritedPost) {
+                [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
+                cell.isFavorited = YES;
+            }
+            else{
+                [cell.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
+                cell.isFavorited = NO;
+            }
+        }];
+    }
     
     PFQuery *postQuery = [EventCategory query];
     [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];
