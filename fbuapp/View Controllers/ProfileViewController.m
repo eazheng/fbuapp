@@ -68,12 +68,13 @@
     
     //creating segment control bar
     self.mainSegment = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Posts", @"Saved", nil]];
-    self.mainSegment.frame = CGRectMake(87, 261, 200, 30);
-    self.mainSegment.layer.shadowOffset = CGSizeMake(0, 2.0f);
-    self.mainSegment.layer.shadowOpacity = 0.25f;
-    self.mainSegment.selectedSegmentIndex = 0;
-    [self.mainSegment addTarget:self action:@selector(fetchPosts) forControlEvents: UIControlEventValueChanged];
-    [self.profileView addSubview:self.mainSegment];
+    self.segmentedControl.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    self.segmentedControl.layer.shadowOpacity = 0.25f;
+    self.segmentedControl.selectedSegmentIndex = 0;
+    self.segmentedControl.selectedSegmentIndex = 0;
+    [self.segmentedControl addTarget:self action:@selector(fetchPosts) forControlEvents: UIControlEventValueChanged];
+    
+
     
     self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
     self.profilePictureView.clipsToBounds = YES;
@@ -107,9 +108,9 @@
 
 //load user's posts to their profile
 - (void)fetchPosts {
-    if(self.mainSegment.selectedSegmentIndex == 0)
+    if(self.segmentedControl.selectedSegmentIndex == 0)
     {
-        [self checkCount];
+//        [self checkCount];
         ///query for posts that user created
         [self.postQuery orderByDescending:@"createdAt"];
         [self.postQuery whereKey:@"eventAuthor" equalTo:[PFUser currentUser].objectId];
@@ -120,15 +121,16 @@
             else {
                 NSLog(@"Loaded User's posts");
                 self.feed.posts = [NSMutableArray arrayWithArray:posts];
+                [self checkCount];
                 NSLog(@"%@", posts);
                 [self.feed reloadData];
             }
         }];
         [self.feed.refreshControl endRefreshing];
     }
-    else if(self.mainSegment.selectedSegmentIndex == 1) {
+    else if(self.segmentedControl.selectedSegmentIndex == 1) {
+//        [self checkCount];
         ///query for posts that have been saved
-        [self checkCount];
         PFQuery *favoriteQuery = [Favorite query];
         [favoriteQuery whereKey:@"userID" equalTo: [PFUser currentUser].objectId];
         [favoriteQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable favoritePosts, NSError *error) {
@@ -150,6 +152,7 @@
                     else {
                         NSLog(@"Loaded User's favorties");
                         self.feed.posts = [NSMutableArray arrayWithArray:objects];
+                        [self checkCount];
                         NSLog(@"%@", objects);
                         [self.feed reloadData];
                     }
@@ -193,15 +196,16 @@
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
         appDelegate.window.rootViewController = navigationController;
+        //logout of actual facebook account
+        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+        [login logOut];
     }];
-    //logout of actual facebook account
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logOut];
+
 }
 
 
 - (void)checkCount {
-    if (self.feed.posts.count > 0) {
+    if (self.feed.posts.count == 0) {
         NSLog(@"No posts");
         self.emptyPostsLabel.text = @"[You have no posts to display]";
     }
