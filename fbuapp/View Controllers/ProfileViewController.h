@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *postView;
 @property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *profilePictureView;
 @property (weak, nonatomic) IBOutlet UILabel *emptyPostsLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @end
 

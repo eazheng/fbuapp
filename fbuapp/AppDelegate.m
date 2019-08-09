@@ -53,10 +53,10 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
     UINavigationController *homeViewNavigationController = [self initializeHomeTab];
     UINavigationController *createPostNavigationController = [self initializeCreatePostTab];
     UINavigationController *profileViewNavigationController = [self initializeProfileTab];
-    
+
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[homeViewNavigationController, createPostNavigationController, profileViewNavigationController];
-    
+
     self.tabBarController.tabBar.items[TabBarHome].title = [self tabIdentifierForType:TabBarHome];
     self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
     self.tabBarController.tabBar.items[TabBarProfile].title = [self tabIdentifierForType:TabBarProfile];
@@ -68,10 +68,8 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
     //persisting user
     if ([PFUser currentUser] != nil) {
         NSLog(@"Logged in");
-        //if a user is logged in they were will be taken to item[0] which is home view
+        
         self.window.rootViewController = self.tabBarController;
-        //to choose which view controller to display
-//        [self.tabBarController setSelectedIndex:2];
     }
     else {
         //If user if not logged in, take them to LogViewController
@@ -90,8 +88,9 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
         self.tabBarController.viewControllers = @[homeViewNavigationController, newCreatePostNavigationController, profileViewNavigationController];
         self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
         [self.tabBarController.tabBar.items[TabBarCompose] setImage:[UIImage imageNamed:@"Createpost"]];
-        
     }];
+    
+
     return YES;
 }
 
