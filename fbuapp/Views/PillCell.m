@@ -22,5 +22,6 @@
     [selectedBackgroundViewForCell setBackgroundColor:[UIColor lightGrayColor]];
 
     self.selectedBackgroundView = selectedBackgroundViewForCell;
+    
 }
 @end
