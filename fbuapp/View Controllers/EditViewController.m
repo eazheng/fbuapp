@@ -12,7 +12,6 @@
 #import "AppDelegate.h"
 
 @interface EditViewController ()
-
 @end
 
 @implementation EditViewController
@@ -26,7 +25,11 @@
     
     self.navigationItem.title = [NSString stringWithFormat:@"Edit Profile"];
     
-    [self formatting];
+    [self formatting:self.editFirstName];
+    [self formatting:self.editLastName];
+    [self formatting:self.editUsername];
+    [self formatting:self.editBio];
+    [self formatting:self.editEmail];
     
     //display old informaiton first before user changes
     [self fetchInfo];
@@ -85,27 +88,10 @@
 }
 
 
-- (void)formatting {
-    self.editFirstName.layer.borderWidth = 0.5f;
-    self.editFirstName.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.editFirstName.layer.cornerRadius = 5.0f;
-    
-    self.editLastName.layer.borderWidth = 0.5f;
-    self.editLastName.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.editLastName.layer.cornerRadius = 5.0f;
-    
-    self.editEmail.layer.borderWidth = 0.5f;
-    self.editEmail.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.editEmail.layer.cornerRadius = 5.0f;
-    
-    self.editBio.layer.borderWidth = 0.5f;
-    self.editBio.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.editBio.layer.cornerRadius = 5.0f;
-    
-    self.editEmail.layer.borderWidth = 0.5f;
-    self.editEmail.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.editEmail.layer.cornerRadius = 5.0f;
+- (void)formatting:(UITextField *)textField {
+    textField.layer.borderWidth = 0.5f;
+    textField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    textField.layer.cornerRadius = 5.0f;
 }
-
 
 @end

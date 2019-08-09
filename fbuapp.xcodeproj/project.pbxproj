@@ -88,6 +88,7 @@
 		0C01F9F122EA7A90009D4947 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		0C01F9F222EA7A90009D4947 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		1947DF620A93CF45116F0D82 /* Pods-fbuapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuapp.release.xcconfig"; path = "Target Support Files/Pods-fbuapp/Pods-fbuapp.release.xcconfig"; sourceTree = "<group>"; };
+		380807EE22FD396500A68417 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		3827E2C122DE98F8008B8FA0 /* fbuapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fbuapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3827E2C422DE98F8008B8FA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3827E2C522DE98F8008B8FA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -263,6 +264,7 @@
 				83E6B27422E148E40045B437 /* View Controllers */,
 				83E6B27022E136FD0045B437 /* Models */,
 				3827E2C422DE98F8008B8FA0 /* AppDelegate.h */,
+				380807EE22FD396500A68417 /* Key.h */,
 				3827E2C522DE98F8008B8FA0 /* AppDelegate.m */,
 				3827E2CA22DE98F8008B8FA0 /* Main.storyboard */,
 				3827E2CD22DE98F9008B8FA0 /* Assets.xcassets */,
@@ -834,7 +836,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P77LWX87UK;
+				DEVELOPMENT_TEAM = 62N42H7N6L;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -893,7 +895,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P77LWX87UK;
+				DEVELOPMENT_TEAM = 62N42H7N6L;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
