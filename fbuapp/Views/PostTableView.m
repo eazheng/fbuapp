@@ -122,7 +122,6 @@ static NSString *kTableViewPostCell = @"PostCell";
     cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
     [[NSNotificationCenter defaultCenter] addObserverForName:(@"informationSaved") object:(nil) queue:(nil) usingBlock:^(NSNotification * _Nonnull note) {
         cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
-
     }];
 
     cell.fbProfilePhoto.profileID = [PFQuery getUserObjectWithId: post.eventAuthor][@"fbUserId"];
