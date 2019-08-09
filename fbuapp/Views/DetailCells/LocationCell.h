@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Post.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *locationDistanceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property Post *post;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapLocationView;
+
 
 @end
 

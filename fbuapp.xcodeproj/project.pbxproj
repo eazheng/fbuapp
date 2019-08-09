@@ -88,6 +88,7 @@
 		0C01F9F122EA7A90009D4947 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		0C01F9F222EA7A90009D4947 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		1947DF620A93CF45116F0D82 /* Pods-fbuapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuapp.release.xcconfig"; path = "Target Support Files/Pods-fbuapp/Pods-fbuapp.release.xcconfig"; sourceTree = "<group>"; };
+		380807EE22FD396500A68417 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		3827E2C122DE98F8008B8FA0 /* fbuapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fbuapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3827E2C422DE98F8008B8FA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3827E2C522DE98F8008B8FA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		830B5C5222F4B10A002FCC24 /* EditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		830B5C5322F4B10A002FCC24 /* EditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		830B5C5422F4B10A002FCC24 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
-		830B5C6522F8E6AB002FCC24 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Key.h; path = /Users/belchercd/Desktop/fbuapp/fbuapp/Key.h; sourceTree = "<absolute>"; };
 		83657DDD22E24824002EB6A8 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		83657DDE22E24824002EB6A8 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		83657DDF22E24824002EB6A8 /* LogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogViewController.xib; sourceTree = "<group>"; };
@@ -263,13 +263,13 @@
 				83E6B27422E148E40045B437 /* View Controllers */,
 				83E6B27022E136FD0045B437 /* Models */,
 				3827E2C422DE98F8008B8FA0 /* AppDelegate.h */,
+				380807EE22FD396500A68417 /* Key.h */,
 				3827E2C522DE98F8008B8FA0 /* AppDelegate.m */,
 				3827E2CA22DE98F8008B8FA0 /* Main.storyboard */,
 				3827E2CD22DE98F9008B8FA0 /* Assets.xcassets */,
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
-				830B5C6522F8E6AB002FCC24 /* Key.h */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";
@@ -834,7 +834,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 62N42H7N6L;
+				DEVELOPMENT_TEAM = P77LWX87UK;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -893,7 +893,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 62N42H7N6L;
+				DEVELOPMENT_TEAM = P77LWX87UK;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
