@@ -110,7 +110,6 @@
 - (void)fetchPosts {
     if(self.segmentedControl.selectedSegmentIndex == 0)
     {
-//        [self checkCount];
         ///query for posts that user created
         [self.postQuery orderByDescending:@"createdAt"];
         [self.postQuery whereKey:@"eventAuthor" equalTo:[PFUser currentUser].objectId];
@@ -129,7 +128,6 @@
         [self.feed.refreshControl endRefreshing];
     }
     else if(self.segmentedControl.selectedSegmentIndex == 1) {
-//        [self checkCount];
         ///query for posts that have been saved
         PFQuery *favoriteQuery = [Favorite query];
         [favoriteQuery whereKey:@"userID" equalTo: [PFUser currentUser].objectId];
