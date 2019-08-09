@@ -97,10 +97,4 @@
     textField.layer.cornerRadius = 5.0f;
 }
 
-
-
-
-
-
-
 @end
