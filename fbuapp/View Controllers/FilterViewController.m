@@ -24,14 +24,24 @@
 @property (weak, nonatomic) IBOutlet UITextField *maxDistance;
 @property (strong, nonatomic) PFQuery *postQuery;
 @property (strong, nonatomic) CategoryHeaderView* pillSelector;
+@property (nonatomic, assign) BOOL editingFields;
+@property (nonatomic, assign) CGFloat prevY;
 
 @end
 
+
 @implementation FilterViewController
 
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.editingFields = NO;
+    self.prevY = self.view.frame.origin.y;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(clearFilters:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(presentHomeOnFilter:)];
@@ -51,6 +61,11 @@
     }];
 
     [self initializeWithSavedQuery];
+    
+    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
@@ -178,14 +193,5 @@
         [self.postQuery whereKey: @"eventCategory" containedIn:@[@0, @1, @2, @3, @4, @5, @6, @7]];
     }
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

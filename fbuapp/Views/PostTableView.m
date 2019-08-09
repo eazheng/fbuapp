@@ -123,24 +123,19 @@ static NSString *kTableViewPostCell = @"PostCell";
         cell.eventAuthor.text = post.authorName;
         cell.fbProfilePhoto.profileID = post.authorPhoto;
     }
-    if([post.eventAuthor isEqualToString: self.currentUserId]){
-        [cell.favoriteButton removeFromSuperview];
-    }
-    else{
         PFQuery *favoriteQuery = [Favorite query];
         [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
         [favoriteQuery whereKey: @"userID" equalTo: self.currentUserId];
         [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
-            if (favoritedPost) {
-                [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
-                cell.isFavorited = YES;
-            }
-            else{
-                [cell.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
-                cell.isFavorited = NO;
-            }
+          if (favoritedPost) {
+              [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
+              cell.isFavorited = YES;
+          }
+          else{
+              [cell.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
+              cell.isFavorited = NO;
+          }
         }];
-    }
     
     PFQuery *postQuery = [EventCategory query];
     [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];

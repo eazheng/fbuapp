@@ -85,7 +85,6 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fly-Fishing" translatesAutoresizingMaskIntoConstraints="NO" id="ijj-Vb-8rK">
                         <rect key="frame" x="15" y="15" width="390" height="260"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="T5s-nh-rta"/>
                             <constraint firstAttribute="width" secondItem="ijj-Vb-8rK" secondAttribute="height" multiplier="3:2" id="wFI-8t-4KY"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -93,11 +92,11 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <view clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDe-cw-Aqz">
-                        <rect key="frame" x="29" y="27" width="117" height="36"/>
+                        <rect key="frame" x="29" y="27" width="138" height="36"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXy-3h-wqF">
-                                <rect key="frame" x="12" y="5" width="93" height="26"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="21"/>
+                                <rect key="frame" x="12" y="2.5" width="114" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -209,6 +208,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="categoryView" destination="lvk-Bt-ktq" id="XZH-f8-OWQ"/>
+                <outlet property="dollarSign" destination="MQt-18-Beu" id="NmS-TP-2RT"/>
                 <outlet property="eventAuthor" destination="3wp-vl-Gw2" id="CSt-KJ-6lk"/>
                 <outlet property="eventCategory" destination="9f9-4X-59b" id="zuC-Xv-6jZ"/>
                 <outlet property="eventDaysAgo" destination="7q6-pa-5HW" id="8MM-OC-noo"/>

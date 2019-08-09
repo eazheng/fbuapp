@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventAuthor;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+@property (weak, nonatomic) IBOutlet UILabel *dollarSign;
 
 @property (weak, nonatomic) IBOutlet UIView *categoryView;
 @property (nonatomic, assign) BOOL isFavorited;
