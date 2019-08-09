@@ -14,7 +14,7 @@
 - (id) init{
     self = [super init];
     self.name = @"";
-    self.category = -1;
+    self.category = [[NSMutableArray alloc] init];
     self.price = -1.0;
     self.distance = -1.0;
     return self;
