@@ -196,7 +196,9 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         }
         case DetailsCellTypeLocationCell: {
             LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.locationNameLabel.text = self.post.eventLocationName;
+            cell.post = self.post;
+            [cell.locationButton setTitle:self.post.eventLocationName forState:UIControlStateNormal];
+//            cell.loloccationNameLabel.text = self.post.eventLocationName;
             
             NSString *dist = [PFGeoPoint distanceToPoint: self.post.eventLocation fromLocation: self.currentLocation];
             cell.locationDistanceLabel.text = [NSString stringWithFormat:@"About %@ miles away", dist];

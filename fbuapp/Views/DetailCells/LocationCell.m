@@ -21,4 +21,15 @@
     // Configure the view for the selected state
 }
 
+// brings user to google map of location
+- (IBAction)locationButtonAction:(id)sender {
+    NSLog(@"Pressed location button");
+    NSLog(@"Post: %@", self.post);
+    NSString *locationString = [NSString stringWithFormat:@"%f,%f", self.post.eventLocation.latitude, self.post.eventLocation.longitude];
+    NSString *linkString = [NSString stringWithFormat:@"https://www.google.com/maps/search/?api=1&query=%@", locationString];
+    NSLog(@"Location string: %@", linkString);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: linkString] options:@{} completionHandler:nil];
+    
+}
+
 @end
