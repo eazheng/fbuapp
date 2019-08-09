@@ -19,12 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="420" height="423.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtr-v8-NQe">
-                        <rect key="frame" x="348" y="297" width="54" height="30"/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wp-vl-Gw2">
                         <rect key="frame" x="87" y="296" width="138.5" height="32"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
@@ -168,6 +162,12 @@
                             <constraint firstAttribute="width" secondItem="jwu-Mn-y8m" secondAttribute="height" multiplier="1:1" id="Q5r-wL-PAE"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtr-v8-NQe">
+                        <rect key="frame" x="348" y="297" width="54" height="30"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ijj-Vb-8rK" secondAttribute="trailing" constant="15" id="0gO-h1-XNE"/>
@@ -196,6 +196,7 @@
                     <constraint firstItem="3wp-vl-Gw2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ijj-Vb-8rK" secondAttribute="bottom" constant="5" id="cMv-ou-CuL"/>
                     <constraint firstItem="3wp-vl-Gw2" firstAttribute="leading" secondItem="jwu-Mn-y8m" secondAttribute="trailing" constant="15" id="crX-RZ-x8T"/>
                     <constraint firstItem="ijj-Vb-8rK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="gWU-6Z-dNa"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vO5-kF-mhi" secondAttribute="trailing" constant="18" id="giL-zC-JsE"/>
                     <constraint firstAttribute="bottom" secondItem="s3x-5A-qta" secondAttribute="bottom" id="k9o-vX-7BJ"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RDe-cw-Aqz" secondAttribute="trailing" constant="29" id="lNp-PS-E1a"/>
                     <constraint firstItem="jwu-Mn-y8m" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="1:9" id="lzV-t4-tBX"/>
