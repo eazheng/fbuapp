@@ -30,6 +30,7 @@
 @property PostTableView *feed;
 @property (strong, nonatomic) CategoryHeaderView *pillSelector;
 @property (strong, nonatomic) Query *savedQuery;
+@property float verticalContentOffset;
 
 @end
 
@@ -57,6 +58,7 @@
     self.feed.tableHeaderView = self.pillSelector;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterViewController:)];
+    self.verticalContentOffset = 0;
 }
 
 - (IBAction)presentFilterViewController:(id)sender{
@@ -125,6 +127,7 @@
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [appDelegate.tabBarController.tabBar setHidden:NO];
+    [self.feed setContentOffset:CGPointMake(0, self.verticalContentOffset)];
 }
 
 - (void)favoritePost:(NSString *)post withUser:(NSString *)user{
@@ -151,6 +154,9 @@
 
 
 - (void) showDetails: (Post *)post {
+    self.verticalContentOffset  = self.feed.contentOffset.y;
+    NSLog(@"Offset154 %f", self.feed.contentOffset.y);
+
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
     detailsViewController.currentLocation = self.feed.currentLocation;
