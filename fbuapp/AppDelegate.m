@@ -17,6 +17,7 @@
 #import "HomeViewController.h"
 #import "CreatePostViewController.h"
 #import <GooglePlaces/GooglePlaces.h>
+#import <GoogleMaps/GoogleMaps.h>
 #import "Key.h"
 
 
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
 
                                      
     [GMSPlacesClient provideAPIKey:API_KEY];
+    [GMSServices provideAPIKey:API_KEY];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];

@@ -21,6 +21,7 @@
 #import "UIViewController+Alerts.h"
 #import "EventCategory.h"
 #import "FBSDKProfile.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 static NSUInteger const kNumberOfCellTypes = 6;
 typedef NS_ENUM(NSUInteger, DetailsCellType) {
@@ -196,10 +197,23 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         }
         case DetailsCellTypeLocationCell: {
             LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            cell.locationNameLabel.text = self.post.eventLocationName;
+            cell.post = self.post;
+            [cell.locationButton setTitle:self.post.eventLocationName forState:UIControlStateNormal];
             
             NSString *dist = [PFGeoPoint distanceToPoint: self.post.eventLocation fromLocation: self.currentLocation];
             cell.locationDistanceLabel.text = [NSString stringWithFormat:@"About %@ miles away", dist];
+            
+            
+            GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.post.eventLocation.latitude longitude:self.post.eventLocation.longitude zoom:12];
+
+            cell.mapLocationView.camera = camera;
+            cell.mapLocationView.myLocationEnabled = YES;
+
+            // Creates a marker in the center of the map.
+            GMSMarker *marker = [[GMSMarker alloc] init];
+            marker.position = CLLocationCoordinate2DMake(self.post.eventLocation.latitude, self.post.eventLocation.longitude);
+            marker.map = cell.mapLocationView;
+            
             return cell;
         }
         case DetailsCellTypeAuthorCell: {
