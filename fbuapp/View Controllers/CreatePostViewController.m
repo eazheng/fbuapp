@@ -45,7 +45,6 @@
 @implementation CreatePostViewController
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -216,6 +215,7 @@
     [geocoder geocodeAddressString:self.addressString completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error geocoding address string: %@", error.localizedDescription);
+            [self showAlert:@"Error" withMessage:@"Error geocoding address string"];
         }
         else {
             CLPlacemark *placemark = [placemarks lastObject];
@@ -227,11 +227,10 @@
             [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withLocationName: self.eventLocationTextField.text withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(!succeeded){
                     NSLog(@"Error posting Event: %@", error.localizedDescription);
+                    [self showAlert:@"Error Posting Event" withMessage:error.localizedDescription];
                 }
                 else {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostEventComplete" object:nil userInfo:nil];
-                    
-                    NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
                 }
             }];
@@ -267,7 +266,6 @@
     self.pickedImage = true;
     
     // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     
     // Do something with the images (based on your use case)
@@ -282,10 +280,6 @@
 didAutocompleteWithPlace:(GMSPlace *)place {
     [self dismissViewControllerAnimated:YES completion:nil];
     // Do something with the selected place.
-    NSLog(@"Place name %@", place.name);
-    NSLog(@"Place ID %@", place.placeID);
-    NSLog(@"Formatted Address %@", place.formattedAddress);
-    NSLog(@"Place attributions %@", place.attributions.string);
     self.addressString = place.formattedAddress;
     self.eventLocationTextField.text = place.name;
 }
@@ -294,7 +288,6 @@ didAutocompleteWithPlace:(GMSPlace *)place {
 didFailAutocompleteWithError:(NSError *)error {
     [self dismissViewControllerAnimated:YES completion:nil];
     // TODO: handle the error.
-    NSLog(@"Error: %@", [error description]);
     [self showAlert:@"Failed Autocomplete" withMessage:[error description]];
 }
 
