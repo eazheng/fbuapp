@@ -150,14 +150,11 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         // handle response here.
         [self.post deleteInBackground];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeEventComplete" object:nil userInfo:nil];
-        
-        NSLog(@"Delete Event Success!");
         [self.navigationController popViewControllerAnimated:YES];
         
     }];
     // create a cancel action
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        // handle response here.
     }];
     
     // add actions to the alert controller
@@ -269,7 +266,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 }
 
 - (IBAction)contactAuthorButtonAction:(id)sender {
-    NSLog(@"I want to contact the author!");
     NSString *userId = self.postAuthor[@"fbUsername"];
     NSString *linkString = [NSString stringWithFormat:@"http://m.me/%@", userId];
 
