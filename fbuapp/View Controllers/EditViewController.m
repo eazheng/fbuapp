@@ -12,15 +12,12 @@
 #import "AppDelegate.h"
 
 @interface EditViewController ()
-
-
 @end
 
 @implementation EditViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(didTapCancel)];
     
