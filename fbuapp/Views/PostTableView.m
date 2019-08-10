@@ -22,6 +22,7 @@
 #import "PFGeoPoint+Helpers.h"
 #import "NSDate+Helpers.h"
 #import "PFFileObject+Helpers.h"
+#import "UIViewController+Alerts.h"
 
 
 static NSString *kTableViewPostCell = @"PostCell";
@@ -119,6 +120,7 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     cell.post = post;
     cell.currentUserId = self.currentUserId;
+    
     if(post.authorName != nil){//only assign eventAuthor if authorName is in the database
         cell.eventAuthor.text = post.authorName;
         cell.fbProfilePhoto.profileID = post.authorPhoto;
@@ -143,9 +145,6 @@ static NSString *kTableViewPostCell = @"PostCell";
         if (category) {
             cell.eventCategory.text = category[@"name"];
             cell.categoryView.backgroundColor = [UIColor colorWithRGB: category[@"color"]];
-        }
-        else {
-            NSLog(@"Failed to fetch categories.");
         }
     }];
     cell.eventTitle.text = post.eventTitle;

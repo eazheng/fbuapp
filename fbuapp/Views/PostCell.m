@@ -40,7 +40,6 @@
 }
 
 - (IBAction)onTapCell:(id)sender {
-    NSLog(@"Recognized onTapCell!!");
 }
 
 

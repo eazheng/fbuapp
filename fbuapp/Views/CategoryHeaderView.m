@@ -68,9 +68,6 @@ static NSString *kCollectionViewPillCell = @"PillCell";
             self.categories = [NSArray arrayWithArray:categories] ;
             [self.collectionView reloadData];
             }
-            else {
-                NSLog(@"Failed to fetch categories.");
-            }
         }];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

@@ -12,6 +12,7 @@
 #import "Masonry.h"
 #import "MultiSelectSegmentedControl.h"
 #import "Query.h"
+#import "UIViewController+Alerts.h"
 
 @interface FilterViewController () <CategoryHeaderViewDelegate>
 
@@ -68,7 +69,6 @@
     for(NSNumber *indexPathRow in self.eventCategory){
         [self.pillSelector.collectionView selectItemAtIndexPath : [NSIndexPath indexPathForItem:[indexPathRow intValue] inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
     }
-    
 }
 
 - (void)dealloc
@@ -159,7 +159,7 @@
                 [queryArray addObject:@2];
             }
             else{
-                NSLog(@"Error: Invalid multipane selection.");
+                [self showAlert:@"Error" withMessage:@"Invalid multipane selection."];
             }
         }
         [self.postQuery whereKey:key containedIn: queryArray];
@@ -182,7 +182,6 @@
     if([self.eventCategory count] > 0)
     {
         [self.postQuery whereKey: @"eventCategory" containedIn:self.eventCategory];
-        
     }
     else{
         [self.postQuery whereKey: @"eventCategory" containedIn:@[@0, @1, @2, @3, @4, @5, @6, @7]];

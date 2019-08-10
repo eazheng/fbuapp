@@ -22,6 +22,7 @@
 #import "FilterViewController.h"
 #import "PillCell.h"
 #import "Query.h"
+#import "UIViewController+Alerts.h"
 
 
 @interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, DetailsViewDelegate, UIScrollViewDelegate>
@@ -87,10 +88,9 @@
         else if(posts && self.feed.numberOfPosts == 0){
             self.feed.posts = [NSMutableArray arrayWithArray:posts];
             [self.feed reloadData];
-            NSLog(@"No more posts to reload.");
         }
         else{
-            NSLog(@"Error fetching posts.");
+            [self showAlert:@"Error" withMessage:@"Could not fetch posts."];
         }
         [self.feed.loadingMoreView stopAnimating];
         [self.feed.refreshControl endRefreshing];
@@ -120,23 +120,19 @@
     }
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
-    [self.feed setContentOffset:CGPointMake(0,60)];
+    [self.feed setContentOffset:CGPointMake(0, -self.view.safeAreaLayoutGuide.layoutFrame.origin.y)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [appDelegate.tabBarController.tabBar setHidden:NO];
-    [self.feed setContentOffset:CGPointMake(0, self.verticalContentOffset)];
 }
 
 - (void)favoritePost:(NSString *)post withUser:(NSString *)user{
     [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(!succeeded){
             NSLog(@"Error favoriting event: %@", error.localizedDescription);
-        }
-        else{
-            NSLog(@"Favoriting event success!");
         }
     }];
 }
@@ -154,9 +150,6 @@
 
 
 - (void) showDetails: (Post *)post {
-    self.verticalContentOffset  = self.feed.contentOffset.y;
-    NSLog(@"Offset154 %f", self.feed.contentOffset.y);
-
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
     detailsViewController.currentLocation = self.feed.currentLocation;
