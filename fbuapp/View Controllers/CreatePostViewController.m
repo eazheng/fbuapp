@@ -54,13 +54,13 @@
     self.editingPrice = NO;
     self.prevY = self.view.frame.origin.y;
 
-    
-    self.eventTitleField.font = [UIFont boldSystemFontOfSize:50.0f];
+    self.eventTitleField.font =[UIFont systemFontOfSize:50.0f weight:UIFontWeightLight];
+
     self.eventTitleField.borderStyle = UITextBorderStyleNone;
     self.eventTitleField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     if ([self.eventTitleField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor blackColor];
+        UIColor *color = [UIColor lightGrayColor];
         self.eventTitleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Event Title" attributes:@{NSForegroundColorAttributeName: color}];
     } else {
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
@@ -106,7 +106,7 @@
     self.eventLocationTextField.leftViewMode = UITextFieldViewModeAlways;
     
     UIImageView *priceImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.eventPriceField.font.pointSize, self.eventPriceField.font.pointSize)];
-    priceImage.image = [UIImage imageNamed:@"dollar_sign"];
+    priceImage.image = [UIImage imageNamed:@"money"];
     priceImage.contentMode = UIViewContentModeScaleAspectFit;
     self.eventPriceField.leftViewMode = UITextFieldViewModeAlways;
     self.eventPriceField.leftView = priceImage;
@@ -145,7 +145,6 @@
 
 - (IBAction)onTapPriceField:(id)sender {
     self.editingPrice = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillChangeFrameNotification object:nil userInfo:nil];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender

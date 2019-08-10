@@ -82,6 +82,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
                                       initWithFrame:CGRectZero];
     
     self.navButton = [[UIBarButtonItem alloc]init];
+    self.navButton.title = @"";
     if ([self.currentUser isEqualToString:self.postAuthor.objectId]) {
         [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
@@ -217,7 +218,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             AuthorCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             
             cell.authorNameLabel.text = [NSString stringWithFormat:@"%@ %@", self.postAuthor[@"firstName"], self.postAuthor[@"lastName"]];
-            cell.usernameLabel.text = self.postAuthor[@"username"];
+            cell.usernameLabel.text = [NSString stringWithFormat:@"@%@",self.postAuthor[@"username"]];
             
             cell.fbProfileView.profileID = self.postAuthor[@"fbUserId"];
             
