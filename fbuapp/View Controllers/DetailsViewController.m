@@ -82,6 +82,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
                                       initWithFrame:CGRectZero];
     
     self.navButton = [[UIBarButtonItem alloc]init];
+    self.navButton.title = @"";
     if ([self.currentUser isEqualToString:self.postAuthor.objectId]) {
         [self.detailsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
@@ -150,14 +151,11 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
         // handle response here.
         [self.post deleteInBackground];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeEventComplete" object:nil userInfo:nil];
-        
-        NSLog(@"Delete Event Success!");
         [self.navigationController popViewControllerAnimated:YES];
         
     }];
     // create a cancel action
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        // handle response here.
     }];
     
     // add actions to the alert controller
@@ -220,7 +218,7 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
             AuthorCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             
             cell.authorNameLabel.text = [NSString stringWithFormat:@"%@ %@", self.postAuthor[@"firstName"], self.postAuthor[@"lastName"]];
-            cell.usernameLabel.text = self.postAuthor[@"username"];
+            cell.usernameLabel.text = [NSString stringWithFormat:@"@%@",self.postAuthor[@"username"]];
             
             cell.fbProfileView.profileID = self.postAuthor[@"fbUserId"];
             
@@ -269,7 +267,6 @@ typedef NS_ENUM(NSUInteger, SkillLevel) {
 }
 
 - (IBAction)contactAuthorButtonAction:(id)sender {
-    NSLog(@"I want to contact the author!");
     NSString *userId = self.postAuthor[@"fbUsername"];
     NSString *linkString = [NSString stringWithFormat:@"http://m.me/%@", userId];
 

@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property Post *post;
 @property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *fbProfileView;
 
-
 @end
 
 NS_ASSUME_NONNULL_END
