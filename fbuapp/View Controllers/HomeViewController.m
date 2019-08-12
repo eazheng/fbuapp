@@ -22,6 +22,7 @@
 #import "FilterViewController.h"
 #import "PillCell.h"
 #import "Query.h"
+#import "UIViewController+Alerts.h"
 
 
 @interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, DetailsViewDelegate, UIScrollViewDelegate>
@@ -85,11 +86,8 @@
         else if(posts && self.feed.numberOfPosts == 0){
             self.feed.posts = [NSMutableArray arrayWithArray:posts];
             [self.feed reloadData];
-            NSLog(@"No more posts to reload.");
         }
-        else{
-            NSLog(@"Error fetching posts.");
-        }
+        
         [self.feed.loadingMoreView stopAnimating];
         [self.feed.refreshControl endRefreshing];
     }];
@@ -118,7 +116,7 @@
     }
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
-    [self.feed setContentOffset:CGPointMake(0,-62)];
+    [self.feed setContentOffset:CGPointMake(0, -self.view.safeAreaLayoutGuide.layoutFrame.origin.y)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -130,7 +128,6 @@
 - (void)favoritePost:(NSString *)post withUser:(NSString *)user{
     [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(!succeeded){
-            NSLog(@"Error favoriting event: %@", error.localizedDescription);
             [self showAlert:@"Error favoriting event" withMessage:error.localizedDescription];
         }
     }];
