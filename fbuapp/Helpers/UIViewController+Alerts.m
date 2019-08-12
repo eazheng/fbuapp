@@ -20,7 +20,6 @@
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Okay"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {
-                                                         // handle response here.
                                                      }];
     // add the OK action to the alert controller
     [alert addAction:okAction];

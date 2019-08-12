@@ -31,7 +31,6 @@
 @property PostTableView *feed;
 @property (strong, nonatomic) CategoryHeaderView *pillSelector;
 @property (strong, nonatomic) Query *savedQuery;
-@property float verticalContentOffset;
 
 @end
 
@@ -59,7 +58,6 @@
     self.feed.tableHeaderView = self.pillSelector;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterViewController:)];
-    self.verticalContentOffset = 0;
 }
 
 - (IBAction)presentFilterViewController:(id)sender{
@@ -130,7 +128,7 @@
 - (void)favoritePost:(NSString *)post withUser:(NSString *)user{
     [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(!succeeded){
-            NSLog(@"Error favoriting event: %@", error.localizedDescription);
+            [self showAlert:@"Error favoriting event" withMessage:error.localizedDescription];
         }
     }];
 }
@@ -145,7 +143,6 @@
         }
     }];
 }
-
 
 - (void) showDetails: (Post *)post {
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
