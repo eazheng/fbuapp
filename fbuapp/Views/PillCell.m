@@ -12,7 +12,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 -(void)setSelected:(BOOL)selected {
@@ -20,7 +19,7 @@
 
     UIView *selectedBackgroundViewForCell = [UIView new];
     [selectedBackgroundViewForCell setBackgroundColor:[UIColor lightGrayColor]];
-
+    
     self.selectedBackgroundView = selectedBackgroundViewForCell;
 }
 @end

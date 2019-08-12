@@ -12,6 +12,7 @@
 #import "Masonry.h"
 #import "MultiSelectSegmentedControl.h"
 #import "Query.h"
+#import "UIViewController+Alerts.h"
 
 @interface FilterViewController () <CategoryHeaderViewDelegate>
 
@@ -27,8 +28,13 @@
 
 @end
 
+
 @implementation FilterViewController
 
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,6 +57,11 @@
     }];
 
     [self initializeWithSavedQuery];
+    
+    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
@@ -58,7 +69,6 @@
     for(NSNumber *indexPathRow in self.eventCategory){
         [self.pillSelector.collectionView selectItemAtIndexPath : [NSIndexPath indexPathForItem:[indexPathRow intValue] inSection:0] animated: NO scrollPosition: UICollectionViewScrollPositionNone];
     }
-    
 }
 
 - (void)dealloc
@@ -149,7 +159,7 @@
                 [queryArray addObject:@2];
             }
             else{
-                NSLog(@"Error: Invalid multipane selection.");
+                [self showAlert:@"Error" withMessage:@"Invalid multipane selection."];
             }
         }
         [self.postQuery whereKey:key containedIn: queryArray];
@@ -172,20 +182,10 @@
     if([self.eventCategory count] > 0)
     {
         [self.postQuery whereKey: @"eventCategory" containedIn:self.eventCategory];
-        
     }
     else{
         [self.postQuery whereKey: @"eventCategory" containedIn:@[@0, @1, @2, @3, @4, @5, @6, @7]];
     }
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

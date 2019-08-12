@@ -22,6 +22,7 @@
 #import "FilterViewController.h"
 #import "PillCell.h"
 #import "Query.h"
+#import "UIViewController+Alerts.h"
 
 
 @interface HomeViewController () <PostCellDelegate, PostTableViewDelegate, FilterDelegate, CategoryHeaderViewDelegate, DetailsViewDelegate, UIScrollViewDelegate>
@@ -30,7 +31,6 @@
 @property PostTableView *feed;
 @property (strong, nonatomic) CategoryHeaderView *pillSelector;
 @property (strong, nonatomic) Query *savedQuery;
-@property float verticalContentOffset;
 
 @end
 
@@ -58,7 +58,6 @@
     self.feed.tableHeaderView = self.pillSelector;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(presentFilterViewController:)];
-    self.verticalContentOffset = 0;
 }
 
 - (IBAction)presentFilterViewController:(id)sender{
@@ -87,11 +86,8 @@
         else if(posts && self.feed.numberOfPosts == 0){
             self.feed.posts = [NSMutableArray arrayWithArray:posts];
             [self.feed reloadData];
-            NSLog(@"No more posts to reload.");
         }
-        else{
-            NSLog(@"Error fetching posts.");
-        }
+        
         [self.feed.loadingMoreView stopAnimating];
         [self.feed.refreshControl endRefreshing];
     }];
@@ -120,23 +116,19 @@
     }
     self.feed.numberOfPosts = 0;
     [self fetchPosts];
-    [self.feed setContentOffset:CGPointMake(0,-62)];
+    [self.feed setContentOffset:CGPointMake(0, -self.view.safeAreaLayoutGuide.layoutFrame.origin.y)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     [appDelegate.tabBarController.tabBar setHidden:NO];
-    [self.feed setContentOffset:CGPointMake(0, self.verticalContentOffset)];
 }
 
 - (void)favoritePost:(NSString *)post withUser:(NSString *)user{
     [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(!succeeded){
-            NSLog(@"Error favoriting event: %@", error.localizedDescription);
-        }
-        else{
-            NSLog(@"Favoriting event success!");
+            [self showAlert:@"Error favoriting event" withMessage:error.localizedDescription];
         }
     }];
 }
@@ -152,11 +144,7 @@
     }];
 }
 
-
 - (void) showDetails: (Post *)post {
-    self.verticalContentOffset  = self.feed.contentOffset.y;
-    NSLog(@"Offset154 %f", self.feed.contentOffset.y);
-
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
     detailsViewController.currentLocation = self.feed.currentLocation;

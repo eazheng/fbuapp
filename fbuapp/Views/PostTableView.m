@@ -22,6 +22,7 @@
 #import "PFGeoPoint+Helpers.h"
 #import "NSDate+Helpers.h"
 #import "PFFileObject+Helpers.h"
+#import "UIViewController+Alerts.h"
 
 
 static NSString *kTableViewPostCell = @"PostCell";
@@ -119,31 +120,24 @@ static NSString *kTableViewPostCell = @"PostCell";
     
     cell.post = post;
     cell.currentUserId = self.currentUserId;
-    cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
-    [[NSNotificationCenter defaultCenter] addObserverForName:(@"informationSaved") object:(nil) queue:(nil) usingBlock:^(NSNotification * _Nonnull note) {
-        cell.eventAuthor.text = [PFQuery getUserObjectWithId: post[@"eventAuthor"]][@"firstName"];
-    }];
-
-    cell.fbProfilePhoto.profileID = [PFQuery getUserObjectWithId: post.eventAuthor][@"fbUserId"];
     
-    if([post.eventAuthor isEqualToString: self.currentUserId]){
-        [cell.favoriteButton removeFromSuperview];
+    if(post.authorName != nil){//only assign eventAuthor if authorName is in the database
+        cell.eventAuthor.text = post.authorName;
+        cell.fbProfilePhoto.profileID = post.authorPhoto;
     }
-    else{
         PFQuery *favoriteQuery = [Favorite query];
         [favoriteQuery whereKey: @"postID" equalTo: post.objectId];
         [favoriteQuery whereKey: @"userID" equalTo: self.currentUserId];
         [favoriteQuery getFirstObjectInBackgroundWithBlock:^(PFObject *favoritedPost, NSError *error) {
-            if (favoritedPost) {
-                [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
-                cell.isFavorited = YES;
-            }
-            else{
-                [cell.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
-                cell.isFavorited = NO;
-            }
+          if (favoritedPost) {
+              [cell.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
+              cell.isFavorited = YES;
+          }
+          else{
+              [cell.favoriteButton setImage:[UIImage imageNamed:@"notfavorited"] forState:UIControlStateNormal];
+              cell.isFavorited = NO;
+          }
         }];
-    }
     
     PFQuery *postQuery = [EventCategory query];
     [postQuery whereKey: @"idNumber" equalTo: post[@"eventCategory"]];
@@ -151,9 +145,6 @@ static NSString *kTableViewPostCell = @"PostCell";
         if (category) {
             cell.eventCategory.text = category[@"name"];
             cell.categoryView.backgroundColor = [UIColor colorWithRGB: category[@"color"]];
-        }
-        else {
-            NSLog(@"Failed to fetch categories.");
         }
     }];
     cell.eventTitle.text = post.eventTitle;

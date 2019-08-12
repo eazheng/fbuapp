@@ -45,7 +45,6 @@
 @implementation CreatePostViewController
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -55,13 +54,13 @@
     self.editingPrice = NO;
     self.prevY = self.view.frame.origin.y;
 
-    
-    self.eventTitleField.font = [UIFont boldSystemFontOfSize:50.0f];
+    self.eventTitleField.font =[UIFont systemFontOfSize:50.0f weight:UIFontWeightLight];
+
     self.eventTitleField.borderStyle = UITextBorderStyleNone;
     self.eventTitleField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     if ([self.eventTitleField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor blackColor];
+        UIColor *color = [UIColor lightGrayColor];
         self.eventTitleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Event Title" attributes:@{NSForegroundColorAttributeName: color}];
     } else {
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
@@ -107,7 +106,7 @@
     self.eventLocationTextField.leftViewMode = UITextFieldViewModeAlways;
     
     UIImageView *priceImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.eventPriceField.font.pointSize, self.eventPriceField.font.pointSize)];
-    priceImage.image = [UIImage imageNamed:@"dollar_sign"];
+    priceImage.image = [UIImage imageNamed:@"money"];
     priceImage.contentMode = UIViewContentModeScaleAspectFit;
     self.eventPriceField.leftViewMode = UITextFieldViewModeAlways;
     self.eventPriceField.leftView = priceImage;
@@ -146,7 +145,6 @@
 
 - (IBAction)onTapPriceField:(id)sender {
     self.editingPrice = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillChangeFrameNotification object:nil userInfo:nil];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
@@ -156,7 +154,6 @@
 
 // Present the autocomplete view controller when the button is pressed.
 - (void)searchClicked {
-    NSLog(@"Clicked on search");
     GMSAutocompleteViewController *locationController = [[GMSAutocompleteViewController alloc] init];
     locationController.delegate = self;
     
@@ -211,11 +208,13 @@
     NSInteger authorSkill = [self.userLevelControl selectedSegmentIndex];
     NSInteger authorRole = [self.userRoleControl selectedSegmentIndex];
     
+    NSString *authorName = [PFUser currentUser][@"firstName"];
+    NSString *authorPhoto = [PFUser currentUser][@"fbUserId"];
 
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:self.addressString completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error geocoding address string: %@", error.localizedDescription);
+            [self showAlert:@"Error" withMessage:@"Error geocoding address string"];
         }
         else {
             CLPlacemark *placemark = [placemarks lastObject];
@@ -224,14 +223,12 @@
             CGSize size = CGSizeMake(390, 260);
             UIImage *resizedImage = [self resizeImage:self.eventImage.image withSize:size];
             //post the event
-            [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withLocationName: self.eventLocationTextField.text withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withLocationName: self.eventLocationTextField.text withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withAuthorName:authorName withAuthorPhoto:authorPhoto withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(!succeeded){
-                    NSLog(@"Error posting Event: %@", error.localizedDescription);
+                    [self showAlert:@"Error Posting Event" withMessage:error.localizedDescription];
                 }
                 else {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostEventComplete" object:nil userInfo:nil];
-                    
-                    NSLog(@"Post Event Success!");
                     [self showAlert:@"Event Succesfully Posted!" withMessage:@""];
                 }
             }];
@@ -267,7 +264,6 @@
     self.pickedImage = true;
     
     // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     
     // Do something with the images (based on your use case)
@@ -282,19 +278,13 @@
 didAutocompleteWithPlace:(GMSPlace *)place {
     [self dismissViewControllerAnimated:YES completion:nil];
     // Do something with the selected place.
-    NSLog(@"Place name %@", place.name);
-    NSLog(@"Place ID %@", place.placeID);
-    NSLog(@"Formatted Address %@", place.formattedAddress);
-    NSLog(@"Place attributions %@", place.attributions.string);
     self.addressString = place.formattedAddress;
     self.eventLocationTextField.text = place.name;
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController
 didFailAutocompleteWithError:(NSError *)error {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    // TODO: handle the error.
-    NSLog(@"Error: %@", [error description]);
+    [self dismissViewControllerAnimated:YES completion:nil];\
     [self showAlert:@"Failed Autocomplete" withMessage:[error description]];
 }
 
@@ -330,7 +320,6 @@ didFailAutocompleteWithError:(NSError *)error {
 
 // delegate for categoryHeaderView
 -(void)didSelectCell: (NSIndexPath *)indexPath {
-    NSLog(@"EVENT CATEGORY RECEIVED by createPost");
     self.eventCategory = indexPath.row;
 }
 
