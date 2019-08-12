@@ -89,9 +89,7 @@
             self.feed.posts = [NSMutableArray arrayWithArray:posts];
             [self.feed reloadData];
         }
-        else{
-            [self showAlert:@"Error" withMessage:@"Could not fetch posts."];
-        }
+        
         [self.feed.loadingMoreView stopAnimating];
         [self.feed.refreshControl endRefreshing];
     }];
