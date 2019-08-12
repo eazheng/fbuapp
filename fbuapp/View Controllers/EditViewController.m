@@ -10,6 +10,8 @@
 #import "RegisterViewController.h"
 #import "ProfileViewController.h"
 #import "AppDelegate.h"
+#import "UIColor+Helpers.h"
+#import "UIViewController+Alerts.h"
 
 @interface EditViewController ()
 @end
@@ -33,6 +35,9 @@
     
     //display old informaiton first before user changes
     [self fetchInfo];
+    
+    NSArray *color = @[@237, @167, @114];
+    self.backgroundView.backgroundColor = [UIColor colorWithRGB:color];
 }
 
 
@@ -56,11 +61,10 @@
         
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
-                NSLog(@"Error: %@", error.localizedDescription);
+                [self showAlert:@"Error: %@" withMessage:error.localizedDescription];
             }
             else {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"informationSaved" object:nil userInfo:nil];
-                NSLog(@"User information updated! %@", [PFUser currentUser]);
             }
         }];
     }
@@ -75,7 +79,7 @@
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser != nil) {
         [currentUser fetch];
-        NSLog(@"Current user: %@", currentUser.email);
+
         self.editFirstName.text = currentUser[@"firstName"];
         self.editLastName.text = currentUser[@"lastName"];
         self.editUsername.text = currentUser.username;
@@ -83,7 +87,7 @@
         self.editEmail.text = currentUser.email;
     }
     else {
-        NSLog(@"No information to display");
+        [self showAlert:@"User not found" withMessage:@""];
     }
 }
 

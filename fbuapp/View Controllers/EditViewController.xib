@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditViewController">
             <connections>
+                <outlet property="backgroundView" destination="8lt-nT-HWI" id="1az-ML-3YB"/>
                 <outlet property="editBio" destination="nGa-zh-VNb" id="pes-38-XEa"/>
                 <outlet property="editEmail" destination="BhA-kX-krt" id="sYG-dE-ZfL"/>
                 <outlet property="editFirstName" destination="D5B-p9-f9F" id="Cmb-0S-fmC"/>
@@ -97,6 +98,14 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lt-nT-HWI">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="375" id="IEt-Q9-p4q"/>
+                                        <constraint firstAttribute="height" constant="57" id="JeI-z0-R3u"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -105,6 +114,7 @@
                                 <constraint firstItem="nGa-zh-VNb" firstAttribute="leading" secondItem="jAQ-2i-eM4" secondAttribute="leading" constant="33" id="6jp-tA-LuD"/>
                                 <constraint firstItem="IMg-hD-Fbj" firstAttribute="width" secondItem="jAQ-2i-eM4" secondAttribute="width" multiplier="0.25" id="7cF-aJ-NKt"/>
                                 <constraint firstItem="iiF-M0-5Ud" firstAttribute="top" secondItem="dsQ-U9-iRU" secondAttribute="bottom" constant="-1" id="7kD-4J-8i6"/>
+                                <constraint firstAttribute="trailing" secondItem="8lt-nT-HWI" secondAttribute="trailing" id="B0X-Xk-lRI"/>
                                 <constraint firstItem="D5B-p9-f9F" firstAttribute="top" secondItem="IMg-hD-Fbj" secondAttribute="bottom" constant="-1" id="EL7-K4-hN5"/>
                                 <constraint firstItem="beF-rE-O34" firstAttribute="leading" secondItem="jAQ-2i-eM4" secondAttribute="leading" constant="36" id="F5r-eX-fpk"/>
                                 <constraint firstItem="BhA-kX-krt" firstAttribute="top" secondItem="56J-ac-4yr" secondAttribute="bottom" id="Huj-6T-Dxc"/>
@@ -118,6 +128,7 @@
                                 <constraint firstItem="BhA-kX-krt" firstAttribute="width" secondItem="jAQ-2i-eM4" secondAttribute="width" multiplier="0.82" id="SI0-cF-cfn"/>
                                 <constraint firstItem="beF-rE-O34" firstAttribute="width" secondItem="jAQ-2i-eM4" secondAttribute="width" multiplier="0.25" id="Xar-TG-qym"/>
                                 <constraint firstItem="dsQ-U9-iRU" firstAttribute="leading" secondItem="jAQ-2i-eM4" secondAttribute="leading" constant="36" id="Ylm-CV-pxP"/>
+                                <constraint firstItem="8lt-nT-HWI" firstAttribute="top" secondItem="jAQ-2i-eM4" secondAttribute="top" id="ZiC-d9-ihc"/>
                                 <constraint firstItem="56J-ac-4yr" firstAttribute="leading" secondItem="jAQ-2i-eM4" secondAttribute="leading" constant="36" id="aUm-0Q-DLC"/>
                                 <constraint firstItem="IMg-hD-Fbj" firstAttribute="top" secondItem="jAQ-2i-eM4" secondAttribute="top" constant="94" id="cPA-Cr-z8S"/>
                                 <constraint firstItem="beF-rE-O34" firstAttribute="top" secondItem="D5B-p9-f9F" secondAttribute="bottom" constant="18" id="eVV-n2-6uS"/>
@@ -132,6 +143,7 @@
                                 <constraint firstItem="56J-ac-4yr" firstAttribute="top" secondItem="nGa-zh-VNb" secondAttribute="bottom" constant="31" id="tuw-br-m5G"/>
                                 <constraint firstItem="km9-LZ-xw5" firstAttribute="top" secondItem="iiF-M0-5Ud" secondAttribute="bottom" constant="30" id="u3X-bJ-N0M"/>
                                 <constraint firstItem="PXx-gf-Ppl" firstAttribute="width" secondItem="jAQ-2i-eM4" secondAttribute="width" multiplier="0.82" id="uNg-Ia-LBA"/>
+                                <constraint firstItem="8lt-nT-HWI" firstAttribute="leading" secondItem="jAQ-2i-eM4" secondAttribute="leading" id="uXX-dt-cTb"/>
                             </constraints>
                         </view>
                     </subviews>

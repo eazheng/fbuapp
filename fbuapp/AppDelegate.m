@@ -58,29 +58,26 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
     self.tabBarController.tabBar.items[TabBarHome].title = [self tabIdentifierForType:TabBarHome];
     self.tabBarController.tabBar.items[TabBarCompose].title = [self tabIdentifierForType:TabBarCompose];
     self.tabBarController.tabBar.items[TabBarProfile].title = [self tabIdentifierForType:TabBarProfile];
-    
+
     [self.tabBarController.tabBar.items[TabBarHome] setImage:[UIImage imageNamed:@"Home"]];
     [self.tabBarController.tabBar.items[TabBarCompose] setImage:[UIImage imageNamed:@"Createpost"]];
     [self.tabBarController.tabBar.items[TabBarProfile] setImage:[UIImage imageNamed:@"Profile"]];
     
-    //persisting user
     if ([PFUser currentUser] != nil) {
         NSLog(@"Logged in");
-        
+
         self.window.rootViewController = self.tabBarController;
     }
     else {
-        //If user if not logged in, take them to LogViewController
+        //If user is not logged in, take them to LogViewController
         LogViewController *logViewController = [[LogViewController alloc] init];
         logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
-        UINavigationController *logViewNavigationController = [self initializeLogView];
-        self.window.rootViewController = logViewNavigationController;
+        self.window.rootViewController = logViewController;
     }
 
     [[NSNotificationCenter defaultCenter] addObserverForName:@"PostEventComplete" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        NSLog(@"The Action I was waiting for is complete");
         [self.tabBarController setSelectedIndex:TabBarHome];
         UINavigationController *newCreatePostNavigationController = [self initializeCreatePostTab];
         self.tabBarController.viewControllers = @[homeViewNavigationController, newCreatePostNavigationController, profileViewNavigationController];
@@ -88,7 +85,6 @@ typedef NS_ENUM(NSUInteger, TabBarItems) {
         [self.tabBarController.tabBar.items[TabBarCompose] setImage:[UIImage imageNamed:@"Createpost"]];
     }];
     
-
     return YES;
 }
 

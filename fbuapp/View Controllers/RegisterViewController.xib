@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController">
             <connections>
+                <outlet property="colorView" destination="EMJ-ic-svF" id="B1c-v7-Vep"/>
                 <outlet property="emailField" destination="lRC-c9-bf0" id="OEK-oE-4cp"/>
                 <outlet property="firstNameField" destination="8Kr-j6-4GE" id="fHy-iv-3nQ"/>
                 <outlet property="lastNameField" destination="hdL-7A-pcT" id="2Ru-QA-ffM"/>
@@ -157,10 +158,10 @@
                                 <constraint firstItem="EMJ-ic-svF" firstAttribute="leading" secondItem="6RM-Ce-k7O" secondAttribute="leading" id="c1X-9I-WBs"/>
                                 <constraint firstItem="EMJ-ic-svF" firstAttribute="width" secondItem="6RM-Ce-k7O" secondAttribute="width" id="ffY-wX-uFm"/>
                                 <constraint firstItem="897-mf-Gdi" firstAttribute="leading" secondItem="6RM-Ce-k7O" secondAttribute="leading" constant="47" id="hM3-ut-biH"/>
+                                <constraint firstAttribute="height" constant="667" id="irV-Wv-klB"/>
                                 <constraint firstItem="u2A-Id-bjx" firstAttribute="leading" secondItem="6RM-Ce-k7O" secondAttribute="leading" constant="46" id="kgY-rF-zNT"/>
                                 <constraint firstItem="Z4J-Gm-wVk" firstAttribute="top" secondItem="EMJ-ic-svF" secondAttribute="bottom" constant="87" id="lHJ-p8-0xn"/>
                                 <constraint firstItem="8Kr-j6-4GE" firstAttribute="leading" secondItem="6RM-Ce-k7O" secondAttribute="leading" constant="46" id="pjd-sY-ycA"/>
-                                <constraint firstAttribute="height" constant="667" id="qyR-v4-KEH"/>
                                 <constraint firstItem="hdL-7A-pcT" firstAttribute="top" secondItem="PDX-Mr-65R" secondAttribute="bottom" constant="-1" id="tVt-60-oLD"/>
                                 <constraint firstItem="8Kr-j6-4GE" firstAttribute="width" secondItem="6RM-Ce-k7O" secondAttribute="width" multiplier="0.75" id="w5h-Ap-Kud"/>
                                 <constraint firstItem="EMJ-ic-svF" firstAttribute="top" secondItem="6RM-Ce-k7O" secondAttribute="top" id="yY4-iW-GJH"/>

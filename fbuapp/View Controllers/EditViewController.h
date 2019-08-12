@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *editUsername;
 @property (weak, nonatomic) IBOutlet UITextView *editBio;
 @property (weak, nonatomic) IBOutlet UITextField *editEmail;
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @end
 
 NS_ASSUME_NONNULL_END
