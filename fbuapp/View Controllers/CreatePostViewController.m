@@ -154,7 +154,6 @@
 
 // Present the autocomplete view controller when the button is pressed.
 - (void)searchClicked {
-    NSLog(@"Clicked on search");
     GMSAutocompleteViewController *locationController = [[GMSAutocompleteViewController alloc] init];
     locationController.delegate = self;
     
@@ -215,7 +214,6 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:self.addressString completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error geocoding address string: %@", error.localizedDescription);
             [self showAlert:@"Error" withMessage:@"Error geocoding address string"];
         }
         else {
@@ -227,7 +225,6 @@
             //post the event
             [Post postEvent:self.eventTitleField.text withDescription:self.eventDescriptionField.text withPrice:price withSkill:authorSkill withLocation:loc withLocationName: self.eventLocationTextField.text withRole:authorRole withCategory: self.eventCategory withImage:resizedImage withAuthorName:authorName withAuthorPhoto:authorPhoto withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(!succeeded){
-                    NSLog(@"Error posting Event: %@", error.localizedDescription);
                     [self showAlert:@"Error Posting Event" withMessage:error.localizedDescription];
                 }
                 else {
@@ -287,8 +284,7 @@ didAutocompleteWithPlace:(GMSPlace *)place {
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController
 didFailAutocompleteWithError:(NSError *)error {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    // TODO: handle the error.
+    [self dismissViewControllerAnimated:YES completion:nil];\
     [self showAlert:@"Failed Autocomplete" withMessage:[error description]];
 }
 
@@ -324,7 +320,6 @@ didFailAutocompleteWithError:(NSError *)error {
 
 // delegate for categoryHeaderView
 -(void)didSelectCell: (NSIndexPath *)indexPath {
-    NSLog(@"EVENT CATEGORY RECEIVED by createPost");
     self.eventCategory = indexPath.row;
 }
 
