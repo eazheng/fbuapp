@@ -65,7 +65,6 @@
         self.bioLabel.text = currentUser[@"bio"];
     }];
     
-    //creating segment control bar
     self.mainSegment = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Posts", @"Saved", nil]];
     self.segmentedControl.layer.shadowOffset = CGSizeMake(0, 2.0f);
     self.segmentedControl.layer.shadowOpacity = 0.25f;
@@ -92,8 +91,6 @@
     [self.feed mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.postView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
-    
-    self.navigationItem.title = [NSString stringWithFormat:@"Profile"];
 }
 
 
@@ -104,7 +101,6 @@
 }
 
 
-//load user's posts to their profile
 - (void)fetchPosts {
     if(self.segmentedControl.selectedSegmentIndex == 0)
     {
@@ -224,6 +220,5 @@
     Post *post = self.feed.posts[indexPath.row];
     [self showDetails: post];
 }
-
 
 @end

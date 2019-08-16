@@ -33,11 +33,15 @@
     [self formatting:self.editBio];
     [self formatting:self.editEmail];
     
-    //display old informaiton first before user changes
     [self fetchInfo];
     
     NSArray *color = @[@237, @167, @114];
     self.backgroundView.backgroundColor = [UIColor colorWithRGB:color];
+    self.backgroundView.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
+    self.backgroundView.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    self.backgroundView.layer.shadowOpacity = 1.0f;
+    self.backgroundView.layer.shadowRadius = 0.0f;
+    self.backgroundView.layer.cornerRadius = 4.0f;
 }
 
 
@@ -65,13 +69,14 @@
             }
             else {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"informationSaved" object:nil userInfo:nil];
+                [self dismissViewControllerAnimated:YES completion:nil];
+                AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate.tabBarController.tabBar setHidden:NO];
             }
+
         }];
-    }
     
-    [self dismissViewControllerAnimated:YES completion:nil];
-    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    [appDelegate.tabBarController.tabBar setHidden:NO];
+    }
 }
 
 

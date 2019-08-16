@@ -21,6 +21,9 @@
 @property (strong, nonatomic) UIImage *picImage;
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *profileId;
+@property (nonatomic, assign) BOOL editingUsername;
+@property (nonatomic, assign) CGFloat prevY;
+- (IBAction)onTapUsername:(id)sender;
 @end
 
 
@@ -64,17 +67,44 @@
     
     NSArray *color = @[@237, @167, @114];
     self.colorView.backgroundColor = [UIColor colorWithRGB:color];
+    
+    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
+    
+    self.editingUsername = NO;
+    self.prevY = self.view.frame.origin.y;
+}
+
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
+    [self.view endEditing:YES];
+}
+
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 
 - (void)didCancel {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     LogViewController *logViewController = [[LogViewController alloc] init];
     logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    appDelegate.window.rootViewController = logViewController;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController ];
-    [self presentViewController:navigationController animated:YES completion: nil];
-    //logout of FB to retry registration
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login logOut];
 }
@@ -106,4 +136,33 @@
     }];
 }
 
+
+#pragma mark - keyboard movements
+- (void)keyboardWillShow:(NSNotification *)notification {
+    if (self.editingUsername == YES) {
+        CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect f = self.view.frame;
+            self.prevY = self.view.frame.origin.y;
+            f.origin.y = self.view.frame.origin.y - keyboardSize.height;
+            self.view.frame = f;
+        }];
+    }
+}
+
+
+-(void)keyboardWillHide:(NSNotification *)notification {
+    if (self.editingUsername == YES) {
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect f = self.view.frame;
+            f.origin.y = self.prevY;
+            self.view.frame = f;
+        }];
+        self.editingUsername = NO;
+    }
+}
+- (IBAction)onTapUsername:(id)sender {
+    self.editingUsername = YES;
+}
 @end
