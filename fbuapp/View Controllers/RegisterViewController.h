@@ -14,7 +14,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol PFUserAuthenticationDelegate;
-
 @interface RegisterViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
@@ -22,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 - (IBAction)signupButton:(id)sender;
-//edit design of button
+//edit button design
 @property (weak, nonatomic) IBOutlet UIButton *signupButton;
 @property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *profilePictureView;
-
+@property (weak, nonatomic) IBOutlet UIView *colorView;
 @end
 
 NS_ASSUME_NONNULL_END

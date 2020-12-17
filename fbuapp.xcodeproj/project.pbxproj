@@ -88,7 +88,6 @@
 		0C01F9F122EA7A90009D4947 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		0C01F9F222EA7A90009D4947 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		1947DF620A93CF45116F0D82 /* Pods-fbuapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fbuapp.release.xcconfig"; path = "Target Support Files/Pods-fbuapp/Pods-fbuapp.release.xcconfig"; sourceTree = "<group>"; };
-		380807EE22FD396500A68417 /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		3827E2C122DE98F8008B8FA0 /* fbuapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fbuapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3827E2C422DE98F8008B8FA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3827E2C522DE98F8008B8FA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -145,6 +144,7 @@
 		83657DEB22E67606002EB6A8 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		83657DEC22E67606002EB6A8 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		83657DED22E67606002EB6A8 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		83665DCF2302344300B1BA4F /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		83E6B27222E137AF0045B437 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		83E6B27522E234C10045B437 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		83E6B27622E234C10045B437 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -165,7 +165,6 @@
 		A419823E22EFB05900791E06 /* Favorite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
 		A4434DEC22F900CD00A72120 /* Query.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Query.h; sourceTree = "<group>"; };
 		A4434DED22F900CD00A72120 /* Query.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Query.m; sourceTree = "<group>"; };
-		A44E737B22FC985E000CF38F /* Key.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		A456BCBB22F204D2008C4E3B /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		A456BCBC22F204D2008C4E3B /* FilterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		A456BCBD22F204D2008C4E3B /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
@@ -264,14 +263,13 @@
 				83E6B27422E148E40045B437 /* View Controllers */,
 				83E6B27022E136FD0045B437 /* Models */,
 				3827E2C422DE98F8008B8FA0 /* AppDelegate.h */,
-				380807EE22FD396500A68417 /* Key.h */,
 				3827E2C522DE98F8008B8FA0 /* AppDelegate.m */,
 				3827E2CA22DE98F8008B8FA0 /* Main.storyboard */,
 				3827E2CD22DE98F9008B8FA0 /* Assets.xcassets */,
 				3827E2CF22DE98F9008B8FA0 /* LaunchScreen.storyboard */,
 				3827E2D222DE98F9008B8FA0 /* Info.plist */,
 				3827E2D322DE98F9008B8FA0 /* main.m */,
-				A44E737B22FC985E000CF38F /* Key.h */,
+				83665DCF2302344300B1BA4F /* Key.h */,
 			);
 			path = fbuapp;
 			sourceTree = "<group>";
@@ -836,7 +834,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P77LWX87UK;
+				DEVELOPMENT_TEAM = Y6892GKH9V;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -883,7 +881,7 @@
 					"\"UIKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.eazheng.fbuapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eazheng.fbuapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -895,7 +893,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P77LWX87UK;
+				DEVELOPMENT_TEAM = Y6892GKH9V;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -942,7 +940,7 @@
 					"\"UIKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.eazheng.fbuapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eazheng.fbuapp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

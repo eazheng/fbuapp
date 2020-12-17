@@ -24,6 +24,7 @@
 #import "Masonry.h"
 #import "AppDelegate.h"
 #import "DetailsViewController.h"
+#import "UIViewController+Alerts.h"
 
 @interface ProfileViewController () <PostTableViewDelegate, DetailsViewDelegate>
 
@@ -39,7 +40,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self checkCount];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(loginButtonDidLogOut:)];
     
@@ -50,14 +50,12 @@
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser != nil) {
         [currentUser fetch];
-        NSLog(@"Current user: %@", currentUser.email);
-        NSLog(@"Current user profileId: %@", self.profilePictureView.profileID);
         self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentUser[@"firstName"], currentUser[@"lastName"]];
         self.usernameLabel.text = [NSString stringWithFormat:@"@%@", currentUser.username];
         self.bioLabel.text = currentUser[@"bio"];
     }
     else {
-        NSLog(@"Error, user not found");
+        [self showAlert:@"Error, user not found" withMessage:@""];
     }
     
     //update user info to profile view
@@ -67,15 +65,12 @@
         self.bioLabel.text = currentUser[@"bio"];
     }];
     
-    //creating segment control bar
     self.mainSegment = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Posts", @"Saved", nil]];
     self.segmentedControl.layer.shadowOffset = CGSizeMake(0, 2.0f);
     self.segmentedControl.layer.shadowOpacity = 0.25f;
     self.segmentedControl.selectedSegmentIndex = 0;
     self.segmentedControl.selectedSegmentIndex = 0;
     [self.segmentedControl addTarget:self action:@selector(fetchPosts) forControlEvents: UIControlEventValueChanged];
-    
-
     
     self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
     self.profilePictureView.clipsToBounds = YES;
@@ -96,10 +91,8 @@
     [self.feed mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.postView).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
-    
-    self.navigationItem.title = [NSString stringWithFormat:@"Profile"];
-    
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -108,7 +101,6 @@
 }
 
 
-//load user's posts to their profile
 - (void)fetchPosts {
     if(self.segmentedControl.selectedSegmentIndex == 0)
     {
@@ -117,13 +109,10 @@
         [self.postQuery whereKey:@"eventAuthor" equalTo:[PFUser currentUser].objectId];
         [self.postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
             if (error) {
-                NSLog(@"%@", error.localizedDescription);
+                [self showAlert:@"Error: %@" withMessage:error.localizedDescription];
             }
             else {
-                NSLog(@"Loaded User's posts");
                 self.feed.posts = [NSMutableArray arrayWithArray:posts];
-                [self checkCount];
-                NSLog(@"%@", posts);
                 [self.feed reloadData];
             }
         }];
@@ -135,34 +124,28 @@
         [favoriteQuery whereKey:@"userID" equalTo: [PFUser currentUser].objectId];
         [favoriteQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable favoritePosts, NSError *error) {
             if (error) {
-                NSLog(@"%@", error.localizedDescription);
+                [self showAlert:@"Error: %@" withMessage:error.localizedDescription];
             }
             else{
-                NSLog(@"Accessed User's favorties");
                 self.feed.posts = [NSMutableArray arrayWithArray:favoritePosts];
-                NSLog(@"%@", favoritePosts);
                 
                 PFQuery *postQuery = [Post query];
                 [postQuery orderByDescending:@"createdAt"];
                 [postQuery whereKey:@"objectId" matchesKey:@"postID" inQuery: favoriteQuery];
                 [postQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                     if (error) {
-                        NSLog(@"%@", error.localizedDescription);
+                        [self showAlert:@"Error: %@" withMessage:error.localizedDescription];
                     }
                     else {
-                        NSLog(@"Loaded User's favorties");
                         self.feed.posts = [NSMutableArray arrayWithArray:objects];
-                        [self checkCount];
-                        NSLog(@"%@", objects);
                         [self.feed reloadData];
                     }
                 }];
             }
-            
         }];
     }
     else {
-        NSLog(@"Should not have reached here");
+        [self showAlert:@"Should not have reached here" withMessage:@""];
     }
     [self.feed.refreshControl endRefreshing];
 }
@@ -186,43 +169,25 @@
 
 
 - (void)loginButtonDidLogOut:(UIBarButtonItem *)loginButton {
-    //Clearing out current PFUser --> will now be nil
+    //Clear out current PFUser --> now nil
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        //Take User back to LogViewController
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         LogViewController *logViewController = [[LogViewController alloc] init];
         logViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         logViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:logViewController];
-        appDelegate.window.rootViewController = navigationController;
-        //logout of actual facebook account
+
+        appDelegate.window.rootViewController = logViewController;
+        //logout of facebook account
         FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
         [login logOut];
     }];
-
-}
-
-
-- (void)checkCount {
-    if (self.feed.posts.count < 1) {
-        NSLog(@"No posts");
-        self.emptyPostsLabel.text = @"[You have no posts to display]";
-    }
-    else {
-        NSLog(@"You have posts");
-        self.emptyPostsLabel.text = @" ";
-    }
 }
 
 
 - (void) favoritePost: (NSString *)post withUser: (NSString *)user{
     [Favorite postID: post userID: user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(!succeeded){
-            NSLog(@"Error favoriting event: %@", error.localizedDescription);
-        }
-        else{
-            NSLog(@"Favoriting event success!");
+            [self showAlert:@"Error favoriting event: %@" withMessage:error.localizedDescription];
         }
     }];
 }
@@ -239,6 +204,7 @@
     }];
 }
 
+
 - (void) showDetails: (Post *)post {
     DetailsViewController *detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController" bundle:nil];
     detailsViewController.post = post;
@@ -249,11 +215,10 @@
     [appDelegate.tabBarController.tabBar setHidden:YES];
 }
 
+
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"CELL HAS BEEN SELECTED");
     Post *post = self.feed.posts[indexPath.row];
     [self showDetails: post];
 }
-
 
 @end

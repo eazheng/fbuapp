@@ -85,6 +85,10 @@ static NSString *kCollectionViewPillCell = @"PillCell";
     cell.pillBackground.backgroundColor = [UIColor colorWithRGB: category.color];
     cell.eventCategory.text = category.name;
     cell.pillBackground.layer.cornerRadius = cell.pillBackground.frame.size.height / 2;
+    cell.pillBackground.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
+    cell.pillBackground.layer.shadowOffset = CGSizeMake(0.0, 2.0f);
+    cell.pillBackground.layer.shadowOpacity = 1.0f;
+    cell.pillBackground.layer.shadowRadius = 0.0f;
     
     return cell;
 }

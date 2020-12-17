@@ -10,6 +10,8 @@
 #import "RegisterViewController.h"
 #import "ProfileViewController.h"
 #import "AppDelegate.h"
+#import "UIColor+Helpers.h"
+#import "UIViewController+Alerts.h"
 
 @interface EditViewController ()
 @end
@@ -31,8 +33,15 @@
     [self formatting:self.editBio];
     [self formatting:self.editEmail];
     
-    //display old informaiton first before user changes
     [self fetchInfo];
+    
+    NSArray *color = @[@237, @167, @114];
+    self.backgroundView.backgroundColor = [UIColor colorWithRGB:color];
+    self.backgroundView.layer.shadowColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.25f] CGColor];
+    self.backgroundView.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    self.backgroundView.layer.shadowOpacity = 1.0f;
+    self.backgroundView.layer.shadowRadius = 0.0f;
+    self.backgroundView.layer.cornerRadius = 4.0f;
 }
 
 
@@ -56,18 +65,18 @@
         
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
-                NSLog(@"Error: %@", error.localizedDescription);
+                [self showAlert:@"Error: %@" withMessage:error.localizedDescription];
             }
             else {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"informationSaved" object:nil userInfo:nil];
-                NSLog(@"User information updated! %@", [PFUser currentUser]);
+                [self dismissViewControllerAnimated:YES completion:nil];
+                AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate.tabBarController.tabBar setHidden:NO];
             }
+
         }];
-    }
     
-    [self dismissViewControllerAnimated:YES completion:nil];
-    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    [appDelegate.tabBarController.tabBar setHidden:NO];
+    }
 }
 
 
@@ -75,7 +84,7 @@
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser != nil) {
         [currentUser fetch];
-        NSLog(@"Current user: %@", currentUser.email);
+
         self.editFirstName.text = currentUser[@"firstName"];
         self.editLastName.text = currentUser[@"lastName"];
         self.editUsername.text = currentUser.username;
@@ -83,7 +92,7 @@
         self.editEmail.text = currentUser.email;
     }
     else {
-        NSLog(@"No information to display");
+        [self showAlert:@"User not found" withMessage:@""];
     }
 }
 

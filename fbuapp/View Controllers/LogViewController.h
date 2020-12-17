@@ -13,11 +13,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LogViewController : UIViewController <FBSDKLoginButtonDelegate>
-
-@property (weak, nonatomic) IBOutlet UIView *loginButtonView;
 @property (copy, nonatomic) NSArray<NSString *> *permissions;
 @property (strong, nonatomic) FBSDKLoginButton *fbloginButton;
-
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
+@property (weak, nonatomic) IBOutlet UIView *imageView;
+@property (strong, nonatomic) IBOutlet UIView *mainView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @end
 
 NS_ASSUME_NONNULL_END
